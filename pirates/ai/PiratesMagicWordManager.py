@@ -89,7 +89,7 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
         
         if MagicWordManager.MagicWordManager.doMagicWord(self, word, avId, zoneId) == 1:
             pass
-        1
+        
         if word == '~walk':
             localAvatar.b_setGameState('LandRoam')
             localAvatar.motionFSM.on()

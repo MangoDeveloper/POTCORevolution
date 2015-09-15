@@ -455,11 +455,12 @@ class PiratesBase(OTPBase):
 
     
     def phase3Post(self):
+        from pirates.battle.Sword import Sword
+        from pirates.battle.Dagger import Dagger
         Sword = Sword
         Dagger = Dagger
-        import pirates.battle
-        Sword.Sword.setupAssets()
-        Dagger.Dagger.setupAssets()
+        Sword.setupAssets()
+        Dagger.setupAssets()
         self.buildShips()
 
     
@@ -469,15 +470,29 @@ class PiratesBase(OTPBase):
 
     
     def phase5Post(self):
+        from pirates.creature.Raven import Raven
         Raven = Raven
-        import pirates.creature
-        Raven.Raven.setupAssets()
+        Raven.setupAssets()
         self.buildPhase5Ships()
 
     
     def buildPhase4Assets(self):
+        from pirates.battle import WeaponGlobals
+        from pirates.battle.Pistol import Pistol
+        from pirates.battle.Sword import Sword
+        from pirates.battle.Dagger import Dagger
+        from pirates.battle.Doll import Doll
+        from pirates.battle.Wand import Wand
+        from pirates.battle.Grenade import Grenade
+        from pirates.battle.Bayonet import Bayonet
+        from pirates.battle.Melee import Melee
+        from pirates.battle.DualCutlass import DualCutlass
+        from pirates.battle.Foil import Foil
+        from pirates.battle.Gun import Gun
+        from pirates.battle.FishingRod import FishingRod
+        from pirates.battle.Torch import Torch
+        from pirates.battle.PowderKeg import PowderKeg
         WeaponGlobals = WeaponGlobals
-        import pirates.battle
         Pistol = Pistol
         Sword = Sword
         Dagger = Dagger
@@ -492,7 +507,19 @@ class PiratesBase(OTPBase):
         FishingRod = FishingRod
         Torch = Torch
         PowderKeg = PowderKeg
-        import pirates.battle
+        from pirates.creature.Alligator import Alligator
+        from pirates.creature.Bat import Bat
+        from pirates.creature.Chicken import Chicken
+        from pirates.creature.Crab import Crab
+        from pirates.creature.Dog import Dog
+        from pirates.creature.FlyTrap import FlyTrap
+        from pirates.creature.Monkey import Monkey
+        from pirates.creature.Pig import Pig
+        from pirates.creature.Rooster import Rooster
+        from pirates.creature.Scorpion import Scorpion
+        from pirates.creature.Seagull import Seagull
+        from pirates.creature.Stump import Stump
+        from pirates.creature.Wasp import Wasp
         Alligator = Alligator
         Bat = Bat
         Chicken = Chicken
@@ -506,68 +533,67 @@ class PiratesBase(OTPBase):
         Seagull = Seagull
         Stump = Stump
         Wasp = Wasp
-        import pirates.creature
         if config.GetBool('want-kraken', 0):
+            from pirates.kraken.Holder import Holder
             Holder = Holder
-            import pirates.kraken
-            Holder.Holder.setupAssets()
+            Holder.setupAssets()
             self.loadingScreen.tick()
         
         if base.config.GetBool('want-seamonsters', 0):
+            from pirates.creature.SeaSerpent import SeaSerpent
             SeaSerpent = SeaSerpent
-            import pirates.creature
-            SeaSerpent.SeaSerpent.setupAssets()
+            SeaSerpent.setupAssets()
             self.loadingScreen.tick()
         
-        PowderKeg.PowderKeg.setupAssets()
+        PowderKeg.setupAssets()
         self.loadingScreen.tick()
-        Torch.Torch.setupAssets()
+        Torch.setupAssets()
         self.loadingScreen.tick()
-        FishingRod.FishingRod.setupAssets()
+        FishingRod.setupAssets()
         self.loadingScreen.tick()
-        Bayonet.Bayonet.setupAssets()
+        Bayonet.setupAssets()
         self.loadingScreen.tick()
-        Pistol.Pistol.setupAssets()
+        Pistol.setupAssets()
         self.loadingScreen.tick()
-        Doll.Doll.setupAssets()
+        Doll.setupAssets()
         self.loadingScreen.tick()
-        Grenade.Grenade.setupAssets()
+        Grenade.setupAssets()
         self.loadingScreen.tick()
-        Wand.Wand.setupAssets()
+        Wand.setupAssets()
         self.loadingScreen.tick()
-        Melee.Melee.setupSounds()
+        Melee.setupSounds()
         self.loadingScreen.tick()
-        DualCutlass.DualCutlass.setupAssets()
+        DualCutlass.setupAssets()
         self.loadingScreen.tick()
-        Foil.Foil.setupAssets()
+        Foil.setupAssets()
         self.loadingScreen.tick()
-        Gun.Gun.setupAssets()
+        Gun.setupAssets()
         self.loadingScreen.tick()
-        Alligator.Alligator.setupAssets()
+        Alligator.setupAssets()
         self.loadingScreen.tick()
-        Bat.Bat.setupAssets()
+        Bat.setupAssets()
         self.loadingScreen.tick()
-        Chicken.Chicken.setupAssets()
+        Chicken.setupAssets()
         self.loadingScreen.tick()
-        Crab.Crab.setupAssets()
+        Crab.setupAssets()
         self.loadingScreen.tick()
-        Dog.Dog.setupAssets()
+        Dog.setupAssets()
         self.loadingScreen.tick()
-        FlyTrap.FlyTrap.setupAssets()
+        FlyTrap.setupAssets()
         self.loadingScreen.tick()
-        Monkey.Monkey.setupAssets()
+        Monkey.setupAssets()
         self.loadingScreen.tick()
-        Pig.Pig.setupAssets()
+        Pig.setupAssets()
         self.loadingScreen.tick()
-        Rooster.Rooster.setupAssets()
+        Rooster.setupAssets()
         self.loadingScreen.tick()
-        Scorpion.Scorpion.setupAssets()
+        Scorpion.setupAssets()
         self.loadingScreen.tick()
-        Seagull.Seagull.setupAssets()
+        Seagull.setupAssets()
         self.loadingScreen.tick()
-        Stump.Stump.setupAssets()
+        Stump.setupAssets()
         self.loadingScreen.tick()
-        Wasp.Wasp.setupAssets()
+        Wasp.setupAssets()
         self.loadingScreen.tick()
 
     
@@ -600,7 +626,7 @@ class PiratesBase(OTPBase):
     
     def openMainWindow(self, *args, **kw):
         kw['stereo'] = bool(self.stereoEnabled)
-        success = OTPBase.openMainWindow(self, *args, **args)
+        success = OTPBase.openMainWindow(self, *args, **kw)
         if self.win:
             self.win.setSort(500)
             self.win.setChildSort(10)

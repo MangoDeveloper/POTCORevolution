@@ -16,6 +16,7 @@ if AppRunnerGlobal.appRunner:
     searchPath.appendDirectory(Filename.expandFrom('$POTCO_2_ROOT/etc'))
 else:
     searchPath.appendDirectory(Filename.fromOsSpecific(os.path.expandvars('$PIRATES/src/inventory')))
+    searchPath.appendDirectory(Filename.fromOsSpecific(os.path.expandvars('resources/phase_2/etc')))
     searchPath.appendDirectory(Filename.fromOsSpecific(os.path.expandvars('pirates/src/inventory')))
     searchPath.appendDirectory(Filename.fromOsSpecific(os.path.expandvars('pirates/inventory')))
     searchPath.appendDirectory(Filename('.'))

@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: F (Python 2.4)
 
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import PLocalizer
@@ -371,7 +371,6 @@ class FancyLoadingScreen(DirectObject.DirectObject):
             self.titlePlankMiddle = self.backdrop.find('**/plank_title_middle_box')
             self.titlePlankLeft = self.backdrop.find('**/plank_title_left')
             self.titlePlankRight = self.backdrop.find('**/plank_title_right')
-        continue
         self.loadingBarColors = [ (((i % 10) / 10.0 + 0.5) / 2.0, ((i % 100) / 10 / 10.0 + 0.5) / 2.0, (i / 100 / 10.0 + 0.5) / 2.0, 1) for i in range(1000) ]
         random.shuffle(self.loadingBarColors)
         self.lastUpdateTime = globalClock.getRealTime()
@@ -626,7 +625,7 @@ class FancyLoadingScreen(DirectObject.DirectObject):
             self.overallLabel['text'] = '%3.1f' % self.overallPercent / self.loadScale
             self.tickLabel['text'] = '%3.1f' % self.currPercent * 100.0
         else:
-            self.percentLabel['text'] = '%d%%' % self.overallPercent / self.loadScale
+            self.percentLabel['text'] = '%d%%' % (self.overallPercent / self.loadScale)
         if self.currStage != 'unmapped':
             if self.debugMode:
                 self.currPoly.detachNode()
@@ -703,49 +702,67 @@ class FancyLoadingScreen(DirectObject.DirectObject):
         
         if pickapirate:
             screenshot = screenShot_EnterGame
+            self.setScreenShot(screenshot)
         elif exit:
             screenshot = screenShot_ExitGame
+            self.setScreenShot(screenshot)
         elif ocean:
             screenshot = screenShot_Dinghy
+            self.setScreenShot(screenshot)
         elif jail:
             screenshot = screenShot_Jail
+            self.setScreenShot(screenshot)
         elif potionCrafting:
             screenshot = screenShot_Potions
+            self.setScreenShot(screenshot)
         elif benchRepair:
             screenshot = screenShot_BenchRepair
+            self.setScreenShot(screenshot)
         elif shipRepair:
             screenshot = screenShot_ShipRepair
+            self.setScreenShot(screenshot)
         elif cannonDefense:
             screenshot = screenShot_CannonDefense
+            self.setScreenShot(screenshot)
         elif fishing:
             screenshot = screenShot_Fishing
+            self.setScreenShot(screenshot)
         elif base.localAvatar.style.getTutorial() < PiratesGlobals.TUT_GOT_CUTLASS:
             screenshot = screenShot_Weapon
+            self.setScreenShot(screenshot)
         elif base.localAvatar.style.getTutorial() < PiratesGlobals.TUT_MET_JOLLY_ROGER:
             screenshot = screenShot_Cutlass
+            self.setScreenShot(screenshot)
         elif base.cr.newsManager and base.cr.newsManager.getHoliday(21):
             screenshot = screenShots_WinterHolidayLocations.get(targetId)
             if not screenshot:
                 screenshot = screenShots_Locations.get(targetId)
+            self.setScreenShot(screenshot)
             
         else:
             screenshot = screenShots_Locations.get(targetId)
+            self.setScreenShot(screenshot)
         if not screenshot:
             if areaType_Jungles.has_key(targetId):
                 screenshot = random.choice(screenShots_Jungles)
+                self.setScreenShot(screenshot)
             elif areaType_Swamps.has_key(targetId):
                 screenshot = random.choice(screenShots_Swamps)
+                self.setScreenShot(screenshot)
             elif areaType_Caves.has_key(targetId):
                 screenshot = random.choice(screenShots_Caves)
+                self.setScreenShot(screenshot)
             else:
                 island = getParentIsland(targetId)
                 screenshot = screenShots_Locations.get(island, [
                     random.choice(screenShots)])[0]
+                self.setScreenShot(screenshot)
         elif len(screenshot) > 1:
             screenshot = random.choice(screenshot)
+            self.setScreenShot(screenshot)
         else:
             screenshot = screenshot[0]
-        self._FancyLoadingScreen__setLoadingArt(screenshot)
+            self.setScreenShot(screenshot)
         if pickapirate:
             targetName = PLocalizer.LoadingScreen_PickAPirate
         elif exit:
@@ -762,7 +779,9 @@ class FancyLoadingScreen(DirectObject.DirectObject):
         
         if len(targetName):
             self._FancyLoadingScreen__setLocationText(targetName)
-        
+
+    def setScreenShot(self, screenshot):
+        self._FancyLoadingScreen__setLoadingArt(screenshot)
 
     
     def _FancyLoadingScreen__setLoadingArt(self, screenshot):

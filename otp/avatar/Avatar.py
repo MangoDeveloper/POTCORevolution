@@ -1,8 +1,6 @@
-# File: o (Python 2.4)
-
 from pandac.PandaModules import *
-from libotp import Nametag, NametagGroup
-from libotp import CFSpeech, CFThought, CFTimeout, CFPageButton, CFNoQuitButton, CFQuitButton
+from libotp.Nametag import Nametag
+from libotp.NametagGroup import NametagGroup, CFSpeech, CFThought, CFTimeout, CFPageButton, CFNoQuitButton, CFQuitButton
 from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPLocalizer
 from direct.actor.Actor import Actor
@@ -17,33 +15,31 @@ teleportNotify.showTime = True
 if config.GetBool('want-teleport-debug', 1):
     teleportNotify.setDebug(1)
 
-
 def reconsiderAllUnderstandable():
     for av in Avatar.ActiveAvatars:
         av.considerUnderstandable()
-    
 
 
 class Avatar(Actor, ShadowCaster):
     notify = directNotify.newCategory('Avatar')
     ActiveAvatars = []
     ManagesNametagAmbientLightChanged = False
-    
+
     def __init__(self, other = None):
         self.name = ''
-        
         try:
-            return None
+            self.Avatar_initialized
+            return
         except:
             self.Avatar_initialized = 1
 
-        Actor.__init__(self, None, None, other, flattenable = 0, setFinal = 1)
+        Actor.__init__(self, None, None, other, flattenable=0, setFinal=1)
         ShadowCaster.__init__(self)
-        self._Avatar__font = OTPGlobals.getInterfaceFont()
+        self.__font = OTPGlobals.getInterfaceFont()
         self.soundChatBubble = None
         self.avatarType = ''
         self.nametagNodePath = None
-        self._Avatar__nameVisible = 1
+        self.__nameVisible = 1
         self.nametag = NametagGroup()
         self.nametag.setAvatar(self)
         self.nametag.setFont(OTPGlobals.getInterfaceFont())
@@ -55,7 +51,6 @@ class Avatar(Actor, ShadowCaster):
         self.nametag3d.setLightOff()
         if self.ManagesNametagAmbientLightChanged:
             self.acceptNametagAmbientLightChange()
-        
         OTPRender.renderReflection(False, self.nametag3d, 'otp_avatar_nametag', None)
         self.getGeomNode().showThrough(OTPRender.ShadowCameraBitmask)
         self.nametag3d.hide(OTPRender.ShadowCameraBitmask)
@@ -71,37 +66,35 @@ class Avatar(Actor, ShadowCaster):
         self.understandable = 1
         self.setPlayerType(NametagGroup.CCNormal)
         self.ghostMode = 0
-        self._Avatar__chatParagraph = None
-        self._Avatar__chatMessage = None
-        self._Avatar__chatFlags = 0
-        self._Avatar__chatPageNumber = None
-        self._Avatar__chatAddressee = None
-        self._Avatar__chatDialogueList = []
-        self._Avatar__chatSet = 0
-        self._Avatar__chatLocal = 0
-        self._Avatar__currentDialogue = None
+        self.__chatParagraph = None
+        self.__chatMessage = None
+        self.__chatFlags = 0
+        self.__chatPageNumber = None
+        self.__chatAddressee = None
+        self.__chatDialogueList = []
+        self.__chatSet = 0
+        self.__chatLocal = 0
+        self.__currentDialogue = None
         self.whitelistChatFlags = 0
+        return
 
-    
     def delete(self):
-        
         try:
-            pass
+            self.Avatar_deleted
         except:
             self.deleteNametag3d()
             Actor.cleanup(self)
             if self.ManagesNametagAmbientLightChanged:
                 self.ignoreNametagAmbientLightChange()
-            
             self.Avatar_deleted = 1
-            del self._Avatar__font
+            del self.__font
             del self.style
             del self.soundChatBubble
+            self.nametag.destroy()
             del self.nametag
             self.nametag3d.removeNode()
             ShadowCaster.delete(self)
             Actor.delete(self)
-
 
     
     def acceptNametagAmbientLightChange(self):
