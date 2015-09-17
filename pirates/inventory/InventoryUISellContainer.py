@@ -66,7 +66,7 @@ class InventoryUISellContainer(InventoryUIContainer.InventoryUIContainer):
         for cell in self.gridDict.values():
             if cell.inventoryItem:
                 return True
-                continue
+                
         
         return False
 
@@ -76,7 +76,7 @@ class InventoryUISellContainer(InventoryUIContainer.InventoryUIContainer):
         for cell in self.gridDict.values():
             if cell.inventoryItem:
                 totalCost += ItemGlobals.getGoldCost(cell.inventoryItem.getId()) * cell.inventoryItem.amount
-                continue
+                
         
         return totalCost
 
@@ -87,7 +87,7 @@ class InventoryUISellContainer(InventoryUIContainer.InventoryUIContainer):
                 cell.inventoryItem.inventoryCell['state'] = DGG.NORMAL
                 cell.inventoryItem.inventoryCell.clearColorScale()
                 cell.inventoryItem.destroy()
-                continue
+                
         
 
     

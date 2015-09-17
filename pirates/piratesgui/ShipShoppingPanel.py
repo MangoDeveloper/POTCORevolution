@@ -50,7 +50,7 @@ class ShipShoppingPanel(ShipSelectionPanel):
                             button['text_fg'] = VBase4(0.29999999999999999, 0.25, 0.20000000000000001, 1.0)
                             button['image_color'] = VBase4(0.80000000000000004, 0.80000000000000004, 0.80000000000000004, 1.0)
                         button['state'] = repairButtonState
-                        continue
+                        
                 
             
         
@@ -71,7 +71,7 @@ class ShipShoppingPanel(ShipSelectionPanel):
         shipFrame = ShipFrameShopping(parent = self.scrollFrame.getCanvas(), relief = None, shipId = shipId, shipName = shipOV.name, shipClass = shipOV.shipClass, mode = self.mode, command = callback, extraArgs = myArgs)
         if repaired:
             shipOV.setHealthState(100.0)
-            continue
+            
             _[1](*[ min(1, x) * 100 for x in shipOV.mastStates ])
         
         shipFrame.enableStatsOV(shipOV)

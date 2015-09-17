@@ -35,8 +35,7 @@ class ShipSelectionPanel(GuiPanel.GuiPanel):
         self.doneCallback = doneCallback
         self.pages = pages[:]
         self.scrollFrame = None
-        self.shipFrames = dict(lambda [outmost-iterable]: for page in [outmost-iterable]:
-(page, [])(self.pages))
+        self.shipFrames = {}
         self.closeButton = None
         self.page = -1
         self.tabBackParent = None
@@ -46,7 +45,6 @@ class ShipSelectionPanel(GuiPanel.GuiPanel):
         self.setPos(-1.21, 0, -0.68000000000000005)
         self.createGui()
 
-    
     def destroyGui(self):
         if getattr(self, 'title', 0):
             self.title.destroy()
@@ -56,8 +54,7 @@ class ShipSelectionPanel(GuiPanel.GuiPanel):
             self.scrollFrame.destroy()
             self.scrollFrame = None
         
-        self.shipFrames = dict(lambda [outmost-iterable]: for page in [outmost-iterable]:
-(page, [])(self.pages))
+        self.shipFrames = {}
         if getattr(self, 'shipBar', 0):
             self.shipBar.destroy()
             self.shipBar = None

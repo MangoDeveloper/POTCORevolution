@@ -4,7 +4,8 @@ import os
 import math
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
-from libpirates import SeaPatchRoot, SeaPatchNode
+from libpirates.SeaPatchRoot import SeaPatchRoot
+from libpirates.SeaPatchNode import SeaPatchNode
 from direct.task import Task
 from pirates.seapatch.LerpSeaPatchInterval import LerpSeaPatchInterval
 from direct.directnotify.DirectNotifyGlobal import directNotify

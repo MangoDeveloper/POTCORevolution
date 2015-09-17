@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 import DistributedMiniGameWorld
 from pirates.piratesgui.CannonDefenseCountdownUI import CannonDefenseCountdownUI
@@ -6,7 +6,6 @@ from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import PLocalizer
 from pirates.piratesgui import PiratesConfirm
 from pirates.uberdog.UberDogGlobals import InventoryType
-from pirates.world import WorldGlobals
 
 class DistributedScrimmageWorld(DistributedMiniGameWorld.DistributedMiniGameWorld):
     
@@ -46,7 +45,7 @@ class DistributedScrimmageWorld(DistributedMiniGameWorld.DistributedMiniGameWorl
     
     def localAvEnterDeath(self, av):
         DistributedMiniGameWorld.DistributedMiniGameWorld.localAvEnterDeath(self, av)
-        self.cr.teleportMgr.initiateTeleport(PiratesGlobals.INSTANCE_MAIN, WorldGlobals.PiratesWorldSceneFileBase)
+        self.cr.teleportMgr.initiateTeleport(PiratesGlobals.INSTANCE_MAIN, 'mainWorld')
 
     
     def cleanUpConfirm(self):

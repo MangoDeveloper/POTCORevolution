@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 from pandac.PandaModules import Point3
 from pirates.piratesgui.RadarGui import *
@@ -13,12 +13,17 @@ class QuestIndicatorNodeTunnel(QuestIndicatorNode):
         self.pendingStepObj = None
         QuestIndicatorNode.__init__(self, 'TunnelIndicator', [
             self.LOD_CENTER_OFFSET_X], questStep)
+        self.arrowNode = None
 
     
     def delete(self):
         if self.pendingStepObj:
             base.cr.relatedObjectMgr.abortRequest(self.pendingStepObj)
             self.pendingStepObj = None
+        
+        if self.arrowNode:
+            self.arrowNode.removeNode()
+            self.arrowNode = None
         
         self.ignore('tunnelSetLinks')
         QuestIndicatorNode.delete(self)
@@ -29,16 +34,31 @@ class QuestIndicatorNodeTunnel(QuestIndicatorNode):
     
     def placeInWorld(self):
         
-        def stepObjHere(tunnelObj):
+        def stepObjHere(stepObj):
             self.pendingStepObj = None
-            area = base.cr.getDo(self.questStep.getOriginDoId())
-            areaUid = area.getUniqueId()
-            areaNodeName = tunnelObj.getAreaNodeNameFromAreaUid(areaUid)
-            areaNode = area.getConnectorNodeNamed(areaNodeName)
-            self.reparentTo(areaNode)
-            self.setPosHpr(0, 0, 0, 0, 0, 0)
-            self.setPos(self, self.LOD_CENTER_OFFSET_X, 0, 5)
-            self.wrtReparentTo(area)
+            
+            def performReparent(tunnelObj = stepObj):
+                if tunnelObj == stepObj:
+                    areaIndex = tunnelObj.getAreaIndexFromDoId(self.questStep.getOriginDoId())
+                    if areaIndex != None:
+                        (pos, hpr) = tunnelObj.getConnectorNodePosHpr(areaIndex)
+                        t = TransformState.makePosHpr(pos, hpr)
+                        ti = t.invertCompose(TransformState.makeIdentity())
+                        self.reparentTo(tunnelObj)
+                        self.setPos(ti.getPos())
+                        self.setHpr(ti.getHpr())
+                        self.setPos(self, self.LOD_CENTER_OFFSET_X, 0, 5)
+                        parent = base.cr.doId2do[self.questStep.getOriginDoId()]
+                        self.wrtReparentTo(parent)
+                        self.arrowNode = tunnelObj.attachNewNode('arrowNode')
+                        self.arrowNode.setPos(ti.getPos())
+                    
+                
+
+            if not stepObj.isConnectorLoaded():
+                self.acceptOnce('tunnelSetLinks', performReparent)
+            else:
+                performReparent()
 
         stepObjHere = report(types = [
             'frameCount',

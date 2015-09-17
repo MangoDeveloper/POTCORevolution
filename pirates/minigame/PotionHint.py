@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: P (Python 2.4)
 
 from pirates.piratesgui.GuiPanel import *
 from pirates.piratesgui import GuiButton

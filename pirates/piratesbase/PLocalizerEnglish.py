@@ -11579,6 +11579,7 @@ CodeRedemptionAmmoFury = InventoryTypeNames[InventoryType.AmmoFury]
 CodeRedemptionLostBladeOfLeviathan = ItemNames[ItemGlobals.CURSED_BLADE_47]
 CodeRedemptionLostSwordOfElPatron = ItemNames[ItemGlobals.LOST_SWORD_OF_EL_PATRON]
 CodeRedemptionSummonChicken = ItemNames[ItemGlobals.POTION_SUMMON_CHICKEN]
+
 ShipPVPQuestFrench = 'French'
 ShipPVPQuestSpanish = 'Spanish'
 ShipPVPQuestKillShip = 'ship'

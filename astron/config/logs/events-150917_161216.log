@@ -1,0 +1,27 @@
+{"_time": "2015-09-17 16:12:16Eastern Daylight Time", "type": "log-opened", "sender": "EventLogger", "msg": "Log opened upon Event Logger startup."}
+{"_time": "2015-09-17 16:13:07Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000000", "remote_address": "127.0.0.1:4160", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:14:24Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000000"}
+{"_time": "2015-09-17 16:15:13Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000001", "remote_address": "127.0.0.1:4192", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:15:23Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000001"}
+{"_time": "2015-09-17 16:17:30Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000002", "remote_address": "127.0.0.1:4230", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:17:41Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000002"}
+{"_time": "2015-09-17 16:18:50Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000003", "remote_address": "127.0.0.1:4246", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:19:03Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000003"}
+{"_time": "2015-09-17 16:19:56Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000004", "remote_address": "127.0.0.1:4259", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:20:05Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000004"}
+{"_time": "2015-09-17 16:24:06Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000005", "remote_address": "127.0.0.1:4265", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:24:23Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000005"}
+{"_time": "2015-09-17 16:27:57Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000006", "remote_address": "127.0.0.1:4322", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:28:13Eastern Daylight Time", "type": "client-ejected-security", "sender": "Client:1000000006", "reason_code": "117", "reason_msg": "Client tried to send update to nonexistent object 4674"}
+{"_time": "2015-09-17 16:30:49Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000007", "remote_address": "127.0.0.1:4410", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:31:22Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000007"}
+{"_time": "2015-09-17 16:32:45Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000008", "remote_address": "127.0.0.1:4413", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:32:58Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000008"}
+{"_time": "2015-09-17 16:34:00Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000009", "remote_address": "127.0.0.1:4417", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:34:18Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000009"}
+{"_time": "2015-09-17 16:36:09Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000010", "remote_address": "127.0.0.1:4452", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:36:37Eastern Daylight Time", "type": "client-ejected", "sender": "Client:1000000010", "reason_code": "122", "reason_msg": "This avatar slot is already taken by another avatar!"}
+{"_time": "2015-09-17 16:39:37Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000011", "remote_address": "127.0.0.1:4481", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:40:06Eastern Daylight Time", "type": "client-ejected", "sender": "Client:1000000011", "reason_code": "122", "reason_msg": "This avatar slot is already taken by another avatar!"}
+{"_time": "2015-09-17 16:41:50Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000012", "remote_address": "127.0.0.1:4547", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 16:42:06Eastern Daylight Time", "type": "client-ejected-security", "sender": "Client:1000000012", "reason_code": "117", "reason_msg": "Client tried to send update to nonexistent object 4674"}

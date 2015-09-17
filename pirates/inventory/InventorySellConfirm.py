@@ -109,7 +109,7 @@ class InventorySellConfirm(BorderFrame):
             if sellCell.inventoryItem and sellCell.inventoryItem.inventoryCell == cell:
                 sellCell.inventoryItem.amount = amount
                 sellCell.inventoryItem.updateAmountText()
-                continue
+                
         
 
     
@@ -120,7 +120,7 @@ class InventorySellConfirm(BorderFrame):
                 sellCell.inventoryItem.inventoryCell['state'] = DGG.NORMAL
                 sellCell.inventoryItem.inventoryCell.clearColorScale()
                 sellCell.inventoryItem.destroy()
-                continue
+                
         
 
     
@@ -155,7 +155,7 @@ class InventorySellConfirm(BorderFrame):
                     messenger.send('sellItem', [
                         itemToSell,
                         cell.inventoryItem.amount])
-                    continue
+                    
             
             self.inventoryPanelSell.clearSale()
             self.update()

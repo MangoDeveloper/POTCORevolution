@@ -186,13 +186,13 @@ class Flag(NodePath):
         del oldBgNps
         val = self.dna.bgData[0]
         bgTexCol = self.bgNode.findAllTextures('*_%02d_*' % val)
-        continue
+        
         bgTexCol = [ bgTexCol[x] for x in range(bgTexCol.getNumTextures()) ]
-        continue
+        
         sortDict = [](_[1]([ `x` for x in bgTexCol ], bgTexCol))
         keys = sortDict.keys()
         keys.sort()
-        continue
+        
         bgTexCol = [ sortDict[name] for name in keys ]
         for bgnum in range(0, len(bgTexCol) + 1):
             bgNp = self._Flag__model.copyTo(self, sort = self.BgSortOffset + bgnum)
@@ -367,7 +367,7 @@ class Flag(NodePath):
         takenIndices = self.getEmblemIndices()
         if index not in takenIndices:
             if index < 0:
-                continue
+                
                 availableIndices = _[1]
                 index = availableIndices[0]
             

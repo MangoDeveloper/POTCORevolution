@@ -310,11 +310,9 @@ def getShipDropItemsByClass(shipClass):
     for itemId in __dropInfo:
         item = __dropInfo[itemId]
         if not isLive(item):
-            continue
-        
-        if item[DROPS_FROM_ALL_SHIPS]:
-            dropItems.append(itemId)
-        
+            if item[DROPS_FROM_ALL_SHIPS]:
+                dropItems.append(itemId)
+
         if shipType and shipType < len(item):
             if item[shipType]:
                 dropItems.append(itemId)
@@ -529,10 +527,8 @@ def getEnemyDropItemsByType(type, uniqueId):
     for itemId in __dropInfo:
         item = __dropInfo[itemId]
         if not isLive(item):
-            continue
-        
-        if shouldUseCommonDrop and item[DROPS_FROM_ALL_ENEMIES]:
-            dropItems.append(itemId)
+            if shouldUseCommonDrop and item[DROPS_FROM_ALL_ENEMIES]:
+                dropItems.append(itemId)
         
         if enemyType and enemyType < len(item):
             if item[enemyType]:
@@ -560,13 +556,8 @@ def getStoreItems(uniqueId):
         for itemId in __dropInfo:
             item = __dropInfo[itemId]
             if not isLive(item):
-                continue
-            
-            if item[shopKeeper]:
-                storeItems.append(itemId)
-                continue
-        
-    
+                if item[shopKeeper]:
+                    storeItems.append(itemId)
     __lootStoreCache[uniqueId] = storeItems
     return storeItems
 
@@ -576,12 +567,8 @@ def getMakeAPirateClothing():
     for itemId in __dropInfo:
         item = __dropInfo[itemId]
         if not isLive(item):
-            continue
-        
-        if item[MakeAPirate]:
-            mapClothing.append(itemId)
-            continue
-    
+            if item[MakeAPirate]:
+                mapClothing.append(itemId)
     return mapClothing
 
 
@@ -590,11 +577,9 @@ def getQuestPropItems():
     for itemId in __dropInfo:
         item = __dropInfo[itemId]
         if not isLive(item):
-            continue
-        
-        if item[QuestProp]:
-            qpItems.append(itemId)
-            continue
+            if item[QuestProp]:
+                qpItems.append(itemId)
+            
     
     return qpItems
 
@@ -607,32 +592,24 @@ for index in [
     dropTable = []
     for (itemId, item) in __dropInfo.iteritems():
         if not isLive(item):
-            continue
-        
-        if index < len(item):
-            if item[index]:
-                dropTable.append(itemId)
-            
-        
-    
+            if index < len(item):
+                if item[index]:
+                    dropTable.append(itemId)
+
     __fishTables.append(dropTable)
 
 
 def getFishDrops(size):
     return __fishTables[size]
 
-
 def createZippedDist(unsummedDist, outcomes):
     hundredSum = abs(sum(unsummedDist) - 100) < 0.10000000000000001
     if hundredSum:
-        continue
         return _[1]([ sum(unsummedDist[:x]) for x in range(len(unsummedDist)) ], outcomes)
-    
-    return None(hundredSum, outcomes)
 
+    return (hundredSum, outcomes)
 
 def rollDistribution(zippedDist):
     roll = random.uniform(0, 100)
-    continue
-    return _[1][-1][1]
 
+    return roll

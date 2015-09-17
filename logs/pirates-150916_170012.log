@@ -1,0 +1,18 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  no_version_set
+PAccount: accountServer from launcher:  
+PAccount: default accountServer:  https://pirates.go.com
+Initializing quest ladders...
+:MagicWordManager(warning): You risk being banned if you abuse this mate!
+:MagicWordManager(warning): I will have Jack cut you into pieces! (a.k.a. banned forever)
+:DistributedObjectGlobal(warning): ChatManager going online
+:DistributedShipLoader(warning): ShipLoader going online
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+* interrupt by keyboard

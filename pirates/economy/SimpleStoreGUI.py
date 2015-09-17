@@ -122,7 +122,7 @@ class SimpleStoreColorPicker(BorderFrame):
                 colorButton['state'] = DGG.DISABLED
                 colorButton['image_color'] = Vec4(0.5, 0.5, 0.5, 0.5)
                 colorFrame.setColorScale(0.5, 0.5, 0.5, 0.5)
-                continue
+                
         
 
     
@@ -936,9 +936,9 @@ class SimpleStoreGUI(DirectFrame):
         
         self.setupGrid()
         titleText = ''
-        titleText += '\x1smallCaps\x1'
+        titleText += '\x01smallCaps\x01'
         titleText += self.storeName
-        titleText += '\x2'
+        titleText += '\x02'
         self.cartFrame.nameTagLabel['text'] = titleText
         self.cartFrame.resetDecorations()
         itemIds = self.getTabItemIds(tabId)
@@ -1077,7 +1077,7 @@ class SimpleStoreGUI(DirectFrame):
             item = stock[itemKey]
             if not (item.holidayId) or item.holidayId in activeHolidayIds:
                 newStock[itemKey] = item
-                continue
+                
         
         return newStock
 
@@ -1087,8 +1087,7 @@ class SimpleStoreGUI(DirectFrame):
         for id in stock.keys():
             item = stock[id]
             if not item or not item.canBeUsed(pirate):
-                continue
-            newStock[id] = item
+                newStock[id] = item
         
         return newStock
 
@@ -1127,7 +1126,7 @@ class SimpleStoreGUI(DirectFrame):
     
     def getTabItemIds(self, tabId):
         allIds = self.getStockIds(self.stock)
-        continue
+        
         tabIds = _[1]
         return tabIds
 
@@ -1138,7 +1137,7 @@ class SimpleStoreGUI(DirectFrame):
         for itemId in itemIds:
             if self.stock.get(itemId):
                 items[itemId] = self.stock[itemId]
-                continue
+                
         
         return items
 
@@ -1187,7 +1186,7 @@ class CatalogStoreGUI(SimpleStoreGUI):
 
     
     def createTabs(self):
-        continue
+        
         stockHolidayIds = [](_[1])
         if not stockHolidayIds:
             return None
@@ -1223,7 +1222,7 @@ class CatalogStoreGUI(SimpleStoreGUI):
         for uid in self.maleStock.iterkeys():
             if self.tabIdFromItemId(uid) == tabId:
                 self.currTabMaleStock[uid] = self.maleStock[uid]
-                continue
+                
         
         self.applyStockToPirate(self.currTabMaleStock, self.previewMale)
         self.unapplyStockFromPirate(self.currTabFemaleStock, self.previewFemale, self.femaleDNA)
@@ -1231,7 +1230,7 @@ class CatalogStoreGUI(SimpleStoreGUI):
         for uid in self.femaleStock.iterkeys():
             if self.tabIdFromItemId(uid) == tabId:
                 self.currTabFemaleStock[uid] = self.femaleStock[uid]
-                continue
+                
         
         self.applyStockToPirate(self.currTabFemaleStock, self.previewFemale)
         for card in self.previewCards.itervalues():
@@ -1470,7 +1469,7 @@ class JewelryStoreGUI(SimpleStoreGUI):
     def getTabItemIds(self, tabId):
         allIds = self.getMerchandiseIds()
         tabType = SimpleJewelryItem.itemTypeFromJewelryType(tabId)
-        continue
+        
         tabIds = _[1]
         return tabIds
 
@@ -1521,7 +1520,7 @@ class TattooStoreGUI(SimpleStoreGUI):
     def getTabItemIds(self, tabId):
         allIds = self.stock.keys()
         tabType = SimpleTattooItem.itemTypeFromTattooType(tabId)
-        continue
+        
         tabIds = _[1]
         return tabIds
 
@@ -1634,7 +1633,7 @@ class MerchantStoreGUI(SimpleStoreGUI):
             if tabId:
                 self.tabInventory.setdefault(tabId, [])
                 self.tabInventory[tabId].append(itemId)
-                continue
+                
         
         SimpleStoreGUI.__init__(self, name, npc, **None)
         self.rotateSlider.hide()
@@ -1658,7 +1657,7 @@ class MerchantStoreGUI(SimpleStoreGUI):
                 
                 image = icons.find(displayInfo[0])
                 self.addTab(tabId, tabName, tabName, image = image, image_scale = 0.55000000000000004)
-                continue
+                
         
 
     
@@ -1671,7 +1670,7 @@ class MerchantStoreGUI(SimpleStoreGUI):
         
         if item:
             oldTasks = taskMgr.getTasksNamed('inventoryUIHideDetailsTask')
-            continue
+            
             oldTasks = _[1]
             for tsk in oldTasks:
                 taskMgr.remove(tsk)
@@ -1700,7 +1699,7 @@ class MerchantStoreGUI(SimpleStoreGUI):
         
         if item:
             oldTasks = taskMgr.getTasksNamed('inventoryUIShowDetailsTask')
-            continue
+            
             oldTasks = _[1]
             for tsk in oldTasks:
                 taskMgr.remove(tsk)

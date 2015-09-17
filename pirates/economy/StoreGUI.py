@@ -172,7 +172,7 @@ class StoreGUI(DirectFrame):
                             InventoryType.ItemTypeWeapon,
                             dataId,
                             0]))
-                        continue
+                        
                 
                 locatables.append(InvItem([
                     InventoryType.ItemTypeWeapon,
@@ -183,7 +183,7 @@ class StoreGUI(DirectFrame):
                     if locationId in (Locations.INVALID_LOCATION, Locations.NON_LOCATION):
                         base.localAvatar.guiMgr.createWarning(PLocalizer.InventoryFullWarning, PiratesGuiGlobals.TextFG6)
                         return None
-                        continue
+                        
                 
             elif itemId in ItemGlobals.getAllConsumableIds():
                 itemQuantity = self.purchaseInventory.getItemQuantity(itemId)
@@ -221,7 +221,7 @@ class StoreGUI(DirectFrame):
                         if locationId in (Locations.INVALID_LOCATION, Locations.NON_LOCATION):
                             base.localAvatar.guiMgr.createWarning(PLocalizer.InventoryFullWarning, PiratesGuiGlobals.TextFG6)
                             return None
-                            continue
+                            
                     
                 
             else:
@@ -317,15 +317,9 @@ class StoreGUI(DirectFrame):
         for item in self.inventory:
             if item == InventoryType.ShipRepairKit:
                 if not base.config.GetBool('want-privateering', 1):
-                    continue
-                
-            
-            if not self.isPageAdded(getItemGroup(item)):
-                self.addTab(getItemGroup(item), item)
-                continue
-        
+                    if not self.isPageAdded(getItemGroup(item)):
+                        self.addTab(getItemGroup(item), item)
 
-    
     def addTab(self, itemGroup, item):
         newTab = self.tabBar.addTab(itemGroup, command = self.setPage, extraArgs = [
             itemGroup])

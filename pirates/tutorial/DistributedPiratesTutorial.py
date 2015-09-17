@@ -198,7 +198,7 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
         self.noJailLight = base.config.GetBool('no-jail-light', 0)
         self._leftJail = 0
         self.map = 0
-        base.cr.tutorialObject = self
+        self.cr.tutorialObject = self
         self.enemyBoatHidden = True
 
     
@@ -435,13 +435,13 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
     
     def enterAct1MakeAPirate(self):
         base.disableMouse()
-        localAvatar.gameFSM.request('MakeAPirate')
-        localAvatar.gameFSM.lockFSM = True
-        localAvatar.guiMgr.hideTrays()
+        #localAvatar.gameFSM.request('MakeAPirate')
+        #localAvatar.gameFSM.lockFSM = True
+        #localAvatar.guiMgr.hideTrays()
         self.avHpr = VBase3(180, 0, 0)
-        ga = localAvatar.getParentObj()
-        ga.builder.turnOffLights()
-        self.jail = ga.find('**/*navy_jail_interior*')
+        #ga = localAvatar.getParentObj()
+        #ga.builder.turnOffLights()
+        #self.jail = ga.find('**/*navy_jail_interior*')
         self.map.enter()
         self.accept('makeAPirateComplete', self.handleMakeAPirate)
         UserFunnel.logSubmit(1, 'CREATE_PIRATE_LOADS')
@@ -453,12 +453,10 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
         self.notify.debug('done make-a-pirate')
         done = self.map.getDoneStatus()
         if done == 'cancel':
-            localAvatar.b_setLocation(0, 0)
+            #localAvatar.b_setLocation(0, 0)
             self.map.exit()
             self.map.unload()
             self.map = 0
-            base.cr.closeShard()
-            base.cr.logout()
         elif done == 'created':
             dna = self.map.pirate.style
             localAvatar.setDNA(dna)
@@ -507,10 +505,10 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
             self.map = 0
         else:
             self.notify.error('Invalid doneStatus from MakeAPirate: ' + str(done))
-        localAvatar.gameFSM.lockFSM = False
-        ga = localAvatar.getParentObj()
-        if ga is not None:
-            ga.builder.turnOnLights()
+        #localAvatar.gameFSM.lockFSM = False
+        #ga = localAvatar.getParentObj()
+        #if ga is not None:
+        #    ga.builder.turnOnLights()
         
 
     

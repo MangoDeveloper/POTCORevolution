@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from pirates.minigame import DistributedLock
 from direct.interval.IntervalGlobal import *

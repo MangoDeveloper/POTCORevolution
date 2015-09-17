@@ -302,7 +302,6 @@ class DistributedBattleNPC(DistributedBattleAvatar):
         print 'handleAggroModelSwitch'
         self.updateCollisions()
 
-    
     def checkQuestObjMod(self, doMod = True, interestChange = False):
         if self._associatedQuests and doMod:
             self.questMod = QuestBase.questObjMod(self._associatedQuests, self, localAvatar, self.cr)
@@ -316,13 +315,14 @@ class DistributedBattleNPC(DistributedBattleAvatar):
                 self.enableBattleCollisions()
                 self.updateCollisions()
             elif self.questMod and not interestChange:
-                
+
                 try:
                     eval('self.' + self.questMod[0] + '(' + self.questMod[1] + ')')
-                self.notify.warning('error executing npc mod funcion %s for quest %s' % (self.questMod, self._associatedQuests))
+                except:
+                    self.notify.warning('error executing npc mod funcion %s for quest %s' % (self.questMod, self._associatedQuests))
 
-            
-        
+
+
         return self.questMod
 
     

@@ -710,9 +710,9 @@ class ShipUpgradeInterface(DirectFrame):
                     1
                     shortResouce = True
                     self.tooExpensive = True
-                    costString += '\x5currency-%s\x5 ' % currency + currencyString + '\n\n'
+                    costString += '\x05currency-%s\x05 ' % currency + currencyString + '\n\n'
                     if shortResouce:
-                        ownedString += '\x1red\x1%s\x2\n\n' % currencyAmount
+                        ownedString += '\x01red\x01%s\x02\n\n' % currencyAmount
                     else:
                         ownedString += '%s\n\n' % currencyAmount
             
@@ -758,7 +758,7 @@ class ShipUpgradeInterface(DirectFrame):
                     shortResouce = True
                     self.tooExpensive = True
                     if shortResouce:
-                        ownedString += '\x1red\x1%s\x2\n\n' % currencyAmount
+                        ownedString += '\x01red\x01%s\x02\n\n' % currencyAmount
                     else:
                         ownedString += '%s\n\n' % currencyAmount
             
@@ -791,7 +791,7 @@ class ShipUpgradeInterface(DirectFrame):
         for skillId in boostInfo.keys():
             skillLevel = boostInfo[skillId]
             skillName = PLocalizer.InventoryTypeNames[skillId]
-            newAttributeLine = '\x5sailSkill-%s\x5 %s %s %s\n\n' % (skillId, skillName, PLocalizer.ShipUpgradeSkillBoostAdd, skillLevel)
+            newAttributeLine = '\x05sailSkill-%s\x05 %s %s %s\n\n' % (skillId, skillName, PLocalizer.ShipUpgradeSkillBoostAdd, skillLevel)
             boostString += newAttributeLine
         
         self.attributeString += boostString
@@ -819,12 +819,12 @@ class ShipUpgradeInterface(DirectFrame):
             if diffArmor == 0:
                 armorText = ''
             elif diffArmor >= 0:
-                armorText = '\x1green\x1+%s%%\x2' % diffArmor
+                armorText = '\x01green\x01+%s%%\x02' % diffArmor
                 signArmor = '+'
             else:
-                armorText = '\x1red\x1%s%%\x2' % diffArmor
+                armorText = '\x01red\x01%s%%\x02' % diffArmor
                 signArmor = ''
-            armorIconLine = '\x5dtl-armor\x5 '
+            armorIconLine = '\x05dtl-armor\x05 '
             armorLine = armorIconLine + '%s: %s%% %s\n\n' % (PLocalizer.ShipUpgradeAttributeArmor, newArmorP, armorText)
             newSpeed = hullInfo['Speed']
             oldSpeed = oldHullInfo['Speed']
@@ -834,12 +834,12 @@ class ShipUpgradeInterface(DirectFrame):
             if diffSpeed == 0:
                 speedText = ''
             elif diffSpeed >= 0:
-                speedText = '\x1green\x1+%s%%\x2' % diffSpeed
+                speedText = '\x01green\x01+%s%%\x02' % diffSpeed
                 signSpeed = '+'
             else:
-                speedText = '\x1red\x1%s%%\x2' % diffSpeed
+                speedText = '\x01red\x01%s%%\x02' % diffSpeed
                 signSpeed = ''
-            speedIconLine = '\x5dtl-speed\x5 '
+            speedIconLine = '\x05dtl-speed\x05 '
             speedLine = speedIconLine + '%s: %s%% %s\n\n' % (PLocalizer.ShipUpgradeAttributeSpeed, newSpeedP, speedText)
             newTurning = hullInfo['Turning']
             oldTurning = oldHullInfo['Turning']
@@ -849,12 +849,12 @@ class ShipUpgradeInterface(DirectFrame):
             if diffTurning == 0:
                 turningText = ''
             elif diffTurning >= 0:
-                turningText = '\x1green\x1+%s%%\x2' % diffTurning
+                turningText = '\x01green\x01+%s%%\x02' % diffTurning
                 signTurning = '+'
             else:
-                turningText = '\x1red\x1%s%%\x2' % diffTurning
+                turningText = '\x01red\x01%s%%\x02' % diffTurning
                 signTurning = ''
-            turningIconLine = '\x5dtl-turning\x5 '
+            turningIconLine = '\x05dtl-turning\x05 '
             turningLine = turningIconLine + '%s: %s%% %s\n\n' % (PLocalizer.ShipUpgradeAttributeTurning, newTurningP, turningText)
             newCargo = hullInfo['Cargo']
             oldCargo = oldHullInfo['Cargo']
@@ -864,18 +864,18 @@ class ShipUpgradeInterface(DirectFrame):
             if diffCargo == 0:
                 cargoText = ''
             elif diffCargo >= 0:
-                cargoText = '\x1green\x1+%s%%\x2' % diffCargo
+                cargoText = '\x01green\x01+%s%%\x02' % diffCargo
                 signCargo = '+'
             else:
-                cargoText = '\x1red\x1%s%%\x2' % diffCargo
+                cargoText = '\x01red\x01%s%%\x02' % diffCargo
                 signCargo = ''
-            cargoIconLine = '\x5dtl-cargo\x5 '
+            cargoIconLine = '\x05dtl-cargo\x05 '
             cargoLine = cargoIconLine + '%s: %s%% %s\n\n' % (PLocalizer.ShipUpgradeAttributeCargo, newCargoP, cargoText)
             if hullInfo.get('BroadsideType', 0):
                 broadsideType = hullInfo.get('BroadsideType')
                 broadsideAmount = int(hullInfo.get('BroadsideAmount') * 100)
                 broadsideName = PLocalizer.InventoryTypeNames.get(broadsideType, 'Error')
-                broadsideIconLine = '\x5broadside-%s\x5 ' % broadsideType
+                broadsideIconLine = '\x05broadside-%s\x05 ' % broadsideType
                 broadsideLine = broadsideIconLine + PLocalizer.ShipBroadsideInfo % (broadsideAmount, broadsideName) + '\n'
             
         else:

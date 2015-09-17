@@ -156,7 +156,7 @@ class InventoryUIBeltGrid(InventoryUIContainer.InventoryUIContainer):
             if item[0] in (InventoryType.ItemTypeWeapon, InventoryType.ItemTypeCharm):
                 self.overflowInfo.show()
                 return None
-                continue
+                
         
 
 

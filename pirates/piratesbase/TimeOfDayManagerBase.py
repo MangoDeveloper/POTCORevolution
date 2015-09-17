@@ -188,7 +188,7 @@ class TimeOfDayManagerBase:
                 timeToToggle = startToggle
             if timeToToggle < 0.0:
                 pass
-            1
+            
             if nextToggleTime == None or nextToggleTime > timeToToggle:
                 nextToggleTime = timeToToggle
             
@@ -214,7 +214,7 @@ class TimeOfDayManagerBase:
                 waitTime = timeDiff * REALSECONDS_PER_GAMEHOUR
                 if waitTime < 0:
                     pass
-                1
+                
                 if shortestWait == None or waitTime < shortestWait:
                     shortestWait = waitTime
                 

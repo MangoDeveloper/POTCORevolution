@@ -41,10 +41,10 @@ from otp.ai.AIBaseGlobal import *
 
 from pirates.ai.PiratesAIRepository import PiratesAIRepository
 simbase.air = PiratesAIRepository(config.GetInt('air-base-channel', 401000000),
-                                   config.GetInt('air-stateserver', 4002),
+                                   config.GetInt('air-stateserver', 10000),
                                    config.GetString('district-name', 'Devhaven'))
 host = config.GetString('air-connect', '127.0.0.1')
-port = 7100
+port = 7199
 if ':' in host:
     host, port = host.split(':', 1)
     port = int(port)

@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: T (Python 2.4)
 
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.piratesbase import PLocalizer

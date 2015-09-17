@@ -154,7 +154,7 @@ class Ship(Item):
         self.shipModel.reparentTo(self)
         self.shipModel.setScale(0.13)
         self.shipModel.setTwoSided(1)
-        formattedName = '\x1smallCaps\x1\x1slant\x1' + name.replace(' ', '\n') + '\x2\x2'
+        formattedName = '\x01smallCaps\x01\x01slant\x01' + name.replace(' ', '\n') + '\x02\x02'
         self.text = Text(name + '-text', NodePath(), 0.0, formattedName, 0, scale = 0.017000000000000001)
         self.text.reparentTo(self)
         if self.shipModel.getBounds().isEmpty():
@@ -314,7 +314,7 @@ class TextIsland(Island):
                 out = '%s\n%s' % (out, token)
             
             out.strip()
-            return '\x1smallCaps\x1%s\x2' % (out,)
+            return '\x01smallCaps\x01%s\x02' % (out,)
 
         formattedName = formatName(self.name, 10)
         self.text = Text(name + '-text', nodePath, offset, formattedName, stencilId)
@@ -509,7 +509,7 @@ class OceanAreaText(Text):
         for l in range(len(name)):
             text = text + name[l] + ' '
         
-        text = '\x1slant\x1\x1smallCaps\x1' + text + '\x2\x2'
+        text = '\x01slant\x01\x01smallCaps\x01' + text + '\x02\x02'
         Text.__init__(self, name, NodePath(), 0, text, 0, 0.017000000000000001)
         self.uid = areaUid
         self.fadeIval = None

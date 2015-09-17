@@ -1,5 +1,3 @@
-# File: o (Python 2.4)
-
 from SCTerminal import SCTerminalSelectedEvent
 from SCTerminal import SCTerminalLinkedEmoteEvent
 from SCStaticTextTerminal import SCStaticTextMsgEvent

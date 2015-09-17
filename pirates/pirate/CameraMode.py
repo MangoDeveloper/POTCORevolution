@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: C (Python 2.4)
 
 from pandac.PandaModules import *
 from direct.showbase import DirectObject

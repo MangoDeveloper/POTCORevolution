@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from pirates.quest.QuestConstants import NPCIds
 from pirates.quest.QuestPrereq import *

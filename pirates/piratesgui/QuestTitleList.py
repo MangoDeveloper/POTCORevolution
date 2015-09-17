@@ -248,16 +248,17 @@ class QuestTitleList(DirectScrolledFrame):
         
 
     
+
     def _QuestTitleList__getContainer(self, questId):
         localAvatar.questStatus.forceInit()
         container = localAvatar.questStatus.getContainer(questId)
         if container:
             return container
-        
+
         quest = localAvatar.getQuestById(questId)
         return quest
 
-    
+
     def _QuestTitleList__getText(self, indent, questId, isContainer = False):
         text = '    ' * (indent - 1)
         localizerText = None
@@ -268,7 +269,7 @@ class QuestTitleList(DirectScrolledFrame):
             else:
                 text += questId
         elif indent == 0:
-            format = '\x1questTitle2\x1%s\x2'
+            format = 'questTitle2%s'
         else:
             format = '%s'
         localizerText = PLocalizer.QuestStrings.get(questId)
@@ -280,19 +281,19 @@ class QuestTitleList(DirectScrolledFrame):
         container = localAvatar.questStatus.getContainer(questId)
         if not container:
             container = localAvatar.getQuestById(questId)
-        
+
         if not container:
             return text
-        
+
         if container.isComplete(showComplete = True):
             quest = localAvatar.getQuestById(container.getQuestId())
             if quest and quest.getTasks() and not filter(lambda x: isinstance(quest.getTasks()[0], x), [
                 VisitTaskDNA,
                 DeliverItemTaskDNA]):
-                text += '   \x1questComplete\x1' + PLocalizer.QuestTitleComplete + '\x2'
-            
+                text += '   questComplete' + PLocalizer.QuestTitleComplete + ''
+
         elif not container.viewedInGUI:
-            text += '   \x1questNew\x1' + PLocalizer.QuestTitleNew + '\x2'
+            text += '   questNew' + PLocalizer.QuestTitleNew + ''
         elif not isContainer:
             progressList = container.getTaskProgress()
             for prog in progressList:
@@ -301,36 +302,34 @@ class QuestTitleList(DirectScrolledFrame):
                 if progress < goal:
                     quest = localAvatar.getQuestById(container.getQuestId())
                     if goal > 1 and quest and quest.getTasks() and not isinstance(quest.getTasks()[0], DowsingRodTaskDNA):
-                        text += '   \x1questPercent\x1%d of %d\x2' % (progress, goal)
-                    
+                        text += '   questPercent%d of %d' % (progress, goal)
+
                 not isinstance(quest.getTasks()[0], DowsingRodTaskDNA)
-                text += '   \x1questComplete\x1' + PLocalizer.QuestTitleComplete + '\x2'
-            
+                text += '   questComplete' + PLocalizer.QuestTitleComplete + ''
+
         elif container.isChoice():
             (count, total, length) = container.getProgress(showComplete = True)
             if total == length:
-                text += '   \x1questPercent\x1%d of %d\x2' % (count, total)
+                text += '   questPercent%d of %d' % (count, total)
             else:
-                text += '   \x1questPercent\x1%d of %d (of %d)\x2' % (count, total, length)
-            format = ' \x1questPercent\x1%s\x2'
+                text += '   questPercent%d of %d (of %d)' % (count, total, length)
+            format = ' questPercent%s'
             if localizerText:
                 text += format % localizerText.get('items', 'Items')
             else:
                 text += format % 'Items'
         else:
-            for None in localAvatar.getQuests():
-                quest = None
+            for quest in localAvatar.getQuests():
                 if container.hasQuest(quest.getQuestId()):
                     questId = quest.getQuestId()
                     break
-                    continue
-            
+
             (compCont, cont) = QuestLadderDB.getPercentComplete(container.getName(), questId)
             compNum = 0
             if compCont > 0 and cont > 0:
                 compNum = int((float(compCont) / float(cont)) * 100.0)
-                text += '   \x1questPercent\x1%d%%\x2' % compNum
-            
+                text += '   questPercent%d%%' % compNum
+
         return text
 
     

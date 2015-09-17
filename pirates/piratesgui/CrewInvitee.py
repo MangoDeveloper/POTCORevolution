@@ -33,13 +33,13 @@ class CrewInvitee(DirectFrame):
             return None
         
         self.title = DirectLabel(parent = self, relief = None, text = PLocalizer.CrewInviteeTitle, text_scale = PiratesGuiGlobals.TextScaleExtraLarge, text_align = TextNode.ACenter, text_fg = PiratesGuiGlobals.TextFG2, text_shadow = PiratesGuiGlobals.TextShadow, text_font = PiratesGlobals.getPirateOutlineFont(), pos = (0.25, 0, 0.41999999999999998), image = None, image_scale = 0.25)
-        nameArray = ('\x1CPOrangeHEAD\x1' + self.avName + '\x2', '\x1CPOrangeHEAD\x1' + self.avName + '\x2', '\x1CPOrangeOVER\x1' + self.avName + '\x2', '\x1CPOrangeHEAD\x1' + self.avName + '\x2')
+        nameArray = ('\x001CPOrangeHEAD\x001' + self.avName + '\x002', '\x001CPOrangeHEAD\x001' + self.avName + '\x002', '\x001CPOrangeOVER\x001' + self.avName + '\x002', '\x001CPOrangeHEAD\x001' + self.avName + '\x002')
         nameButton = DirectButton(parent = NodePath(), relief = None, text = nameArray, text_align = TextNode.ALeft, text_shadow = PiratesGuiGlobals.TextShadow, textMayChange = 0, command = self.handleAvatarPress, extraArgs = [
             avId,
             avName])
         (left, right, bottom, top) = nameButton.getBounds()
         nameGFX = TextGraphic(nameButton, left, right, 0, 1)
-        buttonName = '\x5' + self.avName + '\x5'
+        buttonName = '\x005' + self.avName + '\x005'
         buttonText = PLocalizer.CrewInviteeInvitation % buttonName
         tpMgr = TextPropertiesManager.getGlobalPtr()
         tpMgr.setGraphic(self.avName, nameGFX)

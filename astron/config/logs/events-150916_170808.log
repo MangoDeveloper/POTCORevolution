@@ -1,0 +1,11 @@
+{"_time": "2015-09-16 17:08:08Eastern Daylight Time", "type": "log-opened", "sender": "EventLogger", "msg": "Log opened upon Event Logger startup."}
+{"_time": "2015-09-16 17:09:01Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000000", "remote_address": "127.0.0.1:2890", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 17:09:31Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000000"}
+{"_time": "2015-09-16 17:11:22Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000001", "remote_address": "127.0.0.1:2920", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 17:11:23Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000001"}
+{"_time": "2015-09-16 17:13:03Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000002", "remote_address": "127.0.0.1:2947", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 17:13:27Eastern Daylight Time", "type": "client-disconnected", "sender": "Client:1000000002"}
+{"_time": "2015-09-16 17:14:55Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000003", "remote_address": "127.0.0.1:2983", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 17:14:55Eastern Daylight Time", "type": "client-ejected-security", "sender": "Client:1000000003", "reason_code": "118", "reason_msg": "Client tried to send update for non-sendable field: ClientServicesManager(4665).acceptLogin"}
+{"_time": "2015-09-16 17:16:43Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000004", "remote_address": "127.0.0.1:3032", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 17:16:43Eastern Daylight Time", "type": "client-ejected-security", "sender": "Client:1000000004", "reason_code": "118", "reason_msg": "Client tried to send update for non-sendable field: ClientServicesManager(4665).acceptLogin"}

@@ -868,7 +868,6 @@ def reportMemoryLeaks():
         
         try:
             uncompressedReport += str(s) + '&'
-        continue
         except TypeError:
             continue
         

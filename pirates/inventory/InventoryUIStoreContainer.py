@@ -100,7 +100,7 @@ class InventoryUIStoreContainer(InventoryUIContainer.InventoryUIContainer):
             if cell.inventoryItem and cell.inventoryItem.itemTuple[1] == itemId:
                 self.manager.startCellItemDetails(cell, self.detailsPos, self.detailsHeight, self.detailsDelay)
                 return None
-                continue
+                
         
 
     
@@ -108,7 +108,7 @@ class InventoryUIStoreContainer(InventoryUIContainer.InventoryUIContainer):
         for cell in self.cellList:
             if cell.inventoryItem and cell.inventoryItem.itemTuple[1] == itemId:
                 return cell.inventoryItem
-                continue
+                
         
 
     
@@ -184,7 +184,7 @@ class InventoryUIStoreContainer(InventoryUIContainer.InventoryUIContainer):
             item.showResaleValue = False
             if self.zCount == self.gridZ:
                 break
-                continue
+                
         
         while self.zCount < self.gridZ:
             self.addGridCell()
@@ -257,7 +257,7 @@ class InventoryUIStoreContainer(InventoryUIContainer.InventoryUIContainer):
         for cell in self.gridDict.values():
             if not cell.inventoryItem:
                 cell['state'] = DGG.DISABLED
-                continue
+                
         
 
 

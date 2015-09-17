@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: C (Python 2.4)
 
 from direct.fsm.FSM import FSM
 from pandac.PandaModules import *

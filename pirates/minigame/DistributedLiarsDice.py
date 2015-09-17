@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 import random
 from direct.interval.IntervalGlobal import *

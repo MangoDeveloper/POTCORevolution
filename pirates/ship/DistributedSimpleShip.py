@@ -234,7 +234,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                     self.threatIconDict[iconKey] = icon
                     tg = TextGraphic(icon, -0.25, 0.75, -0.31, 0.68999999999999995)
                     tpMgr.setGraphic(iconKey, tg)
-                    continue
+                    
             
         
         if not self.hunterIcon:
@@ -266,9 +266,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         self.showThrough(OTPRender.EnviroCameraBitmask)
         self.calculateLook()
         self.buildShip()
-        continue
         self.mastHealth = [ x[0] * (x[1] / 100.0) for x in zip(self.maxMastHealth, self.mastStates) ]
-        continue
         self.armor = [ x[0] * (x[1] / 100.0) for x in zip(self.maxArmor, self.armorStates) ]
         self.Sp = sum(self.mastHealth)
         self.model.demandMastStates(self.mastStates, self.maxMastHealth)
@@ -392,7 +390,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 self._sampleNPs[sp] = np
                 if showSamplePoints:
                     axis.instanceTo(np)
-                    continue
+                    
             
             self._maxSampleDistance = abs(self._sampleNPs[ShipGlobals.SamplePoints.C].getY() - self._sampleNPs[ShipGlobals.SamplePoints.F].getY())
         
@@ -930,7 +928,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 cannon[1].setAllowInteract(1)
                 cannon[1].checkInUse()
                 cannon[1].refreshState()
-                continue
+                
         
         if self.wheel:
             if self.wheel[1]:
@@ -952,7 +950,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             if cannon[1]:
                 cannon[1].setAllowInteract(0, forceOff = True)
                 cannon[1].refreshState()
-                continue
+                
         
         if self.wheel:
             if self.wheel[1]:
@@ -1185,7 +1183,6 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             rear,
             left,
             right]
-        continue
         self.armor = [ x[0] * (x[1] / 100.0) for x in zip(self.maxArmor, self.armorStates) ]
         self.adjustArmorDisplay()
         self.updateShipEffects()
@@ -1238,7 +1235,6 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             newVal != oldVal
         
         self.mastStates = newMastStates
-        continue
         self.mastHealth = [ x[0] * (x[1] / 100.0) for x in zip(self.maxMastHealth, self.mastStates) ]
         self.Sp = sum(self.mastHealth)
         if self.shipTargetPanel:
@@ -1418,7 +1414,6 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             buffId = self.skillEffects[buffKeyId][0]
             if WeaponGlobals.C_RAM == buffId:
                 return True
-                continue
         
         return False
 
@@ -1464,7 +1459,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 if not disabledBits.isZero():
                     np.node().setIntoCollideMask(cMask)
                     self.disabledCollisionBits[np] = disabledBits
-                    continue
+                    
             
             if self.broadside:
                 if self.broadside[1]:
@@ -1734,7 +1729,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             av = self.cr.getDo(avId)
             if av:
                 av.onShipWithLocalAv(True)
-                continue
+                
         
         self.gameFSM.initAudio()
         self.hideName()
@@ -1792,7 +1787,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             av = self.cr.getDo(avId)
             if av:
                 av.onShipWithLocalAv(False)
-                continue
+                
         
         self.gameFSM.clearAudio()
         if self.gameFSM:
@@ -1862,14 +1857,14 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                     attackerId = self.skillEffects[buffKeyId][3]
                     if buffId == WeaponGlobals.C_RAM:
                         deleteMe.append((buffKeyId, buffId, attackerId))
-                        continue
+                        
                 
                 for (buffKeyId, buffId, attackerId) in deleteMe:
                     del self.skillEffects[buffKeyId]
                     self.removeStatusEffect(buffId, attackerId)
                 
                 self.refreshStatusTray()
-                continue
+                
         
         self.addShipTarget(target, 2)
         if self.isInCrew(base.localAvatar.doId):
@@ -2230,7 +2225,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         for (mast, distMast) in self.masts.values():
             booms.extend(mast.locators.findAllMatches('**/joint_anchor_net_*;+s'))
         
-        continue
+        
         booms = _[1]([ (node.getDistance(boom), boom) for boom in booms ])
         (dist, closest) = booms[0]
         return closest
@@ -2284,14 +2279,14 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         threatText = ''
         if self.badge:
             if base.config.GetBool('want-land-infamy', 0) or base.config.GetBool('want-sea-infamy', 0):
-                badgeText = ' \x1white\x1\x5badge-%s-%s\x5\x2 ' % (self.badge[0], self.badge[1])
+                badgeText = ' \x001white\x001\x005badge-%s-%s\x005\x002 ' % (self.badge[0], self.badge[1])
             
         if base.config.GetBool('want-ship-threat', 1) and not self.getSiegeTeam():
             if self.getThreatLevel():
-                threatText = '\x1white\x1\x5threat-%s\x5\x2\n\n' % self.getThreatLevel()
+                threatText = '\x001white\x001\x005threat-%s\x005\x002\n\n' % self.getThreatLevel()
             elif self.getHunterLevel():
                 hunterName = HighSeasGlobals.HUNTER_LEVEL_NAME_DICT.get(self.getHunterLevel(), '')
-                threatText = '\x1white\x1\x5hunterTAG\x5\x2 \x1red\x1%s\x2\n\n' % hunterName
+                threatText = '\x001white\x001\x005hunterTAG\x005\x002 \x001red\x001%s\x002\n\n' % hunterName
             
         
         if self.nametag:
@@ -2641,7 +2636,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 category = WeaponGlobals.getBuffCategory(buffId)
                 if newPriority < priority and category == newCategory:
                     return None
-                    continue
+                    
             
         
         helmsman = self.cr.doId2do.get(self.steeringAvId)
@@ -2691,7 +2686,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                     timestamp,
                     buffData[0]]
                 self.addStatusEffect(effectId, attackerId, duration, timeLeft, timestamp, buffData[0])
-                continue
+                
             effect = self.skillEffects[buffKeyId]
             effect[3] = timeLeft
             effect[4] = timestamp
@@ -2703,11 +2698,11 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 id = '%s-%s' % (entry[0], entry[1])
                 if buffKeyId == id:
                     foundEntry = 1
-                    continue
+                    
             
             if not foundEntry:
                 killList.append((buffKeyId, self.skillEffects[buffKeyId][0], self.skillEffects[buffKeyId][1]))
-                continue
+                
         
         for (buffKeyId, effectId, attackerId) in killList:
             del self.skillEffects[buffKeyId]
@@ -2722,7 +2717,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             buffId = self.skillEffects[buffKeyId][0]
             if buffId not in buffIds:
                 buffIds.append(buffId)
-                continue
+                
         
         return buffIds
 
@@ -2829,7 +2824,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             buffId = self.skillEffects[buffKeyId][0]
             if WeaponGlobals.C_FULLSAIL == buffId or WeaponGlobals.C_RAM == buffId:
                 slowDown = False
-                continue
+                
         
         self.calcModifiedStats()
 
@@ -2839,7 +2834,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         for buffKeyId in self.skillEffects.keys():
             if self.skillEffects[buffKeyId][0] == effectId:
                 buffCopies.append(buffKeyId)
-                continue
+                
         
         return buffCopies
 
@@ -2870,7 +2865,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         for buffId in self.getSkillEffects():
             if WeaponGlobals.C_RAM == buffId:
                 return None
-                continue
+                
         
         self.enableAutoSail = 0
         self.setIsAutoSailing(0)
@@ -2940,7 +2935,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         for skillId in range(InventoryType.begin_SkillSailing, InventoryType.end_SkillSailing):
             if WeaponGlobals.getSkillTrack(skillId) == WeaponGlobals.PASSIVE_SKILL_INDEX:
                 passiveSkills.append(skillId)
-                continue
+                
         
         spPercent = max(1, self.Sp) / float(max(1, self.maxSp))
         sailModifier = spPercent * 0.25 + 0.75
@@ -2964,15 +2959,15 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 self.maxSpeed += ShipGlobals.defaultMaxSpeed * 1.0
                 self.turnRate = 0.0
                 self.maxTurn = 0.0
-                continue
+                
             if WeaponGlobals.C_COMEABOUT == buffId:
                 self.turnRate += ShipGlobals.defaultTurn * 0.34999999999999998
                 self.maxTurn += ShipGlobals.defaultMaxTurn * 0.34999999999999998
-                continue
+                
             if WeaponGlobals.C_FULLSAIL == buffId:
                 self.acceleration += ShipGlobals.defaultAcceleration * 0.5
                 self.maxSpeed += ShipGlobals.defaultMaxSpeed * 0.5
-                continue
+                
         
 
     
@@ -3046,7 +3041,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                     
                     avgX += pos[0]
                     avgZ += pos[2]
-                    continue
+                    
             
             avgX /= float(bCount)
             avgZ /= float(bCount)
@@ -3309,7 +3304,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             currentClosestDist = closestBoardingSpot.getDistance(base.localAvatar)
             if dist < currentClosestDist:
                 closestBoardingSpot = locator
-                continue
+                
         
         return closestBoardingSpot.getPos() + Vec3(0.13, -0.16, 0)
 
@@ -3331,7 +3326,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             currentClosestDist = closestBoardingSpot.getDistance(base.localAvatar)
             if dist < currentClosestDist:
                 closestBoardingSpot = locator
-                continue
+                
         
         return (closestBoardingSpot.getPos() + Vec3(0, 0, 6), closestBoardingSpot.getH() + 180)
 
@@ -3868,7 +3863,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         for currTextEffect in self.textEffects:
             if currTextEffect:
                 currTextEffect.finish()
-                continue
+                
         
         self.textEffects = []
         if self.shoutTextEffect:
@@ -3895,7 +3890,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 ship = self.cr.getDo(shipId)
                 if ship:
                     ship._calcLocalDistance(self)
-                    continue
+                    
             
             return Task.again
 

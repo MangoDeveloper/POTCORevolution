@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 from pandac.PandaModules import *
 from pirates.world.ZoneLOD import ZoneLOD
@@ -66,19 +66,19 @@ class QuestIndicatorNode(NodePath, FSM, ZoneLOD):
         self.farEffect = None
 
     delete = report(types = [
+        'frameCount',
         'args'], dConfigParam = 'quest-indicator')(delete)
     
     def cleanup(self):
         pass
 
-    cleanup = report(types = [
-        'args'], dConfigParam = 'quest-indicator')(cleanup)
     
     def __cleanup(self):
         ZoneLOD.cleanup(self)
         FSM.cleanup(self)
 
     _QuestIndicatorNode__cleanup = report(types = [
+        'frameCount',
         'args'], dConfigParam = 'quest-indicator')(__cleanup)
     
     def _QuestIndicatorNode__uniqueName(self, idString):
@@ -89,6 +89,7 @@ class QuestIndicatorNode(NodePath, FSM, ZoneLOD):
         pass
 
     placeInWorld = report(types = [
+        'frameCount',
         'args'], dConfigParam = 'quest-indicator')(placeInWorld)
     
     def loadZoneLevel(self, level):
@@ -123,6 +124,7 @@ class QuestIndicatorNode(NodePath, FSM, ZoneLOD):
         
 
     exitOff = report(types = [
+        'frameCount',
         'args'], dConfigParam = 'quest-indicator')(exitOff)
     
     def transferMinimapObject(self, guiMgr):
@@ -149,6 +151,7 @@ class QuestIndicatorNode(NodePath, FSM, ZoneLOD):
         self.startFarEffect()
 
     enterFar = report(types = [
+        'frameCount',
         'args'], dConfigParam = 'quest-indicator')(enterFar)
     
     def exitFar(self):
@@ -156,6 +159,7 @@ class QuestIndicatorNode(NodePath, FSM, ZoneLOD):
         self.stopFarEffect()
 
     exitFar = report(types = [
+        'frameCount',
         'args'], dConfigParam = 'quest-indicator')(exitFar)
     
     def enterNear(self):
@@ -186,6 +190,7 @@ class QuestIndicatorNode(NodePath, FSM, ZoneLOD):
         
 
     startFarEffect = report(types = [
+        'frameCount',
         'args'], dConfigParam = 'quest-indicator')(startFarEffect)
     
     def stopFarEffect(self):
@@ -196,6 +201,7 @@ class QuestIndicatorNode(NodePath, FSM, ZoneLOD):
         
 
     stopFarEffect = report(types = [
+        'frameCount',
         'args'], dConfigParam = 'quest-indicator')(stopFarEffect)
     
     def showEffect(self):
@@ -203,16 +209,12 @@ class QuestIndicatorNode(NodePath, FSM, ZoneLOD):
         self.muted = False
         self.startFarEffect()
 
-    showEffect = report(types = [
-        'args'], dConfigParam = 'quest-indicator')(showEffect)
     
     def hideEffect(self):
         self.notify.debug('HideEffect')
         self.muted = True
         self.stopFarEffect()
 
-    hideEffect = report(types = [
-        'args'], dConfigParam = 'quest-indicator')(hideEffect)
     
     def requestTargetRefresh(self, refreshDelay = 10):
         self.stopTargetRefresh()

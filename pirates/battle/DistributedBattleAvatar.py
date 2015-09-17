@@ -620,7 +620,7 @@ class DistributedBattleAvatar(DistributedReputationAvatar, WeaponBase, Teamable)
     def setMonsterNameTag(self):
         if self.level:
             color = self.cr.battleMgr.getExperienceColor(base.localAvatar, self)
-            name = '%s  %s\x1smallCaps\x1%s%s\x2\x2' % (self.name, color, PLocalizer.Lv, self.level)
+            name = '%s  %s\x001smallCaps\x001%s%s\x002\x002' % (self.name, color, PLocalizer.Lv, self.level)
         else:
             name = self.name
         if self.getNameText():

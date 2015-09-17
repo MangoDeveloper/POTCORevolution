@@ -1,9 +1,7 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
-from direct.directnotify.DirectNotifyGlobal import directNotify
 
 class QuestAvatarBase:
-    notify = directNotify.newCategory('QuestAvatarBase')
     
     def __init__(self):
         self.questNPCInterest = { }
@@ -16,6 +14,7 @@ class QuestAvatarBase:
             if hasattr(self, 'doId'):
                 err += ' for %s' % self.doId
             
+            print err
             return []
         else:
             return inventory.getQuestList()

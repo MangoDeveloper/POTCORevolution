@@ -1,0 +1,33 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  no_version_set
+PAccount: accountServer from launcher:  
+PAccount: default accountServer:  https://pirates.go.com
+Initializing quest ladders...
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\root\Downloads\POTCOR-src-master(1)\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 61, in <module>
+    from pirates.distributed import PiratesClientRepository
+  File "pirates\distributed\PiratesClientRepository.py", line 58, in <module>
+    from pirates.makeapirate.MakeAPirate import MakeAPirate
+  File "pirates\makeapirate\MakeAPirate.py", line 21, in <module>
+    from pirates.pirate import LocalPirate
+  File "pirates\pirate\LocalPirate.py", line 30, in <module>
+    from pirates.piratesgui import GuiManager
+  File "pirates\piratesgui\GuiManager.py", line 61, in <module>
+    from pirates.piratesgui import PirateProfilePage
+  File "pirates\piratesgui\PirateProfilePage.py", line 25, in <module>
+    from pirates.pirate import DistributedPlayerPirate
+  File "pirates\pirate\DistributedPlayerPirate.py", line 97, in <module>
+    class bp:
+  File "pirates\pirate\DistributedPlayerPirate.py", line 98, in bp
+    loginCfg = BpDb.bpPreset(iff = False, cfg = 'loginCfg', static = 1)
+NameError: name 'BpDb' is not defined

@@ -1,5 +1,3 @@
-# File: o (Python 2.4)
-
 from SCObject import SCObject
 from SCMenu import SCMenu
 from SCElement import SCElement

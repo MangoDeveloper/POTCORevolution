@@ -309,8 +309,6 @@ def checkName(name, otherCheckFuncs = [], font = None):
                 
             len(capitals) > 2
         
-
-    
     def checkJapanese(name):
         asciiSpace = range(32, 33)
         asciiDigits = range(48, 64)
@@ -319,10 +317,11 @@ def checkName(name, otherCheckFuncs = [], font = None):
         halfwidthKatakana = range(65381, 65440)
         halfwidthCharacter = set(asciiSpace + halfwidthKatakana)
         allowedUtf8 = set(asciiSpace + hiragana + katakana + halfwidthKatakana)
+
         te = TextEncoder()
         dc = 0.0
-        for char in lambda [outmost-iterable]: for char in [outmost-iterable]:
-ord(char)(te.decodeText(name)):
+
+        for char in (ord(char) for char in te.decodeText(name)):
             if char not in allowedUtf8:
                 if char in asciiDigits:
                     notify.info('name contains not allowed ascii digits')
@@ -330,21 +329,18 @@ ord(char)(te.decodeText(name)):
                 else:
                     notify.info('name contains not allowed utf8 char: 0x%04x' % char)
                     return OTPLocalizer.NCBadCharacter % te.encodeWtext(unichr(char))
-            char in asciiDigits
-            if char in halfwidthCharacter:
+            elif char in halfwidthCharacter:
                 dc += 0.5
-                continue
-            dc += 1
-        
+            else:
+                dc += 1
+
         if dc < 2:
             notify.info('name is too short: %0.1f' % dc)
             return OTPLocalizer.NCTooShort
         elif dc > 8:
             notify.info('name has been occupied more than eight display cells: %0.1f' % dc)
             return OTPLocalizer.NCGeneric
-        
 
-    
     def repeatedChars(name):
         count = 1
         lastChar = None

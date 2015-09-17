@@ -193,7 +193,7 @@ class InventoryUIContainer(DirectFrame, InventoryRequestBase.InventoryRequestBas
         for cell in self.cellList:
             if cell.inventoryItem:
                 itemCount += 1
-                continue
+                
         
         return itemCount
 
@@ -336,7 +336,7 @@ class InventoryUIContainer(DirectFrame, InventoryRequestBase.InventoryRequestBas
             if not cell.inventoryItem:
                 self.putIntoCell(item, cell)
                 return 1
-                continue
+                
         
         return 0
 
@@ -523,14 +523,13 @@ class InventoryUIContainer(DirectFrame, InventoryRequestBase.InventoryRequestBas
                     itemInfo = cell.inventoryItem.itemTuple
                     itemType = ItemGlobals.getType(itemInfo[1])
                     if self.manager.isSlotPending(destSlot):
-                        continue
-                    if testCell.inventoryItem and ItemGlobals.getType(testCell.inventoryItem.itemTuple[1]) == itemType:
-                        destCell = testCell
-                        continue
+                        if testCell.inventoryItem and ItemGlobals.getType(testCell.inventoryItem.itemTuple[1]) == itemType:
+                            destCell = testCell
+                        
                     if testCell.inventoryItem == None:
                         destCell = testCell
                         break
-                        continue
+                        
                 
             elif rangeTypeDict:
                 itemInfo = cell.inventoryItem.itemTuple
@@ -546,7 +545,7 @@ class InventoryUIContainer(DirectFrame, InventoryRequestBase.InventoryRequestBas
                         destCell = self.manager.slotToCellMap.get(destSlot)
                         if destCell.inventoryItem == None:
                             break
-                            continue
+                            
                     
                 
             

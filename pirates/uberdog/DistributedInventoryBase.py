@@ -44,7 +44,7 @@ class DistributedInventoryBase:
             if doIdsInCategory:
                 out += [
                     '  %4d: %7d/%-7d | doIds:  %s' % (categoryId, len(doIdsInCategory), limit, doIdsInCategory)]
-                continue
+                
             out += [
                 '  %4d: %7d/%-7d | stacks: %s' % (categoryId, self.categoryCounts.get(categoryId, 0), limit, self.stacksInCategory.get(categoryId, { }).keys())]
         
@@ -108,7 +108,7 @@ class DistributedInventoryBase:
                 
                 try:
                     overallRep = accumulators[InventoryType.OverallRep]
-                    continue
+                    
                     calculatedOverallRep = _[1]([ accumulators.get(category, 0) for category in xrange(InventoryType.GeneralRep, InventoryType.end_Accumulator) ])
                     if overallRep != calculatedOverallRep:
                         callback(False, 'OverallRep does not add up!')
@@ -119,7 +119,7 @@ class DistributedInventoryBase:
                     for category in xrange(InventoryType.GeneralRep, InventoryType.end_Accumulator):
                         if accumulators.get(category, 0) > AccumulatorLimits[category]:
                             callback(False, 'Overflow in rep category %s' % category)
-                            continue
+                            
                         []
                     
                     callback(True)
@@ -232,7 +232,7 @@ class DistributedInventoryBase:
             if old.get(category, 0) != limit:
                 messenger.send('inventoryLimit-%s-%s' % (self.doId, category), [
                     limit])
-                continue
+                
         
 
     
@@ -243,7 +243,7 @@ class DistributedInventoryBase:
             if old.get(t, 0) != limit:
                 messenger.send('inventoryLimit-%s-%s' % (self.doId, t), [
                     limit])
-                continue
+                
         
 
     
@@ -265,7 +265,7 @@ class DistributedInventoryBase:
     
     def setDoIds(self, categoriesAndDoIds):
         old = self.doIds
-        continue
+        
         self.doIds = _[1]([ (doId, category) for (category, doId) in categoriesAndDoIds ])
         self.doIdsInCategory = { }
         for (category, doId) in categoriesAndDoIds:
@@ -285,10 +285,8 @@ class DistributedInventoryBase:
         mightBeComplete = True
         for (doId, category) in self.doIds.items():
             if category == InventoryCategory.WAGERS or category == InventoryCategory.SHIPS:
-                continue
-            
-            if old.get(doId) is None:
-                distObj = self.dcm.doId2do.get(doId)
+                if old.get(doId) is None:
+                    distObj = self.dcm.doId2do.get(doId)
                 if distObj is not None:
                     messenger.send('inventoryAddDoId-%s-%s' % (self.doId, category), [
                         distObj])
@@ -333,11 +331,9 @@ class DistributedInventoryBase:
     def _checkDoIdsCompletion(self):
         for (doId, category) in self.doIds.items():
             if category == InventoryCategory.WAGERS or category == InventoryCategory.SHIPS:
-                continue
-            
-            if self.dcm.doId2do.get(doId) is None:
-                return None
-                continue
+                if self.dcm.doId2do.get(doId) is None:
+                    return None
+                
         
         self.doIdsReady = True
         self.checkIsReady()
@@ -450,7 +446,7 @@ class DistributedInventoryBase:
             category = InventoryId.getCategory(stackType)
             if category:
                 counts[category] = counts.get(category, 0) + 1
-                continue
+                
         
         self.categoryCounts = counts
 
@@ -465,7 +461,7 @@ class DistributedInventoryBase:
             do = self.dcm.doId2do.get(doId)
             if do is not None:
                 dos.append(do)
-                continue
+                
         
         return dos
 
@@ -601,65 +597,61 @@ class DistributedInventoryBase:
 
     
     def getTonics(self):
-        return dict(lambda [outmost-iterable]: for tonicId in [outmost-iterable]:
-(tonicId, self.getStackQuantity(tonicId))(InventoryType.Potions))
+        return {self.getStackQuantity(tonicId): tonicId for tonicId in InventoryType.Potions}
 
-    
+
     def getShipRepairKits(self):
         return self.getStackQuantity(InventoryType.ShipRepairKit)
 
-    
+
     def getFriendsList(self):
         return self.getDoList(InventoryCategory.FRIENDS)
 
-    
     def getPetsList(self):
         return self.getDoList(InventoryCategory.PETS)
 
-    
+
     def getQuestList(self):
         return self.getDoList(InventoryCategory.QUESTS)
 
-    
+
     def getShipList(self):
         return self.getDoList(InventoryCategory.SHIPS)
 
-    
+
     def getShipDoIdList(self):
         shipIds = self.getDoIdListCategory(InventoryCategory.SHIPS)
         shipIds.sort(reverse = True)
         return shipIds
 
-    
+
     def getShipMainpartsList(self):
         return self.getDoList(InventoryCategory.SHIP_MAINPARTS)
 
-    
+
     def getShipMainpartsDoIdList(self):
         return self.getDoIdListCategory(InventoryCategory.SHIP_MAINPARTS)
 
-    
+
     def getShipAccessoriesList(self):
         return self.getDoList(InventoryCategory.SHIP_ACCESSORIES)
 
-    
+
     def getShipAccessoriesDoIdList(self):
         return self.getDoIdListCategory(InventoryCategory.SHIP_ACCESSORIES)
 
-    
+
     def getTreasureMapsList(self):
         return self.getDoList(InventoryCategory.TREASURE_MAPS)
 
-    
+
     def getWagerList(self):
         return self.getDoList(InventoryCategory.WAGERS)
 
-    
+
     def getFlagList(self):
         return self.getDoList(InventoryCategory.FLAGS)
 
-    
+
     def removeShip(self, shipId):
         pass
-
-

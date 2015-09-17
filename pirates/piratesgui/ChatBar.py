@@ -77,7 +77,7 @@ class WhisperTab(TopTab):
     def __init__(self, tabBar, name, **kw):
         optiondefs = (('modelName', 'general_frame_c', None), ('frameSize', (0, 0.745, 0.0, 0.11), None), ('borderScale', 0.13500000000000001, None), ('bgBuffer', 0.14000000000000001, None))
         self.defineoptions(kw, optiondefs)
-        TopTab.__init__(self, tabBar, name, **None)
+        TopTab.__init__(self, tabBar, name, **kw)
         self.initialiseoptions(ChatTab)
 
 
@@ -104,7 +104,7 @@ class WhisperTabBar(TabBar):
 
     
     def makeTab(self, name, **kw):
-        newWhisperTab = WhisperTab(self, name, **None)
+        newWhisperTab = WhisperTab(self, name, **kw)
         if hasattr(self, 'percentage'):
             newWhisperTab.setBoxWidth(self.percentage)
         
@@ -117,7 +117,7 @@ class ChatBar(DirectFrame, FSM):
     def __init__(self, parent, chatMgr, whiteListEntry, *args, **kw):
         optiondefs = (('relief', None, None), ('state', DGG.DISABLED, None), ('frameSize', (0, 1, 0, 0.75), None), ('frameColor', (1, 0, 1, 0.20000000000000001), None))
         self.defineoptions(kw, optiondefs)
-        DirectFrame.__init__(self, parent, *args, **args)
+        DirectFrame.__init__(self, parent, *args, **kw)
         self.initialiseoptions(ChatBar)
         FSM.__init__(self, 'ChatBar')
         if base.config.GetBool('whitelist-chat-enabled', 1):

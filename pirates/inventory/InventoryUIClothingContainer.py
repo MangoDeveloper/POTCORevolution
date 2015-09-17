@@ -53,7 +53,7 @@ class InventoryUIClothingContainer(InventoryUISlotContainer.InventoryUISlotConta
             if item[0] in (InventoryType.ItemTypeClothing,):
                 self.overflowInfo.show()
                 return None
-                continue
+                
         
 
     

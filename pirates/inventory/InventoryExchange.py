@@ -939,7 +939,7 @@ def findDyeColorFromDNAColor(gender, clothingType, colorIndex):
         dyeColor = DYE_COLORS[dyeColorIndex]
         if dyeColor == colorValue:
             return dyeColorIndex
-            continue
+            
     
     print 'Not found %s' % colorIndex
     import pdb as pdb
@@ -1436,7 +1436,7 @@ def printMaleJewelryDNAHashToOldIdTable():
             count += 1
             hash = getJewelryDNAHash(location, modelId, pColor, sColor)
             print '    %d, %d,' % (hash, uniqueId)
-            continue
+            
     
     print '};'
     print '//', count
@@ -1452,7 +1452,7 @@ def printFemaleJewelryDNAHashToOldIdTable():
             count += 1
             hash = getJewelryDNAHash(location, modelId, pColor, sColor)
             print '    %d, %d,' % (hash, uniqueId)
-            continue
+            
     
     print '};'
     print '//', count
@@ -1520,7 +1520,7 @@ def printMaleTattooTranslateTable():
     for (old, new) in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeTattoo].iteritems():
         if isinstance(new, int):
             print '    %d, %d,' % (old, new)
-            continue
+            
         print '    %d, %d,' % (old, new['m'])
     
     print '};'
@@ -1532,7 +1532,7 @@ def printFemaleTattooTranslateTable():
     for (old, new) in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeTattoo].iteritems():
         if isinstance(new, int):
             print '    %d, %d,' % (old, new)
-            continue
+            
         print '    %d, %d,' % (old, new['f'])
     
     print '};'

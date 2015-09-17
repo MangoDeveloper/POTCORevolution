@@ -1,0 +1,5 @@
+{"_time": "2015-09-16 16:59:14Eastern Daylight Time", "type": "log-opened", "sender": "EventLogger", "msg": "Log opened upon Event Logger startup."}
+{"_time": "2015-09-16 17:03:11Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000000", "remote_address": "127.0.0.1:2797", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 17:03:11Eastern Daylight Time", "type": "client-ejected", "sender": "Client:1000000000", "reason_code": "124", "reason_msg": "Client version mismatch: client=no_version_set, server=sv-1.0.0"}
+{"_time": "2015-09-16 17:04:19Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000001", "remote_address": "127.0.0.1:2830", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 17:04:19Eastern Daylight Time", "type": "client-ejected", "sender": "Client:1000000001", "reason_code": "125", "reason_msg": "Client DC hash mismatch: client=0xc8d4da5d, server=0xd00e4345"}

@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 from direct.directnotify.DirectNotifyGlobal import directNotify
 from direct.showbase.PythonUtil import POD, invertDict, makeTuple
@@ -2901,7 +2901,7 @@ class ViewCutsceneTaskDNA(QuestTaskDNA):
         self.avId = avId
         if self.waitEvent:
             playerAv = simbase.air.doId2do[self.avId]
-            self.acceptOnce(playerAv.uniqueName(self.waitEvent), self._playCutscene)
+            messenger.accept(playerAv.uniqueName(self.waitEvent), self, self._playCutscene, [], 0)
         else:
             self._playCutscene()
 

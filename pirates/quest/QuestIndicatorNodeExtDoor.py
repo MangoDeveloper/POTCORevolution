@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 from pirates.piratesgui.RadarGui import *
 from pirates.effects.RayOfLight import RayOfLight
@@ -65,17 +65,11 @@ class QuestIndicatorNodeExtDoor(QuestIndicatorGridNode):
         QuestIndicatorGridNode.showEffect(self)
         self.startNearEffect()
 
-    showEffect = report(types = [
-        'frameCount',
-        'args'], dConfigParam = 'quest-indicator')(showEffect)
     
     def hideEffect(self):
         QuestIndicatorGridNode.hideEffect(self)
         self.stopNearEffect()
 
-    hideEffect = report(types = [
-        'frameCount',
-        'args'], dConfigParam = 'quest-indicator')(hideEffect)
     
     def startNearEffect(self):
         if self.muted:

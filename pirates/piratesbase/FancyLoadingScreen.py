@@ -451,14 +451,11 @@ class FancyLoadingScreen(DirectObject.DirectObject):
     
     def endStep(self, stageName):
         if self.currStage == 'unmapped':
-            self.notify.warning('step %s was started before loading screen was enabled' % stageName)
-            return None
+            self.notify.warning('step %s was started before loading screen was enabled!' % stageName)
         
         if stageName != self.currStage:
             if __dev__ and self.debugMode:
-                self.notify.error('step %s was active while step %s was trying to end!' % (self.currStage, stageName))
-            else:
-                return None
+                self.notify.warning('step %s was active while step %s was trying to end!' % (self.currStage, stageName))
         
         self.tick()
         if self.debugMode:
@@ -545,20 +542,20 @@ class FancyLoadingScreen(DirectObject.DirectObject):
     def show(self, waitForLocation = False, disableSfx = True, expectedLoadScale = 1.0):
         if self.state and base.config.GetBool('no-loading-screen', 0) or not (self.locationLabel):
             return None
-        
+
         render.hide()
         render2d.hide()
         render2dp.hide()
         if not self.debugMode:
             self.loadingPlank.hide()
-        
+
         self.root.unstash()
         self.root.showThrough()
         self.state = True
         gsg = base.win.getGsg()
         if gsg:
             gsg.setIncompleteRender(False)
-        
+
         base.setTaskChainNetNonthreaded()
         self.allowLiveFlatten.setValue(1)
         self.startLoading(expectedLoadScale)
@@ -572,10 +569,10 @@ class FancyLoadingScreen(DirectObject.DirectObject):
                 sfx_manager = base.sfxManagerList[index]
                 sfx_manager.setVolume(0.0)
                 index += 1
-        
+
         if base.appRunner:
             base.appRunner.notifyRequest('onLoadingMessagesStart')
-        
+
         self._FancyLoadingScreen__setLocationText(self.locationText)
         self._FancyLoadingScreen__setHintText(self.hintText)
         if not waitForLocation:

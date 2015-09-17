@@ -1,0 +1,16 @@
+> c:\users\tyler\desktop\potcor-src-master\potcor-src-master\pirates\piratesbase\piratesstart.py(31)<module>()
+-> from direct.gui import DirectGuiGlobals
+(Pdb) Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 31, in <module>
+    from direct.gui import DirectGuiGlobals
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 31, in <module>
+    from direct.gui import DirectGuiGlobals
+  File "C:\Panda3D-1.8.1\python\lib\bdb.py", line 48, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "C:\Panda3D-1.8.1\python\lib\bdb.py", line 67, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit

@@ -1,32 +1,23 @@
-# File: o (Python 2.4)
-
 from SCMenu import SCMenu
 from SCEmoteTerminal import SCEmoteTerminal
 
 class SCEmoteMenu(SCMenu):
-    
+
     def __init__(self):
         SCMenu.__init__(self)
-        self.accept('emotesChanged', self._SCEmoteMenu__emoteAccessChanged)
-        self._SCEmoteMenu__emoteAccessChanged()
+        self.accept('emotesChanged', self.__emoteAccessChanged)
+        self.__emoteAccessChanged()
 
-    
     def destroy(self):
         SCMenu.destroy(self)
 
-    
-    def _SCEmoteMenu__emoteAccessChanged(self):
+    def __emoteAccessChanged(self):
         self.clearMenu()
-        
         try:
             lt = base.localAvatar
         except:
-            return None
+            return
 
-        for i in range(len(lt.emoteAccess)):
+        for i in xrange(len(lt.emoteAccess)):
             if lt.emoteAccess[i]:
                 self.append(SCEmoteTerminal(i))
-                continue
-        
-
-

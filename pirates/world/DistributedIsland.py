@@ -1333,7 +1333,6 @@ class DistributedIsland(DistributedGameArea, DistributedCartesianGrid, ZoneLOD, 
                 
             
             tsSet = lavaGeom.findAllTextureStages()
-            continue
             tsSet = [ tsSet[x] for x in range(tsSet.getNumTextureStages()) ]
             tsSet.sort(key = lambda x: x.getSort())
             if not tsSet:

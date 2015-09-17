@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: F (Python 2.4)
 
 import random
 from pirates.piratesbase import PLocalizer, PiratesGlobals

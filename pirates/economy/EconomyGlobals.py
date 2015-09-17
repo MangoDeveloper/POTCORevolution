@@ -412,7 +412,7 @@ def getAllCargoType(cargoType):
     for itemId in __cargoList:
         if __cargoList.get(itemId)[1] == cargoType:
             cargo.append(itemId)
-            continue
+            
     
     return cargo
 

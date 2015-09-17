@@ -117,7 +117,7 @@ class AvatarChooser(DirectObject, StateData):
         self.scene.reparentTo(render)
         camera.reparentTo(render)
         camera.setPosHpr(-29.018699999999999, 37.012500000000003, 24.75, 4.0899999999999999, 1.0, 0.0)
-        loggedInSubId = base.cr.accountDetailRecord.playerAccountId
+        loggedInSubId = base.cr.accountDetailRecord.getAccountName()
         if loggedInSubId in self.subIds:
             index = self.subIds.index(loggedInSubId)
         else:
@@ -241,16 +241,16 @@ class AvatarChooser(DirectObject, StateData):
         self.water.updateWater(2)
         self.water.ignore('grid-detail-changed')
         self.ship = None
-        if base.launcher.getPhaseComplete(3):
-            ShipGlobals = ShipGlobals
-            import pirates.ship
-            self.ship = base.shipFactory.getShip(ShipGlobals.INTERCEPTORL1)
-            self.ship.modelRoot.setPosHpr(140.86000000000001, 538.97000000000003, -3.6200000000000001, -133.03999999999999, 0.0, 0.0)
-            self.ship.modelRoot.reparentTo(self.scene)
-            self.shipRoot = self.ship.modelRoot
-            self.ship.playIdle()
-            lodNode = self.ship.lod.node()
-            self.ship.lod.node().forceSwitch(0)
+        #if base.launcher.getPhaseComplete(3):
+        #    ShipGlobals = ShipGlobals
+        #    import pirates.ship
+        #    self.ship = base.shipFactory.getShip(ShipGlobals.INTERCEPTORL1)
+        #    self.ship.modelRoot.setPosHpr(140.86000000000001, 538.97000000000003, -3.6200000000000001, -133.03999999999999, 0.0, 0.0)
+        #    self.ship.modelRoot.reparentTo(self.scene)
+        #    self.shipRoot = self.ship.modelRoot
+        #    self.ship.playIdle()
+        #    lodNode = self.ship.lod.node()
+        #    self.ship.lod.node().forceSwitch(0)
         
         self.avatarListFrame = DirectFrame(parent = base.a2dTopLeft, relief = None)
         self.ropeFrame = DirectFrame(parent = self.avatarListFrame, relief = None, image = self.model.find('**/avatar_c_A_rope'), image_scale = 0.35999999999999999, pos = (0, 0, -0.014999999999999999))
@@ -272,13 +272,13 @@ class AvatarChooser(DirectObject, StateData):
         if base.config.GetBool('allow-linked-accounts', 0):
             self.shareButton = DirectButton(parent = self.highlightFrame, relief = None, text_scale = 0.044999999999999998, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = ('', '', PLocalizer.AvatarChooserShared, ''), image = (self.model.find('**/avatar_c_B_unlock'), self.model.find('**/avatar_c_B_unlock'), self.model.find('**/avatar_c_B_unlock_over')), image_scale = 0.37, text_pos = (0, -0.10000000000000001), pos = (-0.51000000000000001, 0, -0.080000000000000002), scale = 1.3, command = self._AvatarChooser__handleShare)
         
-        self.playButton = DirectButton(parent = self.highlightFrame, relief = None, text_scale = 0.050000000000000003, text_fg = (0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 0.69999999999999996), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserLoading, image = (self.model.find('**/avatar_c_B_bottom'), self.model.find('**/avatar_c_B_bottom'), self.model.find('**/avatar_c_B_bottom_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (0, 0, -0.080000000000000002), scale = 1.7, color = (0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 0.69999999999999996), state = DGG.DISABLED, command = self._AvatarChooser__handlePlay)
+        self.playButton = DirectButton(parent = self.highlightFrame, relief = None, text_scale = 0.050000000000000003, text_fg = (0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 0.69999999999999996), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserLoading, image = (self.model.find('**/avatar_c_B_bottom'), self.model.find('**/avatar_c_B_bottom'), self.model.find('**/avatar_c_B_bottom_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (0, 0, -0.080000000000000002), scale = 1.7, color = (0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 0.69999999999999996), state = DGG.DISABLED, command = self._AvatarChooser__handlePlay)
         if not self.allPhasesComplete:
-            self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserLoading
+            self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserLoading
         elif not self.queueComplete:
-            self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserInQueue
+            self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserInQueue
         else:
-            self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserPlay
+            self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserPlay
             self.playButton.setColor(1, 1, 1, 1)
             self.playButton['text_fg'] = (1.0, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002)
         self.accept('enter', self._AvatarChooser__handleEnter)
@@ -293,11 +293,11 @@ class AvatarChooser(DirectObject, StateData):
             optionsState = DGG.DISABLED
         else:
             optionsState = DGG.NORMAL
-        self.optionsButton = DirectButton(parent = self.quitFrame, relief = None, text_scale = 0.050000000000000003, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserOptions, image = (self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (0, 0, 0.20999999999999999), command = self._AvatarChooser__handleOptions, state = optionsState)
+        self.optionsButton = DirectButton(parent = self.quitFrame, relief = None, text_scale = 0.050000000000000003, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserOptions, image = (self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (0, 0, 0.20999999999999999), command = self._AvatarChooser__handleOptions, state = optionsState)
         if self.disableOptions:
             self.optionsButton.setColorScale(Vec4(0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 0.69999999999999996))
         
-        self.upgradeButton = DirectButton(parent = self.quitFrame, relief = None, text_scale = 0.050000000000000003, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserUpgrade, image = (self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (0, 0, 0.070000000000000007), command = self._AvatarChooser__handleUpgrade)
+        self.upgradeButton = DirectButton(parent = self.quitFrame, relief = None, text_scale = 0.050000000000000003, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserUpgrade, image = (self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (0, 0, 0.070000000000000007), command = self._AvatarChooser__handleUpgrade)
         if base.cr.isPaid() == OTPGlobals.AccessFull:
             self.upgradeButton.hide()
             self.optionsButton.setPos(0, 0, 0.070000000000000007)
@@ -307,11 +307,11 @@ class AvatarChooser(DirectObject, StateData):
             quitState = DGG.DISABLED
         else:
             quitState = DGG.NORMAL
-        self.quitButton = DirectButton(parent = self.quitFrame, state = quitState, relief = None, text_scale = 0.050000000000000003, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserQuit, image = (self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (0, 0, -0.070000000000000007), command = self._AvatarChooser__handleQuit)
+        self.quitButton = DirectButton(parent = self.quitFrame, state = quitState, relief = None, text_scale = 0.050000000000000003, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserQuit, image = (self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (0, 0, -0.070000000000000007), command = self._AvatarChooser__handleQuit)
         if self.disableQuit:
             self.quitButton.setColorScale(Vec4(0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 0.69999999999999996))
         
-        self.renameButton = DirectButton(parent = base.a2dTopRight, relief = None, text_scale = 0.050000000000000003, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x1smallCaps\x1%s\x2' % 'rename', image = (self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (-0.29999999999999999, 0, -0.20000000000000001), command = self._AvatarChooser__handleRename)
+        self.renameButton = DirectButton(parent = base.a2dTopRight, relief = None, text_scale = 0.050000000000000003, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x01smallCaps\x01%s\x02' % 'rename', image = (self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (-0.29999999999999999, 0, -0.20000000000000001), command = self._AvatarChooser__handleRename)
         
         def shardSelected(shardId):
             base.cr.defaultShard = shardId
@@ -366,7 +366,7 @@ class AvatarChooser(DirectObject, StateData):
                     textPos = (0, -0.014999999999999999)
                     image = (self.model.find('**/avatar_c_A_middle'), self.model.find('**/avatar_c_A_middle'), self.model.find('**/avatar_c_A_middle_over'), self.model.find('**/avatar_c_A_middle'))
                 if av == OTPGlobals.AvatarSlotAvailable:
-                    text = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserCreate
+                    text = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserCreate
                     if -3 in avData:
                         command = self._AvatarChooser__handleCreate
                     else:
@@ -378,7 +378,7 @@ class AvatarChooser(DirectObject, StateData):
                     state = DGG.DISABLED
                     imageColor = Vec4(0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 1)
                 elif av == OTPGlobals.AvatarSlotUnavailable:
-                    text = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserCreate
+                    text = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserCreate
                     if -3 in avData:
                         command = self._AvatarChooser__handleCreate
                     else:
@@ -531,14 +531,14 @@ class AvatarChooser(DirectObject, StateData):
             self.playButton['state'] = DGG.DISABLED
         elif potAv.shared and potAv.creator or not base.config.GetBool('allow-linked-accounts', 0):
             if not self.allPhasesComplete:
-                self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserLoading
+                self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserLoading
             elif not self.queueComplete:
-                self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserInQueue
+                self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserInQueue
             else:
-                self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserPlay
+                self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserPlay
             self.playButton['state'] = DGG.NORMAL
         else:
-            self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserLockedByOwner
+            self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserLockedByOwner
             self.playButton['state'] = DGG.DISABLED
         self.renameButton.hide()
         if potAv.wishState == 'APPROVED':
@@ -674,12 +674,9 @@ class AvatarChooser(DirectObject, StateData):
             self.notQueueCompleteDialog.show()
             return None
         
-        self.choice = (subId, slot)
-        self.accept('rejectAvatarSlot', self._AvatarChooser__rejectAvatarSlot)
-        self.accept('avatarSlotResponse', self._AvatarChooser__avatarSlotResponse)
-        base.cr.avatarManager.sendRequestAvatarSlot(subId, slot)
-        base.cr.waitForDatabaseTimeout(requestName = 'WaitForCreateAvatarResponse')
         self.blockInput()
+        self.choice = (subId, slot)
+        self.__avatarSlotResponse(*self.choice)
 
     
     def _AvatarChooser__rejectAvatarSlot(self, reasonId, subId, slot):
@@ -698,10 +695,8 @@ class AvatarChooser(DirectObject, StateData):
         base.cr.cleanupWaitingForDatabase()
         self.doneStatus = {
             'mode': 'create' }
-        self.acceptOnce(base.transitions.FadeOutEvent, lambda : messenger.send(self.doneEvent, [
-self.doneStatus]))
-        base.transitions.fadeOut()
-
+        base.transitions.fadeOut(finishIval = Func(messenger.send, self.doneEvent, [
+            self.doneStatus]))
     
     def _AvatarChooser__handleShare(self):
         if self.shareConfirmDialog:
@@ -750,41 +745,42 @@ self.doneStatus]))
     def _AvatarChooser__handlePlay(self):
         if not self.queueComplete:
             if not self.notQueueCompleteDialog:
-                self.notQueueCompleteDialog = PDialog.PDialog(text = PLocalizer.AvatarChooserQueued, style = OTPDialog.Acknowledge, command = self._AvatarChooser__handleNotQueueComplete)
-            
+                self.notQueueCompleteDialog = PDialog.PDialog(text = PLocalizer.AvatarChooserQueued, style = OTPDialog.Acknowledge, command = self.__handleNotQueueComplete)
+
             self.notQueueCompleteDialog.show()
             return None
-        
+
         if not self.allPhasesComplete:
             if self.notDownloadDialog:
                 self.notDownloadDialog.show()
             else:
-                self.notDownloadDialog = PDialog.PDialog(text = PLocalizer.AvatarChooserNotDownload, style = OTPDialog.Acknowledge, command = self._AvatarChooser__handleNotDownload)
+                self.notDownloadDialog = PDialog.PDialog(text = PLocalizer.AvatarChooserNotDownload, style = OTPDialog.Acknowledge, command = self.__handleNotDownload)
                 base.cr.centralLogger.writeClientEvent('User encountered phase blocker at pick-a-pirate')
                 self.notDownloadDialog.show()
             return None
-        
-        if (0, 0) == self.choice:
-            self._AvatarChooser__handleCreate(self.currentSubId, 0)
+
+        if self.choice == (0, 0):
+            self.__handleCreate(self.currentSubId, 0)
             return None
-        
+
         (subId, slot) = self.choice
         potAv = base.cr.avList[subId][slot]
         if potAv in (OTPGlobals.AvatarSlotUnavailable, OTPGlobals.AvatarSlotAvailable, OTPGlobals.AvatarPendingCreate):
             return None
-        
+
         self.notify.info('AvatarChooser: wants to play slot: %s avId: %s subId: %s' % (slot, potAv.id, subId))
-        self.accept('rejectPlayAvatar', self._AvatarChooser__rejectPlayAvatar)
-        self.accept('playAvatarResponse', self._AvatarChooser__playAvatarResponse)
+        self.accept('rejectPlayAvatar', self.__rejectPlayAvatar)
+        self.accept('playAvatarResponse', self.__playAvatarResponse)
         winInfo = base.win.getProperties()
         x = winInfo.getXSize()
         y = winInfo.getYSize()
         ratio = float(x) / y
         self.fadeFrame = DirectFrame(parent = aspect2dp, frameSize = (-1.0 * ratio, 1.0 * ratio, -1.0, 1.0))
         self.fadeFrame.setTransparency(1)
-        self.fadeInterval = Sequence(Func(self.blockInput), Func(self.fadeFrame.show), LerpColorScaleInterval(self.fadeFrame, 0.29999999999999999, Vec4(0.0, 0.0, 0.0, 1.0), Vec4(0.0, 0.0, 0.0, 0.0), blendType = 'easeInOut'), Func(base.transitions.fadeOut, t = 0), Func(base.cr.avatarManager.sendRequestPlayAvatar, potAv.id, subId), Func(base.cr.waitForDatabaseTimeout, requestName = 'WaitForPlayAvatarResponse'))
+        self.fadeInterval = Sequence(Func(self.blockInput), Func(self.fadeFrame.show), LerpColorScaleInterval(self.fadeFrame, 0.29999999999999999, Vec4(0.0, 0.0, 0.0, 1.0), Vec4(0.0, 0.0, 0.0, 0.0), blendType = 'easeInOut'), Func(base.transitions.fadeOut, t = 0))
         self.fadeInterval.start()
         base.emoteGender = base.cr.avList[subId][slot].dna.gender
+        base.cr.loginFSM.request('waitForSetAvatarResponse', [potAv])
 
     
     def _AvatarChooser__rejectPlayAvatar(self, reasonId, avatarId):
@@ -816,15 +812,15 @@ self.doneStatus]))
     
     def _AvatarChooser__activatePlayButton(self):
         if not self.allPhasesComplete:
-            self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserLoading
+            self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserLoading
             return None
         
         if not self.queueComplete:
-            self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserInQueue
+            self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserInQueue
             return None
         
         self.playButton['state'] = DGG.NORMAL
-        self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserPlay
+        self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserPlay
         self.playButton.setColor(1, 1, 1, 1)
         self.playButton['text_fg'] = (1.0, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002)
 
@@ -841,14 +837,14 @@ self.doneStatus]))
                 if currSubVal[currIdx] == OTPGlobals.AvatarSlotAvailable:
                     button = self.subAvButtons[currSubId][currIdx]
                     button.setColorScale(1, 1, 1, 1)
-                    button['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserCreate
+                    button['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserCreate
                     continue
             
         
 
     
     def _AvatarChooser__deactivatePlayButton(self):
-        self.playButton['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserInQueue
+        self.playButton['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserInQueue
         self.playButton.setColor(0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 0.69999999999999996)
         self.playButton['text_fg'] = (0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 0.69999999999999996)
 
@@ -859,7 +855,7 @@ self.doneStatus]))
                 if currSubVal[currIdx] == OTPGlobals.AvatarSlotAvailable:
                     button = self.subAvButtons[currSubId][currIdx]
                     button.setColorScale(0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 0.69999999999999996)
-                    button['text'] = '\x1smallCaps\x1%s\x2' % PLocalizer.AvatarChooserInQueue
+                    button['text'] = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserInQueue
                     continue
             
         
@@ -877,7 +873,7 @@ self.doneStatus]))
             disableQueueDefault = 1
         else:
             disableQueueDefault = 0
-        if config.GetBool('disable-server-queueing', disableQueueDefault):
+        if config.GetBool('disable-server-queueing', True): #TODO FIXME!
             self._setQueueComplete()
             return None
         
@@ -1038,7 +1034,7 @@ self.doneStatus]))
             self.notify.warning('Received USER_ERROR: %s fetching queue status' % (userError,))
             sys.exit(1)
         
-        self.queueStatus = results.get('QUEUE_ACTION', None)
+        self.queueStatus = results.get('QUEUE_ACTION', 'PLAY')
         if self.queueStatus == 'PLAY':
             self._setQueueComplete()
             return task.done
@@ -1160,12 +1156,16 @@ self.doneStatus]))
 
     
     def _AvatarChooser__handleOptions(self):
+        try:
+            if self.gameOptions.gmOptions == None:
+                self.gameOptions = None
+        except:
+            pass
+        
         if self.gameOptions is not None:
-            if self.gameOptions.isHidden():
-                self.gameOptions.show()
-            else:
-                self.gameOptions.hide()
-        elif base.config.GetBool('want-custom-keys', 0):
+            return
+
+        if base.config.GetBool('want-custom-keys', 0):
             width = 1.8
         else:
             width = 1.6000000000000001
@@ -1173,9 +1173,12 @@ self.doneStatus]))
         x = -width / 2
         y = -height / 2
         self.currentSubId = self.subIds[self.currentSubIndex]
-        subAccess = base.cr.accountDetailRecord.subDetails[self.currentSubId].subAccess
+        subAccess = base.cr.accountDetailRecord.getAccountAccess()
         self.gameOptions = GameOptions('Game Options', x, y, width, height, base.options, access = subAccess, chooser = self)
+        self.gameOptions.avatarListFrame = self.avatarListFrame
+        self.gameOptions.gmOptions = self.gameOptions
         self.gameOptions.show()
+        self.avatarListFrame.hide()
 
     
     def _AvatarChooser__handleQuit(self):
@@ -1435,10 +1438,10 @@ self.doneStatus]))
             self.nextSubButton.show()
         
         self.currentSubId = self.subIds[self.currentSubIndex]
-        subName = base.cr.accountDetailRecord.subDetails[self.currentSubId].subName
-        subAccess = base.cr.accountDetailRecord.subDetails[self.currentSubId].subAccess
+        subName = base.cr.accountDetailRecord.getAccountName()
+        subAccess = base.cr.accountDetailRecord.getAccountAccess()
         subAccessStr = PLocalizer.AccessLevel[subAccess]
-        subLabelText = '\x1white\x1%s\x2\n\x1smallCaps\x1%s\x2' % (subName, subAccessStr)
+        subLabelText = '\x01white\x01%s\x02\n\x01smallCaps\x01%s\x02' % (subName, subAccessStr)
         self.subLabel['text'] = subLabelText
         for frame in self.subFrames.values():
             frame.hide()
@@ -1462,9 +1465,9 @@ self.doneStatus]))
                 if avList[avIdx].wishState == 'APPROVED':
                     self.placeNotification(avIdx, (0.32000000000000001, 0, -0.37 - avIdx * 0.095000000000000001), APPROVED)
                 elif avList[avIdx].wishState == 'DENIED' or avList[avIdx].wishState == 'OPEN':
-                    self.placeNotification(avIdx, (0.32000000000000001, 0, -0.37 - avIdx * 0.095000000000000001), DENIED)
-                
-            avList[avIdx].wishState == 'OPEN'
+                    self.placeNotification(avIdx, (0.32000000000000001, 0, -0.37 - avIdx * 0.095000000000000001), DENIED) 
+                elif avList[avIdx].wishState == 'OPEN':
+                    self.placeNotification(avIdx, (0.32000000000000001, 0, -0.37 - avIdx * 0.095000000000000001), OPEN)
         
         if anyAvatars:
             self.avatarListFrame.reparentTo(base.a2dTopLeft)
@@ -1511,12 +1514,10 @@ self.doneStatus]))
     def _mouseReadTask(self, task):
         if not base.mouseWatcherNode.hasMouse():
             pass
-        1
         winSize = (base.win.getXSize(), base.win.getYSize())
         mouseData = base.win.getPointer(0)
         if mouseData.getX() > winSize[0] or mouseData.getY() > winSize[1]:
             pass
-        1
         dx = mouseData.getX() - self.lastMousePos[0]
         mouseData = base.win.getPointer(0)
         self.lastMousePos = (mouseData.getX(), mouseData.getY())

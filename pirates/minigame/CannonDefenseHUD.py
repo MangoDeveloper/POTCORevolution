@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: C (Python 2.4)
 
 from pirates.piratesgui.CannonDefenseGoldRemaingUI import *
 from pirates.piratesgui.CannonDefenseTimeRemainingUI import *

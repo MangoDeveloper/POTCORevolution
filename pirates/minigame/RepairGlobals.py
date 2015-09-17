@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: R (Python 2.4)
 
 from pandac.PandaModules import Vec3, Vec4, Point3
 
@@ -43,11 +43,7 @@ AI.repairDebuffPerModelClass = {
     13: 1.0,
     21: 1.0,
     22: 1.0,
-    23: 1.0,
-    24: 1.0,
-    25: 1.0,
-    26: 1.0,
-    27: 1.0 }
+    23: 1.0 }
 AI.sailRepairPercent = 0.14999999999999999
 AI.armorRepairPercent = 0.14999999999999999
 AI.hpRepairPercent = 0.40000000000000002

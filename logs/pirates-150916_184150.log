@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 33, in <module>
+    import PiratesBase
+  File "pirates\piratesbase\PiratesBase.py", line 24, in <module>
+    from pirates.piratesgui.GameOptions import Options
+  File "pirates\piratesgui\GameOptions.py", line 3727
+    self.options.load(self.file_path):
+                                     ^
+SyntaxError: invalid syntax

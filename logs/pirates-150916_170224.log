@@ -1,0 +1,25 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  no_version_set
+PAccount: accountServer from launcher:  
+PAccount: default accountServer:  https://pirates.go.com
+Initializing quest ladders...
+:MagicWordManager(warning): You risk being banned if you abuse this mate!
+:MagicWordManager(warning): I will have Jack cut you into pieces! (a.k.a. banned forever)
+:DistributedObjectGlobal(warning): ChatManager going online
+:DistributedShipLoader(warning): ShipLoader going online
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+:PiratesClientRepository(warning): Server is booting us out (124): Client version mismatch: client=no_version_set, server=sv-1.0.0
+########## stopReaderPollTask Pirate
+:PiratesClientRepository(warning): Lost connection to gameserver.
+:ClassicFSM(warning): [loginFSM]: no transition exists from connect to noConnection
+########## stopReaderPollTask Pirate
+:PiratesClientRepository(warning): Lost connection to gameserver.
+:ClassicFSM(warning): [loginFSM]: no transition exists from connect to noConnection
+* interrupt by keyboard

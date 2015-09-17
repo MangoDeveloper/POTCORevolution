@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 from pandac.PandaModules import TransformState
 from direct.directnotify import DirectNotifyGlobal
@@ -210,13 +210,13 @@ class QuestStep:
     NullStep = None
     notify = DirectNotifyGlobal.directNotify.newCategory('QuestStep')
     
-    def __init__(self, originDoId, stepDoId, stepType, posH = (0, 0, 0, 0), islandUid = '', targetAreaUid = '', targetAvatarType = None, nodeSizes = (0, 0), nearOffset = (0, 0, 0), nearVis = (0, 0, 0)):
+    def __init__(self, originDoId, stepDoId, stepType, posH = (0, 0, 0, 0), islandId = '', targetAreaId = '', targetAvatarType = None, nodeSizes = (0, 0), nearOffset = (0, 0, 0), nearVis = (0, 0, 0)):
         self.originDoId = originDoId
         self.stepDoId = stepDoId
         self.stepType = stepType
         self.posH = posH
-        self.islandUid = islandUid
-        self.targetAreaUid = targetAreaUid
+        self.islandId = islandId
+        self.targetAreaId = targetAreaId
         self.targetAvatarType = targetAvatarType
         self.nodeSizes = nodeSizes
         self.nearOffset = nearOffset
@@ -228,7 +228,7 @@ class QuestStep:
 
     
     def __cmp__(self, other):
-        if not not isinstance(other, QuestStep) and cmp(self.originDoId, other.originDoId) and cmp(self.stepDoId, other.stepDoId) and cmp(self.stepType, other.stepType) and cmp(self.posH, other.posH) and cmp(self.islandUid, other.islandUid) and cmp(self.targetAreaUid, other.targetAreaUid) and cmp(self.targetAvatarType, other.targetAvatarType) and cmp(self.nodeSizes, other.nodeSizes) and cmp(self.nearOffset, other.nearOffset):
+        if not not isinstance(other, QuestStep) and cmp(self.originDoId, other.originDoId) and cmp(self.stepDoId, other.stepDoId) and cmp(self.stepType, other.stepType) and cmp(self.posH, other.posH) and cmp(self.islandId, other.islandId) and cmp(self.targetAreaId, other.targetAreaId) and cmp(self.targetAvatarType, other.targetAvatarType) and cmp(self.nodeSizes, other.nodeSizes) and cmp(self.nearOffset, other.nearOffset):
             pass
         return cmp(self.nearVis, other.nearVis)
 
@@ -261,20 +261,20 @@ class QuestStep:
         return self.posH
 
     
-    def setIsland(self, islandUid = ''):
-        self.islandUid = islandUid
+    def setIsland(self, islandId = ''):
+        self.islandId = islandId
 
     
     def getIsland(self):
-        return self.islandUid
+        return self.islandId
 
     
-    def setTargetArea(self, targetUid = ''):
-        self.targetAreaUid = targetUid
+    def setTargetArea(self, targetId = ''):
+        self.targetAreaId = targetId
 
     
     def getTargetArea(self):
-        return self.targetAreaUid
+        return self.targetAreaId
 
     
     def getNodeSizes(self):
@@ -438,7 +438,7 @@ class QuestPath:
             dinghyObj = self.air.doId2do.get(dinghyId)
             if dinghyObj:
                 dinghyPos = dinghyObj.getPos(searchArea)
-                return QuestStep(searchArea.doId, dinghyId, dinghyObj._getQuestStepType(), posH = (dinghyPos[0], dinghyPos[1], dinghyPos[2], dinghyObj.getH()), islandUid = self.getUniqueId())
+                return QuestStep(searchArea.doId, dinghyId, dinghyObj._getQuestStepType(), posH = (dinghyPos[0], dinghyPos[1], dinghyPos[2], dinghyObj.getH()), islandId = self.doId)
             
         
 
@@ -462,10 +462,10 @@ class QuestPath:
         if not questStep or config.GetBool('cache-quest-step', 1) == 0:
             path = self._getQuestPath(questDestUid, isPrivate, [], [], { }, avId)
             if path:
-                targetAreaUid = self.air.doId2do[path[len(path) - 1]].getParentObj().uniqueId
+                targetAreaId = self.air.doId2do[path[len(path) - 1]].getParentObj().uniqueId
                 questStep = self.questSteps.get(questDestUid)
                 if questStep:
-                    questStep.setTargetArea(targetAreaUid)
+                    questStep.setTargetArea(targetAreaId)
                 
             
         

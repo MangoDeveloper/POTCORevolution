@@ -54,6 +54,7 @@ class AwardTypes:
     LOST_BLADE_OF_LEVIATHAN = 25
     LOST_SWORD_OF_EL_PATRON = 26
     BARBOSSAS_FURY = 27
+    BARBOSSA_FURY = 27
     SCIMITAR_42 = 28
     SCIMITAR_46 = 29
     SCIMITAR_47 = 30
@@ -224,51 +225,9 @@ AWARD_ID = {
         None,
         1,
         PLocalizerEnglish.CodeRedemptionLostSwordOfElPatron],
-    AwardTypes.BARBOSSAS_FURY: [
-        NORMAL_INVENTORY,
-        InvItem((InventoryType.ItemTypeWeapon, ItemGlobals.BARBOSSA_FURY, 0, [])),
-        None,
-        1,
-        PLocalizerEnglish.CodeRedemptionBarbossaFury],
-    AwardTypes.SCIMITAR_42: [
-        NORMAL_INVENTORY,
-        InvItem((InventoryType.ItemTypeWeapon, ItemGlobals.SCIMITAR_42, 0, [])),
-        None,
-        1,
-        PLocalizerEnglish.CodeRedemptionScimitar42],
-    AwardTypes.SCIMITAR_46: [
-        NORMAL_INVENTORY,
-        InvItem((InventoryType.ItemTypeWeapon, ItemGlobals.SCIMITAR_46, 0, [])),
-        None,
-        1,
-        PLocalizerEnglish.CodeRedemptionScimitar46],
-    AwardTypes.SCIMITAR_47: [
-        NORMAL_INVENTORY,
-        InvItem((InventoryType.ItemTypeWeapon, ItemGlobals.SCIMITAR_47, 0, [])),
-        None,
-        1,
-        PLocalizerEnglish.CodeRedemptionScimitar47],
-    AwardTypes.SCIMITAR_48: [
-        NORMAL_INVENTORY,
-        InvItem((InventoryType.ItemTypeWeapon, ItemGlobals.SCIMITAR_48, 0, [])),
-        None,
-        1,
-        PLocalizerEnglish.CodeRedemptionScimitar48],
     AwardTypes.POTION_SUMMON_CHICKEN: [
         NORMAL_INVENTORY,
         InvItem((InventoryType.ItemTypeConsumable, ItemGlobals.POTION_SUMMON_CHICKEN, 0, 0)),
         None,
         1,
-        PLocalizerEnglish.CodeRedemptionSummonChicken],
-    AwardTypes.POTION_SUMMON_WASP: [
-        NORMAL_INVENTORY,
-        InvItem((InventoryType.ItemTypeConsumable, ItemGlobals.POTION_SUMMON_WASP, 0, 0)),
-        None,
-        1,
-        PLocalizerEnglish.CodeRedemptionSummonWasp],
-    AwardTypes.POTION_SUMMON_DOG: [
-        NORMAL_INVENTORY,
-        InvItem((InventoryType.ItemTypeConsumable, ItemGlobals.POTION_SUMMON_DOG, 0, 0)),
-        None,
-        1,
-        PLocalizerEnglish.CodeRedemptionSummonDog] }
+        PLocalizerEnglish.CodeRedemptionSummonChicken] }

@@ -1,7 +1,5 @@
-# File: o (Python 2.4)
-
 from pandac.PandaModules import *
-from libotp import CMover
+from libotp.CMover import CMover
 from direct.directnotify import DirectNotifyGlobal
 from otp.movement.PyVec3 import PyVec3
 from direct.showbase import PythonUtil
@@ -15,27 +13,23 @@ class Mover(CMover):
     PSCCpp = 'App:Show code:moveObjects:MoverC++'
     PSCPy = 'App:Show code:moveObjects:MoverPy'
     PSCInt = 'App:Show code:moveObjects:MoverIntegrate'
-    
+
     def __init__(self, objNodePath, fwdSpeed = 1, rotSpeed = 1):
         CMover.__init__(self, objNodePath, fwdSpeed, rotSpeed)
         self.serialNum = Mover.SerialNum
         Mover.SerialNum += 1
         self.VecType = Vec3
-        self.impulses = { }
+        self.impulses = {}
         if Mover.Pstats:
             self.pscCpp = PStatCollector(Mover.PSCCpp)
             self.pscPy = PStatCollector(Mover.PSCPy)
             self.pscInt = PStatCollector(Mover.PSCInt)
-        
 
-    
     def destroy(self):
-        for (name, impulse) in self.impulses.items():
+        for name, impulse in self.impulses.items():
             Mover.notify.debug('removing impulse: %s' % name)
             self.removeImpulse(name)
-        
 
-    
     def addImpulse(self, name, impulse):
         if impulse.isCpp():
             CMover.addCImpulse(self, name, impulse)
@@ -43,54 +37,40 @@ class Mover(CMover):
             self.impulses[name] = impulse
             impulse._setMover(self)
 
-    
     def removeImpulse(self, name):
         if name not in self.impulses:
             if not CMover.removeCImpulse(self, name):
                 Mover.notify.warning("Mover.removeImpulse: unknown impulse '%s'" % name)
-            
-            return None
-        
+            return
         self.impulses[name]._clearMover(self)
         del self.impulses[name]
 
-    
     def getCollisionEventName(self):
         return 'moverCollision-%s' % self.serialNum
 
-    
     def move(self, dt = -1, profile = 0):
         if Mover.Profile and not profile:
-            
+
             def func(doMove = self.move):
                 for i in xrange(10000):
-                    doMove(dt, profile = 1)
-                
+                    doMove(dt, profile=1)
 
             __builtin__.func = func
-            PythonUtil.startProfile(cmd = 'func()', filename = 'profile', sorts = [
-                'cumulative'], callInfo = 0)
+            PythonUtil.startProfile(cmd='func()', filename='profile', sorts=['cumulative'], callInfo=0)
             del __builtin__.func
-            return None
-        
+            return
         if Mover.Pstats:
             self.pscCpp.start()
-        
         CMover.processCImpulses(self, dt)
         if Mover.Pstats:
             self.pscCpp.stop()
             self.pscPy.start()
-        
         for impulse in self.impulses.values():
             impulse._process(self.getDt())
-        
+
         if Mover.Pstats:
             self.pscPy.stop()
             self.pscInt.start()
-        
         CMover.integrate(self)
         if Mover.Pstats:
             self.pscInt.stop()
-        
-
-

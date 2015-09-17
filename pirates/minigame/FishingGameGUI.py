@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: F (Python 2.4)
 
 import math
 from panda3d.core import TextNode
@@ -200,13 +200,6 @@ class FishingGameGUI:
             self.lureSelectionPanelShowing = False
         
         self.tackleBoxButton.reparentTo(base.a2dBottomRight)
-
-    
-    def setTackleBoxPulse(self, bool):
-        if bool:
-            self.tackleBoxInterval.loop()
-        else:
-            self.tackleBoxInterval.finish()
 
     
     def setTackleBoxPulse(self, bool):

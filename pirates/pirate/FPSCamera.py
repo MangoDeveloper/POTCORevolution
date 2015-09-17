@@ -1,5 +1,3 @@
-# File: p (Python 2.4)
-
 import math
 from pandac.PandaModules import *
 from direct.showbase.InputStateGlobal import inputState
@@ -13,33 +11,34 @@ from otp.otpbase import OTPGlobals
 from pirates.pirate import CameraMode
 from pirates.piratesbase import PiratesGlobals
 
+def inputStateHasSet(values):
+    for value in values:
+        if not inputState.isSet(value):
+            return False
+    return True
+
 class FPSCamera(CameraMode.CameraMode, NodePath, ParamObj):
     notify = DirectNotifyGlobal.directNotify.newCategory('FPSCamera')
-    
-    class ParamSet(ParamObj.ParamSet):
-        Params = {
-            'camOffset': Vec3(0, -14, 5.5) }
-
     UpdateTaskName = 'FPSCamUpdateTask'
     ReadMouseTaskName = 'FPSCamReadMouseTask'
     CollisionCheckTaskName = 'FPSCamCollisionTask'
     MinP = -50
     MaxP = 20
-    baseH = None
-    minH = None
-    maxH = None
-    SensitivityH = base.config.GetFloat('fps-cam-sensitivity-x', 0.20000000000000001)
-    SensitivityP = base.config.GetFloat('fps-cam-sensitivity-y', 0.10000000000000001)
-    
-    def __init__(self, subject, params = None):
+    baseH = 0
+    minH = 0
+    maxH = 0
+    SensitivityH = base.config.GetFloat('fps-cam-sensitivity-x', 0.2)
+    SensitivityP = base.config.GetFloat('fps-cam-sensitivity-y', 0.1)
+
+    def __init__(self, subject, params=None):
         ParamObj.__init__(self)
         NodePath.__init__(self, 'fpsCam')
         CameraMode.CameraMode.__init__(self)
         self.subject = subject
-        self.mouseX = 0.0
-        self.mouseY = 0.0
-        self._paramStack = []
-        self._hadMouse = False
+        self.mouseX = 0
+        self.mouseY = 0
+        self.__paramStack = []
+        self.__hadMouse = False
         if params is None:
             self.setDefaultParams()
         else:
@@ -49,331 +48,179 @@ class FPSCamera(CameraMode.CameraMode, NodePath, ParamObj):
         self.forceMaxDistance = True
         self.avFacingScreen = False
 
-    
     def destroy(self):
         if self.zIval:
             self.zIval.finish()
             self.zIval = None
-        
         if self.camIval:
             self.camIval.finish()
             self.camIval = None
-        
         del self.subject
         NodePath.removeNode(self)
         ParamObj.destroy(self)
         CameraMode.CameraMode.destroy(self)
 
-    
     def getName(self):
         return 'FPS'
 
-    
-    def _getTopNodeName(self):
+    def __getTopNodeName(self):
         return 'FPSCam'
 
-    
     def enterActive(self):
         CameraMode.CameraMode.enterActive(self)
         base.camNode.setLodCenter(self.subject)
         if base.wantEnviroDR:
             base.enviroCamNode.setLodCenter(self.subject)
-        
         self.reparentTo(self.subject)
         self.setPos(0, 0, self.camOffset[2])
         camera.reparentTo(self)
         camera.setPosHpr(self.camOffset[0], self.camOffset[1], 0, 0, 0, 0)
-        self._initMaxDistance()
-        self._startCollisionCheck()
+        self.__initMaxDistance()
+        self.__startCollisionCheck()
         base.camLens.setMinFov(PiratesGlobals.BattleCameraFov)
 
-    
-    def _initMaxDistance(self):
-        self._maxDistance = abs(self.camOffset[1])
+    def __initMaxDistance(self):
+        self.__maxDistance = abs(self.camOffset[1])
 
-    
     def exitActive(self):
         if self.camIval:
             self.camIval.finish()
             self.camIval = None
-        
-        self._stopCollisionCheck()
+        self.__stopCollisionCheck()
         base.camNode.setLodCenter(NodePath())
         if base.wantEnviroDR:
             base.enviroCamNode.setLodCenter(NodePath())
-        
         CameraMode.CameraMode.exitActive(self)
 
-    
     def enableMouseControl(self):
         CameraMode.CameraMode.enableMouseControl(self)
         self.subject.controlManager.setWASDTurn(0)
 
-    
     def disableMouseControl(self):
-        CameraMode.CameraMode.disableMouseControl(self)
+        CameraMode.CameraMode.enableMouseControl(self)
         self.subject.controlManager.setWASDTurn(1)
 
-    
     def isSubjectMoving(self):
+        autoRun = False
         if 'localAvatar' in __builtins__:
             autoRun = localAvatar.getAutoRun()
-        else:
-            autoRun = False
-        if inputState.isSet('forward') and inputState.isSet('reverse') and inputState.isSet('turnRight') and inputState.isSet('turnLeft') and inputState.isSet('slideRight') and inputState.isSet('slideLeft') or autoRun:
-            pass
+        if not inputStateHasSet(('forward', 'reverse', 'turnRight', 'turnLeft',
+                                 'slideRight', 'slideLeft')):
+            if autoRun:
+                return True
         return self.subject.controlManager.isEnabled
 
-    
     def isWeaponEquipped(self):
         return self.subject.isWeaponDrawn
 
-    
-    def _avatarFacingTask(self, task):
-        if hasattr(base, 'oobeMode') and base.oobeMode:
-            return task.cont
-        
+    def __avatarFacingTask(self):
+        if hasattr(base, 'oobeMode'):
+            if base.oobeMode:
+                return task.cont
         if self.avFacingScreen:
             return task.cont
-        
-        if self.isSubjectMoving() or self.isWeaponEquipped():
-            camH = self.getH(render)
-            subjectH = self.subject.getH(render)
-            if abs(camH - subjectH) > 0.01:
-                self.subject.setH(render, camH)
-                self.setH(0)
-            
-        
+        if not self.isSubjectMoving():
+            if self.isWeaponEquipped():
+                camH = self.getH(render)
+                subjectH = self.subject.getH(render)
+                if abs(camH - subjectH) > 0.1:
+                    self.subject.setH(render, camH)
+                    self.setH(0)
         return task.cont
 
-    
-    def _mouseUpdateTask(self, task):
-        if hasattr(base, 'oobeMode') and base.oobeMode:
-            return task.cont
-        
+    def __mouseUpdateTask(self):
+        if hasattr(base, 'oobeMode'):
+            if base.oobeMode:
+                return task.cont
         subjectMoving = self.isSubjectMoving()
-        if inputState.isSet('turnRight') or inputState.isSet('turnLeft'):
-            pass
-        subjectTurning = self.subject.controlManager.isEnabled
+        subjectTurning = False
+        if not inputState.isSet('turnRigt'):
+            if inputState.isSet('turnLeft'):
+                subjectTurning = self.subject.controlManager.isEnabled
         weaponEquipped = self.isWeaponEquipped()
-        if subjectMoving or weaponEquipped:
-            hNode = self.subject
-        else:
-            hNode = self
-        if self.mouseDelta[0] or self.mouseDelta[1]:
-            (dx, dy) = self.mouseDelta
-            if subjectTurning:
-                dx = 0
-            
-            if hasattr(base, 'options') and base.options.mouse_look:
-                dy = -dy
-            
-            hNode.setH(hNode, -dx * self.SensitivityH)
-            curP = self.getP()
-            newP = curP + -dy * self.SensitivityP
-            newP = min(max(newP, self.MinP), self.MaxP)
-            self.setP(newP)
-            if self.baseH:
-                messenger.send('pistolMoved')
-                self._checkHBounds(hNode)
-            
-            self.setR(render, 0)
-        
+        if not subjectMoving:
+            if weaponEquipped:
+                hNode = self.subject
+            else:
+                hNode = self
+            if not self.mouseDelta[0]:
+                if self.mouseDelta[1]:
+                    dx, dy = self.mouseDelta
+                    if subjectTurning:
+                        dx = 0
+                    if hasattr(base, 'options'):
+                        if base.options.mouse_look:
+                            dy = -dy
+                    hNode.setH(hNode, -dx * self.SensitivityH)
+                    curP = self.getP()
+                    newP = curP * -dy + self.SensitivityP
+                    newP = min(max(newP, self.MinP), self.MaxP)
+                    self.setP(newP)
+                    if self.baseH:
+                        messenger.send('pistolMoved')
+                        self.__checkHBounds(hNode)
+        self.setR(render)
         return task.cont
 
-    
-    def setHBounds(self, baseH, minH, maxH):
-        self.baseH = baseH
-        self.minH = minH
-        self.maxH = maxH
-        if self.isSubjectMoving() or self.isWeaponEquipped():
-            hNode = self.subject
-        else:
-            hNode = self
-        hNode.setH(maxH)
+    def setHBounds(self):
+        pass
 
-    
     def clearHBounds(self):
-        self.baseH = None
-        self.minH = None
-        self.maxH = None
+        pass
 
-    
-    def _checkHBounds(self, hNode):
-        currH = fitSrcAngle2Dest(hNode.getH(), 180)
-        if currH < self.minH:
-            hNode.setH(reduceAngle(self.minH))
-        elif currH > self.maxH:
-            hNode.setH(reduceAngle(self.maxH))
-        
+    def __checkHBounds(self):
+        pass
 
-    
     def acceptWheel(self):
-        self.accept('wheel_up', self._handleWheelUp)
-        self.accept('wheel_down', self._handleWheelDown)
-        self._resetWheel()
+        pass
 
-    
     def ignoreWheel(self):
-        self.ignore('wheel_up')
-        self.ignore('wheel_down')
-        self._resetWheel()
+        pass
 
-    
-    def _handleWheelUp(self):
-        y = self.camOffset[1]
-        y = max(-14, min(-2, y + 1.0))
-        self._collSolid.setPointB(0, y + 1, 0)
-        self.camOffset.setY(y)
-        inZ = localAvatar.headNode.getZ()
-        outZ = self.camOffset[2]
-        t = (-14 - y) / -12
-        z = lerp(outZ, inZ, t)
-        self.setZ(z)
+    def __handleWheelUp(self):
+        pass
 
-    
-    def _handleWheelDown(self):
-        y = self.camOffset[1]
-        y = max(-14, min(-2, y - 1.0))
-        self._collSolid.setPointB(0, y + 1, 0)
-        self.camOffset.setY(y)
-        inZ = localAvatar.headNode.getZ()
-        outZ = self.camOffset[2]
-        t = (-14 - y) / -12
-        z = lerp(outZ, inZ, t)
-        self.setZ(z)
+    def __handleWheelDown(self):
+        pass
 
-    
-    def _resetWheel(self):
-        if not self.isActive():
-            return None
-        
-        self.camOffset = Vec3(0, -14, 5.5)
-        y = self.camOffset[1]
-        z = self.camOffset[2]
-        self._collSolid.setPointB(0, y + 1, 0)
-        self.setZ(z)
+    def __resetWheel(self):
+        pass
 
-    
     def getCamOffset(self):
-        return self.camOffset
+        pass
 
-    
-    def setCamOffset(self, camOffset):
-        self.camOffset = Vec3(camOffset)
+    def setCamOffset(self):
+        pass
 
-    
     def applyCamOffset(self):
-        if self.isActive():
-            camera.setPos(self.camOffset)
-        
+        pass
 
-    
-    def _setCamDistance(self, distance):
-        offset = camera.getPos(self)
-        offset.normalize()
-        camera.setPos(self, offset * distance)
+    def __setCamDistance(self):
+        pass
 
-    
-    def _getCamDistance(self):
-        return camera.getPos(self).length()
+    def __getCamDistance(self):
+        pass
 
-    
-    def _startCollisionCheck(self):
-        self._collSolid = CollisionSegment(0, 0, 0, 0, -(self._maxDistance + 1.0), 0)
-        collSolidNode = CollisionNode('FPSCam.CollSolid')
-        collSolidNode.addSolid(self._collSolid)
-        collSolidNode.setFromCollideMask(OTPGlobals.CameraBitmask | OTPGlobals.CameraTransparentBitmask | OTPGlobals.FloorBitmask)
-        collSolidNode.setIntoCollideMask(BitMask32.allOff())
-        self._collSolidNp = self.attachNewNode(collSolidNode)
-        self._cHandlerQueue = CollisionHandlerQueue()
-        self._cTrav = CollisionTraverser('FPSCam.cTrav')
-        self._cTrav.addCollider(self._collSolidNp, self._cHandlerQueue)
-        taskMgr.add(self._collisionCheckTask, FPSCamera.CollisionCheckTaskName, priority = 45)
+    def __startCollisionCheck(self):
+        pass
 
-    
-    def _collisionCheckTask(self, task = None):
-        if hasattr(base, 'oobeMode') and base.oobeMode:
-            return Task.cont
-        
-        self._cTrav.traverse(render)
-        self._cHandlerQueue.sortEntries()
-        cNormal = (0, -1, 0)
-        collEntry = None
-        i = 0
-        while i < self._cHandlerQueue.getNumEntries():
-            collEntry = self._cHandlerQueue.getEntry(i)
-            cNormal = collEntry.getSurfaceNormal(self)
-            if cNormal[1] < 0:
-                break
-            
-            i += 1
-        if not collEntry:
-            if self.forceMaxDistance:
-                camera.setPos(self.camOffset)
-                camera.setZ(0)
-            
-            self.subject.getGeomNode().show()
-            return task.cont
-        
-        cPoint = collEntry.getSurfacePoint(self)
-        offset = 0.90000000000000002
-        camera.setPos(cPoint + cNormal * offset)
-        distance = camera.getDistance(self)
-        if distance < 1.8:
-            self.subject.getGeomNode().hide()
-        else:
-            self.subject.getGeomNode().show()
-        localAvatar.ccPusherTrav.traverse(render)
-        return Task.cont
+    def __collisionCheckTask(self):
+        pass
 
-    
-    def _stopCollisionCheck(self):
-        taskMgr.remove(FPSCamera.CollisionCheckTaskName)
-        self._cTrav.removeCollider(self._collSolidNp)
-        del self._cHandlerQueue
-        del self._cTrav
-        self._collSolidNp.detachNode()
-        del self._collSolidNp
-        self.subject.getGeomNode().show()
+    def __stopCollisionCheck(self):
+        pass
 
-    
-    def lerpFromZOffset(self, z = 0.0, duration = 1):
-        if self.zIval:
-            self.zIval.finish()
-        
-        self.zIval = LerpFunc(self.setZ, duration, fromData = z + self.camOffset[2], toData = self.camOffset[2])
-        self.zIval.start()
-        self.zIval.setT(0)
+    def lerpFromZOffset(self):
+        pass
 
-    
     def avFaceCamera(self):
-        if not (self.mouseControl) or self.avFacingScreen:
-            self.avFacingScreen = False
-            camH = self.getH(render)
-            subjectH = self.subject.getH(render)
-            if abs(camH - subjectH) > 0.01:
-                self.subject.setH(render, camH)
-                self.setH(0)
-            
-        
+        pass
 
-    
     def avFaceScreen(self):
-        if not self.mouseControl:
-            self.avFacingScreen = True
-            camH = self.getH(render)
-            subjectH = self.subject.getH(render)
-            self.subject.setH(render, camH - 180)
-            self.setH(180)
-        
+        pass
 
-    
     def isAvFacingScreen(self):
-        return self.avFacingScreen
+        pass
 
-    
-    def setForceMaxDistance(self, force):
-        self.forceMaxDistance = force
-
-
+    def setForceMaxDistance(self):
+        pass

@@ -154,7 +154,7 @@ class FlagDNA(AvatarDNA.AvatarDNA):
     def flattenEmblemIndices(self):
         indices = self.getEmblemIndices()
         indices.sort()
-        continue
+        
         newEmblems = range(len(indices))([](_[1], [ self.emblems[x] for x in indices ]))
         self.emblems = newEmblems
 

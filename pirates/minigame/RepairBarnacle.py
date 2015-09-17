@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: R (Python 2.4)
 
 import random
 from pandac.PandaModules import Point3

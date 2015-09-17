@@ -1,4 +1,7 @@
-# File: p (Python 2.4)
+#Since this is currently broken, the unedited code is below.
+pass
+
+'''# File: p (Python 2.4)
 
 from pandac.PandaModules import VBase3
 from pirates.npc import Skeleton
@@ -151,13 +154,7 @@ from pirates.effects.AmbientSoundFX import AmbientSoundFX
 ENTITY_DICT = {
     'LevelEntity': LevelEntity,
     'AmbientSoundFX': AmbientSoundFX }
-continue
-PROP_UI_COMBO[[]] = [
-    _[1],
-    [ x for x in range(-1, 10) ] + [
-        26,
-        28,
-        30]]
+#PROP_UI_COMBO[[]] = [[1],[ x for x in range(-1, 10) ] + [26, 28, 30]]
 'Properties'['Defaults'] = {
     'Spawnables': 'All',
     'Index': -1 }
@@ -962,11 +959,10 @@ PROP_UI_COMBO[[]] = [
                 'Bi-directional',
                 'Direction 1',
                 'Direction 2']] } }
-continue
+
 PROP_UI_COMBO[[]] = [
     _[1],
     [ x for x in range(0, 10) ]]
-continue
 PROP_UI_COMBO[[]] = [
     _[1],
     [ x for x in range(1, 6) ]]
@@ -6510,3 +6506,4 @@ AVAIL_OBJ_LIST = {
                 'Model': 'models/props/light_tool_bulb_modular',
                 'Models': [
                     'models/props/light_tool_bulb_modular'] } } } }
+'''

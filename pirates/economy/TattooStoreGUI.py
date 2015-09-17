@@ -192,7 +192,7 @@ class TattooStoreCartList(DirectScrolledFrame):
                 
                 self.parent.updateBalance()
                 return None
-                continue
+                
         
 
     
@@ -200,7 +200,7 @@ class TattooStoreCartList(DirectScrolledFrame):
         for panel in self.panels:
             if panel.data == data:
                 return True
-                continue
+                
         
         return False
 
@@ -227,7 +227,7 @@ class TattooStoreCartList(DirectScrolledFrame):
         for panel in self.panels:
             if panel.data[0] == itemId:
                 counter += panel.data[1]
-                continue
+                
         
         return counter
 
@@ -590,7 +590,7 @@ class TattooStoreGUI(DirectFrame):
                 uid,
                 tattooId]:
                 self.equipRequests[type] = None
-                continue
+                
         
         self.purchaseInventory.removeAllPanels()
         self.sellInventory.removeAllPanels()
@@ -659,7 +659,7 @@ class TattooStoreGUI(DirectFrame):
         for item in TattooZones:
             if not self.isPageAdded(item[0]):
                 self.addTab(item[0])
-                continue
+                
         
 
     
@@ -743,7 +743,7 @@ class TattooStoreGUI(DirectFrame):
                     if locationId in (Locations.INVALID_LOCATION, Locations.NON_LOCATION):
                         base.localAvatar.guiMgr.createWarning(PLocalizer.InventoryFullWarning, PiratesGuiGlobals.TextFG6)
                         return None
-                        continue
+                        
                 
                 self.purchaseInventory.addPanel(data)
                 button.addToCart['text'] = PLocalizer.TailorRemove
@@ -760,7 +760,7 @@ class TattooStoreGUI(DirectFrame):
                     dataId = item.data[1]
                     if itemId == dataId:
                         itemCount += 1
-                        continue
+                        
                 
                 if inventory.getItemQuantity(InventoryType.ItemTypeTattoo, itemId) < itemCount:
                     base.localAvatar.guiMgr.createWarning(PLocalizer.DoNotOwnEnoughWarning, PiratesGuiGlobals.TextFG6)
@@ -787,7 +787,7 @@ class TattooStoreGUI(DirectFrame):
                 
                 item.addToCart.buyState = 1
                 return None
-                continue
+                
         
 
     
@@ -907,7 +907,7 @@ class TattooStoreGUI(DirectFrame):
     
     def setPage(self, pageName, startIndex = 0, refreshWardrobe = True):
         self.tabBar.unstash()
-        self.titleLabel['text'] = '\x1smallCaps\x1' + self.rootTitle + ' - ' + TattooZones[pageName][1] + '\x2'
+        self.titleLabel['text'] = '\x01smallCaps\x01' + self.rootTitle + ' - ' + TattooZones[pageName][1] + '\x02'
         previousPage = self.currentPage
         if self.currentPage != pageName:
             self.prevIdx = 0
@@ -992,7 +992,7 @@ class TattooStoreGUI(DirectFrame):
                             tattooId,
                             holiday,
                             location])
-                        continue
+                        
                 
             
         
@@ -1055,7 +1055,7 @@ class TattooStoreGUI(DirectFrame):
                 for item in self.currentWardrobe:
                     if uid == item:
                         owned = True
-                        continue
+                        
                 
                 if self.mode == SELLING:
                     buttonState = DGG.DISABLED

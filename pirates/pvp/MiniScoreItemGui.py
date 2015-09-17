@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: M (Python 2.4)
 
 from pandac.PandaModules import *
 from direct.gui.DirectGui import *
@@ -10,6 +10,8 @@ from pirates.piratesbase import PLocalizer
 from direct.interval.IntervalGlobal import *
 from pirates.piratesbase import PiratesGlobals
 import random
+
+variableOne = .2
 
 class MiniScoreItemGui(DirectFrame.DirectFrame):
     Width = PiratesGuiGlobals.PVPPanelWidth - PiratesGuiGlobals.GridSize
@@ -64,7 +66,7 @@ class MiniScoreItemGui(DirectFrame.DirectFrame):
         self.descText['text_fg'] = color
 
     
-    def shakeItUp(self, .2):
+    def shakeItUp(self, variableOne):
         (x, y, r, g, b, a) = .2
         self.colorLabel((r, g, b, a))
         randX = random.random() * 0.0050000000000000001 + 0.0050000000000000001
@@ -84,5 +86,3 @@ class MiniScoreItemGui(DirectFrame.DirectFrame):
         
         self.descText.destroy()
         del self.descText
-
-

@@ -80,7 +80,7 @@ class InventoryUIJewelryDressingContainer(InventoryUISlotContainer.InventoryUISl
                     cell['geom_color'] = (0.40000000000000002, 0.40000000000000002, 0.40000000000000002, 1.0)
                 
                 cell.container.markCell(cell, MASK_EMPTYEQUIP)
-                continue
+                
         
 
     

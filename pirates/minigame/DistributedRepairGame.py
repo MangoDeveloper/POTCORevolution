@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.DistributedObject import DistributedObject
@@ -97,20 +97,20 @@ class DistributedRepairGame(DistributedRepairGameBase, DistributedObject):
                 return None
             
         
-        self.gameIndexRequested = None
+        del self.gameIndexRequested
         del self.gameProgress[:]
         del self.gameProgress
         self.gameFSM.destroy()
         self.gameFSM = None
         self.mousePicker.destroy()
-        self.mousePicker = None
+        del self.mousePicker
         if hasattr(self, 'gui'):
             self.gui.destroy()
-            self.gui = None
+            del self.gui
         
         if hasattr(self, 'repairClock'):
             self.repairClock.destroy()
-            self.repairClock = None
+            del self.repairClock
         
         if hasattr(self, 'games'):
             for game in self.games:
@@ -134,7 +134,7 @@ class DistributedRepairGame(DistributedRepairGameBase, DistributedObject):
             if progress != 100:
                 cycleComplete = False
                 break
-                continue
+                
         
         return cycleComplete
 
@@ -145,7 +145,7 @@ class DistributedRepairGame(DistributedRepairGameBase, DistributedObject):
             if progress == -1:
                 isOpenGame = True
                 break
-                continue
+                
         
         return isOpenGame
 
@@ -179,25 +179,19 @@ class DistributedRepairGame(DistributedRepairGameBase, DistributedObject):
     
     def setMincroGameProgress(self, gameIndex, progress):
         self.notify.debug('setMincroGameProgress (%i, %i)' % (gameIndex, progress))
-        if hasattr(self, 'gui') and self.gui:
-            self.gui.setProgress(gameIndex, progress)
-        
-        if hasattr(self, 'gameProgress'):
-            self.gameProgress[gameIndex] = progress
-        
-        if hasattr(self, 'currentGame') and self.currentGame:
+        self.gui.setProgress(gameIndex, progress)
+        self.gameProgress[gameIndex] = progress
+        if self.currentGame:
             self.currentGame.updatePostWinLabel()
         
 
     
     def setAvIds2CurrentGameList(self, gameIndexList, doIdList):
-        if hasattr(self, 'avIds2CurrentGameIndex'):
-            self.avIds2CurrentGameIndex.clear()
-            for i in range(len(gameIndexList)):
-                self.avIds2CurrentGameIndex[doIdList[i]] = gameIndexList[i]
-            
-            self.gui.updatePirateNamesPerMincrogame(self.avIds2CurrentGameIndex)
+        self.avIds2CurrentGameIndex.clear()
+        for i in range(len(gameIndexList)):
+            self.avIds2CurrentGameIndex[doIdList[i]] = gameIndexList[i]
         
+        self.gui.updatePirateNamesPerMincrogame(self.avIds2CurrentGameIndex)
 
     
     def setAllMincroGameProgress(self, progressList):
@@ -214,9 +208,6 @@ class DistributedRepairGame(DistributedRepairGameBase, DistributedObject):
 
     
     def cycleComplete(self, difficulty = 0, doIds = [], rewards = [], totalTime = 0):
-        if self.gameFSM == None:
-            return None
-        
         if self.gameFSM.state == 'Intro':
             self.resetMincroGameProgress()
             self.gui.setDifficulty(difficulty)
@@ -255,10 +246,8 @@ class DistributedRepairGame(DistributedRepairGameBase, DistributedObject):
 
     
     def shipDamaged(self, wasGrapeshot = False, difficulty = 0):
-        if hasattr(self, 'gui') and self.gui:
-            self.gui.onShipDamaged(wasGrapeshot)
-            self.gui.setDifficulty(difficulty)
-        
+        self.gui.onShipDamaged(wasGrapeshot)
+        self.gui.setDifficulty(difficulty)
 
     
     def resetMincroGameProgress(self):
@@ -272,13 +261,5 @@ class DistributedRepairGame(DistributedRepairGameBase, DistributedObject):
         if hasattr(self, 'gameFSM'):
             self.cleanup()
         
-
-    
-    def handleArrivedOnShip(self, ship):
-        pass
-
-    
-    def handleLeftShip(self, ship):
-        pass
 
 

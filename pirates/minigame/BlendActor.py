@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: B (Python 2.4)
 
 from direct.interval.MetaInterval import Sequence
 from direct.interval.MetaInterval import Parallel

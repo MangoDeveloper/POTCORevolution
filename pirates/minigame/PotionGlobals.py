@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: P (Python 2.4)
 
 from direct.directnotify import DirectNotifyGlobal
 from pirates.uberdog.UberDogGlobals import InventoryType
@@ -566,14 +566,11 @@ __potionBuffs = {
         'potionId': ItemGlobals.STAFF_ENCHANT_2,
         'dontStackList': [] },
     C_SUMMON_CHICKEN: {
-        'duration': 300,
+        'duration': 300.0,
         'xp': 0,
         'potionId': ItemGlobals.POTION_SUMMON_CHICKEN,
         'dontStackList': [
             C_SUMMON_CHICKEN,
-            C_SUMMON_MONKEY,
-            C_SUMMON_WASP,
-            C_SUMMON_DOG,
             C_SCORPION_TRANSFORM,
             C_ALLIGATOR_TRANSFORM,
             C_CRAB_TRANSFORM,
@@ -586,13 +583,6 @@ __potionBuffs = {
 
 def getIsPotionBuff(effectId):
     return effectId in __potionBuffs
-
-
-def updatePotionBuffDuration(effectId, duration):
-    if getIsPotionBuff(effectId):
-        __potionBuffs[effectId]['duration'] = duration
-    else:
-        notify.warning('%d is not a valid effectId' % effectId)
 
 
 def getPotionBuffDuration(effectId):

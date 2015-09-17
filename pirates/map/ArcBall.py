@@ -715,9 +715,7 @@ class ArcBall(NodePath, DirectObject):
             t = math.atan2(a, b / math.tan(theta))
             aUnit *= a
             bUnit *= b
-            continue
             pts = [ aUnit * math.cos(x * t / N) + bUnit * math.sin(x * t / N) for x in range(N + 1) ]
-            continue
             pts = [ pt + axis * math.sqrt(self._radius * self._radius - pt.lengthSquared()) for pt in pts ]
             if A != proj0:
                 pts.reverse()

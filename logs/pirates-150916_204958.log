@@ -1,0 +1,84 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  sv-1.0.0
+PAccount: accountServer from launcher:  
+PAccount: default accountServer:  https://pirates.go.com
+Initializing quest ladders...
+:MagicWordManager(warning): You risk being banned if you abuse this mate!
+:MagicWordManager(warning): I will have Jack cut you into pieces! (a.k.a. banned forever)
+:DistributedObjectGlobal(warning): ChatManager going online
+:DistributedShipLoader(warning): ShipLoader going online
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\lib-tk\Tkinter.py", line 1410, in __call__
+    return self.func(*args)
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 10, in __inject_tk
+    exec (text.get(1.0, "end"),globals())
+  File "<string>", line 5, in <module>
+NameError: name 'x' is not defined
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+New DO:401000001, dclass:PiratesDistrict
+New DO:401000002, dclass:DistributedPopulationTracker
+getSubTimeList
+ sub was None for 0
+setEnvironment unnamed 8 {}
+getSubTimeList
+ sub was None for 8
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\lib-tk\Tkinter.py", line 1410, in __call__
+    return self.func(*args)
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 10, in __inject_tk
+    exec (text.get(1.0, "end"),globals())
+  File "<string>", line 1, in <module>
+AssertionError: _has_mouse at line 65 of c:\documents and settings\cfsworks\desktop\panda3d-1.8.1\panda\src\tform\mouseWatcher.I
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\lib-tk\Tkinter.py", line 1410, in __call__
+    return self.func(*args)
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 10, in __inject_tk
+    exec (text.get(1.0, "end"),globals())
+  File "<string>", line 1, in <module>
+AssertionError: _has_mouse at line 65 of c:\documents and settings\cfsworks\desktop\panda3d-1.8.1\panda\src\tform\mouseWatcher.I
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\lib-tk\Tkinter.py", line 1410, in __call__
+    return self.func(*args)
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 10, in __inject_tk
+    exec (text.get(1.0, "end"),globals())
+  File "<string>", line 1, in <module>
+AssertionError: _has_mouse at line 65 of c:\documents and settings\cfsworks\desktop\panda3d-1.8.1\panda\src\tform\mouseWatcher.I
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\lib-tk\Tkinter.py", line 1410, in __call__
+    return self.func(*args)
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 10, in __inject_tk
+    exec (text.get(1.0, "end"),globals())
+  File "<string>", line 1, in <module>
+AssertionError: _has_mouse at line 65 of c:\documents and settings\cfsworks\desktop\panda3d-1.8.1\panda\src\tform\mouseWatcher.I
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\lib-tk\Tkinter.py", line 1410, in __call__
+    return self.func(*args)
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 10, in __inject_tk
+    exec (text.get(1.0, "end"),globals())
+  File "<string>", line 1, in <module>
+AssertionError: _has_mouse at line 65 of c:\documents and settings\cfsworks\desktop\panda3d-1.8.1\panda\src\tform\mouseWatcher.I
+NAME= watcher0
+X=Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\lib-tk\Tkinter.py", line 1410, in __call__
+    return self.func(*args)
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 10, in __inject_tk
+    exec (text.get(1.0, "end"),globals())
+  File "<string>", line 3, in <module>
+AssertionError: _has_mouse at line 65 of c:\documents and settings\cfsworks\desktop\panda3d-1.8.1\panda\src\tform\mouseWatcher.I
+ ########## stopReaderPollTask Pirate

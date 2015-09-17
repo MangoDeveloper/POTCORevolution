@@ -41,7 +41,7 @@ from pirates.battle import WeaponGlobals
 import random
 from direct.showbase import PythonUtil
 from pirates.reputation import ReputationGlobals
-from libotp import CFSpeech, CFTimeout
+from libotp import NametagConstants
 import PotionInstructionPanel
 from pirates.minigame.LegendaryTellGUI import LegendaryTellGUI
 from pirates.piratesbase import Freebooter

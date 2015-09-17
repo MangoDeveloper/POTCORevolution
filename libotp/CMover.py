@@ -4,7 +4,6 @@ class CMover:
 	def __init__(self, objNodePath, fwdSpeed, rotSpeed):
 		self.rotSpeed = rotSpeed
 		self.fwdSpeed = fwdSpeed
-		self.rotSpeed = rotSpeed
 		self.impulses = [None]
 		self.activeImpluses = set()
 	

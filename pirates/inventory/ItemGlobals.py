@@ -57,12 +57,7 @@ def getAllWeaponIds(type = None):
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeWeapon:
             if type:
                 if __itemInfo[item][ITEM_TYPE] != type:
-                    continue
-                
-            
-            keys.append(item)
-            continue
-    
+                    keys.append(item)
     return keys
 
 
@@ -72,11 +67,7 @@ def getAllClothingIds(gender = None):
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeClothing:
             if gender:
                 if (gender == 'm' or __itemInfo[item][MALE_MODEL_ID] == -1 or gender == 'f') and __itemInfo[item][FEMALE_MODEL_ID] == -1:
-                    continue
-                
-            keys.append(item)
-            continue
-    
+                    keys.append(item)
     return keys
 
 
@@ -85,7 +76,7 @@ def getClothingByType(type):
     for item in __itemInfo:
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeClothing and __itemInfo[item][ITEM_TYPE] == type:
             keys.append(item)
-            continue
+            
     
     return keys
 
@@ -95,7 +86,7 @@ def getAllJewelryIds():
     for item in __itemInfo:
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeJewelry:
             keys.append(item)
-            continue
+            
     
     return keys
 
@@ -105,7 +96,7 @@ def getJewelryByType(type):
     for item in __itemInfo:
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeJewelry and __itemInfo[item][ITEM_TYPE] == type:
             keys.append(item)
-            continue
+            
     
     return keys
 
@@ -115,7 +106,7 @@ def getAllTattooIds():
     for item in __itemInfo:
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeTattoo:
             keys.append(item)
-            continue
+            
     
     return keys
 
@@ -125,7 +116,7 @@ def getTattoosByType(type):
     for item in __itemInfo:
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeTattoo and __itemInfo[item][ITEM_TYPE] == type:
             keys.append(item)
-            continue
+            
     
     return keys
 
@@ -135,7 +126,7 @@ def getAllCharmIds():
     for item in __itemInfo:
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeCharm:
             keys.append(item)
-            continue
+            
     
     return keys
 
@@ -146,7 +137,7 @@ def getAllConsumableIds(usableOnly = True):
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeConsumable:
             if usableOnly == False or not __itemInfo[item][FROM_QUEST]:
                 keys.append(item)
-                continue
+                
     
     return keys
 
@@ -156,7 +147,7 @@ def getAllHealthIds():
     for item in __itemInfo:
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeConsumable and __itemInfo[item][AUTO_TONIC]:
             keys.append(item)
-            continue
+            
     
     return keys
 
@@ -166,7 +157,7 @@ def getHumanWeaponTypes():
     for item in __itemInfo:
         if __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeWeapon or __itemInfo[item][ITEM_CLASS] == InventoryType.ItemTypeConsumable:
             keys.append(item)
-            continue
+            
     
     return keys
 
@@ -299,7 +290,7 @@ def getLegalConsumables(rarity, items, level):
         item = __itemInfo.get(itemId)
         if item and item[ITEM_CLASS] == InventoryType.ItemTypeConsumable and item[FROM_LOOT] and item[RARITY] == rarity and item[ITEM_NOTORIETY_REQ] <= level + LEVEL_REQ_BUFFER:
             typeItems.append(itemId)
-            continue
+            
     
     return typeItems
 
@@ -327,7 +318,7 @@ def getLegalStoreItems(items):
         item = __itemInfo.get(itemId)
         if item[FROM_SHOP]:
             typeItems.append(itemId)
-            continue
+            
     
     return typeItems
 
@@ -342,8 +333,6 @@ def getGenderType(type, gender, items):
                 modelId = getFemaleModelId(item)
             if modelId != -1:
                 typeItems.append(item)
-            
-        modelId != -1
     
     return typeItems
 

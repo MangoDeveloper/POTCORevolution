@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 from pirates.piratesgui.RadarGui import *
 from pirates.quest.QuestIndicatorGridNode import QuestIndicatorGridNode

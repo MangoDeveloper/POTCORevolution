@@ -1233,15 +1233,15 @@ class BattleManagerBase:
     def getExperienceColor(self, av, target):
         levelRank = self.getModifiedExperienceGrade(av, target, currentWeaponId = av.currentWeaponId, forColor = True)
         if levelRank >= EnemyGlobals.RED:
-            color = '\x1red\x1'
+            color = '\x001red\x001'
         elif levelRank >= EnemyGlobals.YELLOW:
-            color = '\x1yellow\x1'
+            color = '\x001yellow\x001'
         elif levelRank >= EnemyGlobals.GREEN:
-            color = '\x1midgreen\x1'
+            color = '\x001midgreen\x001'
         elif levelRank == EnemyGlobals.GREY:
-            color = '\x1grey\x1'
+            color = '\x001grey\x001'
         else:
-            color = '\x1white\x1'
+            color = '\x001white\x001'
         return color
 
     

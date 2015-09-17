@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from direct.directnotify import DirectNotifyGlobal
 from pirates.quest import QuestConstants, QuestAvatarBase, QuestHolder
@@ -147,7 +147,7 @@ class DistributedQuestAvatar(QuestAvatarBase.QuestAvatarBase, QuestHolder.QuestH
     def setQuestStep(self, questStepArgs):
         (originDoId, stepDoId, typeData) = questStepArgs
         if typeData[0] == 10:
-            typeDict = dict(zip(('stepType', 'posH', 'islandUid', 'targetAreaUid', 'nodeSizes', 'nearOffset', 'nearVis'), typeData))
+            typeDict = dict(zip(('stepType', 'posH', 'islandId', 'targetAreaId', 'nodeSizes', 'nearOffset', 'nearVis'), typeData))
             questStep = QuestStep(*(originDoId, stepDoId), **(originDoId, stepDoId))
         else:
             questStep = QuestStep(*(originDoId, stepDoId) + typeData)

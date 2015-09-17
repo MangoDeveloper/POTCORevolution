@@ -57,7 +57,7 @@ class ShipFrameSelect(ShipFrame):
         typeStr = ''
         if shipOV.Hp <= 0:
             self.button['state'] = DGG.DISABLED
-            stateStr = '\x1Ired\x1%s\x2' % PLocalizer.ShipSunk
+            stateStr = '\x01Ired\x01%s\x02' % PLocalizer.ShipSunk
             self['shipColorScale'] = VBase4(1, 0.40000000000000002, 0.40000000000000002, 1)
         elif shipOV.state in 'Off':
             self.button['state'] = DGG.NORMAL
@@ -65,6 +65,6 @@ class ShipFrameSelect(ShipFrame):
         else:
             self.button['state'] = DGG.NORMAL
             stateStr = PLocalizer.ShipAtSea
-        self.typeLabel['text'] = '\x1smallCaps\x1(%s)\x2' % typeStr
+        self.typeLabel['text'] = '\x01smallCaps\x01(%s)\x02' % typeStr
 
 

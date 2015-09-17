@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: P (Python 2.4)
 
 import time
 from direct.interval.IntervalGlobal import Sequence, Func
@@ -56,7 +56,7 @@ class PotionRecipePicker(DirectFrame):
                 recipe.enabled = False
             if recipe.enabled and recipe.potionID not in notNew_list:
                 recipe.haveMade = False
-                continue
+                
             recipe.haveMade = True
         
         self.potionGame.recipes.sort()
@@ -77,22 +77,20 @@ class PotionRecipePicker(DirectFrame):
                                 if isinstance(currTask, PotionsTaskDNA):
                                     if (PotionGlobals.getPotionItemID(recipe.potionID) == currTask.potionType or not primaryComplete or PotionGlobals.getPotionItemID(recipe.potionID) == currTask.potionTypeBonus) and not bonusComplete:
                                         raise brewable
-                                        continue
+                                        
                             
-                continue
+                
                 except brewable:
                     pass
                 
 
             
             if recipe.level - playerLevel > 3 and not (recipe.questOnly):
-                continue
-            
-            buttonImage = None
-            recipe.loadIngredients()
-            buttonImageScale = 0.0
-            text = recipe.name
-            helptext = recipe.desc
+                buttonImage = None
+                recipe.loadIngredients()
+                buttonImageScale = 0.0
+                text = recipe.name
+                helptext = recipe.desc
             if not (recipe.haveMade) and len(recipe.ingredients) > 0:
                 if recipe.questOnly:
                     iconText = PLocalizer.PotionGui['QuestLabel']

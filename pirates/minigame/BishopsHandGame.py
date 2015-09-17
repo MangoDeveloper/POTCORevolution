@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: B (Python 2.4)
 
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.ClockDelta import *
@@ -266,7 +266,6 @@ class FaceSpot(DirectFrame):
         self.back = DirectFrame(parent = self, relief = None, geom = model.find('**/*bevel'))
         self.dots = DirectFrame(parent = self, relief = None, geom = model.find('**/*dots'))
         spot = model.find('**/*dot')
-        continue
         self.spots = [ DirectFrame(parent = self, relief = None, geom = spot, hpr = (0.0, 0.0, (360.0 / 24.0) * x)) for x in range(self.NUMSTEPS) ]
         self.face = DirectFrame(parent = self, relief = None, geom = model.find('**/*face_' + `faceId`))
         self.cross = DirectFrame(parent = self, relief = None, geom = model.find('**/*x'))
@@ -499,7 +498,6 @@ class BishopsHandGame(DirectFrame, FSM.FSM):
         self.gameInterface.hide()
         model = loader.loadModel('models/props/BH_images')
         self.bgImage = DirectFrame(parent = self.gameInterface, relief = None, geom = model.find('**/*table'), scale = (8.0 / 3.0, 2, 2))
-        continue
         self.faces = [ FaceSpot(0, parent = self.gameInterface, relief = None, pos = BishopsHandGlobals.FACE_SPOT_POS[p], scale = 0.33300000000000002) for p in BishopsHandGlobals.FACE_SPOT_POS.keys()[1:] ]
         base.faces = self.faces
         for f in self.faces:
@@ -613,7 +611,7 @@ class BishopsHandGame(DirectFrame, FSM.FSM):
         self.timerLabel.show()
         render.hide()
 
-    
+
     def enterRejoin(self):
         self.notify.debug('EnteringRejoin')
         self.hideAll()
@@ -626,7 +624,6 @@ class BishopsHandGame(DirectFrame, FSM.FSM):
         self.timerLabel.show()
         render.hide()
 
-    
     def enterLeave(self):
         self.notify.debug('EnteringLeave')
         self.hideAll()
@@ -638,11 +635,9 @@ class BishopsHandGame(DirectFrame, FSM.FSM):
         self.timerLabel.show()
         render.hide()
 
-    
     def enterOff(self):
         self.hideAll()
 
-    
     def startTimer(self, time):
         if time > 0:
             
@@ -657,25 +652,18 @@ class BishopsHandGame(DirectFrame, FSM.FSM):
             self.stopTimer()
             t = taskMgr.add(timerTask, 'BH-game-timer')
             t.timer = time
-        
 
-    
     def stopTimer(self):
         tasks = taskMgr.getTasksNamed('BH-game-timer')
         for t in tasks:
             t.timer = 0
-        
 
-    
     def setTableState(self, tableState, oldSeatStatus, newSeatStatus):
         for (face, oldStatus, newStatus) in zip(self.faces, oldSeatStatus, newSeatStatus):
             if newStatus != oldStatus:
                 (avId, status) = newStatus
                 face.setStatus(status)
-                continue
-        
 
-    
     def resetBurns(self):
         self.burns.reset()
 
@@ -693,7 +681,6 @@ class BishopsHandGame(DirectFrame, FSM.FSM):
             pivot = (0.070000000000000007, -0.15670000000000001)
             
             def turn(a, b):
-                continue
                 d = [ x - y for (x, y) in zip(a, b) ]
                 return atan2(d[0], d[1]) * 180.0 / math.pi
 
@@ -723,14 +710,12 @@ class BishopsHandGame(DirectFrame, FSM.FSM):
     def startRound(self):
         self.round.start()
 
-    
     def stopRound(self):
         if self.round:
             self.round.stop()
         
         self.round = None
 
-    
     def destroy(self):
         self.cleanup()
         self.stopTimer()
@@ -746,5 +731,3 @@ class BishopsHandGame(DirectFrame, FSM.FSM):
         self.tableStateLabel.destroy()
         self.menu.destroy()
         DirectFrame.destroy(self)
-
-

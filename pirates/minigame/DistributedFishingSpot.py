@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 import sys
 import random
@@ -127,10 +127,8 @@ class DistributedFishingSpot(DistributedInteractive.DistributedInteractive, Loot
         if not localAvatar.gameFSM.isInTransition():
             localAvatar.b_setGameState(localAvatar.gameFSM.defaultState)
         
-        if self.loadingSequence:
-            self.loadingSequence.pause()
-            self.loadingSequence.clearToInitial()
-        
+        self.loadingSequence.pause()
+        self.loadingSequence.clearToInitial()
         base.transitions.fadeIn(self.fadeTime)
         if self.fishingGame is not None:
             self.fishingGame.delete()
@@ -296,9 +294,6 @@ class DistributedFishingSpot(DistributedInteractive.DistributedInteractive, Loot
         if self.fishingGame or not self.fishingGame.gui.resultsScreen.isHidden() or localAvatar.guiMgr.inventoryUIManager.hasPlunder():
             return None
         
-        if not self.fishingGame:
-            return None
-        
         if self._DistributedFishingSpot__dialog == None:
             self._DistributedFishingSpot__dialog = PDialog(text = PLocalizer.FishingGui['ExitText'], style = OTPDialog.YesNo, giveMouse = False, command = self._DistributedFishingSpot__onDialogItemSelected)
         else:
@@ -334,13 +329,5 @@ class DistributedFishingSpot(DistributedInteractive.DistributedInteractive, Loot
         if self.fishingGame and not self.fishingGame.gui.resultsScreen.isHidden():
             localAvatar.guiMgr.inventoryUIManager.hidePlunder()
         
-
-    
-    def handleArrivedOnShip(self, ship):
-        pass
-
-    
-    def handleLeftShip(self, ship):
-        pass
 
 

@@ -1,0 +1,3 @@
+{"_time": "2015-09-16 21:42:27Eastern Daylight Time", "type": "log-opened", "sender": "EventLogger", "msg": "Log opened upon Event Logger startup."}
+{"_time": "2015-09-16 21:43:19Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000000", "remote_address": "127.0.0.1:1959", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 21:43:24Eastern Daylight Time", "type": "client-ejected-security", "sender": "Client:1000000000", "reason_code": "117", "reason_msg": "Client tried to send update to nonexistent object 4674"}

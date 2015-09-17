@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 import copy
 from direct.directnotify import DirectNotifyGlobal

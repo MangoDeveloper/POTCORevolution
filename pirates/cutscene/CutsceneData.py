@@ -569,7 +569,7 @@ class CutsceneDesc(POD):
         'focalLength': 30 }
     
     def __init__(self, *args, **kwArgs):
-        POD.__init__(self, *args, **args)
+        POD.__init__(self, *args, **kwArgs)
         self.filename = CutsceneFilenames[self.id]
 
 

@@ -42,7 +42,6 @@ class ScreenshotViewer:
     
     def resetImages(self):
         filenames = os.listdir(os.curdir + '/' + PLocalizer.ScreenshotDir)
-        continue
         self.screens = _[1]
         self.currentIndex = 0
 

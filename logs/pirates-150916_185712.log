@@ -1,0 +1,80 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  sv-1.0.0
+PAccount: accountServer from launcher:  
+PAccount: default accountServer:  https://pirates.go.com
+Initializing quest ladders...
+:MagicWordManager(warning): You risk being banned if you abuse this mate!
+:MagicWordManager(warning): I will have Jack cut you into pieces! (a.k.a. banned forever)
+:DistributedObjectGlobal(warning): ChatManager going online
+:DistributedShipLoader(warning): ShipLoader going online
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+:WorldCreator(warning): Loading old-style file PortRoyalWorld
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 610, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 617, in readerPollOnce
+    self.handleDatagram(self.private__di)
+  File "otp\distributed\OTPClientRepository.py", line 2414, in handleDatagram
+    self.handleMessageType(msgType, di)
+  File "otp\distributed\OTPClientRepository.py", line 2290, in handleMessageType
+    self.handleGenerateWithRequired(di)
+  File "otp\distributed\OTPClientRepository.py", line 2505, in handleGenerateWithRequired
+    distObj = self.generateWithRequiredFields(dclass, doId, di, parentId, zoneId)
+  File "C:\Panda3D-1.8.1\direct\distributed\ClientRepositoryBase.py", line 265, in generateWithRequiredFields
+    distObj.updateRequiredFields(dclass, di)
+  File "C:\Panda3D-1.8.1\direct\distributed\DistributedObject.py", line 337, in updateRequiredFields
+    self.announceGenerate()
+  File "pirates\distributed\PiratesDistrict.py", line 28, in announceGenerate
+    self.worldCreator.makeMainWorld(self.mainWorldFile)
+  File "pirates\world\WorldCreatorBase.py", line 36, in makeMainWorld
+    self.loadObjectsFromFile(worldFile, self.repository)
+  File "pirates\world\WorldCreator.py", line 47, in loadObjectsFromFile
+    fileData = self.openFile(filename)
+  File "pirates\world\WorldCreatorBase.py", line 223, in openFile
+    data = vfs.readFile(pfile, 1)
+AssertionError: okflag at line 939 of c:\documents and settings\cfsworks\desktop\panda3d-1.8.1\panda\src\express\virtualFileSystem.cxx
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 79, in <module>
+    run()
+  File "C:\Panda3D-1.8.1\direct\showbase\ShowBase.py", line 2921, in run
+    self.taskMgr.run()
+  File "C:\Panda3D-1.8.1\direct\task\Task.py", line 502, in run
+    self.step()
+  File "C:\Panda3D-1.8.1\direct\task\Task.py", line 460, in step
+    self.mgr.poll()
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 610, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 617, in readerPollOnce
+    self.handleDatagram(self.private__di)
+  File "otp\distributed\OTPClientRepository.py", line 2414, in handleDatagram
+    self.handleMessageType(msgType, di)
+  File "otp\distributed\OTPClientRepository.py", line 2290, in handleMessageType
+    self.handleGenerateWithRequired(di)
+  File "otp\distributed\OTPClientRepository.py", line 2505, in handleGenerateWithRequired
+    distObj = self.generateWithRequiredFields(dclass, doId, di, parentId, zoneId)
+  File "C:\Panda3D-1.8.1\direct\distributed\ClientRepositoryBase.py", line 265, in generateWithRequiredFields
+    distObj.updateRequiredFields(dclass, di)
+  File "C:\Panda3D-1.8.1\direct\distributed\DistributedObject.py", line 337, in updateRequiredFields
+    self.announceGenerate()
+  File "pirates\distributed\PiratesDistrict.py", line 28, in announceGenerate
+    self.worldCreator.makeMainWorld(self.mainWorldFile)
+  File "pirates\world\WorldCreatorBase.py", line 36, in makeMainWorld
+    self.loadObjectsFromFile(worldFile, self.repository)
+  File "pirates\world\WorldCreator.py", line 47, in loadObjectsFromFile
+    fileData = self.openFile(filename)
+  File "pirates\world\WorldCreatorBase.py", line 223, in openFile
+    data = vfs.readFile(pfile, 1)
+AssertionError: okflag at line 939 of c:\documents and settings\cfsworks\desktop\panda3d-1.8.1\panda\src\express\virtualFileSystem.cxx

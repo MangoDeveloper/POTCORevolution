@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from pirates.minigame import PlayingCardGlobals
 from pirates.minigame import DistributedPokerTable

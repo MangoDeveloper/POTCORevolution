@@ -154,7 +154,7 @@ def getClothingTypeBySlot(slot):
                 rangeEnd = typeRange[1]
             if slot in range(rangeStart, rangeEnd + 1):
                 return type
-                continue
+                
         
     
 
@@ -170,7 +170,7 @@ def getJewelryTypeBySlot(slot):
                 rangeEnd = typeRange[1]
             if slot in range(rangeStart, rangeEnd + 1):
                 return type
-                continue
+                
         
     
 
@@ -184,7 +184,7 @@ def getJewelryLocationBySlot(slot):
             rangeEnd = locationRange[1]
         if slot in range(rangeStart, rangeEnd + 1):
             return Locations.JEWELRY_RANGE_TO_LOCATION[locationRange]
-            continue
+            
     
 
 
@@ -199,7 +199,7 @@ def getTattooTypeBySlot(slot):
                 rangeEnd = typeRange[1]
             if slot in range(rangeStart, rangeEnd + 1):
                 return type
-                continue
+                
         
     
 
@@ -213,7 +213,7 @@ def getTattooLocationBySlot(slot):
             rangeEnd = locationRange[1]
         if slot in range(rangeStart, rangeEnd + 1):
             return Locations.TATTOO_RANGE_TO_LOCATION[locationRange]
-            continue
+            
     
 
 

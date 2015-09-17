@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: M (Python 2.4)
 
 from direct.fsm import FSM
 

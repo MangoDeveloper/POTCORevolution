@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: F (Python 2.4)
 
 import math
 from pirates.piratesgui.GuiPanel import *

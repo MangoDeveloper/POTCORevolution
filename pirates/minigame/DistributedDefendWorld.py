@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from pandac.PandaModules import *
 from direct.gui.OnscreenText import OnscreenText
@@ -54,7 +54,6 @@ class DistributedDefendWorld(DistributedMiniGameWorld, Lootable):
         self.startingState = None
         self.flamingBarrels = []
         self.initGoldPiles()
-        base.shipsVisibleFromIsland = True
 
     
     def initGoldPiles(self):
@@ -93,12 +92,12 @@ class DistributedDefendWorld(DistributedMiniGameWorld, Lootable):
             if treasureRemaining > (i + 1) * CannonDefenseGlobals.MINE_TREASURE_START / 10.0:
                 goldPile.unstash()
                 goldPile.setScale(3.0, 3.0, 3.0)
-                continue
+                
             if treasureRemaining > i * CannonDefenseGlobals.MINE_TREASURE_START / 10.0:
                 goldPile.unstash()
                 goldMod = treasureRemaining - i * CannonDefenseGlobals.MINE_TREASURE_START / 10.0
                 goldPile.setScale(1.0 + 20.0 * goldMod / CannonDefenseGlobals.MINE_TREASURE_START, 1.0 + goldMod * 20.0 / CannonDefenseGlobals.MINE_TREASURE_START, 0.5 + goldMod * 25.0 / CannonDefenseGlobals.MINE_TREASURE_START)
-                continue
+                
             goldPile.stash()
         
 
@@ -111,11 +110,6 @@ class DistributedDefendWorld(DistributedMiniGameWorld, Lootable):
         DistributedMiniGameWorld.announceGenerate(self)
         CullBinManager.getGlobalPtr().addBin('gui-cannonDefense', CullBinManager.BTFixed, 40)
         self.setupLocalPlayer()
-
-    
-    def disable(self):
-        DistributedMiniGameWorld.disable(self)
-        base.shipsVisibleFromIsland = False
 
     
     def delete(self):
@@ -149,23 +143,18 @@ class DistributedDefendWorld(DistributedMiniGameWorld, Lootable):
     
     def turnOn(self, av = None):
         DistributedMiniGameWorld.turnOn(self, av)
+        base.cr.timeOfDayManager.setEnvironment(TODGlobals.ENV_CANNONGAME)
 
     
     def enterCannon(self, cannonDoId):
-        
-        def avatarHere():
-            doIds = [
-                cannonDoId]
-            base.cr.relatedObjectMgr.requestObjects(doIds, self._doCannonInteraction)
-            base.cr.timeOfDayManager.setEnvironment(TODGlobals.ENV_CANNONGAME)
-
-        self.accept('localAvTeleportFinished', avatarHere)
+        doIds = [
+            cannonDoId]
+        base.cr.relatedObjectMgr.requestObjects(doIds, self._doCannonInteraction)
 
     
     def requestState(self, stateName):
         if localAvatar.cannon:
             self.fsm.request(stateName)
-            self.startingState = None
         else:
             self.startingState = stateName
 
@@ -225,7 +214,7 @@ class DistributedDefendWorld(DistributedMiniGameWorld, Lootable):
 
     
     def getWorldPos(self, node):
-        if not node.isEmpty() and self.isOnStage():
+        if not node.isEmpty() and self.isOn():
             return node.getPos(self)
         
 
@@ -400,7 +389,7 @@ class DistributedDefendWorld(DistributedMiniGameWorld, Lootable):
             ammo = cannonball.getPythonTag('DefenseAmmo')
             if ammo:
                 ammo.destroy()
-                continue
+                
         
 
 

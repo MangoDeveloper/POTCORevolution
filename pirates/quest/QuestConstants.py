@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 from pirates.ship.ShipGlobals import *
 from pirates.world.LocationConstants import LocationIds, getLocationList

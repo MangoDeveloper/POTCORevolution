@@ -17,6 +17,22 @@ from pandac.PandaModules import *
 from otp.launcher.LauncherBase import LauncherBase
 from pirates.piratesbase import PLocalizer
 
+class LogAndOutput:
+    def __init__(self, orig, log):
+        self.orig = orig
+        self.log = log
+
+    def write(self, str):
+        self.log.write(str)
+        self.log.flush()
+        self.orig.write(str)
+        self.orig.flush()
+
+    def flush(self):
+        self.log.flush()
+        self.orig.flush()
+
+
 class PiratesQuickLauncher(LauncherBase):
     GameName = 'Pirates'
     ArgCount = 3
@@ -42,6 +58,24 @@ class PiratesQuickLauncher(LauncherBase):
     
     def __init__(self):
         print 'Running: PiratesQuickLauncher'
+        self.logPrefix = 'potcor-'
+
+        ltime = 1 and time.localtime()
+        logSuffix = '%02d%02d%02d_%02d%02d%02d' % (ltime[0] - 2000,  ltime[1], ltime[2],
+                                                   ltime[3], ltime[4], ltime[5])
+
+        
+        if not os.path.exists('logs/'):
+            os.mkdir('logs/')
+            self.notify.info('Made new directory to save logs.')
+        
+        logfile = os.path.join('logs', self.logPrefix + logSuffix + '.log')
+
+        log = open(logfile, 'a')
+        logOut = LogAndOutput(sys.stdout, log)
+        logErr = LogAndOutput(sys.stderr, log)
+        sys.stdout = logOut
+        sys.stderr = logErr
         self.heavyDownloadServerList = []
         self.heavyDownloadServer = None
         self.launcherFileDbFilename = '%s?%s' % (self.getValue('GAME_PATCHER_FILE_OPTIONS', 'patcher.ver'), random.randint(1, 1000000000))
@@ -340,9 +374,4 @@ class PiratesQuickLauncher(LauncherBase):
 
     
     def startGame(self):
-        self.newTaskManager()
-        eventMgr.restart()
-        PiratesStart = PiratesStart
-        import pirates.piratesbase
-
-
+        from pirates.piratesbase import PiratesStart

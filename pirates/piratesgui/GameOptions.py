@@ -279,7 +279,7 @@ class Options(OptionSpace):
     def __init__(self):
         self.default()
         self.texture_scale_mode = True
-        self.recommendOptionsBasedOnData = base.config.GetBool('use-statistical-gameoptions-recommendation', 0)
+        self.recommendOptionsBasedOnData = base.config.GetBool('use-statistical-gameoptions-recommendation', 1)
         self.invasionOn = False
         self.display = DisplayOptions()
 
@@ -440,13 +440,15 @@ class Options(OptionSpace):
         state = False
         self.desiredApi = launcher.getValue('api', self.desiredApi)
         if self.desiredApi == 'default':
-            
+
             try:
                 input_file = open(Options.DEFAULT_API_FILE_PATH, 'r')
                 self.desiredApi = input_file.readline().strip()
+            except:
+                pass
 
         else:
-            
+
             try:
                 output_file = open(Options.DEFAULT_API_FILE_PATH, 'w')
                 output_file.writelines(self.desiredApi + '\n')
@@ -458,9 +460,7 @@ class Options(OptionSpace):
         
         try:
             input_file = open(file_path, 'r')
-            continue
             file_data = [ x.strip() for x in input_file.read().split('\n') ]
-            continue
             self.tokenDict = [](_[1])
             self.version = self.validate(int, 'version', 0)
             self.state = self.validate(str, 'state', self.DEFAULT_STATE, [
@@ -3691,11 +3691,13 @@ class GameOptions(BorderFrame):
     
     def __init__(self, title, x, y, width, height, options = None, file_path = None, pipe = None, access = 0, chooser = 0, keyMappings = None):
         self.inAdFrame = False
+        self.avatarListFrame = None
+        self.gmOptions = None
         self.width = width
         self.height = height
         self.chooser = chooser
         self.enable_hdr = base.config.GetInt('want-game-options-hdr', 1)
-        self.enable_ship_visibility = base.config.GetInt('want-game-options-ship-visibility', 0)
+        self.enable_ship_visibility = base.config.GetInt('want-game-options-ship-visibility', 1)
         if file_path:
             self.file_path = file_path
         else:
@@ -3723,12 +3725,12 @@ class GameOptions(BorderFrame):
             self.options = options
         else:
             self.options = Options()
-            if self.options.load(self.file_path):
-                pass
-            1
-            self.options = Options()
-            self.options.config_to_options()
-            self.options.recommendedOptions(base.pipe, True)
+            
+        self.options = Options()
+        self.options.load(self.file_path)
+        self.options.config_to_options()
+        self.options.recommendedOptions(base.pipe, True)
+
         if keyMappings:
             self.keyMappings = keyMappings
         else:
@@ -4008,7 +4010,6 @@ class GameOptions(BorderFrame):
 
     
     def simple_shadow_button_function(self):
-        
         try:
             time_of_day_manager = base.cr.timeOfDayManager
         except:
@@ -4024,7 +4025,6 @@ class GameOptions(BorderFrame):
 
     
     def shadow_button_function(self):
-        
         try:
             time_of_day_manager = base.cr.timeOfDayManager
         except:
@@ -4410,8 +4410,12 @@ class GameOptions(BorderFrame):
     
     def hide(self, log = True):
         self.delete_dialogs()
-        if self.gui:
+        try:
             self.gui.hide()
+            self.avatarListFrame.show()
+            self.gmOptions = None
+        except:
+            self.show()
         
         if log:
             self.options.log('User Closed Options')

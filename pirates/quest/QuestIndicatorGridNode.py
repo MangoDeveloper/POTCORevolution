@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 from pirates.quest.QuestIndicatorNode import QuestIndicatorNode
 from pirates.piratesgui.RadarGui import RADAR_OBJ_TYPE_QUEST

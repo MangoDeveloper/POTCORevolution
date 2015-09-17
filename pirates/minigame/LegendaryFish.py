@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: L (Python 2.4)
 
 from pandac.PandaModules import NodePath
 from direct.interval.IntervalGlobal import Sequence

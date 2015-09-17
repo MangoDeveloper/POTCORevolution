@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: A (Python 2.4)
 
 from pirates.pirate.AvatarType import AvatarType
 

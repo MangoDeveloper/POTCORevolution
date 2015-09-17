@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 QuestLinkDict = {
     'c3r2r1.6.5bribeBonita': 1,

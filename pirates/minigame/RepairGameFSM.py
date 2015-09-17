@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: R (Python 2.4)
 
 from MinigameFSM import MinigameFSM
 from direct.directnotify import DirectNotifyGlobal

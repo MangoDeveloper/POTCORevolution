@@ -268,7 +268,7 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
         self.genderIdx = 0
         self.wantNPCViewer = base.config.GetBool('want-npc-viewer', 0)
         self.wantPicButtons = base.config.GetBool('want-gen-pics-buttons', 0)
-        self.wantIdleCentered = base.config.GetBool('want-idle-centered', 0)
+        self.wantIdleCentered = base.config.GetBool('want-idle-centered', 1)
         if self.wantPicButtons and not (self.wantNPCViewer):
             self.wantNPCViewer = True
             self.notify.warning('Warning! want-gen-pics-buttons needs want-npc-viewer. wantNPCViewer overridden and set to TRUE')
@@ -280,7 +280,7 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
         self.loadJackDialogs()
         self.skipTutorial = base.config.GetBool('skip-tutorial', 0)
         self.chooseFemale = base.config.GetBool('choose-female', 0)
-        self.noJailLight = base.config.GetBool('no-jail-light', 0)
+        self.noJailLight = base.config.GetBool('no-jail-light', 1)
         if hasattr(base, 'pe') and base.pe:
             self.noJailLight = True
         
@@ -975,7 +975,7 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
         elif self.chooseFemale:
             bodyChoice = BodyDefs.BodyChoiceGenderDict['f'][2]
             self.pirate.style = HumanDNA.HumanDNA('f', bodyIndex = bodyChoice)
-        else:
+        elif self.chooseFemale == 0:
             bodyChoice = BodyDefs.BodyChoiceGenderDict['m'][2]
             self.pirate.style = HumanDNA.HumanDNA(bodyIndex = bodyChoice)
         self.navyDNA = HumanDNA
@@ -1212,8 +1212,10 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
         if self.isNPCEditor:
             self.piratesEditor.updateNPC('Cancel')
         
-        self.acceptOnce(base.transitions.FadeOutEvent, lambda : messenger.send(self.doneEvent))
-        base.transitions.fadeOut()
+        try:
+            messenger.send(self.doneEvent)
+        finally:
+            base.transitions.fadeOut()
 
     
     def handleDone(self):
@@ -1235,7 +1237,7 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
             del self.confirmInvalidName
         
         self.nameGui._checkTypeANameAsPickAName()
-        if hasattr(base, 'pe') or base.pe or self.nameGui.cr is None:
+        if hasattr(base, 'cr') or base.cr or self.nameGui.cr is None:
             self._handleNameOK()
         elif self.nameGui.hasCustomName():
             if self._waitForServerDlg:
@@ -1319,9 +1321,8 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
 
         
         def createAv():
-            self.ignore(base.transitions.FadeOutEvent)
             self.acceptOnce('createdNewAvatar', populateAv)
-            base.cr.avatarManager.sendRequestCreateAvatar(self.subId)
+            base.cr.csm.sendCreateAvatar(self.pirate.style, self.index)
 
         
         def acknowledgeTempName(value):
@@ -1336,9 +1337,9 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
         if self.nameGui.customName and not (self.isNPCEditor) and not (self.confirmTempName):
             self.confirmTempName = PDialog.PDialog(text = PLocalizer.TempNameIssued, style = OTPDialog.Acknowledge, command = acknowledgeTempName)
         elif self.isTutorial and self.isNPCEditor or self.wantNPCViewer:
-            self.acceptOnce(base.transitions.FadeOutEvent, sendDone)
+            sendDone()
         else:
-            self.acceptOnce(base.transitions.FadeOutEvent, createAv)
+            createAv()
         base.transitions.fadeOut()
 
     

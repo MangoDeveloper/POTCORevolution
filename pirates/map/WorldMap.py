@@ -30,7 +30,6 @@ class WorldMap(DirectFrame):
         self.camY = [
             -0.29999999999999999,
             0.25]
-        continue
         self.tiltLimit = [ x * math.pi / 180 for x in (27, 33) ]
         self.mapBall = DecoratedMapBall('WorldMapArcBall', self, self.tiltLimit[1], mapSize = 242000, radius = self.radius, scrollFactor = 0.125, camera = b.camera, keepUpright = 1, mouseDownEvent = self.getMouseDownEvent(), mouseUpEvent = self.getMouseUpEvent())
         self.render = b.getSceneRoot()

@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: P (Python 2.4)
 
 global _cardImagesInitialized
 from pandac.PandaModules import *

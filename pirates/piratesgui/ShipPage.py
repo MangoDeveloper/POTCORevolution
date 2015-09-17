@@ -180,8 +180,7 @@ class ShipPage(InventoryPage):
             self.clearTabs()
             for id in range(len(shipIds), 3):
                 self.addPanel(id)
-            
-            continue
+
             validShips = _[1]
             for shipId in validShips:
                 self.makeTab(shipId)

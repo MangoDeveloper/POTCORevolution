@@ -1,11 +1,10 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from direct.interval.ProjectileInterval import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.task.Task import Task
-from direct.distributed.GridChild import GridChild
 from pirates.piratesbase import PLocalizer
 from pirates.battle.CannonballProjectile import CannonballProjectile
 from pirates.piratesbase import PiratesGlobals
@@ -18,11 +17,10 @@ from pirates.audio import SoundGlobals
 import random
 from direct.distributed.DistributedObject import DistributedObject
 
-class DistributedFlamingBarrel(DistributedObject, GridChild):
+class DistributedFlamingBarrel(DistributedObject):
     
     def __init__(self, cr):
         DistributedObject.__init__(self, cr)
-        GridChild.__init__(self)
         self.collNode = None
         self.destroyed = False
         self.smokeVfx = None
@@ -156,8 +154,6 @@ class DistributedFlamingBarrel(DistributedObject, GridChild):
             self.trailEffect.stopLoop()
             self.trailEffect = None
         
-        GridChild.delete(self)
-        DistributedObject.delete(self)
 
     
     def makeCollNode(self):

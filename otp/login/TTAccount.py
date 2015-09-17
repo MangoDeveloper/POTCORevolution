@@ -10,15 +10,15 @@ import RemoteValueSet
 import copy
 accountServer = ''
 accountServer = launcher.getAccountServer()
-print 'TTAccount: accountServer from launcher: ', accountServer
+print 'PAccount: accountServer from launcher: ', accountServer
 configAccountServer = base.config.GetString('account-server', '')
 if configAccountServer:
     accountServer = configAccountServer
-    print 'TTAccount: overriding accountServer from config: ', accountServer
+    print 'PAccount: overriding accountServer from config: ', accountServer
 
 if not accountServer:
-    accountServer = 'https://toontown.go.com'
-    print 'TTAccount: default accountServer: ', accountServer
+    accountServer = 'https://pirates.go.com'
+    print 'PAccount: default accountServer: ', accountServer
 
 accountServer = URLSpec(accountServer, 1)
 
@@ -28,7 +28,7 @@ def getAccountServer():
 TTAccountException = HTTPUtil.HTTPUtilException
 
 class TTAccount:
-    notify = DirectNotifyGlobal.directNotify.newCategory('TTAccount')
+    notify = DirectNotifyGlobal.directNotify.newCategory('PAccount')
     
     def __init__(self, cr):
         self.cr = cr
@@ -151,7 +151,7 @@ class TTAccount:
             if fieldNameMap.has_key(fieldName):
                 dict[fieldNameMap[fieldName]] = dict[fieldName]
                 del dict[fieldName]
-                continue
+                
         
 
     
@@ -190,7 +190,7 @@ class TTAccount:
 
     
     def talk(self, operation, data = { }):
-        self.notify.debug('TTAccount.talk()')
+        self.notify.debug('PAccount.talk()')
         for key in data.keys():
             data[key] = str(data[key])
         
@@ -217,7 +217,7 @@ class TTAccount:
                 pass
             
         else:
-            self.notify.error("Internal TTAccount error: need to add 'required data' checking for %s operation" % operation)
+            self.notify.error("Internal PAccount error: need to add 'required data' checking for %s operation" % operation)
         op2Php = {
             'play': 'play',
             'get': 'get',
@@ -295,7 +295,7 @@ class TTAccount:
         elif operation in ('play', 'cancel', 'create', 'purchase', 'setParentPassword', 'setSecretChat', 'authenticateParentPassword', 'authenticateDelete', 'forgotPassword', 'authenticateParentPasswordNewStyle', 'authenticateParentUsernameAndPassword', 'authenticateDeleteNewStyle'):
             expectedHeader = 'ACCOUNT SERVER RESPONSE'
         else:
-            self.notify.error("Internal TTAccount error: need to set expected response header for '%s' operation" % operation)
+            self.notify.error("Internal PAccount error: need to set expected response header for '%s' operation" % operation)
         self.response = RemoteValueSet.RemoteValueSet(url, self.cr.http, body = body, expectedHeader = expectedHeader)
         self.notify.debug('    self.response=' + str(self.response))
         if self.response.hasKey('errorCode'):
@@ -315,7 +315,7 @@ class TTAccount:
             self.playToken = self.response.getString('playToken')
             self.playTokenIsEncrypted = 1
         else:
-            self.notify.error('Internal TTAccount error: need to extract useful data for %s operation' % operation)
+            self.notify.error('Internal PAccount error: need to extract useful data for %s operation' % operation)
 
     
     def authenticateParentUsernameAndPassword(self, loginName, password, parentUsername, parentPassword):

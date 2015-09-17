@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: C (Python 2.4)
 
 from pirates.minigame import CannonDefenseGlobals
 from pirates.pirate.CannonCamera import CannonCamera

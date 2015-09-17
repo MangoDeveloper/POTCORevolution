@@ -103,7 +103,7 @@ class InventoryPlunderPanel(DirectFrame):
                 skull.setX(i * 0.050000000000000003)
                 if i >= self.rating:
                     skull.setColor(0, 0, 0, 0.25)
-                    continue
+                    
             
             rating.flattenStrong()
         self.setupPlunder(self.plunderList)
@@ -137,7 +137,7 @@ class InventoryPlunderPanel(DirectFrame):
         for cell in self.grid.cellList:
             if cell.inventoryItem:
                 numItems += 1
-                continue
+                
             if not cell.isHidden():
                 cell.hide()
                 if self.itemsToTake:

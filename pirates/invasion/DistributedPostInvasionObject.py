@@ -2,14 +2,12 @@
 
 from pandac.PandaModules import *
 from direct.distributed import DistributedObject
-from direct.distributed.GridChild import GridChild
 
-class DistributedPostInvasionObject(DistributedObject.DistributedObject, GridChild):
+class DistributedPostInvasionObject(DistributedObject.DistributedObject):
     notify = directNotify.newCategory('DistributedWreckedGovernorsMansion')
     
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
-        GridChild.__init__(self)
         self.postInvasionObjs = []
         self.onFire = False
 
@@ -31,7 +29,6 @@ class DistributedPostInvasionObject(DistributedObject.DistributedObject, GridChi
     
     def delete(self):
         DistributedObject.DistributedObject.delete(self)
-        GridChild.__init__(self)
 
     
     def setOnFire(self, onFire):

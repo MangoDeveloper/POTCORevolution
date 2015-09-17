@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: P (Python 2.4)
 
 from direct.interval.IntervalGlobal import Sequence, Func
 from direct.showbase.ShowBaseGlobal import *
@@ -76,13 +76,10 @@ class PotionGame(DirectObject.DirectObject):
         for recipeData in PotionRecipeData.PotionRecipeList:
             valid = True
             if recipeData.get('disabled', False):
-                continue
-            
-            for ingredient in recipeData['ingredients']:
-                if ingredient['color'] not in PotionRecipeData.PotionColorSets[self.dist.colorSet]:
-                    valid = False
-                    continue
-            
+                for ingredient in recipeData['ingredients']:
+                    if ingredient['color'] not in PotionRecipeData.PotionColorSets[self.dist.colorSet]:
+                        valid = False
+
             newRecipe = PotionRecipe(self, recipeData['potionID'], recipeData['name'], recipeData['desc'], recipeData['ingredients'], recipeData['level'], recipeData['free'], recipeData.get('questOnly', False))
             if valid:
                 newRecipe.available = True
@@ -367,7 +364,7 @@ class PotionGame(DirectObject.DirectObject):
                     for ingredient in self.currentRecipe.ingredients:
                         if ingredient.completed == False and piece.colorIndex == ingredient.colorIndex and piece.level == ingredient.level:
                             return True
-                            continue
+                            
                     
             
         
@@ -405,14 +402,14 @@ class PotionGame(DirectObject.DirectObject):
                                 for testingredient in self.currentRecipe.ingredients:
                                     if testingredient.completed == False:
                                         self.currentRecipe.complete = False
-                                        continue
+                                        
                                 
                                 piece.wrtReparentTo(self.currentRecipe)
                                 piece.setY(-5)
                                 print 'adding animation for completed ingredient'
                                 self.animationList.append(Sequence(piece.moveToBoardVerySlow(ingredient.column, ingredient.row), Func(ingredient.updateDisplay), Func(piece.removeNode), Func(self.gameBoard.kill, piece)))
                                 self.postAnimationList.append(self.showIngredientXP(ingredient))
-                                continue
+                                
                         
                 
             

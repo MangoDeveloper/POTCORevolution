@@ -365,7 +365,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                         moveIval.loop()
                         propAv.moveIval = moveIval
                         return None
-                        continue
+                        
                 
         
 
@@ -416,7 +416,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
             value = objData.get(field)
             if value:
                 footprint.setTag(field, objData[field])
-                continue
+                
         
         return footprint
 
@@ -477,7 +477,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                     higher = lodnode.find(higherName + ';+i')
                     if not higher.isEmpty():
                         sgr.applyAttribs(higher.node(), sgr.TTCullFace)
-                        continue
+                        
                 
         
         objNode.flattenStrong()
@@ -661,7 +661,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                 animRateRange = WorldGlobals.ObjectAnimRates.get(animName)
                 if animRateRange == None:
                     animRateRange = WorldGlobals.ObjectAnimRates.get('Default')
-                    continue
+                    
             
             if bAnimatedTree:
                 self.makeAnimatedTree(obj, trunkName, leafName)
@@ -768,7 +768,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
             effect = base.localAvatar.node().getEffect(PolylightEffect.getClassType())
             if effect.hasLight(light):
                 base.localAvatar.node().setEffect(effect.removeLight(light))
-                continue
+                
         
         for disc in self.discs:
             disc.removeNode()
@@ -916,7 +916,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                             door = geomRoot.find('door_%s_%d;+s' % (doorStr, i + 1))
                         if not door.isEmpty():
                             doorList[doorStr].append(door)
-                            continue
+                            
                     
                 
                 lod = geomRoot.find('+LODNode')
@@ -1296,7 +1296,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
         modelDef.root.node().setPreserveTransform(True)
         switchRoot = modelDef.root.attachNewNode(SwitchNode('Switch Prop'))
         switchRoot.setTag('Switch Class', objData['Switch Class'])
-        continue
+        
         subDefs = [ (key, self.makeModelDef(loader.loadModel(visualData['Model']))) for (key, visualData) in objData['Visual'].iteritems() ]
         subDefs.sort()
         for (key, subDef) in subDefs:
@@ -1306,7 +1306,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                 x += 1
             subDef.root.reparentTo(switchRoot)
         
-        continue
+        
         return (_[1], [ subDef[1] for subDef in subDefs ])
 
     
@@ -1554,7 +1554,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
         for holidayId in HolidayGlobals.getAllHolidayIds():
             if base.cr.newsManager and base.cr.newsManager.getHoliday(holidayId):
                 self.unstashHolidayObjects(HolidayGlobals.getHolidayName(holidayId))
-                continue
+                
             self.stashHolidayObjects(HolidayGlobals.getHolidayName(holidayId))
         
 
@@ -1610,7 +1610,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                 collision.node().setIntoCollideMask(collision.node().getIntoCollideMask() | PiratesGlobals.TargetBitmask)
                 collision.setTag('objType', str(PiratesGlobals.COLL_LAND))
                 collision.setTag('groundId', str(self.master.doId))
-                continue
+                
         
 
     
@@ -1621,7 +1621,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                 light = attrib.getLight(i).asNode()
                 if light.getClassType() != AmbientLight.getClassType():
                     self.staticGridRoot.setLightOff(NodePath(light), 10)
-                    continue
+                    
             
         
 
@@ -1648,7 +1648,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
             propertyValue = dataDict.get(propertyName)
             if propertyValue:
                 node.setTag(propertyName, propertyValue)
-                continue
+                
         
         return node
 
@@ -1694,7 +1694,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
     
     def getMinimapCapturePointNodes(self, holidayName):
         nodes = self.areaGeometry.findAllMatches('MinimapCapturePointNode;+s')
-        continue
+        
         nodes = _[1]
         return nodes
 

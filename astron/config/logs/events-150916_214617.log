@@ -1,0 +1,27 @@
+{"_time": "2015-09-16 21:46:17Eastern Daylight Time", "type": "log-opened", "sender": "EventLogger", "msg": "Log opened upon Event Logger startup."}
+{"_time": "2015-09-16 21:47:05Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000000", "remote_address": "127.0.0.1:1975", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 21:47:37Eastern Daylight Time", "type": "client-ejected-security", "sender": "Client:1000000000", "reason_code": "117", "reason_msg": "Client tried to send update to nonexistent object 4674"}
+{"_time": "2015-09-16 21:50:04Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000001", "remote_address": "127.0.0.1:1986", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 21:51:03Eastern Daylight Time", "type": "client-disconnected", "sender": "Client:1000000001"}
+{"_time": "2015-09-16 21:51:50Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000002", "remote_address": "127.0.0.1:2020", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 21:51:59Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000002"}
+{"_time": "2015-09-16 21:53:24Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000003", "remote_address": "127.0.0.1:2030", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 21:53:30Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000003"}
+{"_time": "2015-09-16 21:54:50Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000004", "remote_address": "127.0.0.1:2034", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 21:55:00Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000004"}
+{"_time": "2015-09-16 21:58:11Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000005", "remote_address": "127.0.0.1:2041", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 21:58:17Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000005"}
+{"_time": "2015-09-16 22:01:04Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000006", "remote_address": "127.0.0.1:2045", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 22:01:10Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000006"}
+{"_time": "2015-09-16 22:02:09Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000007", "remote_address": "127.0.0.1:2074", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 22:02:38Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000007"}
+{"_time": "2015-09-16 22:03:43Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000008", "remote_address": "127.0.0.1:2095", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 22:03:54Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000008"}
+{"_time": "2015-09-16 22:06:18Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000009", "remote_address": "127.0.0.1:2166", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 22:06:27Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000009"}
+{"_time": "2015-09-16 22:08:35Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000010", "remote_address": "127.0.0.1:2227", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 22:09:14Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000010"}
+{"_time": "2015-09-16 22:10:26Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000011", "remote_address": "127.0.0.1:2259", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 22:11:11Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000011"}
+{"_time": "2015-09-16 22:12:34Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000012", "remote_address": "127.0.0.1:2274", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 22:13:04Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000012"}

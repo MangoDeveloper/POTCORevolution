@@ -1,6 +1,5 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
-from direct.distributed.GridChild import GridChild
 from RepairBracingGame import RepairBracingGame
 from RepairCareeningGame import RepairCareeningGame
 from RepairHammeringGame import RepairHammeringGame
@@ -15,10 +14,9 @@ ON_LAND = 1
 DIFFICULTY_MAX = 9
 GAME_ORDER = ((RepairPumpingGame, RepairSawingGame, RepairBracingGame, RepairHammeringGame, RepairPitchingGame), (RepairCareeningGame, RepairSawingGame, RepairBracingGame, RepairHammeringGame, RepairPitchingGame))
 
-class DistributedRepairGameBase(GridChild):
+class DistributedRepairGameBase:
     
     def __init__(self, location = 0):
-        GridChild.__init__(self)
         self.location = location
 
     

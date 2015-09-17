@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: H (Python 2.4)
 
 from direct.directnotify import DirectNotifyGlobal
 from pirates.pirate.BipedAnimationMixer import BipedAnimationMixer

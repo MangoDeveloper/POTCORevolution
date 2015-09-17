@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from direct.showbase.DirectObject import DirectObject
 from pirates.quest.DialogTree import *

@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 7
 from direct.interval.IntervalGlobal import *
@@ -154,9 +154,5 @@ class DistributedPotionGame(DistributedObject):
         repAmt = inv.getAccumulator(InventoryType.PotionsRep)
         repLvl = ReputationGlobals.getLevelFromTotalReputation(InventoryType.PotionsRep, repAmt)
         return repLvl[0]
-
-    
-    def handleArrivedOnShip(self, ship):
-        pass
 
 

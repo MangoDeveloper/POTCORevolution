@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: R (Python 2.4)
 
 from pandac.PandaModules import Vec4, TextNode
 from direct.gui.DirectGui import DirectLabel, DGG

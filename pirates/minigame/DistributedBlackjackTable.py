@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
@@ -71,14 +71,14 @@ class DistributedBlackjackTable(DistributedGameTable.DistributedGameTable):
             total_hands = len(handArray)
             if total_hands <= 1:
                 hands = hands + handArray
-                continue
+                
             for j in range(total_hands):
                 k = total_hands - j - 1
                 if k == 0 or len(handArray[k]) >= 2:
                     hands = hands + [
                         handArray[k]]
                     break
-                    continue
+                    
             
         
         return hands
@@ -388,7 +388,7 @@ class DistributedBlackjackTable(DistributedGameTable.DistributedGameTable):
                 if k == 0 or len(handArray[k]) >= 2:
                     current_hand_index = k
                     break
-                    continue
+                    
             
         
         return current_hand_index

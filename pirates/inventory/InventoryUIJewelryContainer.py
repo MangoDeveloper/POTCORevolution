@@ -53,7 +53,7 @@ class InventoryUIJewelryContainer(InventoryUISlotContainer.InventoryUISlotContai
             if item[0] in (InventoryType.ItemTypeJewelry, InventoryType.ItemTypeTattoo):
                 self.overflowInfo.show()
                 return None
-                continue
+                
         
 
 

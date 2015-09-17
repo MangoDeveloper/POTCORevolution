@@ -175,7 +175,7 @@ class AccessoriesStoreCartList(DirectScrolledFrame):
                 
                 self.parent.updateBalance()
                 return None
-                continue
+                
         
 
     
@@ -212,7 +212,7 @@ class AccessoriesStoreCartList(DirectScrolledFrame):
         for panel in self.panels:
             if panel.data[0] == itemId:
                 counter += panel.data[1]
-                continue
+                
         
         return counter
 
@@ -402,7 +402,7 @@ class AccessoriesStoreGUI(DirectFrame):
         for item in self.buttons:
             if item.selectedColor:
                 item.selectedColor[1] = None
-                continue
+                
         
 
     
@@ -457,7 +457,7 @@ class AccessoriesStoreGUI(DirectFrame):
                         self.clothHumans[idx].style.setHatColor(hatColor)
                         self.clothHumans[idx].model.handleClothesHiding()
                         self.clothHumans[idx].model.handleHeadHiding()
-                        continue
+                        
                 
             
             self.pirate.style.setClothesTopColor(topColors[0], topColors[1], topColors[2])
@@ -507,7 +507,7 @@ class AccessoriesStoreGUI(DirectFrame):
                 colorButton['state'] = DGG.DISABLED
                 colorButton['image_color'] = Vec4(0.5, 0.5, 0.5, 0.5)
                 colorFrame.setColorScale(0.5, 0.5, 0.5, 0.5)
-                continue
+                
         
         self.colorFrame.show()
         self.colorSelectArgs = [
@@ -549,7 +549,7 @@ class AccessoriesStoreGUI(DirectFrame):
         for id in range(len(self.clothRenders)):
             if self.displayRegionStates[id]:
                 self.clothRenders[id].show()
-                continue
+                
         
 
     
@@ -782,7 +782,7 @@ class AccessoriesStoreGUI(DirectFrame):
                 modelId,
                 texId]:
                 self.equipRequests[type] = None
-                continue
+                
         
         self.purchaseInventory.removeAllPanels()
         self.sellInventory.removeAllPanels()
@@ -856,16 +856,14 @@ class AccessoriesStoreGUI(DirectFrame):
             id = ClothingGlobals.CLOTHING_NUMBER[item]
             if self.shopId == PiratesGlobals.PRIVATEER_HATS and id != ClothingGlobals.HAT:
                 continue
-            
+
             if self.shopId == PiratesGlobals.PRIVATEER_COATS and id != ClothingGlobals.COAT:
                 continue
-            
+
             if not self.isPageAdded(id):
                 self.addTab(id)
                 continue
-        
 
-    
     def addTab(self, id):
         newTab = self.tabBar.addTab(id, command = self.setPage, extraArgs = [
             id,
@@ -1000,7 +998,7 @@ class AccessoriesStoreGUI(DirectFrame):
                     if locationId in (Locations.INVALID_LOCATION, Locations.NON_LOCATION):
                         base.localAvatar.guiMgr.createWarning(PLocalizer.InventoryFullWarning, PiratesGuiGlobals.TextFG6)
                         return None
-                        continue
+                        
                 
                 if colorId == None or colorId == 0:
                     if button.selectedColor and len(button.selectedColor):
@@ -1023,7 +1021,7 @@ class AccessoriesStoreGUI(DirectFrame):
                     dataId = item.data[5]
                     if itemId == dataId:
                         itemCount += 1
-                        continue
+                        
                 
                 if inventory.getItemQuantity(InventoryType.ItemTypeClothing, itemId) < itemCount:
                     base.localAvatar.guiMgr.createWarning(PLocalizer.DoNotOwnEnoughWarning, PiratesGuiGlobals.TextFG6)
@@ -1053,7 +1051,7 @@ class AccessoriesStoreGUI(DirectFrame):
                 
                 item.addToCart.buyState = 1
                 return None
-                continue
+                
         
 
     
@@ -1176,7 +1174,7 @@ class AccessoriesStoreGUI(DirectFrame):
             if button != accessory[0]:
                 button.equippedText.hide()
                 button.addToCart['state'] = DGG.NORMAL
-                continue
+                
         
         if accessory[0].equippedText.isHidden():
             accessory[0].equippedText.show()
@@ -1225,7 +1223,7 @@ class AccessoriesStoreGUI(DirectFrame):
     
     def setPage(self, pageName, startIndex = 0, refreshWardrobe = True):
         self.tabBar.unstash()
-        self.titleLabel['text'] = '\x1smallCaps\x1' + self.rootTitle + ' - ' + self.categoryText[pageName][1] + '\x2'
+        self.titleLabel['text'] = '\x01smallCaps\x01' + self.rootTitle + ' - ' + self.categoryText[pageName][1] + '\x02'
         if localAvatar.style.getGender() == 'm':
             GENDER = 'MALE'
         else:
@@ -1358,7 +1356,7 @@ class AccessoriesStoreGUI(DirectFrame):
                                 0])
                         
                     holiday in AccessoriesStoreGUI.holidayIdList
-                    continue
+                    
             
         elif self.mode == SELLING:
             if self.currentWardrobe:

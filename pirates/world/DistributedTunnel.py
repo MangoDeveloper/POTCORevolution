@@ -114,7 +114,7 @@ class DistributedTunnel(DistributedNode, StagedObject):
 
     
     def calcAmbientNames(self):
-        continue
+        
         self.ambientNames = [ self.calcOneAmbientName(self._links[index][self.L_AREA_NODE]) for index in (0, 1) ]
 
     
@@ -146,14 +146,14 @@ class DistributedTunnel(DistributedNode, StagedObject):
         for ambientName in self.ambientNames:
             if ambientName:
                 base.ambientMgr.requestFadeOut(ambientName)
-                continue
+                
         
 
     
     def setupConnectorNodes(self):
-        continue
+        
         locatorNodes = [ self.find('**/' + locator) for locator in self.connectorNodes ]
-        continue
+        
         self.connectorNodePosHpr = [ [
             self.getPos(node),
             self.getHpr(node)] for node in locatorNodes ]
@@ -202,8 +202,8 @@ class DistributedTunnel(DistributedNode, StagedObject):
         localAvatar.detachNode()
         (self.currTransParent, self.currTransZone) = self.getLocation()
         
-        def continueTransition():
-            self.acceptOnce('activeTunnel-%s-complete' % self.getDoId(), continueTransition)
+        def Transition():
+            self.acceptOnce('activeTunnel-%s-complete' % self.getDoId(), Transition)
             currParentObj = self.cr.doId2do.get(self.currTransParent)
             if currParentObj:
                 (self.currTransParent, self.currTransZone) = currParentObj.getLocation()
@@ -215,7 +215,7 @@ class DistributedTunnel(DistributedNode, StagedObject):
                 localAvatar.refreshActiveQuestStep(forceClear = True)
                 localAvatar.lastConnectorId = self.doId
 
-        self.acceptOnce('activeTunnel-%s-complete' % self.getDoId(), continueTransition)
+        self.acceptOnce('activeTunnel-%s-complete' % self.getDoId(), Transition)
         self.ownHandles.append(self.cr.addTaggedInterest(self.currTransParent, self.currTransZone, self.cr.ITAG_GAME, 'activeTunnel-%s' % self.getDoId(), event = 'activeTunnel-%s-complete' % self.getDoId()))
 
     transitionToArea = report(types = [
@@ -297,7 +297,7 @@ class DistributedTunnel(DistributedNode, StagedObject):
         for x in (0, 1):
             if areaUid == self._links[x][self.L_AREA_UID]:
                 return x
-                continue
+                
         
 
     
@@ -318,7 +318,7 @@ class DistributedTunnel(DistributedNode, StagedObject):
         for link in self._links.itervalues():
             if areaUid == link[self.L_AREA_UID]:
                 return link[self.L_AREA_NODE]
-                continue
+                
         
 
     

@@ -35,13 +35,13 @@ class GuildInvitee(DirectFrame):
             self.guildName = PLocalizer.GuildDefaultName % self.guildId
         else:
             self.guildName = guildName
-        nameArray = ('\x1CPOrangeHEAD\x1' + self.avName + '\x2', '\x1CPOrangeHEAD\x1' + self.avName + '\x2', '\x1CPOrangeOVER\x1' + self.avName + '\x2', '\x1CPOrangeHEAD\x1' + self.avName + '\x2')
+        nameArray = ('\x01CPOrangeHEAD\x01' + self.avName + '\x02', '\x01CPOrangeHEAD\x01' + self.avName + '\x02', '\x01CPOrangeOVER\x01' + self.avName + '\x02', '\x01CPOrangeHEAD\x01' + self.avName + '\x02')
         nameButton = DirectButton(parent = NodePath(), relief = None, text = nameArray, text_align = TextNode.ALeft, text_shadow = PiratesGuiGlobals.TextShadow, textMayChange = 0, command = self.handleAvatarPress, extraArgs = [
             avId,
             avName])
         (left, right, bottom, top) = nameButton.getBounds()
         nameGFX = TextGraphic(nameButton, left, right, 0, 1)
-        buttonName = '\x5' + self.avName + '\x5'
+        buttonName = '\x05' + self.avName + '\x05'
         buttonText = PLocalizer.CrewInviteeInvitation % buttonName
         tpMgr = TextPropertiesManager.getGlobalPtr()
         tpMgr.setGraphic(self.avName, nameGFX)

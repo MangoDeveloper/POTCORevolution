@@ -2,16 +2,52 @@
 
 from pandac.PandaModules import *
 import string
+import time
+import os
+import sys
 from direct.showbase.MessengerGlobal import *
 from direct.showbase.DirectObject import DirectObject
 from direct.showbase.EventManagerGlobal import *
 from direct.task.TaskManagerGlobal import *
 from direct.task.Task import Task
 
+class LogAndOutput:
+    def __init__(self, orig, log):
+        self.orig = orig
+        self.log = log
+
+    def write(self, str):
+        self.log.write(str)
+        self.log.flush()
+        self.orig.write(str)
+        self.orig.flush()
+
+    def flush(self):
+        self.log.flush()
+        self.orig.flush()
+
 class DummyLauncherBase:
     
     def __init__(self):
-        self.logPrefix = ''
+        self.logPrefix = 'pirates-'
+
+        ltime = 1 and time.localtime()
+        logSuffix = '%02d%02d%02d_%02d%02d%02d' % (ltime[0] - 2000,  ltime[1], ltime[2],
+                                                   ltime[3], ltime[4], ltime[5])
+
+        
+        if not os.path.exists('logs/'):
+            os.mkdir('logs/')
+            self.notify.info('Made new directory to save logs.')
+        
+        logfile = os.path.join('logs', self.logPrefix + logSuffix + '.log')
+
+        log = open(logfile, 'a')
+        logOut = LogAndOutput(sys.stdout, log)
+        logErr = LogAndOutput(sys.stderr, log)
+        sys.stdout = logOut
+        sys.stderr = logErr
+
         self._downloadComplete = False
         self.phaseComplete = { }
         for phase in self.LauncherPhases:

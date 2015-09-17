@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from pandac.PandaModules import *
 DICE_FACE_1 = Vec3(90, 0, 90)

@@ -6,7 +6,6 @@ from direct.distributed import DistributedObject
 from direct.interval.IntervalGlobal import *
 from direct.task import Task
 from direct.gui.DirectGui import *
-from direct.distributed.GridChild import GridChild
 from pirates.audio import SoundGlobals
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import EmoteGlobals
@@ -23,12 +22,11 @@ from pirates.effects.PooledEffect import PooledEffect
 import copy
 import random
 
-class DistributedInvasionObject(DistributedObject.DistributedObject, GridChild):
+class DistributedInvasionObject(DistributedObject.DistributedObject):
     notify = directNotify.newCategory('DistributedInvasionObject')
     
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
-        GridChild.__init__(self)
         self.currentPhase = -1
         self.canPlaySfx = False
         self.capturePointNodes = None
@@ -138,7 +136,6 @@ class DistributedInvasionObject(DistributedObject.DistributedObject, GridChild):
         self.cleanup()
         self.holidayId = None
         self.holidayName = None
-        GridChild.delete(self)
         DistributedObject.DistributedObject.delete(self)
 
     

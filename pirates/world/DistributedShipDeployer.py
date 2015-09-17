@@ -1,21 +1,21 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 import math
 from pandac.PandaModules import *
 from direct.distributed.DistributedNode import DistributedNode
-from direct.distributed.GridChild import GridChild
+from direct.directnotify.DirectNotifyGlobal import directNotify
 from direct.showbase.PythonUtil import report
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import PLocalizer
 from pirates.piratesgui import PiratesGuiGlobals
 from pirates.piratesgui import MessageGlobals
 
-class DistributedShipDeployer(DistributedNode, GridChild):
-    
+class DistributedShipDeployer(DistributedNode):
+    notify = directNotify.newCategory('DistributedShipDeployer')
+
     def __init__(self, cr):
         DistributedNode.__init__(self, cr)
         NodePath.__init__(self, 'ShipDeployer')
-        GridChild.__init__(self)
         self.minRadius = 0
         self.spacing = 0
         self.maxRadius = 0
@@ -71,10 +71,9 @@ class DistributedShipDeployer(DistributedNode, GridChild):
     
     def delete(self):
         DistributedNode.delete(self)
-        GridChild.delete(self)
 
     
-    def unlockMessages(self, data = None):
+    def unlockMessages(self):
         if self.lockedMessage:
             localAvatar.guiMgr.unlockInstructionMessage(self)
         
@@ -201,15 +200,15 @@ class DistributedShipDeployer(DistributedNode, GridChild):
         self.d_shipEnteredSphere(shipId, sphereId)
         for sphere in self.deploySpheres:
             sphere.stash()
-        
-        padding = 3
-        numSpheres = len(self.deploySpheres)
-        for sphere in lambda [outmost-iterable]: for s in [outmost-iterable]:
-s % numSpheres(xrange(sphereId - padding, sphereId + padding + 1)):
-            self.deploySpheres[sphere].unstash()
-        
 
-    
+        notify.warning("line 206 - 219: #TODO#")
+#        padding = 3
+#        numSpheres = len(self.deploySpheres)
+#        for sphere in lambda [outmost-iterable]: for s in [outmost-iterable]:
+#s % numSpheres(xrange(sphereId - padding, sphereId + padding + 1)):
+#            self.deploySpheres[sphere].unstash()
+#        
+
     def handleShipCollideExit(self, colEntry):
         shipId = colEntry.getFromNodePath().getNetTag('shipId')
         shipId = int(shipId)
@@ -301,4 +300,3 @@ s % numSpheres(xrange(sphereId - padding, sphereId + padding + 1)):
     enableDeploySpheres = report(types = [
         'frameCount',
         'args'], dConfigParam = 'shipboard')(enableDeploySpheres)
-

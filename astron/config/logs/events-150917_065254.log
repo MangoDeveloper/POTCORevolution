@@ -1,0 +1,21 @@
+{"_time": "2015-09-17 06:52:54Eastern Daylight Time", "type": "log-opened", "sender": "EventLogger", "msg": "Log opened upon Event Logger startup."}
+{"_time": "2015-09-17 06:53:43Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000000", "remote_address": "127.0.0.1:3792", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 06:55:48Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000000"}
+{"_time": "2015-09-17 06:56:35Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000001", "remote_address": "127.0.0.1:3798", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 06:58:17Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000001"}
+{"_time": "2015-09-17 06:59:42Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000002", "remote_address": "127.0.0.1:3803", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 07:00:57Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000002"}
+{"_time": "2015-09-17 07:01:44Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000003", "remote_address": "127.0.0.1:3808", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 07:01:58Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000003"}
+{"_time": "2015-09-17 07:03:33Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000004", "remote_address": "127.0.0.1:3812", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 07:03:50Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000004"}
+{"_time": "2015-09-17 07:04:46Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000005", "remote_address": "127.0.0.1:3816", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 07:04:59Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000005"}
+{"_time": "2015-09-17 07:06:18Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000006", "remote_address": "127.0.0.1:3820", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 07:06:41Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000006"}
+{"_time": "2015-09-17 07:09:26Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000007", "remote_address": "127.0.0.1:3834", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 07:09:47Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000007"}
+{"_time": "2015-09-17 07:10:33Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000008", "remote_address": "127.0.0.1:3843", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 07:11:09Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000008"}
+{"_time": "2015-09-17 07:12:28Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000009", "remote_address": "127.0.0.1:3847", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-17 07:12:51Eastern Daylight Time", "type": "client-lost", "sender": "Client:1000000009"}

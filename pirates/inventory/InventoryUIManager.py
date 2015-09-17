@@ -426,7 +426,7 @@ class InventoryUIManager(DirectFrame):
                 newSlot = self.findOpenSlotForItemType(misplacedItemType, runningList)
                 if newSlot:
                     localAvatar.getInventory().swapItems(slot, newSlot)
-                    continue
+                    
             
         
 
@@ -443,7 +443,7 @@ class InventoryUIManager(DirectFrame):
                     if self.slotToCellMap.has_key(slotIndex) and self.slotToCellMap[slotIndex] != None and self.slotToCellMap[slotIndex].inventoryItem == None and slotIndex not in runningList:
                         runningList.append(slotIndex)
                         return slotIndex
-                        continue
+                        
                 
             
         
@@ -901,7 +901,7 @@ class InventoryUIManager(DirectFrame):
                 if locationId in (Locations.INVALID_LOCATION, Locations.NON_LOCATION):
                     base.localAvatar.guiMgr.createWarning(PLocalizer.InventoryFullWarning, PiratesGuiGlobals.TextFG6)
                     return False
-                    continue
+                    
             
         
         item = cell.container.grabCellItem(cell)
@@ -993,7 +993,7 @@ class InventoryUIManager(DirectFrame):
                     info = (category, id, extraArg)
                     items.append(info)
                     cells[cell] = info
-                    continue
+                    
             
         
         if items:
@@ -1023,7 +1023,7 @@ class InventoryUIManager(DirectFrame):
                 for cell in cells:
                     if cells[cell] in givingItems:
                         cell.hide()
-                        continue
+                        
                 
                 base.localAvatar.guiMgr.createWarning(PLocalizer.PlunderItemsLeftWarning, PiratesGuiGlobals.TextFG6)
             else:
@@ -1047,17 +1047,17 @@ class InventoryUIManager(DirectFrame):
                     weapons.append([
                         ItemGlobals.getGoldCost(item[0]),
                         item])
-                    continue
+                    
                 if item[0] == InventoryType.ItemTypeClothing:
                     clothes.append([
                         ItemGlobals.getGoldCost(item[0]),
                         item])
-                    continue
+                    
                 if item[0] == InventoryType.ItemTypeConsumable:
                     consumables.append([
                         ItemGlobals.getGoldCost(item[0]),
                         item])
-                    continue
+                    
                 givingItems.append(item)
             
             weapons.sort()
@@ -1075,7 +1075,7 @@ class InventoryUIManager(DirectFrame):
             for locationId in locationIds:
                 if locationId in (Locations.INVALID_LOCATION, Locations.NON_LOCATION):
                     invalidLocations += 1
-                    continue
+                    
             
             for i in range(0, invalidLocations):
                 extraItems.append(weapons[i][1])
@@ -1096,7 +1096,7 @@ class InventoryUIManager(DirectFrame):
             for locationId in locationIds:
                 if locationId in (Locations.INVALID_LOCATION, Locations.NON_LOCATION):
                     invalidLocations += 1
-                    continue
+                    
             
             for i in range(0, invalidLocations):
                 extraItems.append(clothes[i][1])
@@ -1117,7 +1117,7 @@ class InventoryUIManager(DirectFrame):
             for locationId in locationIds:
                 if locationId in (Locations.INVALID_LOCATION, Locations.NON_LOCATION):
                     invalidLocations += 1
-                    continue
+                    
             
             for i in range(0, invalidLocations):
                 extraItems.append(consumables[i][1])

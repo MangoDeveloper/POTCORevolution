@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: S (Python 2.4)
 
 from direct.gui.DirectGui import *
 from direct.interval.IntervalGlobal import *
@@ -22,7 +22,7 @@ class ShardPanel(DirectFrame):
         self.shards = { }
         optiondefs = (('image', gui.find('**/drawer'), None), ('image_scale', 0.32000000000000001, None), ('pos', ShardPanel.UPPOS, None), ('uppos', ShardPanel.UPPOS, None), ('downpos', ShardPanel.DOWNPOS, None), ('showtime', ShardPanel.SHOWTIME, None), ('shardSelected', self.shardSelected, None), ('inverted', False, None), ('buttonFont', PiratesGlobals.getPirateFont(), None), ('preferredShard', 0, self.setPreferredShard))
         self.defineoptions(kw, optiondefs)
-        DirectFrame.__init__(self, parent, **None)
+        DirectFrame.__init__(self, parent, **kw)
         self.initialiseoptions(ShardPanel)
         bounds = self.getBounds()
         self['frameSize'] = Vec4(bounds[0], bounds[1], bounds[2], bounds[3]) * 1.25
@@ -128,7 +128,7 @@ class ShardPanel(DirectFrame):
     def getShowIval(self):
         if self.showIval and 1:
             pass
-        1
+        
         self.showIval = Sequence(Func(self.cancelIval, 'hide'), Func(self.toggleUpState, 0), Parallel(self.gear.hprInterval(self['showtime'], Vec3(0, 0, -180), blendType = 'easeInOut'), self.posInterval(self['showtime'], self['downpos'], blendType = 'easeInOut')))
         return self.showIval
 
@@ -136,7 +136,7 @@ class ShardPanel(DirectFrame):
     def getHideIval(self):
         if self.hideIval and 1:
             pass
-        1
+        
         self.hideIval = Sequence(Func(self.cancelIval, 'show'), Func(self.toggleUpState, 1), Parallel(self.gear.hprInterval(self['showtime'], Vec3(0, 0, 0), blendType = 'easeInOut'), self.posInterval(self['showtime'], self['uppos'], blendType = 'easeInOut')))
         return self.hideIval
 
@@ -161,8 +161,7 @@ class ShardPanel(DirectFrame):
     def syncShardList(self):
         current = set(self.shards.keys())
         shards = base.cr.listActiveShards()
-        active = set(lambda [outmost-iterable]: for shard in [outmost-iterable]:
-shard[0](shards))
+        active = set(lambda shard: shard for shard in shard[0](shards))
         old = current.difference(active)
         new = active.difference(current)
         for id in old:
@@ -319,9 +318,9 @@ shard[0](shards))
         if hasattr(self, 'currentShardLabel'):
             district = base.cr.doId2do.get(self['preferredShard'])
             if district:
-                self.currentShardLabel['text'] = '\x1gold\x1' + PLocalizer.ShardPreferredWorld + ' :\x2\n%s %s' % (district.getName(), PLocalizer.Ocean)
+                self.currentShardLabel['text'] = '\x01gold\x01' + PLocalizer.ShardPreferredWorld + ' :\x02\n%s %s' % (district.getName(), PLocalizer.Ocean)
             else:
-                self.currentShardLabel['text'] = '\x1gold\x1' + PLocalizer.ShardPreferredWorld + ' :\x2\n%s' % PLocalizer.ShardNone
+                self.currentShardLabel['text'] = '\x01gold\x01' + PLocalizer.ShardPreferredWorld + ' :\x02\n%s' % PLocalizer.ShardNone
         
 
     

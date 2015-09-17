@@ -1,0 +1,18 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  sv-1.0.0
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 61, in <module>
+    from pirates.distributed import PiratesClientRepository
+  File "pirates\distributed\PiratesClientRepository.py", line 17, in <module>
+    from libotp.nametag import NametagGlobals
+ImportError: No module named nametag

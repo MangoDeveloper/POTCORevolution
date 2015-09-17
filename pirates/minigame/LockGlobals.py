@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: L (Python 2.4)
 
 from pirates.piratesbase import PLocalizer
 LSTATE_ACTIVE = 1

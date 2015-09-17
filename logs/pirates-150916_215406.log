@@ -1,0 +1,165 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  sv-1.0.0
+PAccount: accountServer from launcher:  
+PAccount: default accountServer:  https://pirates.go.com
+Initializing quest ladders...
+:MagicWordManager(warning): You risk being banned if you abuse this mate!
+:MagicWordManager(warning): I will have Jack cut you into pieces! (a.k.a. banned forever)
+:DistributedObjectGlobal(warning): ChatManager going online
+:DistributedShipLoader(warning): ShipLoader going online
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+New DO:401000001, dclass:PiratesDistrict
+New DO:401000002, dclass:DistributedPopulationTracker
+getSubTimeList
+ sub was None for 0
+:TaskManager(warning): doMethodLater: added task: waitForNextTODState-39050323 with negative delay: -2999.99541967
+setEnvironment unnamed 8 {}
+getSubTimeList
+ sub was None for 8
+:TaskManager(warning): doMethodLater: added task: waitForNextTODState-39050323 with negative delay: -2999.99541967
+Exception occurred while processing Func-send-10 of fadeTask:
+fadeTask:
+  0.000 fadeTask {
+  0.000   *Func-reparentTo-11
+  0.000   *Func-showThrough-12
+  0.000   LerpColorInterval-12: color to 0 0 0 1 dur 0.5
+  0.500   *Func-send-10
+  0.500 }
+
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\direct\showbase\ShowBase.py", line 1791, in __ivalLoop
+    IntervalManager.ivalMgr.step()
+  File "C:\Panda3D-1.8.1\direct\interval\IntervalManager.py", line 96, in step
+    self.__doPythonCallbacks()
+  File "C:\Panda3D-1.8.1\direct\interval\IntervalManager.py", line 119, in __doPythonCallbacks
+    ival.privPostEvent()
+  File "C:\Panda3D-1.8.1\direct\interval\MetaInterval.py", line 518, in privPostEvent
+    self.__doPythonCallbacks()
+  File "C:\Panda3D-1.8.1\direct\interval\MetaInterval.py", line 494, in __doPythonCallbacks
+    ival.privDoEvent(t, eventType)
+  File "C:\Panda3D-1.8.1\direct\interval\Interval.py", line 207, in privDoEvent
+    self.privInstant()
+  File "C:\Panda3D-1.8.1\direct\interval\FunctionInterval.py", line 88, in privInstant
+    self.function(*self.extraArgs, **self.kw)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "pirates\distributed\PiratesClientRepository.py", line 359, in __handleAvatarChooserDone
+    self.handleAvatarChoice(done, subId, slot)
+  File "pirates\distributed\PiratesClientRepository.py", line 381, in handleAvatarChoice
+    subId])
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.8.1\direct\fsm\State.py", line 204, in enter
+    apply(self.__enterFunc, argList)
+  File "pirates\distributed\PiratesClientRepository.py", line 418, in enterCreateAvatar
+    self.csm.requestEnterMAP()
+  File "pirates\uberdog\ClientServicesManager.py", line 74, in requestEnterMAP
+    base.cr.tutorialObject.enterAct0Tutorial()
+AttributeError: 'NoneType' object has no attribute 'enterAct0Tutorial'
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 610, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 615, in readerPollOnce
+    if self.checkDatagram():
+  File "C:\Panda3D-1.8.1\direct\showbase\ShowBase.py", line 1791, in __ivalLoop
+    IntervalManager.ivalMgr.step()
+  File "C:\Panda3D-1.8.1\direct\interval\IntervalManager.py", line 96, in step
+    self.__doPythonCallbacks()
+  File "C:\Panda3D-1.8.1\direct\interval\IntervalManager.py", line 119, in __doPythonCallbacks
+    ival.privPostEvent()
+  File "C:\Panda3D-1.8.1\direct\interval\MetaInterval.py", line 518, in privPostEvent
+    self.__doPythonCallbacks()
+  File "C:\Panda3D-1.8.1\direct\interval\MetaInterval.py", line 494, in __doPythonCallbacks
+    ival.privDoEvent(t, eventType)
+  File "C:\Panda3D-1.8.1\direct\interval\Interval.py", line 207, in privDoEvent
+    self.privInstant()
+  File "C:\Panda3D-1.8.1\direct\interval\FunctionInterval.py", line 88, in privInstant
+    self.function(*self.extraArgs, **self.kw)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "pirates\distributed\PiratesClientRepository.py", line 359, in __handleAvatarChooserDone
+    self.handleAvatarChoice(done, subId, slot)
+  File "pirates\distributed\PiratesClientRepository.py", line 381, in handleAvatarChoice
+    subId])
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.8.1\direct\fsm\State.py", line 204, in enter
+    apply(self.__enterFunc, argList)
+  File "pirates\distributed\PiratesClientRepository.py", line 418, in enterCreateAvatar
+    self.csm.requestEnterMAP()
+  File "pirates\uberdog\ClientServicesManager.py", line 74, in requestEnterMAP
+    base.cr.tutorialObject.enterAct0Tutorial()
+AttributeError: 'NoneType' object has no attribute 'enterAct0Tutorial'
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 79, in <module>
+    run()
+  File "C:\Panda3D-1.8.1\direct\showbase\ShowBase.py", line 2921, in run
+    self.taskMgr.run()
+  File "C:\Panda3D-1.8.1\direct\task\Task.py", line 502, in run
+    self.step()
+  File "C:\Panda3D-1.8.1\direct\task\Task.py", line 460, in step
+    self.mgr.poll()
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 610, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 615, in readerPollOnce
+    if self.checkDatagram():
+  File "C:\Panda3D-1.8.1\direct\showbase\ShowBase.py", line 1791, in __ivalLoop
+    IntervalManager.ivalMgr.step()
+  File "C:\Panda3D-1.8.1\direct\interval\IntervalManager.py", line 96, in step
+    self.__doPythonCallbacks()
+  File "C:\Panda3D-1.8.1\direct\interval\IntervalManager.py", line 119, in __doPythonCallbacks
+    ival.privPostEvent()
+  File "C:\Panda3D-1.8.1\direct\interval\MetaInterval.py", line 518, in privPostEvent
+    self.__doPythonCallbacks()
+  File "C:\Panda3D-1.8.1\direct\interval\MetaInterval.py", line 494, in __doPythonCallbacks
+    ival.privDoEvent(t, eventType)
+  File "C:\Panda3D-1.8.1\direct\interval\Interval.py", line 207, in privDoEvent
+    self.privInstant()
+  File "C:\Panda3D-1.8.1\direct\interval\FunctionInterval.py", line 88, in privInstant
+    self.function(*self.extraArgs, **self.kw)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "pirates\distributed\PiratesClientRepository.py", line 359, in __handleAvatarChooserDone
+    self.handleAvatarChoice(done, subId, slot)
+  File "pirates\distributed\PiratesClientRepository.py", line 381, in handleAvatarChoice
+    subId])
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.8.1\direct\fsm\State.py", line 204, in enter
+    apply(self.__enterFunc, argList)
+  File "pirates\distributed\PiratesClientRepository.py", line 418, in enterCreateAvatar
+    self.csm.requestEnterMAP()
+  File "pirates\uberdog\ClientServicesManager.py", line 74, in requestEnterMAP
+    base.cr.tutorialObject.enterAct0Tutorial()
+AttributeError: 'NoneType' object has no attribute 'enterAct0Tutorial'

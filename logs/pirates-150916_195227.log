@@ -1,0 +1,142 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  sv-1.0.0
+PAccount: accountServer from launcher:  
+PAccount: default accountServer:  https://pirates.go.com
+Initializing quest ladders...
+:MagicWordManager(warning): You risk being banned if you abuse this mate!
+:MagicWordManager(warning): I will have Jack cut you into pieces! (a.k.a. banned forever)
+:DistributedObjectGlobal(warning): ChatManager going online
+:DistributedShipLoader(warning): ShipLoader going online
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+New DO:401000001, dclass:PiratesDistrict
+New DO:401000002, dclass:DistributedPopulationTracker
+getSubTimeList
+ sub was None for 0
+setEnvironment unnamed 8 {}
+getSubTimeList
+ sub was None for 8
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 61, in eventLoopTask
+    self.doEvents()
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 55, in doEvents
+    processFunc(self.eventQueue.dequeueEvent())
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 122, in processEvent
+    messenger.send(eventName, paramList)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "C:\Panda3D-1.8.1\direct\gui\DirectButton.py", line 103, in commandFunc
+    apply(self['command'], self['extraArgs'])
+  File "pirates\login\AvatarChooser.py", line 1177, in _AvatarChooser__handleOptions
+    self.gameOptions = GameOptions('Game Options', x, y, width, height, base.options, access = subAccess, chooser = self)
+  File "pirates\piratesgui\GameOptions.py", line 3767, in __init__
+    self.gui = GameOptionsGui(self, title, x, y, width, height, options, file_path, pipe, access, chooser, keyMappings)
+  File "pirates\piratesgui\GameOptionsGui.py", line 64, in __init__
+    self.setupUpperFrame()
+  File "pirates\piratesgui\GameOptionsGui.py", line 118, in setupUpperFrame
+    self.defaultButton = GuiButton(parent = parent, text = text, pos = (x, 0, y), command = self.defaultButtonCB)
+  File "pirates\piratesgui\GuiButton.py", line 27, in __init__
+    DirectButton.__init__(self, parent = NodePath(), **kw)
+  File "C:\Panda3D-1.8.1\direct\gui\DirectButton.py", line 49, in __init__
+    DirectFrame.__init__(self, parent)
+  File "C:\Panda3D-1.8.1\direct\gui\DirectFrame.py", line 45, in __init__
+    DirectGuiWidget.__init__(self, parent)
+  File "C:\Panda3D-1.8.1\direct\gui\DirectGuiBase.py", line 756, in __init__
+    apply(self.setPos, pos)
+  File "pirates\piratesgui\GuiButton.py", line 246, in setPos
+    DirectButton.setPos(self, *args, **args)
+TypeError: method_descriptor object argument after ** must be a mapping, not tuple
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 610, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 615, in readerPollOnce
+    if self.checkDatagram():
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 61, in eventLoopTask
+    self.doEvents()
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 55, in doEvents
+    processFunc(self.eventQueue.dequeueEvent())
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 122, in processEvent
+    messenger.send(eventName, paramList)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "C:\Panda3D-1.8.1\direct\gui\DirectButton.py", line 103, in commandFunc
+    apply(self['command'], self['extraArgs'])
+  File "pirates\login\AvatarChooser.py", line 1177, in _AvatarChooser__handleOptions
+    self.gameOptions = GameOptions('Game Options', x, y, width, height, base.options, access = subAccess, chooser = self)
+  File "pirates\piratesgui\GameOptions.py", line 3767, in __init__
+    self.gui = GameOptionsGui(self, title, x, y, width, height, options, file_path, pipe, access, chooser, keyMappings)
+  File "pirates\piratesgui\GameOptionsGui.py", line 64, in __init__
+    self.setupUpperFrame()
+  File "pirates\piratesgui\GameOptionsGui.py", line 118, in setupUpperFrame
+    self.defaultButton = GuiButton(parent = parent, text = text, pos = (x, 0, y), command = self.defaultButtonCB)
+  File "pirates\piratesgui\GuiButton.py", line 27, in __init__
+    DirectButton.__init__(self, parent = NodePath(), **kw)
+  File "C:\Panda3D-1.8.1\direct\gui\DirectButton.py", line 49, in __init__
+    DirectFrame.__init__(self, parent)
+  File "C:\Panda3D-1.8.1\direct\gui\DirectFrame.py", line 45, in __init__
+    DirectGuiWidget.__init__(self, parent)
+  File "C:\Panda3D-1.8.1\direct\gui\DirectGuiBase.py", line 756, in __init__
+    apply(self.setPos, pos)
+  File "pirates\piratesgui\GuiButton.py", line 246, in setPos
+    DirectButton.setPos(self, *args, **args)
+TypeError: method_descriptor object argument after ** must be a mapping, not tuple
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 79, in <module>
+    run()
+  File "C:\Panda3D-1.8.1\direct\showbase\ShowBase.py", line 2921, in run
+    self.taskMgr.run()
+  File "C:\Panda3D-1.8.1\direct\task\Task.py", line 502, in run
+    self.step()
+  File "C:\Panda3D-1.8.1\direct\task\Task.py", line 460, in step
+    self.mgr.poll()
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 610, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 615, in readerPollOnce
+    if self.checkDatagram():
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 61, in eventLoopTask
+    self.doEvents()
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 55, in doEvents
+    processFunc(self.eventQueue.dequeueEvent())
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 122, in processEvent
+    messenger.send(eventName, paramList)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "C:\Panda3D-1.8.1\direct\gui\DirectButton.py", line 103, in commandFunc
+    apply(self['command'], self['extraArgs'])
+  File "pirates\login\AvatarChooser.py", line 1177, in _AvatarChooser__handleOptions
+    self.gameOptions = GameOptions('Game Options', x, y, width, height, base.options, access = subAccess, chooser = self)
+  File "pirates\piratesgui\GameOptions.py", line 3767, in __init__
+    self.gui = GameOptionsGui(self, title, x, y, width, height, options, file_path, pipe, access, chooser, keyMappings)
+  File "pirates\piratesgui\GameOptionsGui.py", line 64, in __init__
+    self.setupUpperFrame()
+  File "pirates\piratesgui\GameOptionsGui.py", line 118, in setupUpperFrame
+    self.defaultButton = GuiButton(parent = parent, text = text, pos = (x, 0, y), command = self.defaultButtonCB)
+  File "pirates\piratesgui\GuiButton.py", line 27, in __init__
+    DirectButton.__init__(self, parent = NodePath(), **kw)
+  File "C:\Panda3D-1.8.1\direct\gui\DirectButton.py", line 49, in __init__
+    DirectFrame.__init__(self, parent)
+  File "C:\Panda3D-1.8.1\direct\gui\DirectFrame.py", line 45, in __init__
+    DirectGuiWidget.__init__(self, parent)
+  File "C:\Panda3D-1.8.1\direct\gui\DirectGuiBase.py", line 756, in __init__
+    apply(self.setPos, pos)
+  File "pirates\piratesgui\GuiButton.py", line 246, in setPos
+    DirectButton.setPos(self, *args, **args)
+TypeError: method_descriptor object argument after ** must be a mapping, not tuple

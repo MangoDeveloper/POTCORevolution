@@ -1,25 +1,23 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from direct.showbase.DirectObject import *
-from direct.distributed.DistributedSmoothNode import DistributedSmoothNode
+from direct.distributed import DistributedSmoothNode
 from direct.task.Task import Task
 from direct.distributed.ClockDelta import *
 from direct.interval.IntervalGlobal import *
-from direct.distributed.GridChild import SmoothGridChild
 import random
 from otp.movement import Mover
 from pirates.demo import DemoGlobals
 from pirates.piratesbase import PiratesGlobals
-from pirates.distributed.DistributedTargetableObject import DistributedTargetableObject
+from pirates.distributed import DistributedTargetableObject
 from pirates.battle import EnemyGlobals
 
-class DistributedMovingObject(DistributedSmoothNode, DistributedTargetableObject, SmoothGridChild):
+class DistributedMovingObject(DistributedSmoothNode.DistributedSmoothNode, DistributedTargetableObject.DistributedTargetableObject):
     notify = directNotify.newCategory('DistributedMovingObject')
     
     def __init__(self, cr):
-        DistributedSmoothNode.__init__(self, cr)
-        DistributedTargetableObject.__init__(self, cr)
-        SmoothGridChild.__init__(self)
+        DistributedSmoothNode.DistributedSmoothNode.__init__(self, cr)
+        DistributedTargetableObject.DistributedTargetableObject.__init__(self, cr)
         self.maxAISpeed = 0
         self.canMove = True
         self.aggroMode = EnemyGlobals.AGGRO_MODE_FORCED
@@ -41,22 +39,22 @@ class DistributedMovingObject(DistributedSmoothNode, DistributedTargetableObject
 
     
     def generate(self):
-        DistributedSmoothNode.generate(self)
-        DistributedTargetableObject.generate(self)
+        DistributedSmoothNode.DistributedSmoothNode.generate(self)
+        DistributedTargetableObject.DistributedTargetableObject.generate(self)
         if base.config.GetBool('create-client-coll-spheres', 0) is 1:
             self.setupDebugCollisions()
         
 
     
     def announceGenerate(self):
-        DistributedSmoothNode.announceGenerate(self)
-        DistributedTargetableObject.announceGenerate(self)
+        DistributedSmoothNode.DistributedSmoothNode.announceGenerate(self)
+        DistributedTargetableObject.DistributedTargetableObject.announceGenerate(self)
 
     
     def disable(self):
         self.stopSmooth()
-        DistributedSmoothNode.disable(self)
-        DistributedTargetableObject.disable(self)
+        DistributedSmoothNode.DistributedSmoothNode.disable(self)
+        DistributedTargetableObject.DistributedTargetableObject.disable(self)
         if base.config.GetBool('create-client-coll-spheres', 0) is 1:
             self.cleanupDebugcollisions()
         
@@ -64,25 +62,16 @@ class DistributedMovingObject(DistributedSmoothNode, DistributedTargetableObject
 
     
     def delete(self):
-        DistributedSmoothNode.delete(self)
-        DistributedTargetableObject.delete(self)
-        SmoothGridChild.delete(self)
+        DistributedSmoothNode.DistributedSmoothNode.delete(self)
+        DistributedTargetableObject.DistributedTargetableObject.delete(self)
 
     
-    def setLocation(self, parentId, zoneId):
-        DistributedSmoothNode.setLocation(self, parentId, zoneId)
+    def setLocation(self, parentId, zoneId, teleport = 0):
+        DistributedSmoothNode.DistributedSmoothNode.setLocation(self, parentId, zoneId, teleport)
 
     
     def wrtReparentTo(self, parent):
-        DistributedSmoothNode.wrtReparentTo(self, parent)
-
-    
-    def transformTelemetry(self, x, y, z, h, p, r, e):
-        return SmoothGridChild.transformTelemetry(self, x, y, z, h, p, r, e)
-
-    
-    def updateCurrentZone(self):
-        return SmoothGridChild.updateCurrentZone(self)
+        DistributedSmoothNode.DistributedSmoothNode.wrtReparentTo(self, parent)
 
     
     def setupDebugCollisions(self):
@@ -172,5 +161,3 @@ class DistributedMovingObject(DistributedSmoothNode, DistributedTargetableObject
     
     def getSkillRank(self, skillId):
         return 0
-
-

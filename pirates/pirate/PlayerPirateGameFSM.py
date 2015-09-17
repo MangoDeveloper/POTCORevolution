@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: P (Python 2.4)
 
 from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *

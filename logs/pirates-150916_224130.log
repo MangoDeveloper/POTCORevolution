@@ -1,0 +1,112 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  sv-1.0.0
+PAccount: accountServer from launcher:  
+PAccount: default accountServer:  https://pirates.go.com
+Initializing quest ladders...
+:MagicWordManager(warning): You risk being banned if you abuse this mate!
+:MagicWordManager(warning): I will have Jack cut you into pieces! (a.k.a. banned forever)
+:DistributedObjectGlobal(warning): ChatManager going online
+:DistributedShipLoader(warning): ShipLoader going online
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+New DO:401000001, dclass:PiratesDistrict
+New DO:401000002, dclass:DistributedPopulationTracker
+getSubTimeList
+ sub was None for 0
+setEnvironment unnamed 8 {}
+getSubTimeList
+ sub was None for 8
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 61, in eventLoopTask
+    self.doEvents()
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 55, in doEvents
+    processFunc(self.eventQueue.dequeueEvent())
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 122, in processEvent
+    messenger.send(eventName, paramList)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "C:\Panda3D-1.8.1\direct\gui\DirectButton.py", line 103, in commandFunc
+    apply(self['command'], self['extraArgs'])
+  File "C:\Panda3D-1.8.1\direct\showbase\PythonUtil.py", line 124, in _do__call__
+    return self._function(*(self._args + args), **_kargs)
+  File "pirates\makeapirate\ClothesGUI.py", line 649, in handleNextClothing
+    clothing = self.getNextClothingItem(type)
+  File "pirates\makeapirate\ClothesGUI.py", line 1138, in getNextClothingItem
+    self.notify.error('rrusso: how did it get here? dataId = %s' % dataId)
+  File "C:\Panda3D-1.8.1\direct\directnotify\Notifier.py", line 132, in error
+    raise exception(errorString)
+StandardError: rrusso: how did it get here? dataId = 26001
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 610, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 615, in readerPollOnce
+    if self.checkDatagram():
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 61, in eventLoopTask
+    self.doEvents()
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 55, in doEvents
+    processFunc(self.eventQueue.dequeueEvent())
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 122, in processEvent
+    messenger.send(eventName, paramList)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "C:\Panda3D-1.8.1\direct\gui\DirectButton.py", line 103, in commandFunc
+    apply(self['command'], self['extraArgs'])
+  File "C:\Panda3D-1.8.1\direct\showbase\PythonUtil.py", line 124, in _do__call__
+    return self._function(*(self._args + args), **_kargs)
+  File "pirates\makeapirate\ClothesGUI.py", line 649, in handleNextClothing
+    clothing = self.getNextClothingItem(type)
+  File "pirates\makeapirate\ClothesGUI.py", line 1138, in getNextClothingItem
+    self.notify.error('rrusso: how did it get here? dataId = %s' % dataId)
+  File "C:\Panda3D-1.8.1\direct\directnotify\Notifier.py", line 132, in error
+    raise exception(errorString)
+StandardError: rrusso: how did it get here? dataId = 26001
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\Tyler\Desktop\POTCOR-src-master\POTCOR-src-master\pirates\piratesbase\PiratesStart.py", line 79, in <module>
+    run()
+  File "C:\Panda3D-1.8.1\direct\showbase\ShowBase.py", line 2921, in run
+    self.taskMgr.run()
+  File "C:\Panda3D-1.8.1\direct\task\Task.py", line 502, in run
+    self.step()
+  File "C:\Panda3D-1.8.1\direct\task\Task.py", line 460, in step
+    self.mgr.poll()
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 610, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 615, in readerPollOnce
+    if self.checkDatagram():
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 61, in eventLoopTask
+    self.doEvents()
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 55, in doEvents
+    processFunc(self.eventQueue.dequeueEvent())
+  File "C:\Panda3D-1.8.1\direct\showbase\EventManager.py", line 122, in processEvent
+    messenger.send(eventName, paramList)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.8.1\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "C:\Panda3D-1.8.1\direct\gui\DirectButton.py", line 103, in commandFunc
+    apply(self['command'], self['extraArgs'])
+  File "C:\Panda3D-1.8.1\direct\showbase\PythonUtil.py", line 124, in _do__call__
+    return self._function(*(self._args + args), **_kargs)
+  File "pirates\makeapirate\ClothesGUI.py", line 649, in handleNextClothing
+    clothing = self.getNextClothingItem(type)
+  File "pirates\makeapirate\ClothesGUI.py", line 1138, in getNextClothingItem
+    self.notify.error('rrusso: how did it get here? dataId = %s' % dataId)
+  File "C:\Panda3D-1.8.1\direct\directnotify\Notifier.py", line 132, in error
+    raise exception(errorString)
+StandardError: rrusso: how did it get here? dataId = 26001

@@ -255,22 +255,13 @@ class OTPBase(ShowBase):
                         self.errorAccumulatorBuffer += 'texture phase is higher than the models (%s, %s)\n' % (path, texPath)
                     
                 texPhase > basePhase
-            
-        
 
-    
     def getRepository(self):
         return self.cr
 
-    
     def openMainWindow(self, *args, **kw):
-        result = ShowBase.openMainWindow(self, *args, **args)
+        result = ShowBase.openMainWindow(self, *args, **kw)
         if result:
-            if not not self.win.getGsg().isHardware():
-                pass
-            self.wantEnviroDR = config.GetBool('want-background-region', 1)
+            self.wantEnviroDR = not self.win.getGsg().isHardware() or config.GetBool('want-background-region', 1)
             self.backgroundDrawable = self.win
-        
         return result
-
-

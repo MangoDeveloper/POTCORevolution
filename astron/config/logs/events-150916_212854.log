@@ -1,0 +1,7 @@
+{"_time": "2015-09-16 21:28:54Eastern Daylight Time", "type": "log-opened", "sender": "EventLogger", "msg": "Log opened upon Event Logger startup."}
+{"_time": "2015-09-16 21:29:35Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000000", "remote_address": "127.0.0.1:1827", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 21:30:31Eastern Daylight Time", "type": "client-disconnected", "sender": "Client:1000000000"}
+{"_time": "2015-09-16 21:34:01Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000001", "remote_address": "127.0.0.1:1911", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 21:35:28Eastern Daylight Time", "type": "client-disconnected", "sender": "Client:1000000001"}
+{"_time": "2015-09-16 21:36:13Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000002", "remote_address": "127.0.0.1:1924", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-16 21:36:28Eastern Daylight Time", "type": "client-ejected-security", "sender": "Client:1000000002", "reason_code": "117", "reason_msg": "Client tried to send update to nonexistent object 4674"}

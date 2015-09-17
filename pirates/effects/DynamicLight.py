@@ -79,9 +79,9 @@ class DynamicLight(NodePath):
         self.type = type
         if isInit:
             if self.modular:
-                NodePath.NodePath.__init__(self, 'modularLight')
+                NodePath.__init__(self, 'modularLight')
             else:
-                NodePath.NodePath.__init__(self, 'dynamicLight')
+                NodePath.__init__(self, 'dynamicLight')
         
         if self.lightNodePath:
             self.lightNodePath.removeNode()

@@ -1,7 +1,8 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 from pirates.quest.QuestIndicatorNode import QuestIndicatorNode
 from direct.showbase.PythonUtil import report, StackTrace
+from pirates.effects.RayOfLight import RayOfLight
 
 class QuestIndicatorNodeDinghy(QuestIndicatorNode):
     

@@ -14,12 +14,7 @@ class MixerType(type):
         super(MixerType, cls).__init__(name, bases, dct)
         cls.sectionNameIds = dict(zip(cls.sectionNames, range(len(cls.sectionNames))))
         if set(cls.partNameLists.keys()) != set(cls.sectionNames):
-            continue
-            cls.partNameLists = cls.sectionNames([](_[1], [ [
-                section] for section in cls.sectionNames ]))
-        
-
-
+            cls.partNameLists = {section: section for section in cls.sectionNames}
 
 class AnimationChannel:
     notify = DirectNotifyGlobal.directNotify.newCategory('AnimationChannel')
@@ -272,7 +267,6 @@ class PartMixer:
     def __init__(self, mixer, channelCount, actor, partNameList):
         self.actor = actor
         self.partNameList = partNameList
-        continue
         self.channels = [ AnimationChannel(x, x in mixer.LOOP.values(), actor, partNameList, self.distributeWeight) for x in range(channelCount) ]
 
     
@@ -354,12 +348,11 @@ class AnimationMixer:
     
     def __init__(self, actor):
         self.actor = actor
-        continue
-        channelCount = [](_[1])
-        continue
-        self.partMixers = self.sectionNames([](_[1], [ PartMixer(self, channelCount, actor, self.getPartsNameList(part)) for part in self.sectionNames ]))
+        channelCount = 0
+        self.partMixers = {}
+        for part in self.sectionNames:
+            self.partMixers[part] = PartMixer(self, channelCount, actor, self.getPartsNameList(part))
         self.ownedIvals = []
-
     
     def __str__(self):
         outStr = '(%s: %s)\n' % (self.__class__.__name__, `self.actor`)
@@ -406,7 +399,6 @@ class AnimationMixer:
 
     
     def addIvalToOwnedList(self, ival):
-        continue
         self.ownedIvals = _[1]
         self.ownedIvals.append(ival)
 

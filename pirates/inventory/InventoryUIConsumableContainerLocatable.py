@@ -105,7 +105,7 @@ class InventoryUIConsumableContainerLocatable(InventoryUISlotContainer.Inventory
             if item[0] in (InventoryType.ItemTypeConsumable,):
                 self.overflowInfo.show()
                 return None
-                continue
+                
         
 
 

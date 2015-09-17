@@ -24,7 +24,7 @@ class GuiButton(DirectButton):
         self.canRepositon = False
         optiondefs = (('relief', None, None), ('pos', (0, 0, 0), None), ('image', GuiButton.genericButton, None), ('image_scale', (0.23999999999999999, 0.22, 0.22), None), ('image_pos', (0, 0, 0), None), ('pressEffect', 0, None), ('text', '', None), ('text_font', PiratesGlobals.getInterfaceFont(), None), ('text_scale', PiratesGuiGlobals.TextScaleLarge, None), ('text0_fg', PiratesGuiGlobals.TextFG2, None), ('text1_fg', PiratesGuiGlobals.TextFG2, None), ('text2_fg', PiratesGuiGlobals.TextFG2, None), ('text3_fg', PiratesGuiGlobals.TextFG3, None), ('text_shadow', PiratesGuiGlobals.TextShadow, None), ('text_pos', (0, -0.01), None), ('text_wordwrap', 8, None), ('text_align', TextNode.ACenter, None), ('textMayChange', 1, None), ('helpText', helpText, self.helpTextUpdated), ('helpPos', helpPos, self.setHelpPos), ('helpDelay', helpDelay, None), ('helpColorOff', helpColorOff, None), ('helpLeftAlign', helpLeftAlign, None), ('helpCenterAlign', helpCenterAlign, None), ('helpBin', 'gui-popup', None), ('helpBinSort', 0, None), ('helpOpaque', 0, None), ('canReposition', False, None), ('sortOrder', 100, None), ('baseImage', None, None), ('selected', False, None), ('selectedImage', GuiButton.genericButton, None), ('state', DGG.NORMAL, self.setState))
         self.defineoptions(kw, optiondefs)
-        DirectButton.__init__(self, parent = NodePath(), **None)
+        DirectButton.__init__(self, parent = NodePath(), **kw)
         self.initialiseoptions(GuiButton)
         self.hotkeys = ()
         self.setupHotkeys(hotkeys, hotkeyLabel, self['command'], self['extraArgs'], hotkeyLabelX, hotkeyArgs)
@@ -202,7 +202,6 @@ class GuiButton(DirectButton):
 
     
     def waitShowDetails(self, event):
-        
         try:
             self['helpDelay']
         except AttributeError:
@@ -243,19 +242,19 @@ class GuiButton(DirectButton):
 
     
     def setPos(self, *args, **kw):
-        DirectButton.setPos(self, *args, **args)
+        DirectButton.setPos(self, *args)
 
     
     def setX(self, *args, **kw):
-        DirectButton.setX(self, *args, **args)
+        DirectButton.setX(self, *args)
 
     
     def setY(self, *args, **kw):
-        DirectButton.setY(self, *args, **args)
+        DirectButton.setY(self, *args)
 
     
     def setZ(self, *args, **kw):
-        DirectButton.setZ(self, *args, **args)
+        DirectButton.setZ(self, *args)
 
     
     def setState(self):

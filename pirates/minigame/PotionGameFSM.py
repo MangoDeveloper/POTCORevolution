@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: P (Python 2.4)
 
 from MinigameFSM import MinigameFSM
 from direct.interval.IntervalGlobal import Sequence, Func, Wait, Parallel

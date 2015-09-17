@@ -1,8 +1,8 @@
 # File: o (Python 2.4)
 
 from pandac.PandaModules import *
-from libotp import WhisperPopup
-from libotp import CFQuicktalker, CFPageButton, CFQuitButton, CFSpeech, CFThought, CFTimeout
+from libotp.WhisperPopup import WhisperPopup
+from libotp.NametagConstants import CFQuicktalker, CFPageButton, CFQuitButton, CFSpeech, CFThought, CFTimeout
 from otp.chat import ChatGarbler
 import string
 from direct.task import Task

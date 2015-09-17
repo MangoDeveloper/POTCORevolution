@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: T (Python 2.4)
 
 from pandac.PandaModules import *
 from direct.gui.DirectGui import *

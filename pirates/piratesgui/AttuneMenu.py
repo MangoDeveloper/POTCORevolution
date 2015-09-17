@@ -44,11 +44,11 @@ class AvatarInfoButton(GuiButton):
             try:
                 avType = self.avatar.getAvatarType()
                 if avType.isA(AvatarTypes.JollyRoger):
-                    name = '%s\x2  %s\x1smallCaps\x1%s%s\x2\x2' % (avatar.getShortName(), color, PLocalizer.Lv, PLocalizer.InvasionLv)
+                    name = '%s\x02  %s\x01smallCaps\x01%s%s\x02\x02' % (avatar.getShortName(), color, PLocalizer.Lv, PLocalizer.InvasionLv)
                 elif self.avatar.isInInvasion():
                     name = '%s' % avatar.getShortName()
                 else:
-                    name = '%s\x2  %s\x1smallCaps\x1%s%s\x2\x2' % (avatar.getShortName(), color, PLocalizer.Lv, avatar.level)
+                    name = '%s\x02  %s\x01smallCaps\x01%s%s\x02\x02' % (avatar.getShortName(), color, PLocalizer.Lv, avatar.level)
             except StandardError:
                 e = None
                 self.notify.error('updateItem(%s, %s)' % (str(avatar), str(e)))

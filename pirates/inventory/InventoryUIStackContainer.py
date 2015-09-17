@@ -65,7 +65,7 @@ class InventoryUIStackContainer(InventoryUIContainer.InventoryUIContainer):
                     repCategoryDict[skillRepId] = []
                 
                 repCategoryDict[skillRepId].append(itemId)
-                continue
+                
         
         self.listOfItemLists = []
         for key in repCategoryDict:

@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: P (Python 2.4)
 
 from pirates.piratesgui.GuiPanel import *
 from pirates.piratesgui.RequestButton import RequestButton
@@ -84,10 +84,7 @@ class PotionResults(GuiPanel):
     def playAgain(self):
         if self.potionGame.gameFSM.getCurrentOrNextState() not in [
             'Anim',
-            'ChestOpened',
-            'ExitRequest',
-            'Exit',
-            'Eval']:
+            'ChestOpened']:
             self.cleanUp()
             self.potionGame.gameFSM.request('Reset')
         

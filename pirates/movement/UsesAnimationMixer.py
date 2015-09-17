@@ -45,7 +45,7 @@ class UsesAnimationMixer:
         if self._UsesAnimationMixer__mixer:
             self._UsesAnimationMixer__mixer.play(blendInT = blendInT, blendOutT = blendOutT, blendInto = blendInto, *args, **args)
         else:
-            Actor.play(self, *args, **args)
+            Actor.play(self, *args, **kwargs)
 
     play = report(types = [
         'args',
@@ -61,13 +61,13 @@ class UsesAnimationMixer:
         blendT = kwargs.pop('blendT', defaultBlendT)
         blendDelay = kwargs.pop('blendDelay', 0)
         if self._UsesAnimationMixer__mixer:
-            self._UsesAnimationMixer__mixer.loop(blendT = blendT, blendDelay = blendDelay, *args, **args)
+            self._UsesAnimationMixer__mixer.loop(blendT = blendT, blendDelay = blendDelay, *args, **kwargs)
         elif 'rate' in kwargs:
             rate = kwargs.pop('rate')
-            Actor.loop(self, *args, **args)
+            Actor.loop(self, *args, **kwargs)
             self.setPlayRate(rate, args[0])
         else:
-            Actor.loop(self, *args, **args)
+            Actor.loop(self, *args, **kwargs)
 
     loop = report(types = [
         'args',
@@ -82,9 +82,9 @@ class UsesAnimationMixer:
             defaultBlendT = 0
         blendT = kwargs.pop('blendT', defaultBlendT)
         if self._UsesAnimationMixer__mixer:
-            self._UsesAnimationMixer__mixer.pingpong(blendT = blendT, *args, **args)
+            self._UsesAnimationMixer__mixer.pingpong(blendT = blendT, *args, **kwargs)
         else:
-            Actor.pingpong(self, *args, **args)
+            Actor.pingpong(self, *args, **kwargs)
 
     pingpong = report(types = [
         'args',
@@ -99,9 +99,9 @@ class UsesAnimationMixer:
             defaultBlendT = 0
         blendT = kwargs.pop('blendT', defaultBlendT)
         if self._UsesAnimationMixer__mixer:
-            self._UsesAnimationMixer__mixer.pose(blendT = blendT, *args, **args)
+            self._UsesAnimationMixer__mixer.pose(blendT = blendT, *args, **kwargs)
         else:
-            Actor.pose(self, *args, **args)
+            Actor.pose(self, *args, **kwargs)
 
     pose = report(types = [
         'args',
@@ -111,9 +111,9 @@ class UsesAnimationMixer:
     
     def stop(self, *args, **kwargs):
         if self._UsesAnimationMixer__mixer:
-            self._UsesAnimationMixer__mixer.stop(*args, **args)
+            self._UsesAnimationMixer__mixer.stop(*args, **kwargs)
         else:
-            Actor.stop(self, *args, **args)
+            Actor.stop(self, *args, **kwargs)
 
     stop = report(types = [
         'args',
@@ -134,9 +134,9 @@ class UsesAnimationMixer:
         blendInto = kwargs.pop('blendInto', None)
         if mixingWanted:
             partName = kwargs.get('partName', None)
-            return self._UsesAnimationMixer__mixer.actorInterval(ActorInterval(self, *args, **args), partName, blendInT, blendOutT, blendInto)
+            return self._UsesAnimationMixer__mixer.actorInterval(ActorInterval(self, *args, **kwargs), partName, blendInT, blendOutT, blendInto)
         else:
-            return ActorInterval(self, *args, **args)
+            return ActorInterval(self, *args, **kwargs)
 
     actorInterval = report(types = [
         'args',

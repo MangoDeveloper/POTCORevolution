@@ -162,7 +162,7 @@ class JewelryStoreCartList(DirectScrolledFrame):
                 
                 self.parent.updateBalance()
                 return None
-                continue
+                
         
 
     
@@ -170,7 +170,7 @@ class JewelryStoreCartList(DirectScrolledFrame):
         for panel in self.panels:
             if panel.data == data:
                 return True
-                continue
+                
         
         return False
 
@@ -197,7 +197,7 @@ class JewelryStoreCartList(DirectScrolledFrame):
         for panel in self.panels:
             if panel.data[0] == itemId:
                 counter += panel.data[1]
-                continue
+                
         
         return counter
 
@@ -380,7 +380,7 @@ class JewelryStoreGUI(DirectFrame):
         for id in range(len(self.clothRenders)):
             if self.displayRegionStates[id]:
                 self.clothRenders[id].show()
-                continue
+                
         
 
     
@@ -682,7 +682,7 @@ class JewelryStoreGUI(DirectFrame):
                 primary,
                 secondary]:
                 self.equipRequests[type] = None
-                continue
+                
         
         self.purchaseInventory.removeAllPanels()
         self.sellInventory.removeAllPanels()
@@ -751,7 +751,7 @@ class JewelryStoreGUI(DirectFrame):
         for item in JewelryGlobals.JewelryTypes:
             if not self.isPageAdded(item):
                 self.addTab(item)
-                continue
+                
         
 
     
@@ -870,7 +870,7 @@ class JewelryStoreGUI(DirectFrame):
                     if locationId in (Locations.INVALID_LOCATION, Locations.NON_LOCATION):
                         base.localAvatar.guiMgr.createWarning(PLocalizer.InventoryFullWarning, PiratesGuiGlobals.TextFG6)
                         return None
-                        continue
+                        
                 
                 self.purchaseInventory.addPanel(data)
                 button.addToCart['text'] = PLocalizer.TailorRemove
@@ -887,7 +887,7 @@ class JewelryStoreGUI(DirectFrame):
                     dataId = item.data[1]
                     if itemId == dataId:
                         itemCount += 1
-                        continue
+                        
                 
                 if inventory.getItemQuantity(InventoryType.ItemTypeJewelry, itemId) < itemCount:
                     base.localAvatar.guiMgr.createWarning(PLocalizer.DoNotOwnEnoughWarning, PiratesGuiGlobals.TextFG6)
@@ -914,7 +914,7 @@ class JewelryStoreGUI(DirectFrame):
                 
                 item.addToCart.buyState = 1
                 return None
-                continue
+                
         
 
     
@@ -1057,7 +1057,7 @@ class JewelryStoreGUI(DirectFrame):
     
     def setPage(self, pageName, startIndex = 0, refreshWardrobe = True):
         self.tabBar.unstash()
-        self.titleLabel['text'] = '\x1smallCaps\x1' + self.rootTitle + ' - ' + PLocalizer.JewelryNames.get(pageName) + '\x2'
+        self.titleLabel['text'] = '\x01smallCaps\x01' + self.rootTitle + ' - ' + PLocalizer.JewelryNames.get(pageName) + '\x02'
         previousPage = self.currentPage
         if self.currentPage != pageName:
             self.prevIdx = 0
@@ -1157,7 +1157,7 @@ class JewelryStoreGUI(DirectFrame):
                             secondaryColor,
                             holiday,
                             location])
-                        continue
+                        
                 
             
         
@@ -1208,7 +1208,7 @@ class JewelryStoreGUI(DirectFrame):
                 for item in self.currentWardrobe:
                     if uid == item:
                         owned = True
-                        continue
+                        
                 
                 if self.mode == SELLING:
                     buttonState = DGG.DISABLED

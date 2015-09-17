@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 import math
 from pandac.PandaModules import *
@@ -619,10 +619,6 @@ class DistributedQuestProp(DistributedBattleable.DistributedBattleable, Lootable
         self.showTreasureIval.start()
 
     
-    def aiRequestsExit(self):
-        self.requestExit()
-
-    
     def requestExit(self):
         DistributedBattleable.DistributedBattleable.requestExit(self)
         self.stopSearching(0)
@@ -787,10 +783,16 @@ class DistributedQuestProp(DistributedBattleable.DistributedBattleable, Lootable
         
 
     
-    def clearInteract(self):
+    def teleportAvToPos(self, teleportPos):
+        island = self.getParentObj()
+        if island:
+            islandUid = island.getUniqueId()
+            base.cr.loadingScreen.showTarget(islandUid)
+            base.cr.loadingScreen.showHint(islandUid)
+            base.cr.loadingScreen.show(disableSfx = False)
+            base.cr.teleportMgr.localTeleportPos(teleportPos, island)
+        
         self.requestExit()
-        localAvatar.b_setGameState('Off')
-        localAvatar.b_setGameState('LandRoam')
 
     
     def disableTeleportEffect(self):

@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: Q (Python 2.4)
 
 from direct.directnotify import DirectNotifyGlobal
 from direct.showbase import DirectObject

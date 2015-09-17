@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: P (Python 2.4)
 
 from direct.interval.IntervalGlobal import Sequence, Func
 from direct.showbase.ShowBaseGlobal import *

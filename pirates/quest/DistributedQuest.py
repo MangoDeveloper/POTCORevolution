@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 from pandac.PandaModules import *
 from direct.directnotify import DirectNotifyGlobal
@@ -202,7 +202,7 @@ class DistributedQuest(DistributedObject.DistributedObject, QuestBase.QuestBase,
             
             dialogId = sceneToPlay.get('sceneId')
             npc.playDialogMovie(dialogId, self.doneFinalizeScene, self.prevLocalAvState)
-            if not self.prevLocalAvState:
+            if self.prevLocalAvState == None:
                 self.prevLocalAvState = npc.currentDialogMovie.oldGameState
             
         elif sceneToPlay.get('type') == 'cutscene':
@@ -220,7 +220,7 @@ class DistributedQuest(DistributedObject.DistributedObject, QuestBase.QuestBase,
                 self.sceneObj = plCutscene
                 plCutscene.initialize(self.doneFinalizeScene, giverId, True)
                 plCutscene.play()
-            if not self.prevLocalAvState:
+            if self.prevLocalAvState == None:
                 
                 def cutsceneStarted():
                     localCutActor = self.sceneObj.getActor(CutsceneActor.CutLocalPirate.getActorKey())

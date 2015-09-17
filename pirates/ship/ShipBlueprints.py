@@ -262,7 +262,6 @@ class HullCache:
         data = HullAsset()
         data.root = self.root.copyTo(NodePath())
         if custom:
-            continue
             data.geoms = [ x.copyTo(NodePath()) for x in self.customGeoms ]
         
         data.geoms = custom
@@ -458,7 +457,6 @@ def generateHullCache(modelClass):
         geomMed,
         geomLow,
         geomSuperLow]
-    continue
     customGeoms = [ x.copyTo(NodePath()) for x in genericGeoms ]
     for np in genericGeoms:
         trans = np.find('**/transparent')
@@ -591,7 +589,6 @@ def generateMastCache(mastClass):
     height = MastData[mastClass]['maxHeight']
     matchSet = range(height)
     for i in range(height):
-        continue
         matchSet = _[1]
         reducedSet = []
         foundReduction = False
@@ -669,7 +666,6 @@ def generateMastCache(mastClass):
 def getMastInfo(shipClass, modelClass):
     defs = mastDefs.get(modelClass)
     setup = getMastSetup(shipClass)
-    continue
     return [](_[1])
 
 

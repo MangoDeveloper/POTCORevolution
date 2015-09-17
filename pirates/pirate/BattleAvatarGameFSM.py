@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: B (Python 2.4)
 
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
@@ -670,10 +670,24 @@ class BattleAvatarGameFSM(FSM.FSM):
 
     
     def enterShipBoarding(self, extraArgs = []):
-        self.av.motionFSM.off(lock = True)
-        self.av.setActiveShadow(0)
-        self.av.hideShadow()
-        self.av.stopSmooth()
+        (ship, fromShip, mode, instant, ts) = extraArgs
+        if ship:
+            self.av.motionFSM.off(lock = True)
+            self.av.setActiveShadow(0)
+            showMovie = not instant
+            if base.cr.tutorial == 1:
+                showMovie = False
+            
+            if mode == ShipGlobals.SHIP_BOARD_FROM_SWIM:
+                self.avatarBoardShip(ship, showMovie, ts, fromWater = 1)
+            elif mode == ShipGlobals.SHIP_BOARD_FROM_WALK:
+                if fromShip:
+                    self.avatarBoardShipFromShip(ship, fromShip, showMovie, ts)
+                else:
+                    self.avatarBoardShip(ship, showMovie, ts, fromWater = 0)
+            
+        else:
+            self.notify.warning('enterShipBoarding: ship not found')
 
     
     def exitShipBoarding(self):

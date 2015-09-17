@@ -58,7 +58,7 @@ class InventoryUIAmmoContainer(InventoryUIStackContainer.InventoryUIStackContain
             for pouchId in listOfPouches:
                 if inv.getStackQuantity(pouchId):
                     pouchUsed = pouchId
-                    continue
+                    
             
         
         return pouchUsed
@@ -77,7 +77,7 @@ class InventoryUIAmmoContainer(InventoryUIStackContainer.InventoryUIStackContain
         self.listOfItemLists = []
         for pouchType in orderedPouchTypes:
             ammoList = EconomyGlobals.getPouchAmmoList(pouchType)
-            continue
+            
             itemList = [ WeaponGlobals.getSkillIdForAmmoSkillId(ammoId) for ammoId in ammoList ]
             itemList.insert(0, pouchType)
             self.listOfItemLists.append(itemList)
@@ -127,14 +127,13 @@ class InventoryUIAmmoContainer(InventoryUIStackContainer.InventoryUIStackContain
                     self.putIntoCell(bagItem, bagCell)
                     self.subBagTypesCreated.append(skillId)
                     bagCell['image'] = None
-                    continue
+                    
                 if skillId in self.subBagTypesCreated:
-                    continue
-                cellPos = self.findGridPos(X, Z, self.gapOn)
-                ammoCell = self.getCell()
-                ammoCell.setPos(cellPos)
-                ammoId = WeaponGlobals.getSkillAmmoInventoryId(skillId)
-                newItem = self.getItem(skillId, ammoId)
+                    cellPos = self.findGridPos(X, Z, self.gapOn)
+                    ammoCell = self.getCell()
+                    ammoCell.setPos(cellPos)
+                    ammoId = WeaponGlobals.getSkillAmmoInventoryId(skillId)
+                    newItem = self.getItem(skillId, ammoId)
                 if newItem:
                     if self.textOffset != None:
                         newItem.textOffset = self.textOffset

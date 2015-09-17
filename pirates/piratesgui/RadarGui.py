@@ -85,7 +85,7 @@ class RadarGui(GuiTray, FSM):
     DEMO_ENEMY = 1
     
     def __init__(self, parent, av, radius = 200.0, **kw):
-        GuiTray.__init__(self, parent, 0.40000000000000002, 0.40000000000000002, **None)
+        GuiTray.__init__(self, parent, 0.40000000000000002, 0.40000000000000002, **kw)
         FSM.__init__(self, 'RadarGui')
         self.initialiseoptions(RadarGui)
         self.av = av

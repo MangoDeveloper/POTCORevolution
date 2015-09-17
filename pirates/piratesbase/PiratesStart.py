@@ -1,5 +1,5 @@
-# File: p (Python 2.4)
-
+from pandac.PandaModules import *
+loadPrcFile("config/english/config_en.prc")
 import PiratesPreloader
 print 'PiratesStart: Starting the game.'
 import __builtin__
@@ -18,7 +18,7 @@ import gc
 gc.disable()
 
 try:
-    pass
+    launcher
 except:
     print 'Creating PiratesDummyLauncher'
     from pirates.launcher.PiratesDummyLauncher import PiratesDummyLauncher

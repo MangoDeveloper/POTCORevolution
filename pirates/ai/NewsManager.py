@@ -187,7 +187,7 @@ class NewsManager(DistributedObject.DistributedObject):
 
     
     def getActiveHolidayList(self):
-        continue
+        
         return _[1]
 
     
@@ -314,7 +314,7 @@ class NewsManager(DistributedObject.DistributedObject):
         for iType in PiratesGlobals.INSTANCE_NO_NEWS_MESSAGES:
             if ourInstance == iType:
                 return False
-                continue
+                
         
         return True
 

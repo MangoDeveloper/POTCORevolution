@@ -195,7 +195,7 @@ class BarberStoreGUI(DirectFrame):
         for id in range(len(self.clothRenders)):
             if self.displayRegionStates[id]:
                 self.clothRenders[id].show()
-                continue
+                
         
 
     
@@ -472,9 +472,6 @@ class BarberStoreGUI(DirectFrame):
             
             if not self.isPageAdded(id):
                 self.addTab(id)
-                continue
-        
-
     
     def addTab(self, id):
         newTab = self.tabBar.addTab(id, command = self.setPage, extraArgs = [
@@ -552,7 +549,7 @@ class BarberStoreGUI(DirectFrame):
     
     def setPage(self, pageName, startIndex = 0):
         self.tabBar.unstash()
-        self.titleLabel['text'] = '\x1smallCaps\x1' + self.rootTitle + ' - ' + PLocalizer.barberNames.get(pageName) + '\x2'
+        self.titleLabel['text'] = '\x01smallCaps\x01' + self.rootTitle + ' - ' + PLocalizer.barberNames.get(pageName) + '\x02'
         if localAvatar.style.getGender() == 'm':
             GENDER = 'MALE'
         else:

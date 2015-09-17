@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: L (Python 2.4)
 
 from pandac.PandaModules import NodePath, Point3
 from panda3d.core import TextNode

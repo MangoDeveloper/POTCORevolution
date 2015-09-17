@@ -43,15 +43,16 @@ struct AvatarPendingDel {
 
 dclass Account {
   string DcObjectType db;
-  uint32array ACCOUNT_AV_SET required db;
-  uint32array pirateAvatars required db;
-  uint32array HOUSE_ID_SET db;
+  uint32 ACCOUNT_AV_SET[] required db;
+  uint32 pirateAvatars[] required db;
   uint32 ESTATE_ID db;
   AvatarPendingDel ACCOUNT_AV_SET_DEL[] db;
-  string PLAYED_MINUTES db;
-  string PLAYED_MINUTES_PERIOD db;
-  string CREATED db;
-  string LAST_LOGIN db;
+  blob PLAYED_MINUTES db;
+  blob PLAYED_MINUTES_PERIOD db;
+  blob CREATED db;
+  blob LAST_LOGIN db;
+  blob ACCOUNT_ID db;
+  uint16 ADMIN_ACCESS db;
 };
 
 struct BarrierData {
@@ -228,7 +229,7 @@ dclass DistributedPlayer : DistributedAvatar {
   setWhitelistChatFlags(uint8) broadcast ownrecv ram airecv;
   setSC(uint16) broadcast ownsend airecv;
   setSCCustom(uint16) broadcast ownsend airecv;
-  setFriendsList(uint32uint8array) ownrecv required db airecv;
+  setFriendsList(uint32[]) ownrecv required db airecv;
   setDISLname(string) broadcast ownrecv ram;
   setDISLid(uint32) broadcast ownrecv ram db airecv required;
   OwningAccount(uint32);
@@ -242,7 +243,7 @@ dclass DistributedPlayer : DistributedAvatar {
 dclass MagicWordManager : DistributedObject {
   setMagicWord(string, uint32, uint32, string(0-256)) airecv clsend;
   setMagicWordResponse(string) airecv;
-  setWho(uint32array) airecv clsend;
+  setWho(uint32[]) airecv clsend;
 };
 
 dclass OtpAvatarManager : DistributedObject {

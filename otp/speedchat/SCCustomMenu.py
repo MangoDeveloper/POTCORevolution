@@ -1,33 +1,22 @@
-# File: o (Python 2.4)
-
-from SCMenu import SCMenu
 from SCCustomTerminal import SCCustomTerminal
+from SCMenu import SCMenu
 from otp.otpbase.OTPLocalizer import CustomSCStrings
 
+
 class SCCustomMenu(SCMenu):
-    
+
     def __init__(self):
         SCMenu.__init__(self)
-        self.accept('customMessagesChanged', self._SCCustomMenu__customMessagesChanged)
-        self._SCCustomMenu__customMessagesChanged()
 
-    
-    def destroy(self):
-        SCMenu.destroy(self)
+        self.accept('customMessagesChanged', self.__customMessagesChanged)
+        self.__customMessagesChanged()
 
-    
-    def _SCCustomMenu__customMessagesChanged(self):
+    def __customMessagesChanged(self):
         self.clearMenu()
-        
         try:
             lt = base.localAvatar
         except:
-            return None
-
+            return
         for msgIndex in lt.customMessages:
-            if CustomSCStrings.has_key(msgIndex):
+            if msgIndex in CustomSCStrings:
                 self.append(SCCustomTerminal(msgIndex))
-                continue
-        
-
-

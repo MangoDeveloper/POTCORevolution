@@ -201,8 +201,8 @@ class DistributedJollyRoger(DistributedBattleNPC.DistributedBattleNPC, JollyRoge
 
     
     def setMonsterNameTag(self):
-        color = '\x1red\x1'
-        name = '%s  %s\x1smallCaps\x1%s%s\x2\x2' % (self.name, color, PLocalizer.Lv, PLocalizer.InvasionLv)
+        color = '\x01red\x01'
+        name = '%s  %s\x01smallCaps\x01%s%s\x02\x02' % (self.name, color, PLocalizer.Lv, PLocalizer.InvasionLv)
         self.getNameText()['text'] = name
 
     

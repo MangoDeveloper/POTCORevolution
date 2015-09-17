@@ -24,7 +24,6 @@ class TentacleUtils:
         else:
             root = self
         joints = root.findAllMatches('**/def_tent*')
-        continue
         jointList = [ (x.getName(), x) for x in joints ]
         jointList.sort()
         for i in range(len(joints) - 1):

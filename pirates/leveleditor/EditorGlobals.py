@@ -276,7 +276,7 @@ def getStyleEnumerations():
     styleInfo = PLocalizerEnglish.ShipStyleNames
     styles = styleInfo.keys()
     styles.sort()
-    continue
+    
     return _[1] + [ str(x) + ': ' + styleInfo[x] for x in styles ]
 
 
@@ -284,7 +284,7 @@ def getLogoEnumerations():
     logoInfo = PLocalizerEnglish.ShipLogoNames
     logos = logoInfo.keys()
     logos.sort()
-    continue
+    
     return _[1] + [ str(x) + ': ' + logoInfo[x] for x in logos ]
 
 

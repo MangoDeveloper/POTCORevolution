@@ -1033,11 +1033,10 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
             force = None
             if len(args) > 1:
                 force = int(args[1])
-            
+
             DistributedSimpleShip = DistributedSimpleShip
             import pirates.ship
-            clientShips = filter(lambda x: if isinstance(x, DistributedSimpleShip.DistributedSimpleShip):
-passx is not localAvatar.ship, base.cr.doId2do.values())
+            clientShips = []
             cleared = False
             for currShip in clientShips:
                 shipCollWall = currShip.hull[0].collisions.find('**/collision_hull')
@@ -1047,8 +1046,6 @@ passx is not localAvatar.ship, base.cr.doId2do.values())
                     else:
                         shipCollWall.setCollideMask(shipCollWall.getCollideMask() ^ PiratesGlobals.ShipCollideBitmask)
                         cleared = True
-                
-            
             if cleared:
                 self.setMagicWordResponse('cleared ship collide bitmasks')
             else:

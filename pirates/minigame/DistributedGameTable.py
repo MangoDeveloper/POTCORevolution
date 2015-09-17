@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: D (Python 2.4)
 
 import random
 from pandac.PandaModules import *
@@ -316,10 +316,9 @@ class DistributedGameTable(DistributedInteractive.DistributedInteractive):
             0] * self.NumSeats
         for i in range(len(AIList)):
             if AIList[i] == 0:
-                continue
-            aiplayer = self._getActor(AIList[i])
-            self.AIPlayers[i] = aiplayer
-            self.actors[i] = aiplayer
+                aiplayer = self._getActor(AIList[i])
+                self.AIPlayers[i] = aiplayer
+                self.actors[i] = aiplayer
             if AIList[i] == PiratesGlobals.VILLAGER_TEAM:
                 dna = HumanDNA.HumanDNA()
                 dna.makeNPCPirate(seed = self.doId + i)
@@ -459,7 +458,7 @@ class DistributedGameTable(DistributedInteractive.DistributedInteractive):
                 
             if avId == 0 and self.AIPlayers[seatIndex] == 0:
                 self.actors[seatIndex] = 0
-                continue
+                
         
 
     
@@ -532,7 +531,7 @@ class DistributedGameTable(DistributedInteractive.DistributedInteractive):
             if townfolk:
                 townfolk.removeActive()
                 townfolk.delete()
-                continue
+                
         
         del self.AIPlayers
         del self.actors

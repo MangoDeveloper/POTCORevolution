@@ -96,7 +96,7 @@ class DistributedShopKeeper:
             self.shopInventory = MUSIC_SHELF
         elif self.avatarType.isA(AvatarTypes.Stowaway):
             par = self.getParentObj()
-            continue
+            
             self.shopInventory = _[1]
         elif self.avatarType.isA(AvatarTypes.Fishmaster):
             self.shopInventory = FISHING_LURE_SHELF

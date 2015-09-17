@@ -166,13 +166,13 @@ class Kraken(DistributedCreature, Monstrous):
             if self.grabberTentacles[locId]:
                 self.grabberTentacles.pop(locId)
                 return None
-                continue
+                
         
 
     
     def getRollAngle(self):
         dampen = 0
-        continue
+        
         dampenAmounts = [ grabber.getRockingDampen() for grabber in self.grabberTentacles.itervalues() ]
         if dampenAmounts:
             dampen = max(dampenAmounts)
