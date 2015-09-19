@@ -10,7 +10,7 @@ from pirates.piratesgui.BorderFrame import BorderFrame
 class LookoutListItem(ButtonListItem.ButtonListItem):
     
     def __init__(self, itemInfo, imageTexCardName, itemHeight, itemWidth, parent = None, parentList = None, textScale = None, txtColor = None, wantFrame = False, **kw):
-        ButtonListItem.ButtonListItem.__init__(self, itemInfo, itemHeight, itemWidth, parent, parentList, textScale, txtColor, **None)
+        ButtonListItem.ButtonListItem.__init__(self, itemInfo, itemHeight, itemWidth, parent, parentList, textScale, txtColor, **kw)
         self.initialiseoptions(LookoutListItem)
         lookoutUI = loader.loadModel(imageTexCardName)
         iconImage = itemInfo.get('Icon')

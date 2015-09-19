@@ -14,7 +14,7 @@ class ChestTab(LeftTab):
     def __init__(self, tabBar, name, **kw):
         optiondefs = (('modelName', 'general_frame_d', None), ('borderScale', 0.38, None), ('bgBuffer', 0.14999999999999999, None), ('frameSize', (-0.125, 0.125, -0.10000000000000001, 0.10000000000000001), None), ('unfocusSize', (0, 0, 0, 0), None), ('focusSize', (-0.125, 0.125, -0.11, 0.11), None), ('heightFactor', 0.59999999999999998, None), ('mouseEntered', None, None), ('mouseLeft', None, None))
         self.defineoptions(kw, optiondefs)
-        LeftTab.__init__(self, tabBar, name, **None)
+        LeftTab.__init__(self, tabBar, name, **kw)
         self.initialiseoptions(ChestTab)
         self['unfocusSize'] = self['frameSize']
 
@@ -42,7 +42,7 @@ class ChestTabBar(TabBar):
 
     
     def makeTab(self, name, **kw):
-        return ChestTab(self, name, **None)
+        return ChestTab(self, name, **kw)
 
 
 
@@ -51,7 +51,7 @@ class ChestPanel(DirectFrame):
     def __init__(self, parent, **kw):
         optiondefs = (('relief', None, None), ('state', DGG.NORMAL, None), ('frameSize', (-0.55000000000000004, 0.55000000000000004, -0.81999999999999995, 0.71999999999999997), None), ('pos', (-0.55000000000000004, 0, 0.80000000000000004), None))
         self.defineoptions(kw, optiondefs)
-        DirectFrame.__init__(self, parent = NodePath(), **None)
+        DirectFrame.__init__(self, parent = NodePath(), **kw)
         self.initialiseoptions(ChestPanel)
         self.setBin('gui-fixed', 0)
         self.setupLayers()
@@ -258,11 +258,11 @@ class ChestPanel(DirectFrame):
         elif self.getCurPage():
             self.getCurPage().show()
         
-        super(self.__class__, self).show(*args, **args)
+        super(self.__class__, self).show(*args, **kwargs)
 
     
     def hide(self, *args, **kwargs):
-        super(self.__class__, self).hide(*args, **args)
+        super(self.__class__, self).hide(*args, **kwargs)
         curPage = self.getCurPage()
         if curPage:
             curPage.hide()

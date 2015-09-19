@@ -399,7 +399,7 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
         self.jailInterior = loader.loadModel('models/buildings/navy_jail_interior')
         self.jailInterior.flattenMedium()
         self.jailInterior.reparentTo(render)
-        #self.jailInterior.setLightOff()
+        self.jailInterior.setLightOff()
 
         if not self.noJailLight:
             self.pirate.setH(self.initH)

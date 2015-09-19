@@ -14,3 +14,6 @@ class PiratesOnlineRevolution_Account_Details:
 
 	def canOpenChatAndNotGetBooted(self):
 		return base.config.GetBool('can-open-chat-and-not-get-booted', True)
+
+	def WLChatEnabled(self):
+		return base.config.GetBool('wl-chat-enabled', True)

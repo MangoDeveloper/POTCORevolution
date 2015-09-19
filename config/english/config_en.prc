@@ -25,6 +25,7 @@ lock-to-one-cpu #f
 lock-to-one-core #f
 deferred-generate-interval 0.0
 texture-anisotropic-degree 16
+compressed-textures 0
 
 # PlayToken:
 fake-playtoken Skipps
@@ -45,3 +46,5 @@ notify-level-DistributedLevel debug
 
 server-port 6667
 server-version sv-1.0.0
+
+want-hotkeys #f

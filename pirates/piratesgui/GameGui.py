@@ -17,7 +17,7 @@ class GameGui(DirectButton):
     
     def __init__(self, parent, **kw):
         gui = loader.loadModel('models/gui/toplevel_gui')
-        DirectButton.__init__(self, parent = NodePath(), **None)
+        DirectButton.__init__(self, parent = NodePath(), **kw)
         self.initialiseoptions(GameGui)
         self.repMeter = ReputationMeterDial.ReputationMeterDial(InventoryType.OverallRep, width = 0.56000000000000005)
         self.repMeter.reparentTo(self)

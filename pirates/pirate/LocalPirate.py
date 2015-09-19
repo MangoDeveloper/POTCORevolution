@@ -153,6 +153,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
                 self.accept('shift-f12', self.toggleAvVis)
 
             self.money = 0
+            self.friendsList = []
             self.enableAutoRun = 0
             self.kickEvents = None
             self.battleTeleportFlagTask = None

@@ -14,4 +14,7 @@ class DistributedPiratesTutorialAI(DistributedObjectAI):
         DistributedObjectAI.announceGenerate(self)
 
     def clientEnterAct0Tutorial(self):
-    	self.air.notify.debug("Recieved clientEnterAct0Tutorial field update!")
+		pass
+    
+    def makeAPirateComplete(self):
+		self.sendUpdate('makeAPirateCompleteResp', [])

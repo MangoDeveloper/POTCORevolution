@@ -58,7 +58,7 @@ class ShadowCaster:
         if hasGeomNode:
             self.getGeomNode().setTag('cam', 'caster')
         
-        dropShadow = loader.loadModel(self.shadowFileName)
+        dropShadow = loader.loadModel("phase_2/models/misc/drop_shadow")
         dropShadow.setScale(0.40000000000000002)
         dropShadow.flattenMedium()
         dropShadow.setBillboardAxis(2)

@@ -6,6 +6,7 @@ from pandac.PandaModules import *
 from pirates.battle import WeaponGlobals
 from pirates.battle.EnemySkills import *
 from pirates.pirate import AvatarTypes
+from pirates.pirate import AvatarType
 from pirates.pirate.AvatarType import *
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.reputation import ReputationGlobals
@@ -1375,9 +1376,8 @@ def getBaseStats(avatarType):
 
 
 def getHeight(avatarType):
-    baseStats = getBaseStats(avatarType.getNonBossType())
-    if baseStats:
-        return baseStats[HEIGHT_INDEX]
+    if avatarType:
+        return 1
     else:
         return None
 

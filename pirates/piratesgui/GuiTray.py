@@ -17,7 +17,7 @@ class GuiTray(DirectFrame):
         else:
             optiondefs = (('relief', None, None), ('state', DGG.DISABLED, None), ('frameColor', PiratesGuiGlobals.FrameColor, None), ('borderWidth', PiratesGuiGlobals.BorderWidth, None), ('frameSize', (0, self.width, 0, self.height), None))
         self.defineoptions(kw, optiondefs)
-        DirectFrame.__init__(self, parent, **None)
+        DirectFrame.__init__(self, parent, **kw)
         self.initialiseoptions(GuiTray)
         self.draggable = draggable
         if self.draggable:

@@ -449,13 +449,17 @@ class FancyLoadingScreen(DirectObject.DirectObject):
         base.graphicsEngine.renderFrame()
 
     
-    def endStep(self, stageName):
+    def endStep(self, stageName):	
+        self.currStage = stageName
+		
         if self.currStage == 'unmapped':
             self.notify.warning('step %s was started before loading screen was enabled!' % stageName)
+            return None
         
         if stageName != self.currStage:
             if __dev__ and self.debugMode:
                 self.notify.warning('step %s was active while step %s was trying to end!' % (self.currStage, stageName))
+                return None
         
         self.tick()
         if self.debugMode:
@@ -575,7 +579,7 @@ class FancyLoadingScreen(DirectObject.DirectObject):
 
         self._FancyLoadingScreen__setLocationText(self.locationText)
         self._FancyLoadingScreen__setHintText(self.hintText)
-        if not waitForLocation:
+        if waitForLocation == False:
             screenshot = random.choice(tutorialShots_MoveAim)
             self._FancyLoadingScreen__setLoadingArt(screenshot)
         

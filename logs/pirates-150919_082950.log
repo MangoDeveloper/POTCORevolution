@@ -1,0 +1,110 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  sv-1.0.0
+PAccount: accountServer from launcher:  
+PAccount: default accountServer:  https://pirates.go.com
+Initializing quest ladders...
+:MagicWordManager(warning): You risk being banned if you abuse this mate!
+:MagicWordManager(warning): I will have Jack cut you into pieces! (a.k.a. banned forever)
+:DistributedObjectGlobal(warning): ChatManager going online
+:DistributedShipLoader(warning): ShipLoader going online
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+New DO:401000001, dclass:PiratesDistrict
+New DO:401000002, dclass:DistributedPopulationTracker
+getSubTimeList
+ sub was None for 0
+setEnvironment unnamed 8 {}
+getSubTimeList
+ sub was None for 8
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 610, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 615, in readerPollOnce
+    if self.checkDatagram():
+  File "pirates\uberdog\ClientServicesManager.py", line 45, in setAvatars
+    self.cr.handleAvatarsList({0: avList})
+  File "otp\distributed\OTPClientRepository.py", line 1030, in handleAvatarsList
+    self.loginFSM.request('chooseAvatar', [self.avList])
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.8.1\direct\fsm\State.py", line 204, in enter
+    apply(self.__enterFunc, argList)
+  File "pirates\distributed\PiratesClientRepository.py", line 341, in enterChooseAvatar
+    self.avChoice.enter()
+  File "pirates\login\AvatarChooser.py", line 125, in enter
+    self.showSub(index)
+  File "pirates\login\AvatarChooser.py", line 1475, in showSub
+    self._AvatarChooser__handleHighlight(self.currentSubId, 0)
+  File "pirates\login\AvatarChooser.py", line 586, in _AvatarChooser__handleHighlight
+    self._AvatarChooser__showHighlightedAvatar()
+  File "pirates\login\AvatarChooser.py", line 499, in _AvatarChooser__showHighlightedAvatar
+    self.av.generateHuman(self.av.style.gender, base.cr.humanHigh)
+  File "pirates\pirate\Human.py", line 459, in generateHuman
+    self.loadHuman(other)
+  File "pirates\pirate\Human.py", line 400, in loadHuman
+    self.initializeDropShadow()
+  File "otp\avatar\ShadowCaster.py", line 61, in initializeDropShadow
+    dropShadow = loader.loadModel(self.shadowFileName)
+  File "C:\Panda3D-1.8.1\direct\showbase\Loader.py", line 170, in loadModel
+    raise IOError, message
+IOError: Could not load model file(s): ['models/misc/drop_shadow']
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\Tyler\Desktop\POTCOR-src\pirates\piratesbase\PiratesStart.py", line 79, in <module>
+    run()
+  File "C:\Panda3D-1.8.1\direct\showbase\ShowBase.py", line 2921, in run
+    self.taskMgr.run()
+  File "C:\Panda3D-1.8.1\direct\task\Task.py", line 502, in run
+    self.step()
+  File "C:\Panda3D-1.8.1\direct\task\Task.py", line 460, in step
+    self.mgr.poll()
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 610, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.8.1\direct\distributed\ConnectionRepository.py", line 615, in readerPollOnce
+    if self.checkDatagram():
+  File "pirates\uberdog\ClientServicesManager.py", line 45, in setAvatars
+    self.cr.handleAvatarsList({0: avList})
+  File "otp\distributed\OTPClientRepository.py", line 1030, in handleAvatarsList
+    self.loginFSM.request('chooseAvatar', [self.avList])
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.8.1\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.8.1\direct\fsm\State.py", line 204, in enter
+    apply(self.__enterFunc, argList)
+  File "pirates\distributed\PiratesClientRepository.py", line 341, in enterChooseAvatar
+    self.avChoice.enter()
+  File "pirates\login\AvatarChooser.py", line 125, in enter
+    self.showSub(index)
+  File "pirates\login\AvatarChooser.py", line 1475, in showSub
+    self._AvatarChooser__handleHighlight(self.currentSubId, 0)
+  File "pirates\login\AvatarChooser.py", line 586, in _AvatarChooser__handleHighlight
+    self._AvatarChooser__showHighlightedAvatar()
+  File "pirates\login\AvatarChooser.py", line 499, in _AvatarChooser__showHighlightedAvatar
+    self.av.generateHuman(self.av.style.gender, base.cr.humanHigh)
+  File "pirates\pirate\Human.py", line 459, in generateHuman
+    self.loadHuman(other)
+  File "pirates\pirate\Human.py", line 400, in loadHuman
+    self.initializeDropShadow()
+  File "otp\avatar\ShadowCaster.py", line 61, in initializeDropShadow
+    dropShadow = loader.loadModel(self.shadowFileName)
+  File "C:\Panda3D-1.8.1\direct\showbase\Loader.py", line 170, in loadModel
+    raise IOError, message
+IOError: Could not load model file(s): ['models/misc/drop_shadow']

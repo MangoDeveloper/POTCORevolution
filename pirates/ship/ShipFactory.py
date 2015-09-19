@@ -125,8 +125,8 @@ class ShipFactory:
 
     
     def getShip(self, shipClass, style = ShipGlobals.Styles.Undefined, logo = ShipGlobals.Logos.Undefined, hullDesign = None, detailLevel = 2, wantWheel = True, hullMaterial = None, sailMaterial = None, sailPattern = None, prowType = None, invertLogo = False):
+        from pirates.ship.Ship import Ship
         Ship = Ship
-        import pirates.ship
         modelClass = ShipGlobals.getModelClass(shipClass)
         shipConfig = ShipGlobals.getShipConfig(shipClass)
         if style == ShipGlobals.Styles.Undefined:
@@ -355,9 +355,15 @@ class ShipFactory:
             shipWheel.setTransform(wheelPoint)
             shipWheel.flattenLight()
             shipWheel.find('**/collisions').copyTo(collisions)
-            hull.geoms[0].node().stealChildren(shipWheel.find('**/high').node())
-            hull.geoms[1].node().stealChildren(shipWheel.find('**/med').node())
-            hull.geoms[2].node().stealChildren(shipWheel.find('**/low').node())
+
+            try:
+                hull.geoms[0].node().stealChildren(shipWheel.find('**/high').node())
+                hull.geoms[1].node().stealChildren(shipWheel.find('**/med').node())
+                hull.geoms[2].node().stealChildren(shipWheel.find('**/low').node())
+            except:
+                self.swH = shipWheel.find('**/high').node()
+                self.swM = shipWheel.find('**/med').node()
+                self.swL = shipWheel.find('**/low').node()
         
         if complexCustomization:
             hull.geoms[0].setTexture(shipHullTexture)
@@ -369,14 +375,14 @@ class ShipFactory:
             hull.geoms[3].setTexture(shipHullTexture)
             hull.geoms[3].flattenLight()
         
-        high.attachNewNode(ModelNode('non-animated')).node().stealChildren(hull.geoms[0].node())
-        med.attachNewNode(ModelNode('non-animated')).node().stealChildren(hull.geoms[1].node())
-        low.attachNewNode(ModelNode('non-animated')).node().stealChildren(hull.geoms[2].node())
-        superlow.attachNewNode(ModelNode('non-animated')).node().stealChildren(hull.geoms[3].node())
+        high.attachNewNode(self.swH)
+        med.attachNewNode(self.swM)
+        low.attachNewNode(self.swL)
+        superlow.attachNewNode(self.swL)
         collisions.node().stealChildren(hull.collisions.node())
         hull.locators.stash()
         charRoot.flattenStrong()
-        ship = Ship.Ship(shipClass, root, breakAnims, hitAnims, metaAnims, collisions, hull.locators)
+        ship = Ship(shipClass, root, breakAnims, hitAnims, metaAnims, collisions, hull.locators)
         if not complexCustomization:
             ship.char.setTexture(shipHullTexture)
         
@@ -384,8 +390,8 @@ class ShipFactory:
 
     
     def getAIShip(self, shipClass):
+        from pirates.ship.ShipAI import ShipAI
         ShipAI = ShipAI
-        import pirates.ship
         modelClass = ShipGlobals.getModelClass(shipClass)
         hull = self.getHull(modelClass, 0)
         root = NodePath('Ship')

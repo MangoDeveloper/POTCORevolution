@@ -10,3 +10,6 @@ class NametagFloat2d(Nametag3d):
 
     def upcastToPandaNode(self):
     	return self.icon
+
+    def setActive(self, active):
+    	self.active = active

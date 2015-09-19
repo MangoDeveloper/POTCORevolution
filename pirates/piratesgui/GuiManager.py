@@ -9,7 +9,11 @@ from direct.showbase import DirectObject
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import FSM
 from otp.otpbase import OTPGlobals
-from libotp import Nametag, NametagGlobals, NametagGroup, WhisperPopup, NametagFloat2d
+from libotp.Nametag import Nametag
+from libotp import NametagGlobals
+from libotp.NametagGroup import NametagGroup
+from libotp.WhisperPopup import WhisperPopup
+from libotp.NametagFloat2d import NametagFloat2d
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import PLocalizer
 from pirates.battle import WeaponGlobals

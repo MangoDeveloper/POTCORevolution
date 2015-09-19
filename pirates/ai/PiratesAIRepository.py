@@ -4,6 +4,7 @@ from pirates.distributed.DistributedPopulationTrackerAI import DistributedPopula
 from pirates.piratesbase.DistributedTimeOfDayManagerAI import DistributedTimeOfDayManagerAI
 from pirates.tutorial.DistributedPiratesTutorialAI import DistributedPiratesTutorialAI
 from pirates.world.DistributedJailInteriorAI import DistributedJailInteriorAI
+from pirates.piratesgui.DistributedPirateProfileMgrAI import DistributedPirateProfileMgrAI
 from pirates.world.WorldManagerAI import WorldManagerAI
 from pirates.piratesbase import PiratesGlobals
 from direct.distributed.PyDatagram import *
@@ -33,11 +34,18 @@ class PiratesAIRepository(PiratesInternalRepository):
         self.DistributedTimeOfDayManager = DistributedTimeOfDayManagerAI(self, isPaused=False, isJolly=0)
         self.DistributedTimeOfDayManager.generateWithRequired(2)
 
-        self.DistributedJailInterior = DistributedJailInteriorAI(self)
-        self.DistributedJailInterior.generateWithRequired(2)
+        self.DistributedPirateProfileMgr = DistributedPirateProfileMgrAI(self)
+        self.DistributedPirateProfileMgr.generateWithRequired(2)
 
-        self.worldManager = WorldManagerAI(self)
-        jail = self.worldManager.loadObjectsFromFile(filename="make_a_pirate_jail.py")
+        self.worldManager = WorldManagerAI(self) #TODO: Generate the rest of the islands!
+        self.portRoyal = self.worldManager.loadObjectsFromFile(filename="PortRoyalWorld.py")
+        self.tortuga = self.worldManager.loadObjectsFromFile(filename="TortugaWorld.py")
+        self.islaCangrejos = self.worldManager.loadObjectsFromFile(filename="CangrejosIsland.py")
+        self.kingsHead = self.worldManager.loadObjectsFromFile(filename="KingsheadWorld.py")
+        self.cuba = self.worldManager.loadObjectsFromFile(filename="CubaWorld.py")
+        self.islaRumrunner = self.worldManager.loadObjectsFromFile(filename="RumrunnerWorld.py")
+        self.anvilIsland = self.worldManager.loadObjectsFromFile(filename="AnvilIsland.py")
+        self.islaTormenta = self.worldManager.loadObjectsFromFile(filename="TormentaIsland.py")
 
     def handleConnected(self):
         self.districtId = self.allocateChannel()

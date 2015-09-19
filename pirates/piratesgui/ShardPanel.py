@@ -157,11 +157,20 @@ class ShardPanel(DirectFrame):
             self.getHideIval().start()
         
 
+    def compareShards(a, b):
+        if a[1] < b[1]:
+            return -1
+        elif b[1] < a[1]:
+            return 1
+        else:
+            return 0
     
     def syncShardList(self):
         current = set(self.shards.keys())
         shards = base.cr.listActiveShards()
-        active = set(lambda shard: shard for shard in shards)
+        shards.sort(self.compareShards)
+        for shard in shards:
+            active = set(shard)
         old = current.difference(active)
         new = active.difference(current)
         for id in old:

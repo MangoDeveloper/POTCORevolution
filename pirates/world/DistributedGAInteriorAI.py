@@ -6,7 +6,7 @@ class DistributedGAInteriorAI(DistributedGameAreaAI, DistributedCartesianGridAI)
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedGAInteriorAI')
 
     def __init__(self, air, connectorId, modelPath, name):
-        DistributedGameAreaAI.__init__(self, air, modelPath, name)
+        DistributedGameAreaAI.__init__(self, air, modelPath)
         DistributedCartesianGridAI.__init__(self, air, startingZone=self.air.allocateZone(), gridSize=10, gridRadius=10, cellWidth=20)
         self.connectorId = connectorId
 

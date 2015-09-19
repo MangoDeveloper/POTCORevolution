@@ -69,7 +69,7 @@ class DistributedBandMember(DistributedObject, PAvatarHandle):
     IsAvatarHeadOfBand = classmethod(IsAvatarHeadOfBand)
     
     def IsLocalAvatarHeadOfBand(cls):
-        return cls.IsAvatarHeadOfBand(localAvatar.doId)
+        return cls.IsAvatarHeadOfBand(base.cr.localAvatarDoId)
 
     IsLocalAvatarHeadOfBand = classmethod(IsLocalAvatarHeadOfBand)
     

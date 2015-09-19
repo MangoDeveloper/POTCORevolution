@@ -589,7 +589,7 @@ def generateMastCache(mastClass):
     height = MastData[mastClass]['maxHeight']
     matchSet = range(height)
     for i in range(height):
-        matchSet = _[1]
+        matchSet = []
         reducedSet = []
         foundReduction = False
         for j in range(len(geomSet)):
@@ -600,7 +600,6 @@ def generateMastCache(mastClass):
                     cruft.detach()
                     foundReduction = True
                     continue
-                []
             
             if foundReduction or not matchSet:
                 for group in [

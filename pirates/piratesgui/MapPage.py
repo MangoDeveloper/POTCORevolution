@@ -38,7 +38,7 @@ class MapPage(InventoryPage.InventoryPage):
 
     
     def show(self, *args, **kwargs):
-        super(self.__class__, self).show(*args, **args)
+        super(self.__class__, self).show(*args, **kwargs)
         self.worldMap.enable()
         self.worldMap.show()
         self.accept('texture_state_changed', self.resetTexture)
@@ -55,7 +55,7 @@ class MapPage(InventoryPage.InventoryPage):
 
     
     def hide(self, *args, **kwargs):
-        super(self.__class__, self).hide(*args, **args)
+        super(self.__class__, self).hide(*args, **kwargs)
         self.worldMap.disable()
         self.worldMap.hide()
         self.ignore('texture_state_changed')

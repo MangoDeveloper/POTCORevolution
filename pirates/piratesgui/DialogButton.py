@@ -34,7 +34,7 @@ class DialogButton(GuiButton.GuiButton):
         else:
             optiondefs += (('geom', self.arrowGeom, None), ('geom_scale', (-0.5, 0.5, 0.5), None), ('geom_pos', (0.059999999999999998, 0, 0), None), ('geom0_color', PiratesGuiGlobals.TextFG1, None), ('geom1_color', PiratesGuiGlobals.TextFG1, None), ('geom2_color', PiratesGuiGlobals.TextFG1, None), ('geom3_color', PiratesGuiGlobals.TextFG1, None), ('text', 'Next', None), ('text_scale', PiratesGuiGlobals.TextScaleLarge, None), ('text_pos', (-0.040000000000000001, -0.012), None))
         self.defineoptions(kw, optiondefs)
-        GuiButton.GuiButton.__init__(self, parent = parent, **None)
+        GuiButton.GuiButton.__init__(self, parent = parent, **kw)
         self.initialiseoptions(DialogButton)
 
 

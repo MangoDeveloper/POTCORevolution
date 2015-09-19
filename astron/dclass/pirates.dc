@@ -1911,7 +1911,7 @@ struct PortCollisionSphere {
   Pos pos;
 };
 
-dclass DistributedIsland : DistributedGameArea, DistributedCartesianGrid, Teamable {
+dclass DistributedIsland : DistributedCartesianGrid, DistributedGameArea, Teamable {
   setParentingRules(string, string) required broadcast ram;
   setIslandTransform(int32/10, int32/10, int32/10, int32/10) broadcast required ram;
   setZoneSphereSize(uint16, uint16, uint16) required broadcast ram;
@@ -1920,6 +1920,8 @@ dclass DistributedIsland : DistributedGameArea, DistributedCartesianGrid, Teamab
   setUndockable(bool) required broadcast;
   setPortCollisionSpheres(PortCollisionSphere []) required broadcast ram;
   makeLavaErupt() broadcast;
+  requestEntryToIsland() airecv clsend;
+  deniedEntryToIsland();
   setFeastFireEnabled(bool) required broadcast ram;
   setFireworkShowEnabled(bool, uint8) required broadcast ram;
 };

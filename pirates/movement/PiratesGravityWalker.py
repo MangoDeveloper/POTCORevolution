@@ -9,7 +9,7 @@ class PiratesGravityWalker(GravityWalker):
     notify = directNotify.newCategory('PiratesGravityWalker')
     
     def __init__(self, *args, **kwargs):
-        GravityWalker.__init__(self, *args, **args)
+        GravityWalker.__init__(self, *args, **kwargs)
         self.predicting = 0
 
     

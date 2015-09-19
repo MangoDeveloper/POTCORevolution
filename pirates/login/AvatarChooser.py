@@ -241,16 +241,16 @@ class AvatarChooser(DirectObject, StateData):
         self.water.updateWater(2)
         self.water.ignore('grid-detail-changed')
         self.ship = None
-        #if base.launcher.getPhaseComplete(3):
-        #    ShipGlobals = ShipGlobals
-        #    import pirates.ship
-        #    self.ship = base.shipFactory.getShip(ShipGlobals.INTERCEPTORL1)
-        #    self.ship.modelRoot.setPosHpr(140.86000000000001, 538.97000000000003, -3.6200000000000001, -133.03999999999999, 0.0, 0.0)
-        #    self.ship.modelRoot.reparentTo(self.scene)
-        #    self.shipRoot = self.ship.modelRoot
-        #    self.ship.playIdle()
-        #    lodNode = self.ship.lod.node()
-        #    self.ship.lod.node().forceSwitch(0)
+        if base.launcher.getPhaseComplete(3):
+            from pirates.ship import ShipGlobals
+            ShipGlobals = ShipGlobals
+            self.ship = base.shipFactory.getShip(ShipGlobals.INTERCEPTORL1)
+            self.ship.modelRoot.setPosHpr(140.86000000000001, 538.97000000000003, -3.6200000000000001, -133.03999999999999, 0.0, 0.0)
+            self.ship.modelRoot.reparentTo(self.scene)
+            self.shipRoot = self.ship.modelRoot
+            self.ship.playIdle()
+            lodNode = self.ship.lod.node()
+            self.ship.lod.node().forceSwitch(0)
         
         self.avatarListFrame = DirectFrame(parent = base.a2dTopLeft, relief = None)
         self.ropeFrame = DirectFrame(parent = self.avatarListFrame, relief = None, image = self.model.find('**/avatar_c_A_rope'), image_scale = 0.35999999999999999, pos = (0, 0, -0.014999999999999999))
@@ -672,7 +672,7 @@ class AvatarChooser(DirectObject, StateData):
         
         self.blockInput()
         self.choice = (subId, slot)
-        self.__avatarSlotResponse(*self.choice)
+        self._AvatarChooser__avatarSlotResponse(*self.choice)
 
     
     def _AvatarChooser__rejectAvatarSlot(self, reasonId, subId, slot):
@@ -693,6 +693,7 @@ class AvatarChooser(DirectObject, StateData):
             'mode': 'create' }
         base.transitions.fadeOut(finishIval = Func(messenger.send, self.doneEvent, [
             self.doneStatus]))
+        self.exit()
     
     def _AvatarChooser__handleShare(self):
         if self.shareConfirmDialog:

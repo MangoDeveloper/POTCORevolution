@@ -10,7 +10,7 @@ from pirates.piratesgui import BuffIcon
 class StatusEffectsPanel(DirectFrame):
     
     def __init__(self, parent, **kw):
-        DirectFrame.__init__(self, parent, **None)
+        DirectFrame.__init__(self, parent, **kw)
         self.initialiseoptions(StatusEffectsPanel)
         self.buffIcons = []
         self.buffs = []

@@ -66,7 +66,7 @@ class PiratesBase(OTPBase):
         OTPBase.__init__(self, windowType = 'none')
         print cpMgr
         self.hasEmbedded = hasEmbedded
-        self.shipFactory = None
+        self.shipFactory = ShipFactory.ShipFactory()
         self.isMainWindowOpen = False
         if __dev__:
             launcher.setValue('GAME_SHOW_ADDS', 'NO')

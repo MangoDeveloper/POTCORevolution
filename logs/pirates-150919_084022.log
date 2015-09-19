@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\Tyler\Desktop\POTCOR-src\pirates\piratesbase\PiratesStart.py", line 33, in <module>
+    import PiratesBase
+  File "pirates\piratesbase\PiratesBase.py", line 24, in <module>
+    from pirates.piratesgui.GameOptions import Options
+  File "pirates\piratesgui\GameOptions.py", line 13, in <module>
+    from pirates.piratesgui.GuiButton import GuiButton
+  File "pirates\piratesgui\GuiButton.py", line 20
+    def __init__(self, parent = None, hotkeys = (), hotkeyLabel = None, hotkeyLabelX = 0.091999999999999998, hotkeyArgs = True, helpText = '', helpPos = (0, 0, 0), helpDelay = PiratesGuiGlobals.HelpPopupTime, helpColorOff = False, helpLeftAlign = False, helpCenterAlign = False, pos, **kw):
+SyntaxError: non-default argument follows default argument

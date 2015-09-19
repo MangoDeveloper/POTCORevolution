@@ -10,7 +10,7 @@ class ChangeDialMeter(DirectFrame):
     def __init__(self, parent, **kw):
         optiondefs = (('state', DGG.DISABLED, None), ('relief', None, None), ('meterColor', VBase4(0, 0, 0, 1), None), ('meterColor2', VBase4(1, 1, 1, 1), None), ('baseColor', VBase4(1, 1, 1, 1), None), ('wantCover', True, None))
         self.defineoptions(kw, optiondefs)
-        DirectFrame.__init__(self, parent = NodePath(), **None)
+        DirectFrame.__init__(self, parent = NodePath(), **kw)
         self.initialiseoptions(ChangeDialMeter)
         if self.MeterFull == None:
             card = loader.loadModel('models/textureCards/dialmeter')

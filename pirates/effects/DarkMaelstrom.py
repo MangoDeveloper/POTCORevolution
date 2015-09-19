@@ -45,7 +45,6 @@ class DarkMaelstrom(DirectObject, NodePath):
         for top in stormTops:
             top.setBin('fixed', 125)
         
-        continue
         stormTopTs = [ top.findAllTextureStages()[0] for top in stormTops ]
         duration = 20 + random.randint(1, 20)
         rotate = Parallel(stormTops[0].hprInterval(duration, Point3(360, 0, 0), startHpr = Point3(0, 0, 0)), stormTops[1].hprInterval(duration, Point3(0, 0, 0), startHpr = Point3(360, 0, 0)))

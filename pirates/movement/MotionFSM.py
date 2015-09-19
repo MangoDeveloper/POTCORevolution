@@ -795,7 +795,7 @@ class MotionAnimFSM(FSM):
         'jump'])(exitAirborne)
     
     def request(self, *args, **kwargs):
-        FSM.request(self, *args, **args)
+        FSM.request(self, *args, **kwargs)
 
     request = report(types = [
         'args',

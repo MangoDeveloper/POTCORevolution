@@ -10,7 +10,7 @@ class Tab(BorderFrame):
     def __init__(self, tabBar, name, **kw):
         optiondefs = (('state', DGG.DISABLED, None), ('command', None, self.setCommand), ('extraArgs', [], self.setExtraArgs), ('name', name, None), ('mouseEntered', None, None), ('mouseLeft', None, None), ('selected', False, self.setSelected), ('textMayChange', 1, None))
         self.defineoptions(kw, optiondefs)
-        BorderFrame.__init__(self, parent = NodePath(), **None)
+        BorderFrame.__init__(self, parent = NodePath(), **kw)
         self.initialiseoptions(Tab)
         self.setName(str(name))
         self.tabBar = tabBar
@@ -37,7 +37,7 @@ class Tab(BorderFrame):
                     self.tabBar.selectTab(self['name'])
                 
                 if self['command']:
-                    self['command'](*args, **args)
+                    self['command'](*args, **kwargs)
                 
 
             self.invisibleButton['command'] = command
@@ -57,17 +57,17 @@ class Tab(BorderFrame):
 
     
     def setPos(self, *args, **kwargs):
-        BorderFrame.setPos(self, *args, **args)
+        BorderFrame.setPos(self, *args, **kwargs)
         self._Tab__resetButton()
 
     
     def setScale(self, *args, **kwargs):
-        BorderFrame.setScale(self, *args, **args)
+        BorderFrame.setScale(self, *args, **kwargs)
         self._Tab__resetButton()
 
     
     def setFrameSize(self, *args, **kwargs):
-        BorderFrame.setFrameSize(self, *args, **args)
+        BorderFrame.setFrameSize(self, *args, **kwargs)
         self._Tab__resetButton()
 
     
@@ -94,7 +94,7 @@ class Tab(BorderFrame):
 class LeftTab(Tab):
     
     def __init__(self, tabBar, name, **kw):
-        Tab.__init__(self, tabBar, name, **None)
+        Tab.__init__(self, tabBar, name, **kw)
         self.initialiseoptions(LeftTab)
         self.guiComponents['right'].setColor(0, 0, 0, 1)
         self.guiComponents['right'].setTransparency(0, 1)
@@ -108,7 +108,7 @@ class LeftTab(Tab):
 class TopTab(Tab):
     
     def __init__(self, tabBar, name, **kw):
-        Tab.__init__(self, tabBar, name, **None)
+        Tab.__init__(self, tabBar, name, **kw)
         self.initialiseoptions(TopTab)
         self.guiComponents['bottom'].setColor(0, 0, 0, 1)
         self.guiComponents['bottom'].setTransparency(0, 1)
@@ -123,7 +123,7 @@ class TabBar(DirectFrame):
     def __init__(self, backParent, frontParent, parent = None, offset = 0, **kw):
         optiondefs = (('relief', None, None), ('state', DGG.DISABLED, None))
         self.defineoptions(kw, optiondefs)
-        DirectFrame.__init__(self, parent, **None)
+        DirectFrame.__init__(self, parent, **kw)
         self.initialiseoptions(TabBar)
         self.bParent = backParent
         self.fParent = frontParent
@@ -152,7 +152,7 @@ class TabBar(DirectFrame):
         if pos < 0:
             pos = len(self.tabOrder)
         
-        self.tabs[name] = self.makeTab(name, **None)
+        self.tabs[name] = self.makeTab(name, **kw)
         self.tabs[name].setTabBar(self)
         self.tabOrder.insert(pos, name)
         self.refreshTabs()

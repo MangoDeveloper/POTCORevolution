@@ -1,0 +1,3 @@
+{"_time": "2015-09-18 22:56:18Eastern Daylight Time", "type": "log-opened", "sender": "EventLogger", "msg": "Log opened upon Event Logger startup."}
+{"_time": "2015-09-18 22:57:21Eastern Daylight Time", "type": "client-connected", "sender": "Client:1000000000", "remote_address": "127.0.0.1:8038", "local_address": "127.0.0.1:6667"}
+{"_time": "2015-09-18 22:59:46Eastern Daylight Time", "type": "client-ejected", "sender": "Client:1000000000", "reason_code": "122", "reason_msg": "This avatar slot is already taken by another avatar!"}

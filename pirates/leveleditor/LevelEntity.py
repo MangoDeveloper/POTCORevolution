@@ -11,7 +11,6 @@ class LevelEntity(NodePath):
     def setProperty(self, propertyName, propertyValue):
         if propertyName == 'None':
             pass
-        1
 
     
     def cleanUp(self):

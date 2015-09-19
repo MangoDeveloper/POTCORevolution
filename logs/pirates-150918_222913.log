@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Panda3D-1.8.1\python\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Users\Tyler\Desktop\POTCOR-src\pirates\piratesbase\PiratesStart.py", line 33, in <module>
+    import PiratesBase
+  File "pirates\piratesbase\PiratesBase.py", line 28, in <module>
+    from pirates.piratesbase import FancyLoadingScreen
+  File "pirates\piratesbase\FancyLoadingScreen.py", line 458
+    if self.currStage == 'unmapped':
+                                   ^
+IndentationError: unindent does not match any outer indentation level

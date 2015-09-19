@@ -15,7 +15,7 @@ class ChatTab(TopTab):
     def __init__(self, tabBar, name, text_xyz = None, **kw):
         optiondefs = (('modelName', 'general_frame_c', None), ('frameSize', (0, 0.22, 0.0, 0.10000000000000001), None), ('borderScale', 0.13500000000000001, None), ('bgBuffer', 0.14000000000000001, None), ('label', '', None), ('textMayChange', 1, None))
         self.defineoptions(kw, optiondefs)
-        TopTab.__init__(self, tabBar, name, **None)
+        TopTab.__init__(self, tabBar, name, **kw)
         self.initialiseoptions(ChatTab)
         text_pos = (0.11700000000000001, 0.040000000000000001, 0)
         if text_xyz:
@@ -58,7 +58,7 @@ class ChatTabBar(TabBar):
 
     
     def makeTab(self, name, **kw):
-        return ChatTab(self, name, **None)
+        return ChatTab(self, name, **kw)
 
     
     def stash(self):

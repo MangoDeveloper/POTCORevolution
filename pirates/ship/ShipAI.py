@@ -15,7 +15,6 @@ class ShipAI(DirectObject.DirectObject):
         self.locators = locators
         self.center = None
         self.owner = None
-        continue
         self.mastCollisions = _[1]([ (int(x.getTag('Mast Code')), x) for x in self.modelCollisions.findAllMatches('**/collision_masts') ])
         self._eventRadius = 600
 

@@ -13,7 +13,7 @@ class GuiPanel(BorderFrame):
     def __init__(self, title, w, h, showClose = True, titleSize = 0, modelName = 'general_frame_f', **kw):
         self.width = w
         self.height = h
-        BorderFrame.__init__(self, frameSize = (0, w, 0, h), modelName = modelName, sortOrder = 20, **None)
+        BorderFrame.__init__(self, frameSize = (0, w, 0, h), modelName = modelName, sortOrder = 20, **kw)
         self.initialiseoptions(GuiPanel)
         titleFont = PiratesGuiGlobals.TextScaleMed
         textColor = PiratesGuiGlobals.TextFG1

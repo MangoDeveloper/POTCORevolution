@@ -19,7 +19,7 @@ class ListFrame(DirectFrame, DirectObject):
             h = 1
             self.adjustHeight = True
         
-        DirectFrame.__init__(self, relief = None, state = DGG.NORMAL, frameColor = frameColor, borderWidth = PiratesGuiGlobals.BorderWidth, frameSize = (0.0, w, 0.0, h), pos = (PiratesGuiGlobals.BorderWidth[0], 0, PiratesGuiGlobals.BorderWidth[0]), **None)
+        DirectFrame.__init__(self, relief = None, state = DGG.NORMAL, frameColor = frameColor, borderWidth = PiratesGuiGlobals.BorderWidth, frameSize = (0.0, w, 0.0, h), pos = (PiratesGuiGlobals.BorderWidth[0], 0, PiratesGuiGlobals.BorderWidth[0]), **kw)
         self.initialiseoptions(ListFrame)
         self.delayedReveal = delayedReveal
         self.items = []

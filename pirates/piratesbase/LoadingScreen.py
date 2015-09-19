@@ -557,47 +557,65 @@ class LoadingScreen(DirectObject.DirectObject):
         
         if pickapirate:
             screenshot = screenShot_EnterGame
+            self.setLoadingScreenShot(screenshot)
         elif exit:
             screenshot = screenShot_ExitGame
+            self.setLoadingScreenShot(screenshot)
         elif ocean:
             screenshot = screenShot_Dinghy
+            self.setLoadingScreenShot(screenshot)
         elif jail:
             screenshot = screenShot_Jail
+            self.setLoadingScreenShot(screenshot)
         elif potionCrafting:
             screenshot = screenShot_Potions
+            self.setLoadingScreenShot(screenshot)
         elif benchRepair:
             screenshot = screenShot_BenchRepair
+            self.setLoadingScreenShot(screenshot)
         elif shipRepair:
             screenshot = screenShot_ShipRepair
+            self.setLoadingScreenShot(screenshot)
         elif cannonDefense:
             screenshot = screenShot_CannonDefense
+            self.setLoadingScreenShot(screenshot)
         elif base.localAvatar.style.getTutorial() < PiratesGlobals.TUT_GOT_CUTLASS:
             screenshot = screenShot_Weapon
+            self.setLoadingScreenShot(screenshot)
         elif base.localAvatar.style.getTutorial() < PiratesGlobals.TUT_MET_JOLLY_ROGER:
             screenshot = screenShot_Cutlass
+            self.setLoadingScreenShot(screenshot)
         elif base.cr.newsManager and base.cr.newsManager.getHoliday(21):
             screenshot = screenShots_WinterHolidayLocations.get(targetId)
+            self.setLoadingScreenShot(screenshot)
             if not screenshot:
                 screenshot = screenShots_Locations.get(targetId)
+                self.setLoadingScreenShot(screenshot)
             
         else:
             screenshot = screenShots_Locations.get(targetId)
+            self.setLoadingScreenShot(screenshot)
         if not screenshot:
             if areaType_Jungles.has_key(targetId):
                 screenshot = random.choice(screenShots_Jungles)
+                self.setLoadingScreenShot(screenshot)
             elif areaType_Swamps.has_key(targetId):
                 screenshot = random.choice(screenShots_Swamps)
+                self.setLoadingScreenShot(screenshot)
             elif areaType_Caves.has_key(targetId):
                 screenshot = random.choice(screenShots_Caves)
+                self.setLoadingScreenShot(screenshot)
             else:
                 island = getParentIsland(targetId)
                 screenshot = screenShots_Locations.get(island, [
                     random.choice(screenShots)])[0]
+                self.setLoadingScreenShot(screenshot)
         elif len(screenshot) > 1:
             screenshot = random.choice(screenshot)
+            self.setLoadingScreenShot(screenshot)
         else:
             screenshot = screenshot[0]
-        self._LoadingScreen__setLoadingArt(screenshot)
+            self.setLoadingScreenShot(screenshot)
         if pickapirate:
             targetName = PLocalizer.LoadingScreen_PickAPirate
         elif exit:
@@ -614,8 +632,12 @@ class LoadingScreen(DirectObject.DirectObject):
         
         if len(targetName):
             self._LoadingScreen__setLocationText(targetName)
-        
 
+    def setLoadingScreenShot(self, screenshot):
+        if not screenshot:
+            return
+
+        self._LoadingScreen__setLoadingArt(screenshot)
     
     def _LoadingScreen__setLoadingArt(self, screenshot):
         if self.snapshot:

@@ -1,4 +1,4 @@
-# File: p (Python 2.4)
+# File: M (Python 2.4)
 
 from pandac.PandaModules import *
 MAPCOLOR_FRIEND = Vec4(0.0, 0.0, 1.0, 1.0)

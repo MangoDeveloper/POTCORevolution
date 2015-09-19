@@ -1,0 +1,7 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+

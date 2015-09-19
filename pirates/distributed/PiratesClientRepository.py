@@ -116,6 +116,7 @@ class PiratesClientRepository(OTPClientRepository):
         self.createAvatarClass = DistributedPlayerPirate.DistributedPlayerPirate
         self.tradeManager = None
         self.pvpManager = None
+        self.timeOfDayManager = None
         self.csm = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_CLIENT_SERVICES_MANAGER, 'ClientServicesManager')
         self.avatarManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_PIRATES_AVATAR_MANAGER, 'DistributedAvatarManager')
         self.chatManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_CHAT_MANAGER, 'DistributedChatManager')
@@ -574,11 +575,12 @@ class PiratesClientRepository(OTPClientRepository):
     
     def handleAvatarResponseMsg(self, avatarId, di):
         self.localAvatarDoId = avatarId
+        self.loadingScreen.endStep('waitForAv')
         self.cleanupWaitingForDatabase()
         dclass = self.dclassesByName['DistributedPlayerPirate']
         NametagGlobals.setMasterArrowsOn(0)
         self.loadingScreen.beginStep('LocalAvatar', 36, 120)
-        self.loadingScreen.show(waitForLocation = True, expectedLoadScale = 4)
+        #self.loadingScreen.show(waitForLocation = True, expectedLoadScale = 4)
         localAvatar = LocalPirate(self)
         localAvatar.dclass = dclass
         base.localAvatar = localAvatar

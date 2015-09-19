@@ -1,9 +1,8 @@
-# File: p (Python 2.4)
+# File: E (Python 2.4)
 
 from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from direct.showbase.DirectObject import *
-from pirates.mockup import PythonNodePath
 from pirates.effects import DynamicLight
 from pirates.creature import Creature
 from pirates.creature.Alligator import Alligator
@@ -276,16 +275,14 @@ def getStyleEnumerations():
     styleInfo = PLocalizerEnglish.ShipStyleNames
     styles = styleInfo.keys()
     styles.sort()
-    
-    return _[1] + [ str(x) + ': ' + styleInfo[x] for x in styles ]
+    return [1] + [ str(x) + ': ' + styleInfo[x] for x in styles ]
 
 
 def getLogoEnumerations():
     logoInfo = PLocalizerEnglish.ShipLogoNames
     logos = logoInfo.keys()
     logos.sort()
-    
-    return _[1] + [ str(x) + ': ' + logoInfo[x] for x in logos ]
+    return [1] + [ str(x) + ': ' + logoInfo[x] for x in logos ]
 
 
 def getShipInfo(objectData):

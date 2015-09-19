@@ -1,5 +1,5 @@
 # Source Generated with Decompyle++
-# File: Ship.pyc (Python 2.4)
+# File: pirates.ship.Ship.pyc (Python 2.4)
 
 from pandac.PandaModules import Point3, Vec3, Vec4, VBase3, CompassEffect, ModelNode, TransformState, NodePath, NodePathCollection
 from direct.showbase import DirectObject
@@ -103,8 +103,7 @@ class Ship(DirectObject.DirectObject):
         self.sinkTrack = None
         self.isSplit = False
         self.owner = None
-        continue
-        self.mastCollisions = _[1]([ (int(x.getTag('Mast Code')), x) for x in self.modelCollisions.findAllMatches('**/collision_masts') ])
+        self.mastCollisions = [self.modelCollisions.findAllMatches('**/collision_masts')]
         self.sailCollisions = self.modelCollisions.findAllMatches('**/collision_sails')
         self.disableSails()
         if self.metaAnims['rolldown'].getNumAnims():
@@ -677,4 +676,607 @@ class Ship(DirectObject.DirectObject):
             def camLookAtDummy(t):
                 camera.lookAt(self.owner.lookAtDummy)
 
-            return Parallel(Func(camera.reparentTo, self.owner.attachNewNode('cameraDummy')), LerpPosInterval(camera, 16.0 * self.sinkTimeScale, camEndPos, startPos = camStartPos, blendType = 'easeInOut'), LerpPosInterval(self.owner.lookAtDummy, 18.0 *
+            return Parallel(Func(camera.reparentTo, self.owner.attachNewNode('cameraDummy')), LerpPosInterval(camera, 16.0 * self.sinkTimeScale, camEndPos, startPos = camStartPos, blendType = 'easeInOut'), LerpPosInterval(self.owner.lookAtDummy, 18.0 * self.sinkTimeScale, Vec3(0, 80, 0)), LerpFunc(camLookAtDummy, 18.0 * self.sinkTimeScale))
+        
+
+    
+    def startSinkEffects(self):
+        if not self.sinkEffectsRoot:
+            self.sinkEffectsRoot = self.shipRoot.attachNewNode('sinkEffectsRoot')
+        
+        self.sinkEffectsRoot.setY(self.center.getY())
+        if base.options.getSpecialEffectsSetting() >= base.options.SpecialEffectsMedium:
+            ripples = WaterWakes.getEffect()
+            if ripples:
+                scale = self.hullDimensions
+                ripples.duration = ripples.duration * self.sinkTimeScale
+                ripples.reparentTo(self.sinkEffectsRoot)
+                ripples.setScale(scale[0] / 6, scale[1] / 10, scale[2] / 5)
+                ripples.play()
+                self.sinkEffects.append(ripples)
+            
+        
+        if base.options.getSpecialEffectsSetting() >= base.options.SpecialEffectsHigh:
+            mist = WaterMist.getEffect()
+            if mist:
+                mist.sinkTimeScale = self.sinkTimeScale
+                mist.reparentTo(self.sinkEffectsRoot)
+                mist.setScale(self.hullDimensions / 50.0)
+                mist.setEffectScale(1.0)
+                mist.setZ(-5.0)
+                mist.play()
+                self.sinkEffects.append(mist)
+            
+        
+        taskMgr.add(self.updateSinkEffects, self.uniqueName('updateSinkEffects'))
+
+    
+    def endSinkEffects(self):
+        taskMgr.remove(self.uniqueName('updateSinkEffects'))
+        for effect in self.sinkEffects:
+            effect.stopLoop()
+        
+        self.sinkEffects = []
+
+    
+    def updateSinkEffects(self, task):
+        pos = self.modelRoot.getPos(render)
+        if base.cr.activeWorld and base.cr.activeWorld.getWater():
+            waterHeight = base.cr.activeWorld.getWater().calcHeight(pos[0], pos[1], 0, render)
+            self.sinkEffectsRoot.setZ(render, waterHeight)
+            self.sinkEffectsRoot.setY(self.sinkEffectsRoot.getY() - 0.14999999999999999)
+        
+        return task.cont
+
+    
+    def cleanupLocalSinking(self):
+        base.transitions.fadeOut()
+        base.transitions.letterboxOff()
+        base.cr.interactionMgr.unlock()
+        base.cr.interactionMgr.start()
+        base.musicMgr.requestCurMusicFadeOut()
+
+    
+    def undoSinking(self):
+        self.modelRoot.setPosHpr(0, 0, 0, 0, 0, 0)
+        if self.isSplit:
+            self.clipParent1.setPosHpr(0, 0, 0, 0, 0, 0)
+            self.clipParent2.setPosHpr(0, 0, 0, 0, 0, 0)
+        
+
+    
+    def splitShip(self):
+        if not self.isSplit:
+            self.isSplit = True
+            self.modelGeom.instanceTo(self.clipParent2)
+            planeNode1 = NodePath(PlaneNode('planeNode1', Plane(Vec4(0, 1, 0, 0))))
+            planeNode1.reparentTo(self.clipParent1)
+            planeNode1.setY(ShipGlobals.getShipSplitOffset(self.shipClass))
+            self.clipParent1.setClipPlane(planeNode1)
+            planeNode2 = NodePath(PlaneNode('planeNode2', Plane(Vec4(0, -1, 0, 0))))
+            planeNode2.reparentTo(self.clipParent2)
+            planeNode2.setY(ShipGlobals.getShipSplitOffset(self.shipClass))
+            self.clipParent2.setClipPlane(planeNode2)
+        
+
+    
+    def destroy(self):
+        self.cleanup()
+
+    
+    def manufactureCannons(self, detailLevel = 2):
+        stats = ShipGlobals.getShipConfig(self.shipClass)
+        cannonConfig = stats['cannons']
+        leftConfig = stats['leftBroadsides']
+        rightConfig = stats['rightBroadsides']
+        cannons = { }
+        for i in range(len(cannonConfig)):
+            cannonType = cannonConfig[i]
+            cannon = Cannon.Cannon(None)
+            cannon.loadModel(None, cannonType)
+            cannons[i] = [
+                cannon,
+                0]
+        
+        broadsides = [
+            [
+                [],
+                []],
+            None]
+        for i in range(len(leftConfig)):
+            if leftConfig[i] > 0:
+                cannon = CannonPort.CannonPort(leftConfig[i], 0, i)
+                broadsides[0][0].append(cannon)
+                continue
+            broadsides[0][0].append(None)
+        
+        for i in range(len(rightConfig)):
+            if rightConfig[i] > 0:
+                cannon = CannonPort.CannonPort(rightConfig[i], 1, i)
+                broadsides[0][1].append(cannon)
+                continue
+            broadsides[0][1].append(None)
+        
+        self.setupCannons(cannons, broadsides, detailLevel)
+
+    
+    def setupCannons(self, cannons, broadsides, detailLevel = 2):
+        self.cannons = { }
+        if detailLevel in (1, 2):
+            self.cannonsHigh = self.lod.getChild(0).attachNewNode(ModelNode('cannons'))
+            self.cannonsMed = self.lod.getChild(1).attachNewNode(ModelNode('cannons'))
+            self.cannonsLow = self.lod.getChild(2).attachNewNode(ModelNode('cannons'))
+        else:
+            self.cannonsHigh = self.lod.getChild(0).attachNewNode(ModelNode('cannons'))
+            self.cannonsMed = self.lod.getChild(1).attachNewNode(ModelNode('cannons'))
+        self.cannonColl = self.modelCollisions.attachNewNode('cannons')
+        for i in cannons:
+            transform = self.locators.find('**/cannon_%s;+s' % i).getTransform(self.locators)
+            cannon = cannons[i][0]
+            cannon.root.setTransform(transform)
+            cannon.root.flattenLight()
+            char = cannon.root.node()
+            bundle = char.getBundle(0)
+            if detailLevel in (1, 2):
+                high = cannon.lod.getChild(0)
+                med = cannon.lod.getChild(1)
+                low = cannon.lod.getChild(2)
+                self.char.node().combineWith(char)
+                high.reparentTo(self.cannonsHigh)
+                med.reparentTo(self.cannonsMed)
+                low.reparentTo(self.cannonsLow)
+            else:
+                low = cannon.lod.getChild(2)
+                superlow = cannon.lod.getChild(3)
+                self.char.node().combineWith(char)
+                low.reparentTo(self.cannonsHigh)
+                superlow.reparentTo(self.cannonsMed)
+            cannon.propCollisions.setTransform(transform)
+            cannon.propCollisions.reparentTo(self.cannonColl)
+            cannon.hNode.reparentTo(self.locators.find('**/cannon_%s;+s' % i))
+            self.cannons[i] = cannon
+        
+        if broadsides:
+            broadsideLeft = broadsides[0][0]
+            broadsideRight = broadsides[0][1]
+            self.broadsides = [
+                broadsideLeft,
+                broadsideRight]
+            leftRoot = self.locators.find('**/broadsides_left')
+            rightRoot = self.locators.find('**/broadsides_right')
+            for (broadsideSet, side) in zip(broadsides[0], ((leftRoot, 'left'), (rightRoot, 'right'))):
+                for i in range(len(broadsideSet)):
+                    port = broadsideSet[i]
+                    if not port:
+                        continue
+                    
+                    locator = side[0].find('broadside_%s_%s;+s' % (side[1], i))
+                    transform = locator.getTransform(self.locators)
+                    port.locator = locator
+                    port.root.setTransform(transform)
+                    port.root.flattenLight()
+                    char = port.root.node()
+                    bundle = char.getBundle(0)
+                    if detailLevel in (1, 2):
+                        high = port.lod.getChild(0)
+                        med = port.lod.getChild(1)
+                        low = port.lod.getChild(2)
+                        self.char.node().combineWith(char)
+                        high.reparentTo(self.cannonsHigh)
+                        med.reparentTo(self.cannonsMed)
+                        low.reparentTo(self.cannonsLow)
+                        continue
+                    geom = port.lod.getChild(2)
+                    self.char.node().combineWith(char)
+                    geom.copyTo(self.cannonsHigh)
+                    geom.copyTo(self.cannonsMed)
+                
+            
+        else:
+            self.broadsides = []
+        self.cannonsHigh.flattenStrong()
+        self.cannonsMed.flattenStrong()
+        if detailLevel != 0:
+            self.cannonsLow.flattenStrong()
+        
+        for cannon in self.cannons.values():
+            cannon.finalize()
+        
+        for side in self.broadsides:
+            for port in side:
+                if port:
+                    port.finalize()
+                    continue
+            
+        
+
+    
+    def updateDamageEffects(self, health, rear, left, right):
+        effectSettings = base.options.getSpecialEffectsSetting()
+        if left <= 30.0:
+            locator = self.locators.find('**/location_fire_1')
+            scale = locator.getScale()[0] / 1.75 + (locator.getScale()[0] / 2.0) * (1.0 - health / 100.0)
+            if not self.leftSideFire:
+                self.leftSideFire = ShipFire.getEffect()
+                if self.leftSideFire:
+                    self.leftSideFire.reparentTo(self.modelRoot)
+                    self.leftSideFire.setPos(locator.getPos())
+                    self.leftSideFire.setHpr(80, -15, 0)
+                    self.leftSideFire.startLoop()
+                
+            
+            if self.leftSideFire:
+                self.leftSideFire.setEffectScale(scale)
+            
+            if not (self.leftSideSmoke) and effectSettings >= base.options.SpecialEffectsMedium:
+                self.leftSideSmoke = ShipSmoke.getEffect()
+                if self.leftSideSmoke:
+                    self.leftSideSmoke.reparentTo(self.modelRoot)
+                    self.leftSideSmoke.setPos(locator.getPos())
+                    self.leftSideSmoke.setHpr(90, -15, 0)
+                    self.leftSideSmoke.startLoop()
+                
+            
+            if self.leftSideSmoke:
+                self.leftSideSmoke.setEffectScale(scale)
+            
+        elif self.leftSideFire:
+            self.leftSideFire.stopLoop()
+            self.leftSideFire = None
+        
+        if self.leftSideSmoke:
+            self.leftSideSmoke.stopLoop()
+            self.leftSideSmoke = None
+        
+        if left <= 0.0 and effectSettings >= base.options.SpecialEffectsMedium:
+            locator = self.locators.find('**/location_fire_3')
+            if locator:
+                scale = locator.getScale()[0] / 1.75 + (locator.getScale()[0] / 2.0) * (1.0 - health / 100.0)
+            
+            if locator and not (self.leftSideFire2):
+                self.leftSideFire2 = ShipFire.getEffect()
+                if self.leftSideFire2:
+                    self.leftSideFire2.reparentTo(self.modelRoot)
+                    self.leftSideFire2.setPos(locator.getPos())
+                    self.leftSideFire2.setHpr(90, -10, 10)
+                    self.leftSideFire2.startLoop()
+                
+            
+            if self.leftSideFire2:
+                self.leftSideFire2.setEffectScale(scale)
+            
+            if locator and not (self.leftSideSmoke2):
+                self.leftSideSmoke2 = ShipSmoke.getEffect()
+                if self.leftSideSmoke2:
+                    self.leftSideSmoke2.reparentTo(self.modelRoot)
+                    self.leftSideSmoke2.setPos(locator.getPos())
+                    self.leftSideSmoke2.setHpr(90, -15, 0)
+                    self.leftSideSmoke2.startLoop()
+                
+            
+            if self.leftSideSmoke2:
+                self.leftSideSmoke2.setEffectScale(scale)
+            
+        elif self.leftSideFire2:
+            self.leftSideFire2.stopLoop()
+            self.leftSideFire2 = None
+        
+        if self.leftSideSmoke2:
+            self.leftSideSmoke2.stopLoop()
+            self.leftSideSmoke2 = None
+        
+        if right <= 30.0:
+            locator = self.locators.find('**/location_fire_2')
+            scale = locator.getScale()[0] / 1.75 + (locator.getScale()[0] / 2.0) * (1.0 - health / 100.0)
+            if not self.rightSideFire:
+                self.rightSideFire = ShipFire.getEffect()
+                if self.rightSideFire:
+                    self.rightSideFire.reparentTo(self.modelRoot)
+                    self.rightSideFire.setPos(locator.getPos())
+                    self.rightSideFire.setHpr(100, 15, 0)
+                    self.rightSideFire.startLoop()
+                
+            
+            if self.rightSideFire:
+                self.rightSideFire.setEffectScale(scale)
+            
+            if not (self.rightSideSmoke) and effectSettings >= base.options.SpecialEffectsMedium:
+                self.rightSideSmoke = ShipSmoke.getEffect()
+                if self.rightSideSmoke:
+                    self.rightSideSmoke.reparentTo(self.modelRoot)
+                    self.rightSideSmoke.setPos(locator.getPos())
+                    self.rightSideSmoke.setHpr(90, 15, 0)
+                    self.rightSideSmoke.startLoop()
+                
+            
+            if self.rightSideSmoke:
+                self.rightSideSmoke.setEffectScale(scale)
+            
+        elif self.rightSideFire:
+            self.rightSideFire.stopLoop()
+            self.rightSideFire = None
+        
+        if self.rightSideSmoke:
+            self.rightSideSmoke.stopLoop()
+            self.rightSideSmoke = None
+        
+        if right <= 0.0 and effectSettings >= base.options.SpecialEffectsMedium:
+            locator = self.locators.find('**/location_fire_4')
+            if locator:
+                scale = locator.getScale()[0] / 1.75 + (locator.getScale()[0] / 2.0) * (1.0 - health / 100.0)
+            
+            if locator and not (self.rightSideFire2):
+                self.rightSideFire2 = ShipFire.getEffect()
+                if self.rightSideFire2:
+                    self.rightSideFire2.reparentTo(self.modelRoot)
+                    self.rightSideFire2.setPos(locator.getPos())
+                    self.rightSideFire2.setHpr(90, 10, 10)
+                    self.rightSideFire2.startLoop()
+                
+            
+            if self.rightSideFire2:
+                self.rightSideFire2.setEffectScale(scale)
+            
+            if locator and not (self.rightSideSmoke2):
+                self.rightSideSmoke2 = ShipSmoke.getEffect()
+                if self.rightSideSmoke2:
+                    self.rightSideSmoke2.reparentTo(self.modelRoot)
+                    self.rightSideSmoke2.setPos(locator.getPos())
+                    self.rightSideSmoke2.setHpr(90, 15, 0)
+                    self.rightSideSmoke2.startLoop()
+                
+            
+            if self.rightSideSmoke2:
+                self.rightSideSmoke2.setEffectScale(scale)
+            
+        elif self.rightSideFire2:
+            self.rightSideFire2.stopLoop()
+            self.rightSideFire2 = None
+        
+        if self.rightSideSmoke2:
+            self.rightSideSmoke2.stopLoop()
+            self.rightSideSmoke2 = None
+        
+        if rear <= 30.0:
+            locator = self.locators.findAllMatches('**/location_fire_0')[0]
+            scale = locator.getScale()[0] / 1.75 + (locator.getScale()[0] / 2.0) * (1.0 - health / 100.0)
+            if not self.rearSideFire:
+                self.rearSideFire = ShipFire.getEffect()
+                if self.rearSideFire:
+                    self.rearSideFire.reparentTo(self.modelRoot)
+                    self.rearSideFire.setPos(locator.getPos())
+                    self.rearSideFire.setHpr(0, 20, 0)
+                    self.rearSideFire.startLoop()
+                
+            
+            if self.rearSideFire:
+                self.rearSideFire.setEffectScale(scale)
+            
+            if not (self.rearSideSmoke) and effectSettings >= base.options.SpecialEffectsMedium:
+                self.rearSideSmoke = ShipSmoke.getEffect()
+                if self.rearSideSmoke:
+                    self.rearSideSmoke.reparentTo(self.modelRoot)
+                    self.rearSideSmoke.setPos(locator.getPos())
+                    self.rearSideSmoke.setHpr(0, 20, 0)
+                    self.rearSideSmoke.startLoop()
+                
+            
+            if self.rearSideSmoke:
+                self.rearSideSmoke.setEffectScale(scale)
+            
+        elif self.rearSideFire:
+            self.rearSideFire.stopLoop()
+            self.rearSideFire = None
+        
+        if self.rearSideSmoke:
+            self.rearSideSmoke.stopLoop()
+            self.rearSideSmoke = None
+        
+
+    
+    def cleanUpDamageEffects(self):
+        if self.leftSideFire:
+            self.leftSideFire.cleanUpEffect()
+            self.leftSideFire = None
+        
+        if self.leftSideSmoke:
+            self.leftSideSmoke.cleanUpEffect()
+            self.leftSideSmoke = None
+        
+        if self.leftSideFire2:
+            self.leftSideFire2.cleanUpEffect()
+            self.leftSideFire2 = None
+        
+        if self.leftSideSmoke2:
+            self.leftSideSmoke2.cleanUpEffect()
+            self.leftSideSmoke2 = None
+        
+        if self.rightSideFire:
+            self.rightSideFire.cleanUpEffect()
+            self.rightSideFire = None
+        
+        if self.rightSideSmoke:
+            self.rightSideSmoke.cleanUpEffect()
+            self.rightSideSmoke = None
+        
+        if self.rightSideFire2:
+            self.rightSideFire2.cleanUpEffect()
+            self.rightSideFire2 = None
+        
+        if self.rightSideSmoke2:
+            self.rightSideSmoke2.cleanUpEffect()
+            self.rightSideSmoke2 = None
+        
+        if self.rearSideFire:
+            self.rearSideFire.cleanUpEffect()
+            self.rearSideFire = None
+        
+        if self.rearSideSmoke:
+            self.rearSideSmoke.cleanUpEffect()
+            self.rearSideSmoke = None
+        
+
+    
+    def startDarkFog(self, offset = None):
+        self.fogEffect = DarkShipFog.getEffect()
+        if self.fogEffect:
+            self.fogEffect.reparentTo(self.shipRoot)
+            if offset:
+                self.fogEffect.setY(self.fogEffect, offset)
+            
+            self.fogEffect.setZ(self.fogEffect, 50)
+            self.fogEffect.startLoop()
+        
+
+    
+    def stopDarkFog(self):
+        if self.fogEffect:
+            self.fogEffect.stopLoop()
+            self.fogEffect = None
+        
+
+    
+    def cleanupDarkFog(self):
+        if self.fogEffect:
+            self.fogEffect.destroy()
+            self.fogEffect = None
+        
+
+    
+    def fadeIn(self, duration = 2.0):
+        if self.fader:
+            self.fader.finish()
+            self.fader = None
+        
+        self.modelRoot.setTransparency(1)
+        self.fader = Sequence(self.modelRoot.colorScaleInterval(duration, Vec4(1, 1, 1, 1), startColorScale = Vec4(0, 0, 0, 0)), Func(self.modelRoot.clearTransparency))
+        self.fader.start()
+
+    
+    def fadeOut(self, duration = 2.0):
+        if self.fader:
+            self.fader.finish()
+            self.fader = None
+        
+        self.modelRoot.setTransparency(1)
+        self.fader = Sequence(self.modelRoot.colorScaleInterval(duration / 2.0, Vec4(0, 0, 0, 0), startColorScale = Vec4(1, 1, 1, 1)), Func(self.modelRoot.clearTransparency))
+        self.fader.start()
+
+    
+    def enableSails(self):
+        self.sailCollisions.unstash()
+
+    
+    def disableSails(self):
+        self.sailCollisions.stash()
+
+    
+    def forceLOD(self, index):
+        self.lod.node().forceSwitch(index)
+
+    
+    def clearForceLOD(self):
+        self.lod.node().clearForceSwitch()
+
+    
+    def getRope(self, thickness = 0.14999999999999999):
+        rope = Rope()
+        rope.ropeNode.setRenderMode(RopeNode.RMTube)
+        rope.ropeNode.setNumSlices(10)
+        rope.ropeNode.setUvMode(RopeNode.UVDistance)
+        rope.ropeNode.setUvDirection(1)
+        rope.ropeNode.setUvScale(0.25)
+        rope.ropeNode.setThickness(thickness)
+        ropePile = loader.loadModel('models/char/rope_high')
+        ropeTex = ropePile.findTexture('rope_single_omit')
+        ropePile.removeNode()
+        rope.setTexture(ropeTex)
+        rope.setLightOff()
+        rope.setColorScale(0.5, 0.5, 0.5, 1)
+        return rope
+
+    getRope = report(types = [
+        'frameCount',
+        'deltaStamp'], dConfigParam = 'shipboard')(getRope)
+    
+    def setLandedGrapples(self, ship, landedGrapples):
+        for grapple in landedGrapples:
+            if grapple not in self.landedGrapples:
+                self.createLandedGrapple(ship, grapple[1])
+                continue
+        
+        self.landedGrapples = landedGrapples
+        self.startAnimateLandedGrappleTask()
+
+    
+    def createLandedGrapple(self, otherShip, targetId):
+        self.accept(otherShip.getDisableEvent(), self.removeLandedGrapples)
+        otherShipRelX = otherShip.model.modelRoot.getX(self.modelRoot)
+        grappleStr = '**/grapple_right*'
+        anchorOffset = Vec3(0, 0, -1)
+        if otherShipRelX < 0:
+            grappleStr = '**/grapple_left*'
+        
+        anchorNode = random.choice(self.locators.findAllMatches(grappleStr))
+        anchorPos = anchorNode.getPos(self.modelRoot) + anchorOffset
+        side = 'right'
+        if self.modelRoot.getX(otherShip.model.modelRoot) < 0:
+            side = 'left'
+        
+        targetStr = '**/grapple_%s_%s' % (side, targetId)
+        if targetId >= 0:
+            grappleLocator = otherShip.findLocator(targetStr)
+        else:
+            grappleLocator = random.choice(otherShip.findLocators('**/grapple_%s_*' % (side,)))
+        rope = self.getRope(thickness = 0.5)
+        grapplePos = grappleLocator.getPos(self.modelRoot)
+        sagNode = self.modelRoot.attachNewNode('sagNode')
+        sagNode.setPos((grapplePos + anchorPos) * 0.5)
+        grapple = loader.loadModel('models/ammunition/GrapplingHook')
+        grapple.reparentTo(otherShip.model.modelRoot)
+        posHpr = (grappleLocator, 2, 0, -2.5, -270, -350, 80)
+        if targetStr.find('right') > 0:
+            posHpr = (grappleLocator, 1, 0, -1.5, 90, -40, -180)
+        
+        grapple.setPosHpr(*posHpr)
+        rope.reparentTo(grapple)
+        rope.setup(3, ((None, Point3(0)), (sagNode, Point3(0)), (self.modelRoot, anchorPos)))
+        self.landedGrappleNodes.append([
+            otherShip,
+            grapple,
+            anchorNode,
+            sagNode,
+            grappleLocator,
+            rope])
+
+    
+    def removeLandedGrapples(self):
+        self.stopAnimateLandedGrappleTask()
+        for (ship, grapple, anchorNode, sagNode, grappleLocator, rope) in self.landedGrappleNodes:
+            self.ignore(ship.getDisableEvent())
+            grapple.removeNode()
+            sagNode.removeNode()
+            rope.removeNode()
+        
+        self.landedGrappleNodes = []
+        self.landedGrapples = []
+
+    
+    def startAnimateLandedGrappleTask(self):
+        self.stopAnimateLandedGrappleTask()
+        taskMgr.add(self.animateLandedGrappleTask, self.uniqueName('animateGrapple'))
+
+    
+    def animateLandedGrappleTask(self, task):
+        ship = None
+        for (ship, grapple, anchorNode, sagNode, grappleLocator, rope) in self.landedGrappleNodes:
+            grapplePos = grappleLocator.getPos(self.modelRoot)
+            anchorPos = anchorNode.getPos(self.modelRoot)
+            sagPos = (grapplePos + anchorPos) * 0.5
+            sagNode.setPos(sagPos)
+        
+        return task.cont
+
+    
+    def stopAnimateLandedGrappleTask(self):
+        taskMgr.remove(self.uniqueName('animateGrapple'))

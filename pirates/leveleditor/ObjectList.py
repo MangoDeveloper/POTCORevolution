@@ -1,7 +1,4 @@
-#Since this is currently broken, the unedited code is below.
-pass
-
-'''# File: p (Python 2.4)
+# File: p (Python 2.4)
 
 from pandac.PandaModules import VBase3
 from pirates.npc import Skeleton
@@ -151,14 +148,16 @@ GHOST_COLORS = [
     '0.0,1.0,1.0']
 from pirates.leveleditor.LevelEntity import LevelEntity
 from pirates.effects.AmbientSoundFX import AmbientSoundFX
+Properties = {}
+PlayerSpawnNode = {}
+CellIndex = {}
 ENTITY_DICT = {
     'LevelEntity': LevelEntity,
     'AmbientSoundFX': AmbientSoundFX }
-#PROP_UI_COMBO[[]] = [[1],[ x for x in range(-1, 10) ] + [26, 28, 30]]
-'Properties'['Defaults'] = {
-    'Spawnables': 'All',
-    'Index': -1 }
-'Player Spawn Node'['Player Boot Node'] = {
+
+Properties['Defaults'] = {
+    'Spawnables': 'All','Index': -1 }
+PlayerSpawnNode['Player Boot Node'] = {
     'NonRpmNode': 1,
     'Create': None,
     'Raycast': 1,
@@ -174,76 +173,7 @@ ENTITY_DICT = {
             PROP_UI_ENTRY] },
     'Defaults': {
         'AreaUid': '' } }
-'Player Spawn Node'['Quest Node'] = {
-    'NonRpmNode': 1,
-    'Create': None,
-    'Raycast': 1,
-    'Selectable': 1,
-    'UI Name': 'Quest Node',
-    'Visual': {
-        'Color': (1.0, 1.0, 0.0, 1),
-        'Offset': (0, 0, 1.0),
-        'Scale': 10,
-        'Models': [
-            'models/misc/sphere'] },
-    'Properties': {
-        'At': [
-            PROP_UI_SLIDE,
-            [
-                500,
-                0,
-                1],
-            'self.updateQuestNodeRadius'],
-        'Near': [
-            PROP_UI_SLIDE,
-            [
-                500,
-                0,
-                1],
-            'self.updateQuestNodeRadius'],
-        'NearOffsetX': [
-            PROP_UI_SLIDE,
-            [
-                500,
-                -500,
-                1],
-            'self.updateQuestNodeOffset'],
-        'NearOffsetY': [
-            PROP_UI_SLIDE,
-            [
-                500,
-                -500,
-                1],
-            'self.updateQuestNodeOffset'],
-        'NearOffsetZ': [
-            PROP_UI_SLIDE,
-            [
-                500,
-                -500,
-                1],
-            'self.updateQuestNodeOffset'],
-        'NearVisX': [
-            PROP_UI_SLIDE,
-            [
-                500,
-                -500,
-                1],
-            'self.updateQuestNodeVis'],
-        'NearVisY': [
-            PROP_UI_SLIDE,
-            [
-                500,
-                -500,
-                1],
-            'self.updateQuestNodeVis'],
-        'NearVisZ': [
-            PROP_UI_SLIDE,
-            [
-                500,
-                -500,
-                1],
-            'self.updateQuestNodeVis'] } }
-'Player Spawn Node'['Harbor Node'] = {
+PlayerSpawnNode['Harbor Node'] = {
     'NonRpmNode': 1,
     'Create': None,
     'Raycast': 1,
@@ -286,7 +216,7 @@ ENTITY_DICT = {
     'Defaults': {
         'SubType': 'Ship Spawn',
         'Station': '0' } }
-'Player Spawn Node'['Ship Movement Node'] = {
+PlayerSpawnNode['Ship Movement Node'] = {
     'NonRpmNode': 1,
     'Create': None,
     'Raycast': 1,
@@ -305,7 +235,7 @@ ENTITY_DICT = {
         'Models': [
             'models/misc/smiley'],
         'Offset': (0, 0, 1.0) } }
-'Player Spawn Node'['Ship Spawn Node'] = {
+PlayerSpawnNode['Ship Spawn Node'] = {
     'NonRpmNode': 1,
     'Create': None,
     'Raycast': 1,
@@ -342,7 +272,7 @@ ENTITY_DICT = {
         'Spawnables': 'MERCHANTL1',
         'Level': '3',
         'Flagship': False } }
-'Player Spawn Node'['Cannon Defense Movement Node'] = {
+PlayerSpawnNode['Cannon Defense Movement Node'] = {
     'NonRpmNode': 1,
     'Create': None,
     'Raycast': 1,
@@ -369,7 +299,7 @@ ENTITY_DICT = {
         'Models': [
             'models/misc/smiley'],
         'Offset': (0, 0, 1.0) } }
-'Player Spawn Node'['Spawn Node'] = {
+PlayerSpawnNode['Spawn Node'] = {
     'NonRpmNode': 1,
     'Create': None,
     'Raycast': 1,
@@ -550,7 +480,7 @@ ENTITY_DICT = {
         'spawnTimeBegin': 0.0,
         'spawnTimeEnd': 0.0,
         'Start State': 'Patrol' } }
-'Player Spawn Node'['Dormant NPC Spawn Node'] = {
+PlayerSpawnNode['Dormant NPC Spawn Node'] = {
     'NonRpmNode': 1,
     'Create': None,
     'Raycast': 1,
@@ -723,7 +653,7 @@ ENTITY_DICT = {
         'Pause Duration': 30,
         'Pause Chance': 100,
         'Start State': 'Patrol' } }
-'Player Spawn Node'['Invasion NPC Spawn Node'] = {
+PlayerSpawnNode['Invasion NPC Spawn Node'] = {
     'NonRpmNode': 1,
     'Create': None,
     'Raycast': 1,
@@ -885,24 +815,7 @@ ENTITY_DICT = {
         'Pause Duration': 30,
         'Pause Chance': 100,
         'Start State': 'Patrol' } }
-'Player Spawn Node'['Cutscene Origin Node'] = {
-    'NonRpmNode': 1,
-    'Create': None,
-    'Raycast': 1,
-    'Selectable': 1,
-    'UI Name': 'Cutscene Origin Node',
-    'Visual': {
-        'Color': (0, 0, 0.65000000000000002, 1),
-        'Models': [
-            'models/misc/smiley'],
-        'Offset': (0, 0, 1.0) },
-    'Properties': {
-        'CutsceneId': [
-            PROP_UI_COMBO,
-            CutsceneData.CutsceneIds] },
-    'Defaults': {
-        'CutsceneId': CutsceneData.CutsceneIds[0] } }
-'Player Spawn Node'['Effect Node'] = {
+PlayerSpawnNode['Effect Node'] = {
     'Create': None,
     'Raycast': 1,
     'Selectable': 1,
@@ -919,7 +832,7 @@ ENTITY_DICT = {
             'self.setEffects'] },
     'Defaults': {
         'EffectName': EnvironmentEffects.EffectNodeNames[0] } }
-'Player Spawn Node'['Object Spawn Node'] = {
+PlayerSpawnNode['Object Spawn Node'] = {
     'NonRpmNode': 1,
     'Create': None,
     'Raycast': 1,
@@ -949,7 +862,7 @@ ENTITY_DICT = {
         'SpawnDelay': '20',
         'startingDepth': '12',
         'Priority': '1' } }
-'Player Spawn Node'['Node Link'] = {
+PlayerSpawnNode['Node Link'] = {
     'NonRpmNode': 1,
     'Virtual': 1,
     'Properties': {
@@ -959,38 +872,7 @@ ENTITY_DICT = {
                 'Bi-directional',
                 'Direction 1',
                 'Direction 2']] } }
-
-PROP_UI_COMBO[[]] = [
-    _[1],
-    [ x for x in range(0, 10) ]]
-PROP_UI_COMBO[[]] = [
-    _[1],
-    [ x for x in range(1, 6) ]]
-'Cell Index'['Cell Index'] = 'Level'
-'Properties'[{
-    'Defaults': {
-        'Cell Index': 0,
-        'Level': 1 },
-    'Visual': {
-        'Models': [
-            'models/misc/smiley'],
-        'Color': (1, 0.5, 0.5, 1.0) } }] = {
-    'Defaults': {
-        'Cell Index': 0,
-        'Level': 1 },
-    'Visual': {
-        'Models': [
-            'models/misc/smiley'],
-        'Color': (1, 0.5, 0.5, 1.0) } }
-'Jail Cell Door'[{
-    'NonRpmNode': 1,
-    'Create': None,
-    'Raycast': 1,
-    'Selectable': 1 }] = {
-    'NonRpmNode': 1,
-    'Create': None,
-    'Raycast': 1,
-    'Selectable': 1 }
+	
 AVAIL_OBJ_LIST = {
     CONNECTOR_TUNNEL: {
         'NonRpmNode': 1,
@@ -6506,4 +6388,3 @@ AVAIL_OBJ_LIST = {
                 'Model': 'models/props/light_tool_bulb_modular',
                 'Models': [
                     'models/props/light_tool_bulb_modular'] } } } }
-'''

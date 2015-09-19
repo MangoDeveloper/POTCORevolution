@@ -11,7 +11,7 @@ from pirates.piratesgui.BorderFrame import BorderFrame
 class VitaeMeter(DirectFrame):
     
     def __init__(self, parent, **kw):
-        DirectFrame.__init__(self, parent, **None)
+        DirectFrame.__init__(self, parent, **kw)
         self.initialiseoptions(VitaeMeter)
         toplevel_gui = loader.loadModel('models/gui/toplevel_gui')
         self.vitaeDial = DialMeter(parent = self, meterColor = Vec4(0.80000000000000004, 0.20000000000000001, 0.20000000000000001, 1), baseColor = Vec4(0, 0, 0, 1), scale = 0.28000000000000003)
