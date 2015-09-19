@@ -4,6 +4,7 @@ from pirates.distributed.DistributedPopulationTrackerAI import DistributedPopula
 from pirates.piratesbase.DistributedTimeOfDayManagerAI import DistributedTimeOfDayManagerAI
 from pirates.tutorial.DistributedPiratesTutorialAI import DistributedPiratesTutorialAI
 from pirates.world.DistributedJailInteriorAI import DistributedJailInteriorAI
+from pirates.world.WorldManagerAI import WorldManagerAI
 from pirates.piratesbase import PiratesGlobals
 from direct.distributed.PyDatagram import *
 from otp.distributed.OtpDoGlobals import *
@@ -34,6 +35,9 @@ class PiratesAIRepository(PiratesInternalRepository):
 
         self.DistributedJailInterior = DistributedJailInteriorAI(self)
         self.DistributedJailInterior.generateWithRequired(2)
+
+        self.worldManager = WorldManagerAI(self)
+        jail = self.worldManager.loadObjectsFromFile(filename="make_a_pirate_jail.py")
 
     def handleConnected(self):
         self.districtId = self.allocateChannel()

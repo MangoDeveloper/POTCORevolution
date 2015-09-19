@@ -115,17 +115,17 @@ class GameOptionsGui(DirectFrame):
         y = -0.14999999999999999
         ox = 0.23000000000000001
         text = PLocalizer.GameOptionsDefault
-        self.defaultButton = GuiButton(parent = parent, text = text, pos = (x, 0, y), command = self.defaultButtonCB)
+        self.defaultButton = GuiButton(parent = parent, text = text, pos = (-0.3, 0, 0.09), command = self.defaultButtonCB)
         x += ox
         text = PLocalizer.GameOptionsRestore
-        self.restoreButton = GuiButton(parent = parent, text = text, pos = (x, 0, y), command = self.restoreButtonCB)
+        self.restoreButton = GuiButton(parent = parent, text = text, pos = (0.3, 0, 0.09), command = self.restoreButtonCB)
         x += ox
         text = PLocalizer.GameOptionsSave
         if self.gameOptions is not None:
             command = self.gameOptions.save_button_function
         else:
             command = None
-        button = GuiButton(parent = parent, text = text, pos = (x, 0, y), command = command)
+        self.saveButton = GuiButton(parent = parent, text = text, pos = (0, 0, 0.09), command = command)
         main_gui = loader.loadModel('models/gui/gui_main')
         generic_x = main_gui.find('**/x2')
         generic_box = main_gui.find('**/exit_button')
@@ -133,9 +133,10 @@ class GameOptionsGui(DirectFrame):
         main_gui.removeNode()
         x = 1.2190000000000001
         y = -0.38500000000000001
-        button = GuiButton(parent = parent, relief = None, pos = (x, 0, y), image = (generic_box, generic_box, generic_box_over, generic_box), image_scale = 0.40000000000000002, command = self.close)
-        xButton = OnscreenImage(parent = button, image = generic_x, scale = 0.20000000000000001, pos = (-0.25600000000000001, 0, 0.76600000000000001))
-
+        self.button = GuiButton(parent = parent, relief = None, pos = (0.7, 0, -0.09), image = (generic_box, generic_box, generic_box_over, generic_box), image_scale = 0.40000000000000002, command = self.close)
+        button = self.button
+        self.xButton = OnscreenImage(parent = button, image = generic_x, scale = 0.20000000000000001, pos = (-0.25600000000000001, 0, 0.76600000000000001))
+        xButton = self.xButton
     
     def setupDisplayFrame(self):
         self.displayFrame = DirectFrame(parent = self.upperFrame, relief = None)
@@ -757,6 +758,13 @@ class GameOptionsGui(DirectFrame):
             return None
         
         self.gameOptions.hide()
+        self.defaultButton.hide()
+        self.restoreButton.hide()
+        self.saveButton.hide()
+        self.button.hide()
+        self.xButton.hide()
+        self.graphicsFrame.hide()
+        self.imageFrame.hide()
         base.setLowMemory(self.gameOptions.options.memory)
         if self.orig_texture_scale != self.gameOptions.options.texture_scale or self.orig_textureCompression != self.gameOptions.options.textureCompression:
             self.orig_texture_scale = self.gameOptions.options.texture_scale

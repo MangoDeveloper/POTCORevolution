@@ -161,7 +161,7 @@ class ShardPanel(DirectFrame):
     def syncShardList(self):
         current = set(self.shards.keys())
         shards = base.cr.listActiveShards()
-        active = set(lambda shard: shard for shard in shard[0](shards))
+        active = set(lambda shard: shard for shard in shards)
         old = current.difference(active)
         new = active.difference(current)
         for id in old:

@@ -33,6 +33,7 @@ from pirates.world.LocationConstants import LocationIds
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
 from pirates.inventory import ItemGlobals
+from pirates.pirate.Human import Human
 CannonDistance = 200
 CannonballHitEvent = 'tutorialCannonballHit'
 
@@ -434,15 +435,23 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
 
     
     def enterAct1MakeAPirate(self):
+        base.loadingScreen.beginStep('MakeAPirate', 5, 15)
+        base.loadingScreen.showTarget(jail = True)
+        base.loadingScreen.show()
         base.disableMouse()
+        base.loadingScreen.tick()
         #localAvatar.gameFSM.request('MakeAPirate')
         #localAvatar.gameFSM.lockFSM = True
         #localAvatar.guiMgr.hideTrays()
+        base.loadingScreen.tick()
         self.avHpr = VBase3(180, 0, 0)
+        base.loadingScreen.tick()
         #ga = localAvatar.getParentObj()
         #ga.builder.turnOffLights()
         #self.jail = ga.find('**/*navy_jail_interior*')
+        base.loadingScreen.tick()
         self.map.enter()
+        base.loadingScreen.tick()
         self.accept('makeAPirateComplete', self.handleMakeAPirate)
         UserFunnel.logSubmit(1, 'CREATE_PIRATE_LOADS')
         UserFunnel.logSubmit(0, 'CREATE_PIRATE_LOADS')
@@ -459,10 +468,11 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
             self.map = 0
         elif done == 'created':
             dna = self.map.pirate.style
+            localAvatar = Human()
             localAvatar.setDNA(dna)
             localAvatar.generateHuman(dna.gender, base.cr.humanHigh)
-            localAvatar.motionFSM.off()
-            localAvatar.motionFSM.on()
+            #localAvatar.motionFSM.off()
+            #localAvatar.motionFSM.on()
             if clothing:
                 clothes = []
                 for clothId in clothing:
@@ -489,8 +499,8 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
                             clothing[clothId][2]])
                         continue
                 
-                if clothes:
-                    localAvatar.sendRequestMAPClothes(clothes)
+                #if clothes:
+                #    localAvatar.sendRequestMAPClothes(clothes)
                 
             
             self.acceptOnce('avatarPopulated', self.avatarPopulated)

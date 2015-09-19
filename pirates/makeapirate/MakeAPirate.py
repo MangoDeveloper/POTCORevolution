@@ -395,7 +395,12 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
             self.jail.flattenMedium()
             self.jail.reparentTo(render)
             self.jail.setLightOff()
-        
+
+        self.jailInterior = loader.loadModel('models/buildings/navy_jail_interior')
+        self.jailInterior.flattenMedium()
+        self.jailInterior.reparentTo(render)
+        #self.jailInterior.setLightOff()
+
         if not self.noJailLight:
             self.pirate.setH(self.initH)
             self.pirate.setZ(-1.5)
@@ -479,6 +484,9 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
             self.offsetZoomHpr = camera.getHpr(self.avatarDummyNode)
         else:
             self.offsetZoomHpr = camera.getHpr(render)
+        base.loadingScreen.tick()
+        base.loadingScreen.endStep('MakeAPirate')
+        base.loadingScreen.hide()
         base.transitions.fadeIn()
 
     
@@ -1041,12 +1049,13 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
             self.pirate.model.setupSelectionChoices('NPC')
         else:
             self.pirate.model.setupSelectionChoices('DEFAULT')
-            if self.wantIdleCentered:
-                self.pirate.mixingEnabled = False
-                self.pirate.enableBlend()
-                self.pirate.loop('idle_centered')
-            
+        
+        if self.wantIdleCentered:
+            self.pirate.mixingEnabled = False
+            self.pirate.enableBlend()
+            self.pirate.loop('idle_centered')
             self.pirate.loop('idle')
+            
             if self.wantIdleCentered:
                 self.pirate.setControlEffect('idle_centered', 0)
                 self.pirate.setControlEffect('idle', 1)

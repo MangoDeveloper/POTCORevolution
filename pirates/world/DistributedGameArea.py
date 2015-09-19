@@ -236,7 +236,6 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
                 request = self.pendingSetupConnector.pop(connector.doId, None)
                 if not request:
                     pass
-                1
 
             connector = self.cr.doId2do.get(connId)
             if connector:
@@ -465,7 +464,7 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
             self.envEffects = EnvironmentEffects(self, self.modelPath)
             if interior:
                 pass
-            1
+            
         if loadIslandMusic:
             if not base.localAvatar.isInInvasion():
                 base.musicMgr.requestFadeOut(SoundGlobals.MUSIC_TORMENTA)

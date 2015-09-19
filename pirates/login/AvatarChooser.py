@@ -294,13 +294,9 @@ class AvatarChooser(DirectObject, StateData):
         else:
             optionsState = DGG.NORMAL
         self.optionsButton = DirectButton(parent = self.quitFrame, relief = None, text_scale = 0.050000000000000003, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserOptions, image = (self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (0, 0, 0.20999999999999999), command = self._AvatarChooser__handleOptions, state = optionsState)
+        self.optionsButton.setPos(0, 0, 0.070000000000000007)
         if self.disableOptions:
             self.optionsButton.setColorScale(Vec4(0.69999999999999996, 0.69999999999999996, 0.69999999999999996, 0.69999999999999996))
-        
-        self.upgradeButton = DirectButton(parent = self.quitFrame, relief = None, text_scale = 0.050000000000000003, text_fg = (1, 0.90000000000000002, 0.69999999999999996, 0.90000000000000002), text_shadow = PiratesGuiGlobals.TextShadow, text = '\x01smallCaps\x01%s\x02' % PLocalizer.AvatarChooserUpgrade, image = (self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale = 0.37, text_pos = (0, -0.014999999999999999), pos = (0, 0, 0.070000000000000007), command = self._AvatarChooser__handleUpgrade)
-        if base.cr.isPaid() == OTPGlobals.AccessFull:
-            self.upgradeButton.hide()
-            self.optionsButton.setPos(0, 0, 0.070000000000000007)
         
         self.disableQuit = base.config.GetBool('location-kiosk', 0)
         if self.disableQuit:
@@ -1094,8 +1090,8 @@ class AvatarChooser(DirectObject, StateData):
             self.notify.info('AvatarChooser: request delete slot: %s avId: %s subId: %s' % (slot, potAv.id, subId))
             self.accept('rejectRemoveAvatar', self._AvatarChooser__rejectRemoveAvatar)
             self.accept('removeAvatarResponse', self._AvatarChooser__removeAvatarResponse)
-            base.cr.avatarManager.sendRequestRemoveAvatar(potAv.id, subId, 'delete')
-            base.cr.waitForDatabaseTimeout(requestName = 'WaitForDeleteAvatarResponse')
+            base.cr.csm.sendDeleteAvatar(potAv.id)
+            #base.cr.avatarManager.sendRequestRemoveAvatar(potAv.id, subId, 'delete')
             self.blockInput()
         else:
             self.allowInput()
@@ -1124,8 +1120,7 @@ class AvatarChooser(DirectObject, StateData):
     def _AvatarChooser__removeAvatarResponse(self, avatarId, subId):
         self.ignore('rejectRemoveAvatar')
         self.ignore('removeAvatarResponse')
-        base.cr.cleanupWaitingForDatabase()
-        base.cr.sendGetAvatarsMsg()
+        base.cr.csm.requestAvatars()
 
     
     def _AvatarChooser__rejectRemoveAvatar(self, reasonId):
@@ -1229,8 +1224,6 @@ class AvatarChooser(DirectObject, StateData):
         self.deleteButton.setColorScale(color)
         self.optionsButton['state'] = DGG.DISABLED
         self.optionsButton.setColorScale(color)
-        self.upgradeButton['state'] = DGG.DISABLED
-        self.upgradeButton.setColorScale(color)
         if base.config.GetBool('allow-linked-accounts', 0):
             self.nextSubButton['state'] = DGG.DISABLED
             self.nextSubButton.setColorScale(color)
@@ -1265,8 +1258,6 @@ class AvatarChooser(DirectObject, StateData):
         
         self.deleteButton['state'] = DGG.NORMAL
         self.deleteButton.clearColorScale()
-        self.upgradeButton['state'] = DGG.NORMAL
-        self.upgradeButton.clearColorScale()
         if not self.disableOptions:
             self.optionsButton['state'] = DGG.NORMAL
             self.optionsButton.clearColorScale()

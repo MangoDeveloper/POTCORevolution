@@ -38,7 +38,10 @@ class WorldCreatorBase:
         self.worldType = None
 
     
-    def loadObjectsFromFile(self, filename, parent, parentIsObj = False):
+    def loadObjectsFromFile(self, filename, parent=None, parentIsObj = False):
+        if not parent:
+            parent = self.repository
+
         fileDict = self.openFile(filename)
         self.fileDicts[filename] = fileDict
         objDict = fileDict.get('Objects')
@@ -142,12 +145,19 @@ class WorldCreatorBase:
         prevWorld = self.world
         newObjInfo = self.createObject(object, parent, parentUid, objKey, dynamic, parentIsObj = parentIsObj, fileName = fileName, actualParentObj = actualParentObj)
         if newObjInfo:
-            (newObj, newActualParent) = newObjInfo
+            try:
+                (newObj, newActualParent) = newObjInfo
+            except:
+                (newObj) = newObjInfo
+                newActualParent = None
         else:
             return None
         instanced = object.get('Instanced')
         if instanced:
-            self.world.setCanBePrivate(instanced)
+            try:
+                self.world.setCanBePrivate(instanced)
+            except:
+                pass
         
         objDict = object.get('Objects')
         if objDict:
@@ -158,7 +168,7 @@ class WorldCreatorBase:
                 
             
             self.loadObjectDict(objDict, newObj, objKey, dynamic, fileName = fileName, actualParentObj = newActualParent)
-        
+            
         self._restoreWorld(prevWorld)
         return newObj
 

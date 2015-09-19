@@ -1,0 +1,36 @@
+1 explicit pages:
+  config/english/config_en.prc
+
+2 implicit pages:
+  /c/Panda3D-1.8.1/etc/Config.prc
+  /c/Panda3D-1.8.1/etc/Confauto.prc
+
+serverVersion:  sv-1.0.0
+PAccount: accountServer from launcher:  
+PAccount: default accountServer:  https://pirates.go.com
+Initializing quest ladders...
+:MagicWordManager(warning): You risk being banned if you abuse this mate!
+:MagicWordManager(warning): I will have Jack cut you into pieces! (a.k.a. banned forever)
+:DistributedObjectGlobal(warning): ChatManager going online
+:DistributedShipLoader(warning): ShipLoader going online
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+########## startReaderPollTask Pirate
+########## stopReaderPollTask Pirate
+New DO:401000001, dclass:PiratesDistrict
+New DO:401000002, dclass:DistributedPopulationTracker
+getSubTimeList
+ sub was None for 0
+setEnvironment unnamed 8 {}
+getSubTimeList
+ sub was None for 8
+########## stopReaderPollTask Pirate
+Exception occurred while processing Func-send-10 of fadeTask:
+fadeTask:
+  0.000 fadeTask {
+  0.000   *Func-reparentTo-11
+  0.000   *Func-showThrough-12
+  0.000   LerpColorInterval-12: color to 0 0 0 1 dur 0.5
+  0.500   *Func-send-10
+  0.500 }
+
