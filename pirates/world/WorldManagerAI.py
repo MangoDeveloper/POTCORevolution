@@ -27,6 +27,7 @@ class WorldManagerAI(WorldCreatorBase):
 
 		if objType == 'Island':
 			self.world = DistributedInstanceWorldAI(self.air)
+			self.world.generateWithRequired(zoneId=self.gameZone)
 			self.world.generateIslands(object['Visual']['Model'], object['Name'], objKey, object['Undockable'], self.gameZone)
 
 			self.ocean = DistributedOceanGridAI(self.air)
