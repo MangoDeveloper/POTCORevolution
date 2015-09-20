@@ -3,7 +3,7 @@
 - [x] Get client to the connection dialog
 - [x] Write the AI and UD server
 - [ ] Write needed AI and UD for base
-- [ ] Fix client to work with Astron
+- [x] Fix client to work with Astron
 - [ ] Write AvatarManager
 - [x] Get to PickAPirate
 - [ ] Repair PickAPirate
