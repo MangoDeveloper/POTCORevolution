@@ -28,9 +28,6 @@ class PiratesAIRepository(PiratesInternalRepository):
             self.allocateChannel(), self.getGameDoId(), 3)
         self.districtStats.b_setShardId(self.distributedDistrict.getDoId())
 
-        self.tutorialObject = DistributedPiratesTutorialAI(self)
-        self.tutorialObject.generateWithRequired(2)
-
         self.DistributedTimeOfDayManager = DistributedTimeOfDayManagerAI(self, isPaused=False, isJolly=0)
         self.DistributedTimeOfDayManager.generateWithRequired(2)
 
@@ -46,6 +43,12 @@ class PiratesAIRepository(PiratesInternalRepository):
         self.islaRumrunner = self.worldManager.loadObjectsFromFile(filename="RumrunnerWorld.py")
         self.anvilIsland = self.worldManager.loadObjectsFromFile(filename="AnvilIsland.py")
         self.islaTormenta = self.worldManager.loadObjectsFromFile(filename="TormentaIsland.py")
+
+        # Tutorial:
+        self.rambleShackIsland = self.worldManager.loadObjectsFromFile(filename="RambleshackWorld.py")
+
+        self.tutorialObject = DistributedPiratesTutorialAI(self)
+        self.tutorialObject.generateWithRequired(2)
 
     def handleConnected(self):
         self.districtId = self.allocateChannel()

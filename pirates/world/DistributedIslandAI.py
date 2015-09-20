@@ -31,38 +31,50 @@ class DistributedIslandAI(DistributedCartesianGridAI, DistributedGameAreaAI, Tea
         DistributedGameAreaAI.announceGenerate(self)
         DistributedCartesianGridAI.announceGenerate(self)
 
-    def setParentingRules(self, todo0, todo1):
-        pass
+    def setParentingRules(self, rule1, rule2):
+        self.parentingRules = [rule1, rule2]
 
-    def d_setParentingRules(self, todo0, todo1):
-        pass
+    def d_setParentingRules(self, rule1, rule2):
+        self.sendUpdate('setParentingRules', [
+            rule1,
+            rule2])
 
-    def b_setParentingRules(self, todo0, todo1):
-        pass
+    def b_setParentingRules(self, rule1, rule2):
+        self.setParentingRules(rule1, rule2)
+        self.d_setParentingRules(rule1, rule2)
 
     def getParentingRules(self):
         return self.parentingRules
 
-    def setIslandTransform(self, todo0, todo1, todo2, todo3):
-        pass
+    def setIslandTransform(self, x, y, z, h):
+        self.islandTransform = [x, y, z, h]
 
-    def d_setIslandTransform(self, todo0, todo1, todo2, todo3):
-        pass
+    def d_setIslandTransform(self, x, y, z, h):
+        self.sendUpdate('setIslandTransform', [
+            x,
+            y,
+            z,
+            h])
 
-    def b_setIslandTransform(self, todo0, todo1, todo2, todo3):
-        pass
+    def b_setIslandTransform(self, x, y, z, h):
+        self.setIslandTransform(x, y, z, h)
+        self.d_setIslandTransform(x, y, z, h)
 
     def getIslandTransform(self):
         return self.islandTransform
 
-    def setZoneSphereSize(self, todo0, todo1, todo2):
-        pass
+    def setZoneSphereSize(self, rad0, rad1, rad2):
+        self.zoneSphereSize = [rad0, rad1, rad2]
 
-    def d_setZoneSphereSize(self, todo0, todo1, todo2):
-        pass
+    def d_setZoneSphereSize(self, rad0, rad1, rad2):
+        self.sendUpdate('setZoneSphereSize', [
+            rad0,
+            rad1,
+            rad2])
 
-    def b_setZoneSphereSize(self, todo0, todo1, todo2):
-        pass
+    def b_setZoneSphereSize(self, rad0, rad1, rad2):
+        self.setZoneSphereSize(rad0, rad1, rad2)
+        self.b_setZoneSphereSize(rad0, rad1, rad2)
 
     def getZoneSphereSize(self):
         return self.zoneSphereSize
@@ -79,26 +91,30 @@ class DistributedIslandAI(DistributedCartesianGridAI, DistributedGameAreaAI, Tea
     def getZoneSphereCenter(self):
         return self.zoneSphereCenter
 
-    def setIslandModel(self, todo0):
-        pass
+    def setIslandModel(self, islandModel):
+        self.islandModel = islandModel
 
-    def d_setIslandModel(self, todo0):
-        pass
+    def d_setIslandModel(self, islandModel):
+        self.sendUpdate('setIslandModel', [
+            islandModel])
 
-    def b_setIslandModel(self, todo0):
-        pass
+    def b_setIslandModel(self, islandModel):
+        self.setIslandModel(islandModel)
+        self.d_setIslandModel(islandModel)
 
     def getIslandModel(self):
         return self.islandModel
 
-    def setUndockable(self, todo0):
-        pass
+    def setUndockable(self, undockable):
+        self.undockable = undockable
 
-    def d_setUndockable(self, todo0):
-        pass
+    def d_setUndockable(self, undockable):
+        self.sendUpdate('setUndockable', [
+            undockable])
 
-    def b_setUndockable(self, todo0):
-        pass
+    def b_setUndockable(self, undockable):
+        self.setUndockable(undockable)
+        self.d_setUndockable(undockable)
 
     def getUndockable(self):
         return self.undockable

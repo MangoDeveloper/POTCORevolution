@@ -41,7 +41,6 @@ class DistributedOceanGrid(DistributedCartesianGrid, OceanGridBase, MappableGrid
         world = self.cr.getDo(self.parentId)
         if parentId not in (0, self.cr.getGameDoId()):
             pass
-        1
 
     
     def disable(self):

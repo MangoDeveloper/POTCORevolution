@@ -14,7 +14,7 @@ class DistributedInstanceBaseAI(DistributedObjectAI):
         DistributedObjectAI.announceGenerate(self)
 
     def getParentingRules(self):
-        return ['', '']
+        return ['instance', '2000']
 
     def getFileName(self):
         return self.fileName

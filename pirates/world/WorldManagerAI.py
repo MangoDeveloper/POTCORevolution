@@ -2,6 +2,8 @@ from pandac.PandaModules import *
 from pirates.world.WorldCreatorBase import WorldCreatorBase
 from direct.directnotify.DirectNotifyGlobal import directNotify
 from pirates.world.DistributedIslandAI import DistributedIslandAI
+from pirates.world.DistributedOceanGridAI import DistributedOceanGridAI
+from pirates.instance.DistributedInstanceWorldAI import DistributedInstanceWorldAI
 
 class WorldManagerAI(WorldCreatorBase):
 	notify = directNotify.newCategory('WorldManagerAI')
@@ -11,6 +13,7 @@ class WorldManagerAI(WorldCreatorBase):
 		self.air = air
 
 		self.world = None
+		self.ocean = None
 		self.gameZone = gameZone
 
 	def isObjectInCurrentGamePhase(self, obj):
@@ -23,8 +26,8 @@ class WorldManagerAI(WorldCreatorBase):
 		objType = WorldCreatorBase.loadObject(self, object, parent, parentUid, objKey, dynamic, parentIsObj, fileName, actualParentObj)
 
 		if objType == 'Island':
-			self.world = DistributedIslandAI(self.air, object['Visual']['Model'], object['Name'], objKey)
-			self.world.generateWithRequired(zoneId=self.gameZone)
+			self.world = DistributedInstanceWorldAI(self.air)
+			self.world.generateIslands(object['Visual']['Model'], object['Name'], objKey, object['Undockable'], self.gameZone)
 
-			if self.world:
-				self.air.notify.info("Created island: %s" % (object['Name']))
+			self.ocean = DistributedOceanGridAI(self.air)
+			self.ocean.generateWithRequired(zoneId=self.gameZone)
