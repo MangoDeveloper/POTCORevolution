@@ -8,11 +8,5 @@ screenshots/
 resources/
 cache/
 
-# custom staff batch
-start_game_zach.bat
-astron/darwin/start_ai_server_johnny.sh
-astron/darwin/start_uberdog_server_johnny.sh
-darwin/start_game_localhost_johnny.sh
-
 # Database
 *.db
