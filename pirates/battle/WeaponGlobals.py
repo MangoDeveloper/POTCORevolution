@@ -138,6 +138,7 @@ else:
     searchPath.appendDirectory(Filename.expandFrom('$PIRATES/src/battle'))
     searchPath.appendDirectory(Filename.expandFrom('pirates/src/battle'))
     searchPath.appendDirectory(Filename.expandFrom('pirates/battle'))
+    searchPath.appendDirectory(Filename.expandFrom('resources/phase_2/etc'))
     searchPath.appendDirectory(Filename('.'))
     searchPath.appendDirectory(Filename('etc'))
 found = vfs.resolveFilename(filename, searchPath)
