@@ -4,7 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 class DistributedGameAreaAI(DistributedNodeAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedGameAreaAI')
     
-    def __init__(self, air, modelPath, name='', uid='', links=[]):
+    def __init__(self, air, modelPath, name=None, uid=None, links=[]):
         DistributedNodeAI.__init__(self, air)
         self.modelPath = modelPath
         self.links = links

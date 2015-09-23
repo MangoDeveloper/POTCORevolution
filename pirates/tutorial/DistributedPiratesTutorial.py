@@ -435,11 +435,11 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
 
     
     def enterAct1MakeAPirate(self):
-        base.loadingScreen.beginStep('MakeAPirate', 5, 15)
-        base.loadingScreen.showTarget(jail = True)
-        base.loadingScreen.show()
+        #base.loadingScreen.beginStep('MakeAPirate', 5, 15)
+        #base.loadingScreen.showTarget(jail = True)
+        #base.loadingScreen.show()
         base.disableMouse()
-        base.loadingScreen.tick()
+        #base.loadingScreen.tick()
         #localAvatar.gameFSM.request('MakeAPirate')
         #localAvatar.gameFSM.lockFSM = True
         #localAvatar.guiMgr.hideTrays()
@@ -471,38 +471,40 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
             localAvatar = Human()
             localAvatar.setDNA(dna)
             localAvatar.generateHuman(dna.gender, base.cr.humanHigh)
+            base.camera.reparentTo(localAvatar)
             #localAvatar.motionFSM.off()
             #localAvatar.motionFSM.on()
-            if clothing:
-                clothes = []
-                for clothId in clothing:
-                    clothType = None
-                    if clothId == 'HAT':
-                        clothType = ItemGlobals.HAT
-                    elif clothId == 'SHIRT':
-                        clothType = ItemGlobals.SHIRT
-                    elif clothId == 'VEST':
-                        clothType = ItemGlobals.VEST
-                    elif clothId == 'COAT':
-                        clothType = ItemGlobals.COAT
-                    elif clothId == 'PANT':
-                        clothType = ItemGlobals.PANT
-                    elif clothId == 'BELT':
-                        clothType = ItemGlobals.BELT
-                    elif clothId == 'SHOE':
-                        clothType = ItemGlobals.SHOE
-                    
-                    if clothType and clothing[clothId][0]:
-                        clothes.append([
-                            clothType,
-                            clothing[clothId][0],
-                            clothing[clothId][2]])
-                        continue
+            #if clothing:
+            #    clothes = []
+            #    for clothId in clothing:
+            #        clothType = None
+            #        if clothId == 'HAT':
+            #            clothType = ItemGlobals.HAT
+            #        elif clothId == 'SHIRT':
+            #            clothType = ItemGlobals.SHIRT
+            #        elif clothId == 'VEST':
+            #            clothType = ItemGlobals.VEST
+            #        elif clothId == 'COAT':
+            #            clothType = ItemGlobals.COAT
+            #        elif clothId == 'PANT':
+            #            clothType = ItemGlobals.PANT
+            #        elif clothId == 'BELT':
+            #            clothType = ItemGlobals.BELT
+            #        elif clothId == 'SHOE':
+            #            clothType = ItemGlobals.SHOE
+            #        
+            #        if clothType and clothing[clothId][0]:
+            #            clothes.append([
+            #                clothType,
+            #                clothing[clothId][0],
+            #                clothing[clothId][2]])
+            #            continue
                 
                 #if clothes:
                 #    localAvatar.sendRequestMAPClothes(clothes)
                 
-            
+            print "AVATAR STATE SET TO FSM!"
+            base.transitions.fadeIn(1.0)
             self.acceptOnce('avatarPopulated', self.avatarPopulated)
             if self.map.nameGui.customName:
                 localAvatar.setWishName()
@@ -524,8 +526,8 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
     
     def avatarPopulated(self):
         self.request('EscapeFromLA')
-        localAvatar.b_setGameState('LandRoam')
-        self.sendUpdate('makeAPirateComplete')
+        #localAvatar.b_setGameState('LandRoam')
+        #self.sendUpdate('makeAPirateComplete')
 
     
     def makeAPirateCompleteResp(self):

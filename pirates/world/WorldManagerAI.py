@@ -4,11 +4,12 @@ from direct.directnotify.DirectNotifyGlobal import directNotify
 from pirates.world.DistributedIslandAI import DistributedIslandAI
 from pirates.world.DistributedOceanGridAI import DistributedOceanGridAI
 from pirates.instance.DistributedInstanceWorldAI import DistributedInstanceWorldAI
+import WorldGlobals
 
 class WorldManagerAI(WorldCreatorBase):
 	notify = directNotify.newCategory('WorldManagerAI')
 
-	def __init__(self, air, worldFile=None, gameZone=2000):
+	def __init__(self, air, worldFile=None, gameZone=WorldGlobals.ISLAND_GRID_STARTING_ZONE):
 		WorldCreatorBase.__init__(self, air, worldFile)
 		self.air = air
 

@@ -415,8 +415,8 @@ class PiratesClientRepository(OTPClientRepository):
             self.tutorialObject.map = MakeAPirate(avList, 'makeAPirateComplete')
             self.tutorialObject.map.load()
             self.csm.requestEnterMAP()
-            self.accept('createdNewAvatar', self.handleAvatarCreated, [
-                newPotAv])
+            #self.accept('createdNewAvatar', self.handleAvatarCreated, [
+            #    newPotAv])
 
     enterCreateAvatar = report(types = [
         'args',

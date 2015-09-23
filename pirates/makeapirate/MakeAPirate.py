@@ -263,6 +263,7 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
             'n': 0 }
         FSM.FSM.__init__(self, 'MakeAPirate')
         self.avList = avList
+        self.doneEvent = doneEvent
         self.index = index
         self.subId = subId
         self.genderIdx = 0
@@ -1330,7 +1331,7 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
 
         
         def createAv():
-            self.acceptOnce('createdNewAvatar', populateAv)
+            self.acceptOnce('createdNewAvatar', sendDone)
             base.cr.csm.sendCreateAvatar(self.pirate.style, self.index)
 
         

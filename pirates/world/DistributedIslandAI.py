@@ -2,13 +2,14 @@ from direct.distributed.DistributedCartesianGridAI import DistributedCartesianGr
 from pirates.world.DistributedGameAreaAI import DistributedGameAreaAI
 from direct.directnotify import DirectNotifyGlobal
 from pirates.battle.Teamable import Teamable
+import WorldGlobals
 
 class DistributedIslandAI(DistributedCartesianGridAI, DistributedGameAreaAI, Teamable):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedIslandAI')
     
     def __init__(self, air, islandModel, name, uid):
         DistributedGameAreaAI.__init__(self, air, islandModel, name, uid)
-        DistributedCartesianGridAI.__init__(self, air, 2000, 1, 1, 1)
+        DistributedCartesianGridAI.__init__(self, air, WorldGlobals.ISLAND_GRID_STARTING_ZONE, WorldGlobals.ISLAND_GRID_SIZE, WorldGlobals.ISLAND_GRID_RADIUS, WorldGlobals.ISLAND_CELL_SIZE)
         Teamable.__init__(self)
 
         self.parentingRules = ['island', '2000:10:20']
