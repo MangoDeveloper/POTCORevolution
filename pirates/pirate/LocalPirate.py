@@ -105,129 +105,126 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
     neverDisable = 1
     
     def __init__(self, cr):
-        
-        try:
-            self.LocalPirate_initialized
-        except:
-            self.LocalPirate_initialized = 1
-            DistributedPlayerPirate.__init__(self, cr)
-            self.masterHuman = base.cr.humanHigh
-            chatMgr = PiratesChatManager()
-            talkAssistant = PTalkAssistant()
-            LocalAvatar.__init__(self, cr, chatMgr, talkAssistant = talkAssistant)
-            self.controlManager = ControlManager.ControlManager(True, False)
-            self.gameFSM = None
-            self.equippedWeapons = []
-            self.monstrousTarget = None
-            self.distanceToTarget = 0
-            self._LocalPirate__lootUIEnabled = True
-            self.missedLootInformation = []
-            self.setLocalAvatarUsingWeapon(1)
-            self.cameraFSM = CameraFSM(self)
-            self.guiMgr = GuiManager.GuiManager(self)
-            self.interestHandles = []
-            if base.config.GetBool('debug-local-animMixer', 0):
-                self.animMixer.setVerbose(True)
+        self.LocalPirate_initialized = 1
+        DistributedPlayerPirate.__init__(self, cr)
+        self.masterHuman = base.cr.humanHigh
+        chatMgr = PiratesChatManager()
+        talkAssistant = PTalkAssistant()
+        LocalAvatar.__init__(self, cr, chatMgr, talkAssistant = talkAssistant)
+        self.controlManager = ControlManager(True, False)
+        self.gameFSM = None
+        self.equippedWeapons = []
+        self.monstrousTarget = None
+        self.distanceToTarget = 0
+        self._LocalPirate__lootUIEnabled = True
+        self.missedLootInformation = []
+        self.setLocalAvatarUsingWeapon(1)
+        self.cameraFSM = CameraFSM(self)
+        self.guiMgr = GuiManager.GuiManager(self)
+        self.interestHandles = []
+        if base.config.GetBool('debug-local-animMixer', 0):
+            self.animMixer.setVerbose(True)
             
-            self.currentMouseOver = None
-            self.currentAimOver = None
-            self.currentSelection = None
-            self.tutObject = None
-            self.currentDialogMovie = None
-            self.ship = None
-            self.shipList = set()
-            self.cannon = None
-            self._LocalPirate__turboOn = 0
-            self._LocalPirate__marioOn = 0
-            self.speedIndex = 0
-            self.curMoveSound = None
-            self.setupMovementSounds()
-            self.rangeDetector = RangeDetector.RangeDetector()
-            self.rangeDetector.detachNode()
-            self.showQuest = True
-            self.currentOcean = 0
-            self.soundWhisper = loadSfx(SoundGlobals.SFX_GUI_WHISPER)
-            self.positionExaminer = PositionExaminer.PositionExaminer()
-            self.skillDiary = BattleSkillDiary.BattleSkillDiary(self.cr, self)
-            self.lookAtTarget = None
-            self.lookAtTimer = None
-            self.lookAtDummy = self.attachNewNode('lookAtDummy')
-            self.lookFromNode = self.attachNewNode('lookFromTargetHelper')
-            self.lookFromNode.setZ(self.getHeight())
-            self.lookToNode = NodePath('lookToTargetHelper')
-            if base.config.GetBool('want-dev', False):
-                self.accept('shift-f12', self.toggleAvVis)
+        self.currentMouseOver = None
+        self.currentAimOver = None
+        self.currentSelection = None
+        self.tutObject = None
+        self.currentDialogMovie = None
+        self.ship = None
+        self.shipList = set()
+        self.cannon = None
+        self._LocalPirate__turboOn = 0
+        self._LocalPirate__marioOn = 0
+        self.speedIndex = 0
+        self.curMoveSound = None
+        self.setupMovementSounds()
+        self.rangeDetector = RangeDetector.RangeDetector()
+        self.rangeDetector.detachNode()
+        self.showQuest = True
+        self.currentOcean = 0
+        self.soundWhisper = loadSfx(SoundGlobals.SFX_GUI_WHISPER)
+        self.positionExaminer = PositionExaminer.PositionExaminer()
+        self.skillDiary = BattleSkillDiary.BattleSkillDiary(self.cr, self)
+        self.lookAtTarget = None
+        self.lookAtTimer = None
+        self.lookAtDummy = self.attachNewNode('lookAtDummy')
+        self.lookFromNode = self.attachNewNode('lookFromTargetHelper')
+        self.lookFromNode.setZ(self.getHeight())
+        self.lookToNode = NodePath('lookToTargetHelper')
+        if base.config.GetBool('want-dev', False):
+            self.accept('shift-f12', self.toggleAvVis)
             
-            self.money = 0
-            self.firstMoneyQuieted = 0
-            self.enableAutoRun = 0
-            self.kickEvents = None
-            self.battleTeleportFlagTask = None
-            self.openJailDoorTrack = None
-            self.currentStoryQuests = []
-            self.cloudScudEffect = None
-            self.soloInteraction = False
-            self.emoteAccess = []
-            self.AFKDelay = base.config.GetInt('afk-delay', 600)
-            self.playRewardAnimation = None
-            self.localProjectiles = []
-            self._cannonAmmoSkillId = InventoryType.CannonRoundShot
-            self._siegeTeamSV = StateVar(0)
-            self.guildPopupDialog = None
-            self.moralePopupDialog = None
-            self.gmNameTagEnabledLocal = 0
-            self.gmNameTagStringLocal = ''
-            self.gmNameTagColorLocal = ''
-            soundEffects = [
-                SoundGlobals.SFX_MONSTER_JR_LAUGH_01,
-                SoundGlobals.SFX_MONSTER_JR_LAUGH_02,
-                SoundGlobals.SFX_MONSTER_JR_ENJOY,
-                SoundGlobals.SFX_MONSTER_JR_SUBMIT,
-                SoundGlobals.SFX_MONSTER_JR_JOIN]
-            self.jollySfx = loadSfx(random.choice(soundEffects))
-            self.currCombatMusic = None
-            self.clothingUpdateTaskName = 'inventoryClothingUpdate'
-            self.clothingUpdatePending = 0
-            self.sailHit = 0
-            self.playersNearby = { }
-            self.trackedRotation = []
-            self.trackedTurning = 0
-            self.lastCannonShot = globalClock.getFrameTime()
-            self.pendingInitQuest = None
-            self.inInvasion = False
-            self.levelFootStep = None
-            self.wobbleList = []
-            self.fovIval = None
-            self.lockRegenFlag = 0
-            self.everBeenGhost = 0
-            self.mistimedAttack = 0
-            if base.config.GetBool('want-easy-combos', 1):
-                self.wantComboTiming = 0
-            else:
-                self.wantComboTiming = 1
-            self.zombieEffect = None
-            self.zombieIval = None
-            self.defenceEffects = { }
-            self.skillSfxIval = None
-            self.currentWeaponSlotId = 1
-            if base.config.GetBool('want-pstats', 0):
-                self.pstatsGen = PStatCollector('Battle Avatars:Avatar Generating')
-                self.pstatsLoad = PStatCollector('Battle Avatars:Loading Asset')
-                self.pstatsFPS = PStatCollector('Battle Avatars:fps')
-                self.lastTime = None
-                taskMgr.add(self.logPStats, 'avatarPstats')
+        self.money = 0
+        self.firstMoneyQuieted = 0
+        self.enableAutoRun = 0
+        self.kickEvents = None
+        self.battleTeleportFlagTask = None
+        self.openJailDoorTrack = None
+        self.currentStoryQuests = []
+        self.cloudScudEffect = None
+        self.soloInteraction = False
+        self.emoteAccess = []
+        self.AFKDelay = base.config.GetInt('afk-delay', 600)
+        self.playRewardAnimation = None
+        self.localProjectiles = []
+        self._cannonAmmoSkillId = InventoryType.CannonRoundShot
+        self._siegeTeamSV = StateVar(0)
+        self.guildPopupDialog = None
+        self.moralePopupDialog = None
+        self.gmNameTagEnabledLocal = 0
+        self.gmNameTagStringLocal = ''
+        self.gmNameTagColorLocal = ''
+        soundEffects = [
+            SoundGlobals.SFX_MONSTER_JR_LAUGH_01,
+            SoundGlobals.SFX_MONSTER_JR_LAUGH_02,
+            SoundGlobals.SFX_MONSTER_JR_ENJOY,
+            SoundGlobals.SFX_MONSTER_JR_SUBMIT,
+            SoundGlobals.SFX_MONSTER_JR_JOIN]
+        self.jollySfx = loadSfx(random.choice(soundEffects))
+        self.currCombatMusic = None
+        self.clothingUpdateTaskName = 'inventoryClothingUpdate'
+        self.clothingUpdatePending = 0
+        self.sailHit = 0
+        self.friendsList = []
+        self.playersNearby = { }
+        self.trackedRotation = []
+        self.trackedTurning = 0
+        self.lastCannonShot = globalClock.getFrameTime()
+        self.pendingInitQuest = None
+        self.inInvasion = False
+        self.levelFootStep = None
+        self.wobbleList = []
+        self.fovIval = None
+        self.lockRegenFlag = 0
+        self.everBeenGhost = 0
+        self.mistimedAttack = 0
+        if base.config.GetBool('want-easy-combos', 1):
+            self.wantComboTiming = 0
+        else:
+            self.wantComboTiming = 1
+        self.zombieEffect = None
+        self.zombieIval = None
+        self.defenceEffects = { }
+        self.skillSfxIval = None
+        self.currentWeaponSlotId = 1
+        if base.config.GetBool('want-pstats', 0):
+            self.pstatsGen = PStatCollector('Battle Avatars:Avatar Generating')
+            self.pstatsLoad = PStatCollector('Battle Avatars:Loading Asset')
+            self.pstatsFPS = PStatCollector('Battle Avatars:fps')
+            self.lastTime = None
+            taskMgr.add(self.logPStats, 'avatarPstats')
             
-            self.fishingGameHook = None
-            self.accept('shipRemoved', self.checkHaveShip)
-            self.rocketOn = 0
-            if base.config.GetBool('want-rocketman', 0):
-                self.startRocketJumpMode()
+        self.fishingGameHook = None
+        self.accept('shipRemoved', self.checkHaveShip)
+        self.rocketOn = 0
+        if base.config.GetBool('want-rocketman', 0):
+            self.startRocketJumpMode()
             
-            self.dialogProp = None
-            self.duringDialog = False
-            self.efficiency = False
-            self.boardedShip = False
-            self.shipLookAhead = 1
+        self.dialogProp = None
+        self.duringDialog = False
+        self.efficiency = False
+        self.boardedShip = False
+        self.shipLookAhead = 1
 
 
     
@@ -2777,7 +2774,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
         if __debug__ and hasattr(self, 'isGhosting') and self.isGhosting == True:
             return None
         
-        DistributedPlayerPirate.wrtReparentTo(self, *args, **args)
+        DistributedPlayerPirate.wrtReparentTo(self, *args, **kw)
 
     wrtReparentTo = report(types = [
         'args',
@@ -2897,7 +2894,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
     if __dev__:
         
         def b_setGameState(self, *args, **kw):
-            DistributedPlayerPirate.b_setGameState(self, *args, **args)
+            DistributedPlayerPirate.b_setGameState(self, *args, **kw)
             print 'b_setGameState', args, kw
 
         
@@ -3244,6 +3241,9 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
 
     
     def setZombie(self, value, cursed):
+        if value and cursed == 0:
+            return
+
         if self.zombie == value:
             return None
         

@@ -1339,8 +1339,8 @@ dclass DistributedPlayerPirate : DistributedPlayer, HumanDNA, DistributedBattleA
   setParentingRules(string, string) broadcast ram;
   setAvatarType(AvatarType) required broadcast ram;
   setDNAString(blob) required broadcast ownrecv db;
-  setName(string = "Pirate") required broadcast ram db ownrecv;
-  WishNameState(string = "OPEN") required db ownrecv;
+  setName(blob) required broadcast ram db ownrecv;
+  WishNameState(blob) required db ownrecv;
   setAdminAccess(int16 = 400) required broadcast ram db;
   cueRegenerate() broadcast;
   submitErrorLog(string) airecv clsend;
@@ -1465,8 +1465,8 @@ dclass DistributedPlayerPirate : DistributedPlayer, HumanDNA, DistributedBattleA
   setJailCellIndex(uint8) required db airecv ownrecv;
   setTeam(int16) required broadcast ram ownrecv;
   setPvp(uint8) required broadcast ram ownrecv;
-  setZombie(uint8, uint8) required broadcast ram ownrecv;
-  setCurseStatus(uint8) ownrecv;
+  setZombie(uint8 = 0, uint8 = 0) required broadcast ram ownrecv;
+  setCurseStatus(uint8 = 0) ownrecv;
   setParlorGame(uint8) required broadcast ram ownrecv;
   setPopulated(uint8) required broadcast db ram;
   spendSkillPoint(SkillId) airecv clsend;

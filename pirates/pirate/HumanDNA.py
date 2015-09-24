@@ -515,6 +515,7 @@ class PirateHead:
 
 
 class PirateBody:
+    
     def __init__(self, shape = 0, height = 0.0, color = 0):
         self.shape = shape
         self.height = height
@@ -535,6 +536,7 @@ class PirateBody:
 
 
 class PirateClothes:
+    
     def __init__(self, top = 0, bot = 0, shoe = 0, color = 0):
         self.shirt = top
         self.vest = 0

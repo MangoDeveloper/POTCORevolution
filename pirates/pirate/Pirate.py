@@ -4,12 +4,14 @@ import AvatarTypes
 
 
 class Pirate(Human):
+
     def __init__(self, other = None):
         Human.__init__(self, other)
         self.avatarType = AvatarTypes.Pirate
 
 
 class PirateHeadPortrait(Human):
+    
     def __init__(self):
         Human.__init__(self)
         self.avatarType = AvatarTypes.Townfolk

@@ -290,23 +290,19 @@ class DynamicHuman(HumanBase.HumanBase, Biped.Biped):
 
 
     def delete(self):
+        self.Human_deleted = 1
+        taskMgr.remove(self._DynamicHuman__blinkName)
+        if self.dropShadow and not self.dropShadow.isEmpty():
+            self.deleteDropShadow()
 
-        try:
-            pass
-        except:
-            self.Human_deleted = 1
-            taskMgr.remove(self._DynamicHuman__blinkName)
-            if self.dropShadow and not self.dropShadow.isEmpty():
-                self.deleteDropShadow()
+        del self.eyeFSM
+        self.controlShapes = None
+        self.sliderNames = None
+        if self.model:
+            self.model.delete()
+            del self.model
 
-            del self.eyeFSM
-            self.controlShapes = None
-            self.sliderNames = None
-            if self.model:
-                self.model.delete()
-                del self.model
-
-            Biped.Biped.delete(self)
+        Biped.Biped.delete(self)
 
 
 

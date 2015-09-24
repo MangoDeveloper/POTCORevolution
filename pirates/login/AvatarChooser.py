@@ -35,7 +35,7 @@ from pirates.makeapirate import NameGUI
 from pirates.piratesgui import NonPayerPanel
 from pirates.piratesgui import TrialNonPayerPanel
 from pirates.piratesbase import UserFunnel
-from pirates.pirate import Human
+from pirates.pirate import Human, Pirate
 from pirates.pirate import HumanDNA
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx

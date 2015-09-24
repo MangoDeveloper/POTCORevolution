@@ -6,3 +6,6 @@ class DistributedPlayerPirateUD(DistributedObjectGlobalUD):
 
     def __init__(self, air):
         DistributedObjectGlobalUD.__init__(self, air)
+
+    def setDISLid(self, dislId):
+    	pass
