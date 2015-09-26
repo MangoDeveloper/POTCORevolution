@@ -286,7 +286,7 @@ class StackMessage(BorderFrame):
 class ModalStackMessage(StackMessage):
     
     def __init__(self, parent = None, **kwargs):
-        StackMessage.__init__(self, parent, **None)
+        StackMessage.__init__(self, parent, **kwargs)
         self.initialiseoptions(ModalStackMessage)
         self.doneFunc = None
         self.fadeTime = 0

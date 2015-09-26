@@ -1475,7 +1475,7 @@ dclass DistributedPlayerPirate : DistributedPlayer, HumanDNA, DistributedBattleA
   spentSkillPoint(SkillId) ownrecv;
   requestActivity(uint32, int32, resultPair [], uint32 []) airecv clsend;
   setTempDoubleXPReward(uint32) required db ram broadcast;
-  updateGMNameTag(uint8, string, string) required ram broadcast ownsend;
+  //updateGMNameTag(uint8, string, string) required ram broadcast ownsend;
   requestGotoJailWhileInjured() ownsend airecv;
   startHealing(uint32);
   stopHealing();

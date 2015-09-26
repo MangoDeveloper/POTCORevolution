@@ -93,7 +93,8 @@ class LocalPirateGameFSM(PlayerPirateGameFSM):
 
     def defaultFilter(self, request, args):
         if self.lockFSM:
-            if request in ('LandRoam', 'NPCInteract', 'Emote'):
+            prefixStates = ('LandRoam', 'NPCInteract', 'Emote')
+            if request in prefixStates:
                 return None
 
 
@@ -105,7 +106,8 @@ class LocalPirateGameFSM(PlayerPirateGameFSM):
             if self.state in noBattleStates:
                 return None
 
-            if self.state in ('Cannon', 'NPCInteract', 'Digging', 'Searching', 'ShipPilot', 'DinghyInteract', 'ShipRepair', 'BenchRepair', 'PotionCrafting'):
+            allStates0 = ('Cannon', 'NPCInteract', 'Digging', 'Searching', 'ShipPilot', 'DinghyInteract', 'ShipRepair', 'BenchRepair', 'PotionCrafting') 
+            if self.state in allStates0:
                 messenger.send(InteractiveBase.END_INTERACT_EVENT)
                 return ('Battle',) + args
 
@@ -114,11 +116,13 @@ class LocalPirateGameFSM(PlayerPirateGameFSM):
 
 
         if self.state == 'Death':
-            if request not in ('Off', 'ThrownInJail', 'Unconcious', 'TeleportIn', 'LandRoam', 'PVPWait', 'PVPComplete'):
+            allStates1 = ('Off', 'ThrownInJail', 'Unconcious', 'TeleportIn', 'LandRoam', 'PVPWait', 'PVPComplete')
+            if request not in allStates1:
                 return None
 
         elif self.state == 'TeleportOut':
-            if request in ('NPCInteract', 'DinghyInteract', 'DoorInteract'):
+            allStates2 = ('NPCInteract', 'DinghyInteract', 'DoorInteract')
+            if request in allStates2:
                 return None
 
 

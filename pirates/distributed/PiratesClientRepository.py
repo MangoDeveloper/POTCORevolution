@@ -318,7 +318,7 @@ class PiratesClientRepository(OTPClientRepository):
             bp.loginCfg()
             config_slot = base.config.GetInt('login-pirate-slot', -1)
             if config_slot >= 0 and len(avList) > 0:
-                config_subId = base.config.GetInt('login-pirate-subId', avList.keys()[0])
+                config_subId = base.config.GetInt('login-pirate-subId', avList.keys())
                 slots = avList.get(config_subId, [])
                 if config_slot in range(len(slots)):
                     potAv = slots[config_slot]
@@ -591,7 +591,6 @@ class PiratesClientRepository(OTPClientRepository):
         zoneId = None
         localAvatar.setLocation(parentId, zoneId)
         localAvatar.generate()
-        localAvatar.dclass.receiveUpdateBroadcastRequiredOwner(localAvatar, di)
         localAvatar.updateAllRequiredFields(dclass, di)
         locUID = localAvatar.getReturnLocation()
         if not locUID:

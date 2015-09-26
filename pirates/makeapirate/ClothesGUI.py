@@ -195,7 +195,6 @@ class ClothesGUI(DirectFrame, StateData.StateData):
     def save(self):
         if self.mode == -1:
             pass
-        1
 
     
     def assignAvatar(self, avatar, wantClothingChange):
@@ -205,6 +204,7 @@ class ClothesGUI(DirectFrame, StateData.StateData):
         if avatar.dna.getGender() == 'f':
             genderIdx = 1
         
+        self.avatar.currentClothing = ItemGlobals.getDefaultMaleClothing()
         if wantClothingChange:
             if self.avatar.dna.getGender() == 'm':
                 self.avatar.currentClothing = ItemGlobals.getDefaultMaleClothing()

@@ -70,9 +70,11 @@ class SeaPatch(Water):
         
         if self.shader:
             if base.win.getGsg().getShaderModel() == GraphicsStateGuardian.SM20:
-                self.seamodel = loader.loadModel('models/sea/SeaPatch34')
+                seamodel = loader.loadModel('models/sea/SeaPatch34')
             else:
-                self.seamodel = loader.loadModel('models/sea/SeaPatch31')
+                seamodel = loader.loadModel('models/sea/SeaPatch31')
+            self.patch.seamodel = seamodel
+            self.seamodel = self.patch.seamodel
         elif base.options.getTerrainDetailSetting() == 0:
             self.seamodel = loader.loadModel('models/sea/pir_m_are_wld_seaPatch_low')
         else:

@@ -4,6 +4,8 @@ class SeaPatchRoot:
     WTU = None
     WFSin = None
     WFNoise = None
+    seamodel = None
+    isWaveEnabled = 0
 
     def addFlatWell(self, string1, nodePath1, float1, float2, float3, float4):
         pass
@@ -155,8 +157,8 @@ class SeaPatchRoot:
     def isEnabled(self):
         pass
 
-    def isWaveEnabled(self, int):
-        pass
+    def isWaveEnabled(self, waveEnabled):
+        self.isWaveEnabled = waveEnabled
 
     def output(self, string):
         pass
@@ -189,10 +191,12 @@ class SeaPatchRoot:
         pass
 
     def setHighColor(self, vec4):
-        pass
+        if self.seamodel is not None:
+            self.seamodel.setColor(1.0, 1.0, 1.0, 1.0)
 
     def setLowColor(self, vec4):
-        pass
+        if self.seamodel is not None:
+            self.seamodel.setColor(0.1833, 0.1833, 0.1833, 0.1833)
 
     def setNormalDamper(self, float):
         pass
