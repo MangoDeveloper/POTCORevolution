@@ -6,7 +6,7 @@ import os
 import time
 import string
 import __builtin__
-from pandac.libpandaexpressModules import *
+from panda3d.core import *
 from direct.showbase.ShowBase import ShowBase
 from direct.showbase.MessengerGlobal import *
 from direct.showbase.DirectObject import DirectObject

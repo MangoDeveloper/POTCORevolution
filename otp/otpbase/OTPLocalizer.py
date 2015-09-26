@@ -1,6 +1,6 @@
 # File: o (Python 2.4)
 
-from pandac.libpandaexpressModules import *
+from panda3d.core import *
 import string
 import types
 

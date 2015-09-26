@@ -1,7 +1,7 @@
 # File: p (Python 2.4)
 
 import cPickle
-from panda3d.core import *
+from libpandaexpress import ConfigVariableBool
 from pandac.PandaModules import *
 from direct.showbase.PythonUtil import *
 from direct.showbase import AppRunnerGlobal

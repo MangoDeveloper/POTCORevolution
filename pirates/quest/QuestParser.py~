@@ -26,7 +26,6 @@ from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
 from pirates.inventory import ItemGlobals
 from pirates.inventory.InventoryGlobals import Locations
-from pirates.quest import QuestScripts
 notify = DirectNotifyGlobal.directNotify.newCategory('QuestParser')
 lineDict = { }
 globalVarDict = { }
