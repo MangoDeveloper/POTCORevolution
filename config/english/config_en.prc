@@ -1,5 +1,6 @@
 # Window:
 window-title PiratesOnlineRevolution [Pre-Alpha]
+win-size 800 600
 
 # Audio:
 audio-library-name p3openal_audio
@@ -35,7 +36,7 @@ want-dev #f
 want-pstats 0
 
 # Game Options:
-loading-screen 1
+loading-screen 0
 
 notify-level-gobj warning
 notify-level-loader warning

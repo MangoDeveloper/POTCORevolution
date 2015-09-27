@@ -17,7 +17,7 @@ resolution
 embedded 
 0
 fullscreen 
-False
+0
 widescreen 
 0
 widescreen_resolution 

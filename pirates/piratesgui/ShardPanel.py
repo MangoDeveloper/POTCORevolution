@@ -168,7 +168,10 @@ class ShardPanel(DirectFrame):
     def syncShardList(self):
         current = set(self.shards.keys())
         shards = base.cr.listActiveShards()
-        shards.sort(self.compareShards)
+        try:
+            shards.sort(self.compareShards)
+        except:
+            shard.sort()
         for shard in shards:
             active = set(shard)
         old = current.difference(active)
