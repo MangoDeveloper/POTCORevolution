@@ -196,7 +196,7 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
         self.shipWreck = None
         self.loggingCannonDone = False
         self.debugTutorial = base.config.GetBool('debug-tutorial', 0)
-        self.noJailLight = base.config.GetBool('no-jail-light', 0)
+        self.noJailLight = base.config.GetBool('no-jail-light', 1)
         self._leftJail = 0
         self.map = 0
         self.cr.tutorialObject = self
@@ -438,20 +438,15 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
         #base.loadingScreen.beginStep('MakeAPirate', 5, 15)
         #base.loadingScreen.showTarget(jail = True)
         #base.loadingScreen.show()
-        base.disableMouse()
         #base.loadingScreen.tick()
         #localAvatar.gameFSM.request('MakeAPirate')
         #localAvatar.gameFSM.lockFSM = True
         #localAvatar.guiMgr.hideTrays()
-        base.loadingScreen.tick()
         self.avHpr = VBase3(180, 0, 0)
-        base.loadingScreen.tick()
         #ga = localAvatar.getParentObj()
         #ga.builder.turnOffLights()
         #self.jail = ga.find('**/*navy_jail_interior*')
-        base.loadingScreen.tick()
         self.map.enter()
-        base.loadingScreen.tick()
         self.accept('makeAPirateComplete', self.handleMakeAPirate)
         UserFunnel.logSubmit(1, 'CREATE_PIRATE_LOADS')
         UserFunnel.logSubmit(0, 'CREATE_PIRATE_LOADS')

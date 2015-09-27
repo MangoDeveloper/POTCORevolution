@@ -25,14 +25,14 @@ class PiratesAIRepository(PiratesInternalRepository):
     def createManagers(self):
         self.districtStats = DistributedPopulationTrackerAI(self, populationMin=100, populationMax=700)
         self.districtStats.generateWithRequiredAndId(
-            self.allocateChannel(), self.getGameDoId(), 3)
+            self.allocateChannel(), self.getGameDoId(), 4)
         self.districtStats.b_setShardId(self.distributedDistrict.getDoId())
 
         self.DistributedTimeOfDayManager = DistributedTimeOfDayManagerAI(self, isPaused=False, isJolly=0)
-        self.DistributedTimeOfDayManager.generateWithRequired(2)
+        self.DistributedTimeOfDayManager.generateWithRequired(3)
 
         self.DistributedPirateProfileMgr = DistributedPirateProfileMgrAI(self)
-        self.DistributedPirateProfileMgr.generateWithRequired(2)
+        self.DistributedPirateProfileMgr.generateWithRequired(3)
 
         self.worldManager = WorldManagerAI(self) #TODO: Generate the rest of the islands!
         self.portRoyal = self.worldManager.loadObjectsFromFile(filename="PortRoyalWorld.py")
@@ -48,14 +48,14 @@ class PiratesAIRepository(PiratesInternalRepository):
         self.rambleShackIsland = self.worldManager.loadObjectsFromFile(filename="RambleshackWorld.py")
 
         self.tutorialObject = DistributedPiratesTutorialAI(self)
-        self.tutorialObject.generateWithRequired(2)
+        self.tutorialObject.generateWithRequired(3)
 
     def handleConnected(self):
         self.districtId = self.allocateChannel()
         self.distributedDistrict = PiratesDistrictAI(self, mainWorld="PortRoyalWorld.py", shardType=PiratesGlobals.SHARD_MAIN)
         self.distributedDistrict.setName(self.districtName)
         self.distributedDistrict.generateWithRequiredAndId(
-            self.districtId, self.getGameDoId(), 2)
+            self.districtId, self.getGameDoId(), 3)
         self.notify.info('Claiming ownership of channel ID: %d...' % self.districtId)
         self.claimOwnership(self.districtId)
 
