@@ -10,6 +10,6 @@ echo Starting Pirates Online...
 echo Username: $pUsername$
 echo Client Agent IP: $GAME_SERVER$
 echo ===============================
-python -m pirates.piratesbase.PiratesStart.py
+ppython -m pirates.piratesbase.PiratesStart.py
 pause
 sleep 1
