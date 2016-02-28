@@ -14,6 +14,7 @@ from direct.showbase.EventManagerGlobal import *
 from direct.task import Task
 from direct.task.MiniTask import MiniTask, MiniTaskManager
 from direct.directnotify.DirectNotifyGlobal import *
+from direct.task.TaskManagerGlobal import *
 
 class LogAndOutput:
     
@@ -1179,8 +1180,6 @@ class LauncherBase(DirectObject, ShowBase):
         self.taskMgrStarted = True
         if self.miniTaskMgr.running:
             self.miniTaskMgr.stop()
-        
-        from direct.task.TaskManagerGlobal import *
         taskMgr = taskMgr
         taskMgr.remove('miniTaskManager')
         taskMgr.add(self._stepMiniTaskManager, 'miniTaskManager')
