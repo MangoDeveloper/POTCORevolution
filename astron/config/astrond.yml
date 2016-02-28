@@ -20,24 +20,8 @@ uberdogs:
       id: 4674
       anonymous: false
 
-    - class: DistributedCrewManager
-      id: 4675
-      anonymous: false
-
     - class: DistributedInventoryManager
       id: 4677
-      anonymous: false
-
-    - class: DistributedSpeedChatRelay
-      id: 4711
-      anonymous: false
-
-    - class: DistributedShipManager
-      id: 4678
-      anonymous: false
-
-    - class: DistributedShipManager
-      id: 4678
       anonymous: false
 
     - class: DistributedTravelAgent

@@ -26,4 +26,4 @@ class PiratesUberRepository(PiratesInternalRepository):
                                                     'ClientServicesManager')
 
         self.settingsMgr = simbase.air.generateGlobalObject(OTP_DO_ID_PIRATES_SETTINGS_MANAGER,
-                                                    'PiratesSettingsManager')
+                                                    'PiratesSettingsMgr')

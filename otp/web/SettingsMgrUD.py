@@ -2,7 +2,7 @@ from direct.distributed.DistributedObjectGlobalUD import DistributedObjectGlobal
 from direct.directnotify import DirectNotifyGlobal
 import SettingsMgrBase
 
-class SettingsMgrUD(DistributedObjectGlobalUD, SettingsMgrBase):
+class SettingsMgrUD(DistributedObjectGlobalUD):
     notify = DirectNotifyGlobal.directNotify.newCategory('SettingsMgrUD')
 
     def __init__(self, air):
@@ -10,7 +10,6 @@ class SettingsMgrUD(DistributedObjectGlobalUD, SettingsMgrBase):
 
     def announceGenerate(self):
     	DistributedObjectGlobalUD.announceGenerate(self)
-    	SettingsMgrBase.SettingsMgrBase.announceGenerate(self)
 
     def requestAllChangedSettings(self):
     	pass #Overidden by subclass.
