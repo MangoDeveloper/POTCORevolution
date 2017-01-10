@@ -1,4 +1,4 @@
-# POTCOR Pre Alpha Source Code
+# POTCO Revolution Pre Alpha Source Code
 
 
 
