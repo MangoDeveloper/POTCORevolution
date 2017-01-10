@@ -1,5 +1,5 @@
 # Window:
-window-title PiratesOnlineRevolution [Pre-Alpha]
+window-title Pirates Online Revolution [Pre-Alpha]
 win-size 800 600
 
 # Audio:
